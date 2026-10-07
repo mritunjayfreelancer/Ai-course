@@ -1,0 +1,3435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Text Utilities — AI Learning HUB</title>
+
+    <meta name="description"
+        content="Free browser-based text utilities from AI Learning HUB. Count words and characters, clean text, change case, remove duplicate lines, sort lines, find and replace text, and more.">
+
+    <meta name="keywords"
+        content="text utilities, text tools, word counter, character counter, text cleaner, case converter, remove duplicate lines, AI Learning HUB">
+
+    <meta name="author" content="AI Learning HUB">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Text Utilities — AI Learning HUB">
+    <meta property="og:description"
+        content="Practical browser-based text tools for students, writers, developers and AI users.">
+    <meta property="og:type" content="website">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Learning HUB Text Utilities",
+    "description": "A collection of free browser-based utilities for working with text.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true
+  }
+  </script>
+
+    <style>
+        /* =========================================================
+       AI LEARNING HUB — SHARED DESIGN SYSTEM
+       ========================================================= */
+
+        :root {
+            --bg: #f7f9fc;
+            --surface: #ffffff;
+            --surface-2: #f1f5f9;
+            --surface-3: #eef2f7;
+
+            --text: #111827;
+            --text-soft: #4b5563;
+            --text-muted: #6b7280;
+
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-soft: #eff6ff;
+
+            --border: #e5e7eb;
+            --border-strong: #d1d5db;
+
+            --success: #15803d;
+            --success-soft: #f0fdf4;
+
+            --warning: #b45309;
+            --warning-soft: #fffbeb;
+
+            --danger: #dc2626;
+            --danger-soft: #fef2f2;
+
+            --shadow-sm:
+                0 1px 2px rgba(15, 23, 42, .04);
+
+            --shadow:
+                0 10px 30px rgba(15, 23, 42, .07);
+
+            --shadow-lg:
+                0 20px 55px rgba(15, 23, 42, .10);
+
+            --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 20px;
+
+            --container: 1200px;
+
+            --font:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            --header-height: 72px;
+        }
+
+        html.dark {
+            --bg: #0b1120;
+            --surface: #111827;
+            --surface-2: #172033;
+            --surface-3: #1d293d;
+
+            --text: #f3f4f6;
+            --text-soft: #cbd5e1;
+            --text-muted: #94a3b8;
+
+            --primary: #60a5fa;
+            --primary-dark: #93c5fd;
+            --primary-soft: rgba(37, 99, 235, .14);
+
+            --border: #253248;
+            --border-strong: #334155;
+
+            --success: #4ade80;
+            --success-soft: rgba(34, 197, 94, .10);
+
+            --warning: #fbbf24;
+            --warning-soft: rgba(245, 158, 11, .10);
+
+            --danger: #f87171;
+            --danger-soft: rgba(239, 68, 68, .10);
+
+            --shadow-sm:
+                0 1px 2px rgba(0, 0, 0, .20);
+
+            --shadow:
+                0 12px 35px rgba(0, 0, 0, .22);
+
+            --shadow-lg:
+                0 22px 65px rgba(0, 0, 0, .30);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.6;
+            overflow-x: hidden;
+
+            transition:
+                background .25s ease,
+                color .25s ease;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            background: rgba(37, 99, 235, .18);
+        }
+
+        /* =========================================================
+       HEADER
+       ========================================================= */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            height: var(--header-height);
+
+            background:
+                color-mix(in srgb,
+                    var(--surface) 94%,
+                    transparent);
+
+            border-bottom: 1px solid var(--border);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .nav-container {
+            width: min(calc(100% - 40px),
+                    var(--container));
+
+            height: 100%;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            min-width: max-content;
+
+            font-weight: 800;
+            letter-spacing: -.035em;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            display: grid;
+            place-items: center;
+
+            color: #fff;
+
+            background:
+                linear-gradient(135deg,
+                    #2563eb,
+                    #4f46e5);
+
+            box-shadow:
+                0 7px 18px rgba(37, 99, 235, .22);
+        }
+
+        .brand-mark svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .brand-name {
+            font-size: 1.02rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: auto;
+        }
+
+        .nav-link {
+            padding: 8px 11px;
+
+            border-radius: 8px;
+
+            color: var(--text-soft);
+
+            font-size: .88rem;
+            font-weight: 600;
+
+            transition:
+                background .2s ease,
+                color .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-button {
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--surface);
+            color: var(--text-soft);
+
+            display: grid;
+            place-items: center;
+
+            transition:
+                border-color .2s ease,
+                color .2s ease,
+                background .2s ease,
+                transform .2s ease;
+        }
+
+        .icon-button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .icon-button:active {
+            transform: scale(.96);
+        }
+
+        .menu-button {
+            display: none;
+        }
+
+        /* =========================================================
+       HERO
+       ========================================================= */
+
+        .hero {
+            position: relative;
+
+            padding: 70px 20px 50px;
+
+            border-bottom: 1px solid var(--border);
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 15% 15%,
+                    rgba(37, 99, 235, .08),
+                    transparent 32%),
+                radial-gradient(circle at 85% 20%,
+                    rgba(99, 102, 241, .07),
+                    transparent 30%),
+                var(--surface);
+        }
+
+        .hero-inner {
+            width: min(100%, var(--container));
+            margin: auto;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 6px 11px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: var(--surface);
+            color: var(--primary);
+
+            font-size: .78rem;
+            font-weight: 750;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+        }
+
+        .hero h1 {
+            max-width: 850px;
+
+            margin: 18px auto 14px;
+
+            font-size:
+                clamp(2rem, 5vw, 3.7rem);
+
+            line-height: 1.08;
+            letter-spacing: -.055em;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            max-width: 720px;
+            margin: auto;
+
+            color: var(--text-soft);
+
+            font-size:
+                clamp(.98rem, 2vw, 1.08rem);
+        }
+
+        .hero-points {
+            margin-top: 26px;
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .hero-point {
+            padding: 7px 11px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: var(--surface);
+            color: var(--text-soft);
+
+            font-size: .8rem;
+            font-weight: 600;
+        }
+
+        /* =========================================================
+       MAIN
+       ========================================================= */
+
+        main {
+            width: min(calc(100% - 40px),
+                    var(--container));
+
+            margin: auto;
+
+            padding: 42px 0 80px;
+        }
+
+        /* =========================================================
+       TOOL GRID
+       ========================================================= */
+
+        .tools-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+
+            margin-bottom: 24px;
+        }
+
+        .tool-card {
+            padding: 17px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--surface);
+
+            text-align: left;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(37, 99, 235, .35);
+
+            box-shadow: var(--shadow);
+        }
+
+        .tool-card.active {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .tool-icon {
+            width: 38px;
+            height: 38px;
+
+            margin-bottom: 10px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            color: var(--primary);
+            background: var(--surface-2);
+
+            font-size: 18px;
+        }
+
+        .tool-card.active .tool-icon {
+            background: var(--surface);
+        }
+
+        .tool-card strong {
+            display: block;
+
+            margin-bottom: 3px;
+
+            font-size: .84rem;
+        }
+
+        .tool-card small {
+            display: block;
+
+            color: var(--text-muted);
+
+            font-size: .71rem;
+            line-height: 1.45;
+        }
+
+        /* =========================================================
+       WORKSPACE
+       ========================================================= */
+
+        .workspace {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr) 270px;
+
+            gap: 20px;
+
+            align-items: start;
+        }
+
+        .panel {
+            min-width: 0;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+
+            background: var(--surface);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .panel-header {
+            padding: 19px 21px;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .panel-title {
+            margin: 0;
+
+            font-size: 1.04rem;
+            letter-spacing: -.02em;
+        }
+
+        .panel-subtitle {
+            margin: 4px 0 0;
+
+            color: var(--text-muted);
+
+            font-size: .77rem;
+        }
+
+        .panel-body {
+            padding: 21px;
+        }
+
+        /* =========================================================
+       TEXT EDITOR
+       ========================================================= */
+
+        .editor-wrap {
+            position: relative;
+        }
+
+        #textInput {
+            display: block;
+
+            width: 100%;
+            min-height: 410px;
+
+            padding: 17px;
+
+            resize: vertical;
+
+            border: 1px solid var(--border-strong);
+            border-radius: 12px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            outline: none;
+
+            font-size: .9rem;
+            line-height: 1.7;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+        #textInput:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .11);
+        }
+
+        #textInput::placeholder {
+            color: var(--text-muted);
+        }
+
+        .editor-footer {
+            margin-top: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        .live-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .stat {
+            padding: 5px 8px;
+
+            border-radius: 7px;
+
+            background: var(--surface-2);
+            color: var(--text-muted);
+
+            font-size: .68rem;
+            font-weight: 650;
+        }
+
+        /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .btn {
+            min-height: 39px;
+
+            padding: 8px 13px;
+
+            border: 1px solid transparent;
+            border-radius: 9px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            font-size: .77rem;
+            font-weight: 700;
+
+            transition:
+                transform .18s ease,
+                background .18s ease,
+                border-color .18s ease,
+                color .18s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: var(--primary);
+
+            box-shadow:
+                0 6px 15px rgba(37, 99, 235, .18);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            color: var(--text-soft);
+            background: var(--surface);
+
+            border-color: var(--border-strong);
+        }
+
+        .btn-secondary:hover {
+            color: var(--primary);
+
+            border-color: var(--primary);
+
+            background: var(--primary-soft);
+        }
+
+        .btn-danger {
+            color: var(--danger);
+            background: var(--danger-soft);
+        }
+
+        .btn-small {
+            min-height: 33px;
+            padding: 6px 10px;
+            font-size: .71rem;
+        }
+
+        /* =========================================================
+       SIDEBAR
+       ========================================================= */
+
+        .sidebar-stack {
+            display: grid;
+            gap: 15px;
+
+            position: sticky;
+            top: calc(var(--header-height) + 18px);
+        }
+
+        .mini-panel {
+            padding: 16px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--surface);
+        }
+
+        .mini-panel h3 {
+            margin: 0 0 9px;
+
+            font-size: .84rem;
+            letter-spacing: -.01em;
+        }
+
+        .mini-panel p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: .72rem;
+            line-height: 1.6;
+        }
+
+        .mini-list {
+            margin: 10px 0 0;
+            padding: 0;
+
+            list-style: none;
+
+            display: grid;
+            gap: 7px;
+        }
+
+        .mini-list li {
+            position: relative;
+
+            padding-left: 15px;
+
+            color: var(--text-soft);
+
+            font-size: .72rem;
+        }
+
+        .mini-list li::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: .62em;
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+        }
+
+        /* =========================================================
+       TOOL RESULT AREA
+       ========================================================= */
+
+        .result-section {
+            margin-top: 22px;
+        }
+
+        .result-box {
+            padding: 16px;
+
+            min-height: 160px;
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            background: var(--surface-2);
+
+            color: var(--text);
+
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+
+            font-size: .82rem;
+            line-height: 1.65;
+        }
+
+        .result-empty {
+            color: var(--text-muted);
+
+            display: grid;
+            place-items: center;
+
+            min-height: 125px;
+
+            text-align: center;
+        }
+
+        /* =========================================================
+       OPTIONS
+       ========================================================= */
+
+        .options {
+            margin-top: 16px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+        .option-field label {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--text-soft);
+
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .option-field input,
+        .option-field select {
+            width: 100%;
+            height: 39px;
+
+            padding: 0 10px;
+
+            border: 1px solid var(--border-strong);
+            border-radius: 8px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            outline: none;
+
+            font-size: .76rem;
+        }
+
+        .option-field input:focus,
+        .option-field select:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .10);
+        }
+
+        /* =========================================================
+       DIVIDER
+       ========================================================= */
+
+        .divider {
+            height: 1px;
+
+            margin: 18px 0;
+
+            background: var(--border);
+        }
+
+        /* =========================================================
+       HOW TO USE
+       ========================================================= */
+
+        .section {
+            margin-top: 52px;
+        }
+
+        .section-heading {
+            margin-bottom: 17px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 5px;
+
+            font-size: 1.32rem;
+            letter-spacing: -.025em;
+        }
+
+        .section-heading p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: .84rem;
+        }
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+        .info-card {
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--surface);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-number {
+            width: 31px;
+            height: 31px;
+
+            margin-bottom: 12px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 8px;
+
+            background: var(--primary-soft);
+            color: var(--primary);
+
+            font-size: .73rem;
+            font-weight: 800;
+        }
+
+        .info-card h3 {
+            margin: 0 0 6px;
+
+            font-size: .89rem;
+        }
+
+        .info-card p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: .74rem;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+       FOOTER
+       ========================================================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            width: min(calc(100% - 40px),
+                    var(--container));
+
+            margin: auto;
+
+            padding: 26px 0;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-size: .82rem;
+            font-weight: 750;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: .72rem;
+        }
+
+        /* =========================================================
+       TOAST
+       ========================================================= */
+
+        .toast {
+            position: fixed;
+
+            right: 20px;
+            bottom: 20px;
+
+            z-index: 2000;
+
+            max-width:
+                min(360px, calc(100vw - 40px));
+
+            padding: 11px 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            box-shadow: var(--shadow-lg);
+
+            font-size: .77rem;
+            font-weight: 650;
+
+            opacity: 0;
+            transform: translateY(10px);
+
+            pointer-events: none;
+
+            transition:
+                opacity .22s ease,
+                transform .22s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+       MOBILE NAV
+       ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .nav-links {
+                position: absolute;
+
+                top: calc(var(--header-height) + 7px);
+
+                left: 20px;
+                right: 20px;
+
+                padding: 8px;
+
+                display: none;
+
+                flex-direction: column;
+                align-items: stretch;
+
+                background: var(--surface);
+
+                border: 1px solid var(--border);
+                border-radius: 13px;
+
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 11px 12px;
+            }
+
+            .menu-button {
+                display: grid;
+            }
+
+            .tools-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-stack {
+                position: static;
+            }
+
+            .info-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* =========================================================
+       TABLET
+       ========================================================= */
+
+        @media (max-width: 700px) {
+
+            :root {
+                --header-height: 64px;
+            }
+
+            .nav-container,
+            main,
+            .footer-inner {
+                width:
+                    min(calc(100% - 28px),
+                        var(--container));
+            }
+
+            .hero {
+                padding:
+                    48px 14px 38px;
+            }
+
+            .hero h1 {
+                font-size: 2.15rem;
+            }
+
+            main {
+                padding-top: 30px;
+                padding-bottom: 55px;
+            }
+
+            .panel-header,
+            .panel-body {
+                padding: 17px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        /* =========================================================
+       SMALL MOBILE
+       ========================================================= */
+
+        @media (max-width: 480px) {
+
+            .brand-name {
+                font-size: .92rem;
+            }
+
+            .brand-mark {
+                width: 35px;
+                height: 35px;
+            }
+
+            .nav-actions {
+                gap: 5px;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .hero-description {
+                font-size: .9rem;
+            }
+
+            .hero-points {
+                justify-content: flex-start;
+            }
+
+            .hero-point {
+                font-size: .69rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #textInput {
+                min-height: 330px;
+            }
+
+            .editor-footer {
+                align-items: stretch;
+            }
+
+            .button-group {
+                width: 100%;
+            }
+
+            .button-group .btn {
+                flex: 1;
+            }
+
+            .toast {
+                right: 14px;
+                bottom: 14px;
+                max-width:
+                    calc(100vw - 28px);
+            }
+        }
+
+        /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =======================================================
+       NAVBAR
+       ======================================================= -->
+
+    <header class="site-header">
+
+        <div class="nav-container">
+
+            <a class="brand" href="../index.html" aria-label="AI Learning HUB Home">
+
+                <span class="brand-mark" aria-hidden="true">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                        <path d="M12 3 4.5 7.2v9.6L12 21l7.5-4.2V7.2L12 3Z" />
+                        <path d="m7.5 9.1 4.5 2.5 4.5-2.5M12 11.6V17" />
+
+                    </svg>
+
+                </span>
+
+                <span class="brand-name">
+                    AI Learning HUB
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+
+                <a class="nav-link" href="../index.html">
+                    Home
+                </a>
+
+                <a class="nav-link" href="../index.html#courses">
+                    Courses
+                </a>
+
+                <a class="nav-link active" href="../index.html#tools">
+                    Tools
+                </a>
+
+                <a class="nav-link" href="../index.html#articles">
+                    Articles
+                </a>
+
+                <a class="nav-link" href="../index.html#resources">
+                    Resources
+                </a>
+
+                <a class="nav-link" href="../index.html#about">
+                    About
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode"
+                    title="Toggle theme">
+
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                        <circle cx="12" cy="12" r="4" />
+
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+
+                    </svg>
+
+                </button>
+
+
+                <button class="icon-button menu-button" id="menuButton" type="button" aria-label="Open navigation"
+                    aria-expanded="false">
+
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                        <path d="M4 6h16M4 12h16M4 18h16" />
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =======================================================
+       HERO
+       ======================================================= -->
+
+    <section class="hero">
+
+        <div class="hero-inner">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                Learn by Doing · Text Utilities
+
+            </div>
+
+
+            <h1>
+                Work with Text
+                <span>Smarter</span>
+            </h1>
+
+
+            <p class="hero-description">
+                Word counting se lekar text cleaning, case conversion,
+                duplicate lines remove karne aur find & replace tak —
+                common text tasks ko ek hi clean workspace me handle karo.
+            </p>
+
+
+            <div class="hero-points">
+
+                <span class="hero-point">
+                    Word Count
+                </span>
+
+                <span class="hero-point">
+                    Character Count
+                </span>
+
+                <span class="hero-point">
+                    Text Cleanup
+                </span>
+
+                <span class="hero-point">
+                    Case Converter
+                </span>
+
+                <span class="hero-point">
+                    Line Tools
+                </span>
+
+                <span class="hero-point">
+                    Find & Replace
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+    <main>
+
+
+        <!-- TOOL SELECTOR -->
+
+        <section>
+
+            <div class="tools-grid" id="toolsGrid">
+
+
+                <button class="tool-card active" type="button" data-tool="stats">
+
+                    <span class="tool-icon">
+                        01
+                    </span>
+
+                    <strong>
+                        Text Analyzer
+                    </strong>
+
+                    <small>
+                        Words, characters, lines, sentences and reading time.
+                    </small>
+
+                </button>
+
+
+                <button class="tool-card" type="button" data-tool="case">
+
+                    <span class="tool-icon">
+                        Aa
+                    </span>
+
+                    <strong>
+                        Case Converter
+                    </strong>
+
+                    <small>
+                        Uppercase, lowercase, title case and sentence case.
+                    </small>
+
+                </button>
+
+
+                <button class="tool-card" type="button" data-tool="clean">
+
+                    <span class="tool-icon">
+                        ✨
+                    </span>
+
+                    <strong>
+                        Clean Text
+                    </strong>
+
+                    <small>
+                        Extra spaces, blank lines and unwanted formatting clean karo.
+                    </small>
+
+                </button>
+
+
+                <button class="tool-card" type="button" data-tool="lines">
+
+                    <span class="tool-icon">
+                        ☷
+                    </span>
+
+                    <strong>
+                        Line Tools
+                    </strong>
+
+                    <small>
+                        Sort, unique, reverse, trim and manage individual lines.
+                    </small>
+
+                </button>
+
+
+                <button class="tool-card" type="button" data-tool="replace">
+
+                    <span class="tool-icon">
+                        ↔
+                    </span>
+
+                    <strong>
+                        Find & Replace
+                    </strong>
+
+                    <small>
+                        Text ko quickly search karke replace karo.
+                    </small>
+
+                </button>
+
+
+                <button class="tool-card" type="button" data-tool="prefix">
+
+                    <span class="tool-icon">
+                        +
+                    </span>
+
+                    <strong>
+                        Prefix / Suffix
+                    </strong>
+
+                    <small>
+                        Har line ke start ya end me text automatically add karo.
+                    </small>
+
+                </button>
+
+
+                <button class="tool-card" type="button" data-tool="reverse">
+
+                    <span class="tool-icon">
+                        ↶
+                    </span>
+
+                    <strong>
+                        Reverse Text
+                    </strong>
+
+                    <small>
+                        Characters ya lines ko reverse karne ke quick tools.
+                    </small>
+
+                </button>
+
+
+                <button class="tool-card" type="button" data-tool="extract">
+
+                    <span class="tool-icon">
+                        #
+                    </span>
+
+                    <strong>
+                        Extract Data
+                    </strong>
+
+                    <small>
+                        Emails, URLs aur hashtags ko text se identify karo.
+                    </small>
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- WORKSPACE -->
+
+        <section class="workspace">
+
+
+            <!-- MAIN EDITOR -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title" id="toolTitle">
+
+                            Text Analyzer
+
+                        </h2>
+
+                        <p class="panel-subtitle" id="toolDescription">
+
+                            Text ke important statistics instantly check karo.
+
+                        </p>
+
+                    </div>
+
+
+                    <button class="btn btn-secondary btn-small" id="clearButton" type="button">
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+
+                <div class="panel-body">
+
+
+                    <div class="editor-wrap">
+
+                        <textarea id="textInput" spellcheck="true"
+                            placeholder="Yahan apna text paste ya type karo...&#10;&#10;Example: AI tools students, writers and developers ko everyday work ko faster aur more organized banane me help kar sakte hain."></textarea>
+
+                    </div>
+
+
+                    <div class="editor-footer">
+
+                        <div class="live-stats">
+
+                            <span class="stat">
+                                Words:
+                                <b id="wordCount">0</b>
+                            </span>
+
+                            <span class="stat">
+                                Characters:
+                                <b id="charCount">0</b>
+                            </span>
+
+                            <span class="stat">
+                                Lines:
+                                <b id="lineCount">0</b>
+                            </span>
+
+                            <span class="stat">
+                                Reading:
+                                <b id="readingTime">0 min</b>
+                            </span>
+
+                        </div>
+
+
+                        <div class="button-group">
+
+                            <button class="btn btn-secondary btn-small" id="copyButton" type="button">
+
+                                Copy
+
+                            </button>
+
+                            <button class="btn btn-secondary btn-small" id="downloadButton" type="button">
+
+                                Download
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DYNAMIC OPTIONS -->
+
+                    <div class="options" id="optionsArea">
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="divider"></div>
+
+
+                    <div class="button-group">
+
+                        <button class="btn btn-primary" id="runButton" type="button">
+
+                            Apply Tool
+
+                        </button>
+
+                        <button class="btn btn-secondary" id="useResultButton" type="button">
+
+                            Use Result as Text
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- RESULT -->
+
+                    <div class="result-section">
+
+                        <div class="panel-header" style="padding:0 0 10px;border:0;">
+
+                            <div>
+
+                                <h3 class="panel-title" style="font-size:.92rem;">
+
+                                    Result
+
+                                </h3>
+
+                                <p class="panel-subtitle">
+
+                                    Tool ka processed output yahan dikhega.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="result-box" id="resultBox">
+
+                            <div class="result-empty">
+                                Text add karo aur koi utility run karo.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SIDEBAR -->
+
+            <aside class="sidebar-stack">
+
+
+                <div class="mini-panel">
+
+                    <h3>
+                        Quick workflow
+                    </h3>
+
+                    <p>
+                        Simple process follow karo:
+                    </p>
+
+                    <ul class="mini-list">
+
+                        <li>
+                            Text paste karo
+                        </li>
+
+                        <li>
+                            Utility choose karo
+                        </li>
+
+                        <li>
+                            Options set karo
+                        </li>
+
+                        <li>
+                            Apply Tool dabao
+                        </li>
+
+                        <li>
+                            Result copy/use karo
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="mini-panel">
+
+                    <h3>
+                        Privacy
+                    </h3>
+
+                    <p>
+                        Ye tools browser ke andar locally process hote hain.
+                        Is page par koi text-processing API required nahi hai.
+                    </p>
+
+                </div>
+
+
+                <div class="mini-panel">
+
+                    <h3>
+                        Useful for
+                    </h3>
+
+                    <ul class="mini-list">
+
+                        <li>
+                            Students
+                        </li>
+
+                        <li>
+                            Writers
+                        </li>
+
+                        <li>
+                            Developers
+                        </li>
+
+                        <li>
+                            Researchers
+                        </li>
+
+                        <li>
+                            AI users
+                        </li>
+
+                        <li>
+                            Office work
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+            </aside>
+
+        </section>
+
+
+        <!-- HOW IT WORKS -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <h2>
+                    Text utilities ka practical use
+                </h2>
+
+                <p>
+                    Chhote text tasks ko manually karne ki zarurat kam karo.
+                </p>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Analyze before editing
+                    </h3>
+
+                    <p>
+                        Pehle words, characters, lines aur reading time dekho.
+                        Isse content ki basic size aur structure samajh aata hai.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Clean before using
+                    </h3>
+
+                    <p>
+                        Extra spaces aur unnecessary blank lines remove karne
+                        se copied ya generated text ko organize karna easy hota hai.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Format consistently
+                    </h3>
+
+                    <p>
+                        Case conversion aur line formatting repetitive editing
+                        ko fast aur consistent bana sakti hai.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Remove duplicates
+                    </h3>
+
+                    <p>
+                        Lists, copied data aur repeated entries me duplicate
+                        lines ko quickly identify aur remove karo.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Find exactly what matters
+                    </h3>
+
+                    <p>
+                        Find and replace ka use karke repeated words,
+                        names ya formatting patterns ko quickly change karo.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Keep your workflow local
+                    </h3>
+
+                    <p>
+                        Normal text operations ke liye external service ki zarurat
+                        nahi. Processing browser me hi ho sakti hai.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div>
+
+                <div class="footer-brand">
+                    AI Learning HUB
+                </div>
+
+                <div class="footer-text">
+                    Learn AI. Practice AI. Build with AI.
+                </div>
+
+            </div>
+
+            <div class="footer-text">
+                Text Utilities · Browser-based learning tool
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- TOAST -->
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+    </div>
+
+
+    <script>
+        "use strict";
+
+
+        /* =========================================================
+           ELEMENTS
+           ========================================================= */
+
+        const root =
+            document.documentElement;
+
+        const textInput =
+            document.getElementById("textInput");
+
+        const toolTitle =
+            document.getElementById("toolTitle");
+
+        const toolDescription =
+            document.getElementById("toolDescription");
+
+        const optionsArea =
+            document.getElementById("optionsArea");
+
+        const resultBox =
+            document.getElementById("resultBox");
+
+        const wordCount =
+            document.getElementById("wordCount");
+
+        const charCount =
+            document.getElementById("charCount");
+
+        const lineCount =
+            document.getElementById("lineCount");
+
+        const readingTime =
+            document.getElementById("readingTime");
+
+        const toast =
+            document.getElementById("toast");
+
+
+        let currentTool =
+            "stats";
+
+
+        /* =========================================================
+           THEME
+           ========================================================= */
+
+        function applyTheme(theme) {
+
+            if (theme === "dark") {
+
+                root.classList.add("dark");
+
+                localStorage.setItem(
+                    "ailh-theme",
+                    "dark"
+                );
+
+            } else {
+
+                root.classList.remove("dark");
+
+                localStorage.setItem(
+                    "ailh-theme",
+                    "light"
+                );
+
+            }
+
+        }
+
+
+        const savedTheme =
+            localStorage.getItem("ailh-theme");
+
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        }
+
+
+        document
+            .getElementById("themeToggle")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const dark =
+                        root.classList.contains("dark");
+
+                    applyTheme(
+                        dark ? "light" : "dark"
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           MOBILE MENU
+           ========================================================= */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+
+        menuButton.addEventListener(
+            "click",
+            () => {
+
+                const open =
+                    navLinks.classList.toggle("open");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    String(open)
+                );
+
+            }
+        );
+
+
+        navLinks
+            .querySelectorAll("a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        navLinks.classList.remove("open");
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =========================================================
+           TOOL DEFINITIONS
+           ========================================================= */
+
+        const tools = {
+
+            stats: {
+
+                title:
+                    "Text Analyzer",
+
+                description:
+                    "Text ke important statistics instantly check karo.",
+
+                options: () => "",
+
+                process: text => {
+
+                    const clean =
+                        text.trim();
+
+                    const words =
+                        clean
+                            ? clean
+                                .split(/\s+/)
+                                .filter(Boolean)
+                                .length
+                            : 0;
+
+                    const chars =
+                        text.length;
+
+                    const charsNoSpaces =
+                        text
+                            .replace(/\s/g, "")
+                            .length;
+
+                    const lines =
+                        text
+                            ? text.split(/\r?\n/).length
+                            : 0;
+
+                    const nonEmptyLines =
+                        text
+                            ? text
+                                .split(/\r?\n/)
+                                .filter(line => line.trim())
+                                .length
+                            : 0;
+
+                    const sentences =
+                        clean
+                            ? (
+                                clean.match(
+                                    /[^.!?]+[.!?]+/g
+                                ) || []
+                            ).length
+                            : 0;
+
+                    const paragraphs =
+                        text
+                            ? text
+                                .split(/\n\s*\n/)
+                                .filter(p => p.trim())
+                                .length
+                            : 0;
+
+                    const minutes =
+                        words
+                            ? Math.max(
+                                1,
+                                Math.ceil(words / 200)
+                            )
+                            : 0;
+
+                    return [
+                        `Words: ${words}`,
+                        `Characters: ${chars}`,
+                        `Characters without spaces: ${charsNoSpaces}`,
+                        `Lines: ${lines}`,
+                        `Non-empty lines: ${nonEmptyLines}`,
+                        `Sentences: ${sentences}`,
+                        `Paragraphs: ${paragraphs}`,
+                        `Estimated reading time: ${minutes} minute(s)`
+                    ].join("\n");
+
+                }
+
+            },
+
+
+            case: {
+
+                title:
+                    "Case Converter",
+
+                description:
+                    "Text ko different capitalization styles me convert karo.",
+
+                options: () => `
+
+          <div class="option-field">
+
+            <label for="caseMode">
+              Conversion
+            </label>
+
+            <select id="caseMode">
+
+              <option value="upper">
+                UPPERCASE
+              </option>
+
+              <option value="lower">
+                lowercase
+              </option>
+
+              <option value="title">
+                Title Case
+              </option>
+
+              <option value="sentence">
+                Sentence case
+              </option>
+
+              <option value="alternating">
+                aLtErNaTiNg
+              </option>
+
+            </select>
+
+          </div>
+
+        `,
+
+                process: text => {
+
+                    const mode =
+                        document.getElementById(
+                            "caseMode"
+                        )?.value || "upper";
+
+                    if (mode === "upper") {
+                        return text.toUpperCase();
+                    }
+
+                    if (mode === "lower") {
+                        return text.toLowerCase();
+                    }
+
+                    if (mode === "title") {
+
+                        return text
+                            .toLowerCase()
+                            .replace(
+                                /\b\w/g,
+                                char =>
+                                    char.toUpperCase()
+                            );
+
+                    }
+
+                    if (mode === "sentence") {
+
+                        return text
+                            .toLowerCase()
+                            .replace(
+                                /(^\s*[a-z]|[.!?]\s+[a-z])/g,
+                                match =>
+                                    match.toUpperCase()
+                            );
+
+                    }
+
+                    if (mode === "alternating") {
+
+                        let index = 0;
+
+                        return [...text]
+                            .map(char => {
+
+                                if (!/[a-z]/i.test(char)) {
+                                    return char;
+                                }
+
+                                const result =
+                                    index % 2 === 0
+                                        ? char.toLowerCase()
+                                        : char.toUpperCase();
+
+                                index++;
+
+                                return result;
+
+                            })
+                            .join("");
+
+                    }
+
+                    return text;
+
+                }
+
+            },
+
+
+            clean: {
+
+                title:
+                    "Clean Text",
+
+                description:
+                    "Extra spaces, blank lines aur common formatting noise clean karo.",
+
+                options: () => `
+
+          <div class="option-field">
+
+            <label for="cleanMode">
+              Cleaning level
+            </label>
+
+            <select id="cleanMode">
+
+              <option value="normal">
+                Spaces + blank lines
+              </option>
+
+              <option value="aggressive">
+                Strong cleanup
+              </option>
+
+              <option value="lines">
+                Clean each line
+              </option>
+
+            </select>
+
+          </div>
+
+        `,
+
+                process: text => {
+
+                    const mode =
+                        document.getElementById(
+                            "cleanMode"
+                        )?.value || "normal";
+
+                    let output =
+                        text.replace(/\r\n/g, "\n");
+
+                    if (
+                        mode === "normal" ||
+                        mode === "aggressive"
+                    ) {
+
+                        output =
+                            output
+                                .split("\n")
+                                .map(line =>
+                                    line
+                                        .replace(/[ \t]+/g, " ")
+                                        .trim()
+                                )
+                                .join("\n");
+
+                    }
+
+                    if (mode === "normal") {
+
+                        output =
+                            output.replace(
+                                /\n{3,}/g,
+                                "\n\n"
+                            );
+
+                    }
+
+                    if (mode === "aggressive") {
+
+                        output =
+                            output
+                                .replace(/\n{2,}/g, "\n")
+                                .replace(/\s{2,}/g, " ")
+                                .trim();
+
+                    }
+
+                    if (mode === "lines") {
+
+                        output =
+                            output
+                                .split("\n")
+                                .map(line =>
+                                    line.trim()
+                                )
+                                .join("\n");
+
+                    }
+
+                    return output;
+
+                }
+
+            },
+
+
+            lines: {
+
+                title:
+                    "Line Tools",
+
+                description:
+                    "Text ki individual lines ko sort, reverse, trim ya unique karo.",
+
+                options: () => `
+
+          <div class="option-field">
+
+            <label for="lineMode">
+              Line operation
+            </label>
+
+            <select id="lineMode">
+
+              <option value="trim">
+                Trim each line
+              </option>
+
+              <option value="unique">
+                Remove duplicates
+              </option>
+
+              <option value="sortAZ">
+                Sort A → Z
+              </option>
+
+              <option value="sortZA">
+                Sort Z → A
+              </option>
+
+              <option value="reverse">
+                Reverse line order
+              </option>
+
+              <option value="removeEmpty">
+                Remove empty lines
+              </option>
+
+              <option value="number">
+                Add line numbers
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="option-field">
+
+            <label for="ignoreCase">
+              Duplicate / sorting behavior
+            </label>
+
+            <select id="ignoreCase">
+
+              <option value="yes">
+                Ignore case
+              </option>
+
+              <option value="no">
+                Respect case
+              </option>
+
+            </select>
+
+          </div>
+
+        `,
+
+                process: text => {
+
+                    const mode =
+                        document.getElementById(
+                            "lineMode"
+                        )?.value || "trim";
+
+                    const ignoreCase =
+                        document.getElementById(
+                            "ignoreCase"
+                        )?.value === "yes";
+
+                    let lines =
+                        text.split(/\r?\n/);
+
+                    if (mode === "trim") {
+
+                        return lines
+                            .map(line => line.trim())
+                            .join("\n");
+
+                    }
+
+                    if (mode === "removeEmpty") {
+
+                        return lines
+                            .filter(line => line.trim())
+                            .join("\n");
+
+                    }
+
+                    if (mode === "reverse") {
+
+                        return lines
+                            .reverse()
+                            .join("\n");
+
+                    }
+
+                    if (mode === "number") {
+
+                        return lines
+                            .map(
+                                (line, index) =>
+                                    `${index + 1}. ${line}`
+                            )
+                            .join("\n");
+
+                    }
+
+                    if (mode === "unique") {
+
+                        const seen =
+                            new Set();
+
+                        return lines
+                            .filter(line => {
+
+                                const key =
+                                    ignoreCase
+                                        ? line.trim().toLowerCase()
+                                        : line.trim();
+
+                                if (seen.has(key)) {
+                                    return false;
+                                }
+
+                                seen.add(key);
+
+                                return true;
+
+                            })
+                            .join("\n");
+
+                    }
+
+                    if (
+                        mode === "sortAZ" ||
+                        mode === "sortZA"
+                    ) {
+
+                        return lines
+                            .slice()
+                            .sort((a, b) => {
+
+                                const first =
+                                    ignoreCase
+                                        ? a.toLowerCase()
+                                        : a;
+
+                                const second =
+                                    ignoreCase
+                                        ? b.toLowerCase()
+                                        : b;
+
+                                return mode === "sortAZ"
+                                    ? first.localeCompare(
+                                        second
+                                    )
+                                    : second.localeCompare(
+                                        first
+                                    );
+
+                            })
+                            .join("\n");
+
+                    }
+
+                    return text;
+
+                }
+
+            },
+
+
+            replace: {
+
+                title:
+                    "Find & Replace",
+
+                description:
+                    "Repeated text ko quickly find karke replacement se change karo.",
+
+                options: () => `
+
+          <div class="option-field">
+
+            <label for="findText">
+              Find
+            </label>
+
+            <input
+              id="findText"
+              type="text"
+              placeholder="Text to find">
+
+          </div>
+
+
+          <div class="option-field">
+
+            <label for="replaceText">
+              Replace with
+            </label>
+
+            <input
+              id="replaceText"
+              type="text"
+              placeholder="Replacement">
+
+          </div>
+
+
+          <div class="option-field">
+
+            <label for="replaceCase">
+              Matching
+            </label>
+
+            <select id="replaceCase">
+
+              <option value="insensitive">
+                Ignore case
+              </option>
+
+              <option value="sensitive">
+                Match case
+              </option>
+
+            </select>
+
+          </div>
+
+        `,
+
+                process: text => {
+
+                    const find =
+                        document.getElementById(
+                            "findText"
+                        )?.value || "";
+
+                    const replacement =
+                        document.getElementById(
+                            "replaceText"
+                        )?.value || "";
+
+                    const matching =
+                        document.getElementById(
+                            "replaceCase"
+                        )?.value || "insensitive";
+
+                    if (!find) {
+                        return text;
+                    }
+
+                    const escaped =
+                        find.replace(
+                            /[.*+?^${}()|[\]\\]/g,
+                            "\\$&"
+                        );
+
+                    const regex =
+                        new RegExp(
+                            escaped,
+                            matching === "insensitive"
+                                ? "gi"
+                                : "g"
+                        );
+
+                    return text.replace(
+                        regex,
+                        replacement
+                    );
+
+                }
+
+            },
+
+
+            prefix: {
+
+                title:
+                    "Prefix / Suffix",
+
+                description:
+                    "Har line ke start ya end me custom text add karo.",
+
+                options: () => `
+
+          <div class="option-field">
+
+            <label for="prefixText">
+              Prefix
+            </label>
+
+            <input
+              id="prefixText"
+              type="text"
+              placeholder="Example: • ">
+
+          </div>
+
+
+          <div class="option-field">
+
+            <label for="suffixText">
+              Suffix
+            </label>
+
+            <input
+              id="suffixText"
+              type="text"
+              placeholder="Example: ;">
+
+          </div>
+
+
+          <div class="option-field">
+
+            <label for="emptyLines">
+              Empty lines
+            </label>
+
+            <select id="emptyLines">
+
+              <option value="skip">
+                Skip empty lines
+              </option>
+
+              <option value="include">
+                Include empty lines
+              </option>
+
+            </select>
+
+          </div>
+
+        `,
+
+                process: text => {
+
+                    const prefix =
+                        document.getElementById(
+                            "prefixText"
+                        )?.value || "";
+
+                    const suffix =
+                        document.getElementById(
+                            "suffixText"
+                        )?.value || "";
+
+                    const empty =
+                        document.getElementById(
+                            "emptyLines"
+                        )?.value || "skip";
+
+                    return text
+                        .split(/\r?\n/)
+                        .map(line => {
+
+                            if (
+                                !line.trim() &&
+                                empty === "skip"
+                            ) {
+                                return line;
+                            }
+
+                            return (
+                                prefix +
+                                line +
+                                suffix
+                            );
+
+                        })
+                        .join("\n");
+
+                }
+
+            },
+
+
+            reverse: {
+
+                title:
+                    "Reverse Text",
+
+                description:
+                    "Characters ya lines ko reverse order me convert karo.",
+
+                options: () => `
+
+          <div class="option-field">
+
+            <label for="reverseMode">
+              Reverse mode
+            </label>
+
+            <select id="reverseMode">
+
+              <option value="characters">
+                Characters
+              </option>
+
+              <option value="words">
+                Words
+              </option>
+
+              <option value="lines">
+                Lines
+              </option>
+
+            </select>
+
+          </div>
+
+        `,
+
+                process: text => {
+
+                    const mode =
+                        document.getElementById(
+                            "reverseMode"
+                        )?.value || "characters";
+
+                    if (mode === "characters") {
+
+                        return [...text]
+                            .reverse()
+                            .join("");
+
+                    }
+
+                    if (mode === "words") {
+
+                        return text
+                            .split(/(\s+)/)
+                            .reverse()
+                            .join("");
+
+                    }
+
+                    if (mode === "lines") {
+
+                        return text
+                            .split(/\r?\n/)
+                            .reverse()
+                            .join("\n");
+
+                    }
+
+                    return text;
+
+                }
+
+            },
+
+
+            extract: {
+
+                title:
+                    "Extract Data",
+
+                description:
+                    "Text ke andar se emails, URLs aur hashtags identify karo.",
+
+                options: () => `
+
+          <div class="option-field">
+
+            <label for="extractMode">
+              What to extract
+            </label>
+
+            <select id="extractMode">
+
+              <option value="emails">
+                Email addresses
+              </option>
+
+              <option value="urls">
+                URLs
+              </option>
+
+              <option value="hashtags">
+                Hashtags
+              </option>
+
+              <option value="mentions">
+                @Mentions
+              </option>
+
+            </select>
+
+          </div>
+
+        `,
+
+                process: text => {
+
+                    const mode =
+                        document.getElementById(
+                            "extractMode"
+                        )?.value || "emails";
+
+                    let regex;
+
+                    if (mode === "emails") {
+
+                        regex =
+                            /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
+
+                    } else if (mode === "urls") {
+
+                        regex =
+                            /https?:\/\/[^\s<>"']+/gi;
+
+                    } else if (mode === "hashtags") {
+
+                        regex =
+                            /#[\p{L}\p{N}_-]+/gu;
+
+                    } else {
+
+                        regex =
+                            /@[\p{L}\p{N}_.-]+/gu;
+
+                    }
+
+                    const matches =
+                        text.match(regex) || [];
+
+                    const unique =
+                        [...new Set(matches)];
+
+                    return unique.length
+                        ? unique.join("\n")
+                        : "Nothing found.";
+
+                }
+
+            }
+
+        };
+
+
+        /* =========================================================
+           LOAD TOOL
+           ========================================================= */
+
+        function loadTool(name) {
+
+            const tool =
+                tools[name];
+
+            if (!tool) return;
+
+            currentTool =
+                name;
+
+            toolTitle.textContent =
+                tool.title;
+
+            toolDescription.textContent =
+                tool.description;
+
+            optionsArea.innerHTML =
+                tool.options();
+
+            document
+                .querySelectorAll(".tool-card")
+                .forEach(card => {
+
+                    card.classList.toggle(
+                        "active",
+                        card.dataset.tool === name
+                    );
+
+                });
+
+            resultBox.innerHTML = `
+        <div class="result-empty">
+          Text add karo aur <strong>${tool.title}</strong> apply karo.
+        </div>
+      `;
+
+        }
+
+
+        document
+            .querySelectorAll(".tool-card")
+            .forEach(card => {
+
+                card.addEventListener(
+                    "click",
+                    () => {
+
+                        loadTool(
+                            card.dataset.tool
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =========================================================
+           LIVE ANALYZER
+           ========================================================= */
+
+        function updateStats() {
+
+            const text =
+                textInput.value;
+
+            const words =
+                text.trim()
+                    ? text
+                        .trim()
+                        .split(/\s+/)
+                        .filter(Boolean)
+                        .length
+                    : 0;
+
+            const characters =
+                text.length;
+
+            const lines =
+                text
+                    ? text.split(/\r?\n/).length
+                    : 0;
+
+            const minutes =
+                words
+                    ? Math.max(
+                        1,
+                        Math.ceil(words / 200)
+                    )
+                    : 0;
+
+            wordCount.textContent =
+                words;
+
+            charCount.textContent =
+                characters;
+
+            lineCount.textContent =
+                lines;
+
+            readingTime.textContent =
+                `${minutes} min`;
+
+        }
+
+
+        textInput.addEventListener(
+            "input",
+            updateStats
+        );
+
+
+        /* =========================================================
+           RUN TOOL
+           ========================================================= */
+
+        document
+            .getElementById("runButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const text =
+                        textInput.value;
+
+                    if (!text.trim()) {
+
+                        showToast(
+                            "Pehle kuch text add karo."
+                        );
+
+                        textInput.focus();
+
+                        return;
+
+                    }
+
+                    const tool =
+                        tools[currentTool];
+
+                    const result =
+                        tool.process(text);
+
+                    resultBox.textContent =
+                        result;
+
+                    showToast(
+                        `${tool.title} applied.`
+                    );
+
+                    resultBox.scrollIntoView({
+                        behavior: "smooth",
+                        block: "nearest"
+                    });
+
+                }
+            );
+
+
+        /* =========================================================
+           USE RESULT
+           ========================================================= */
+
+        document
+            .getElementById("useResultButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const result =
+                        resultBox.textContent.trim();
+
+                    if (
+                        !result ||
+                        result ===
+                        "Text add karo aur koi utility run karo."
+                    ) {
+
+                        showToast(
+                            "Pehle koi result generate karo."
+                        );
+
+                        return;
+
+                    }
+
+                    textInput.value =
+                        result;
+
+                    updateStats();
+
+                    showToast(
+                        "Result editor me aa gaya."
+                    );
+
+                    textInput.focus();
+
+                }
+            );
+
+
+        /* =========================================================
+           CLEAR
+           ========================================================= */
+
+        document
+            .getElementById("clearButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    textInput.value = "";
+
+                    updateStats();
+
+                    resultBox.innerHTML = `
+            <div class="result-empty">
+              Text add karo aur koi utility run karo.
+            </div>
+          `;
+
+                    showToast(
+                        "Text clear ho gaya."
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           COPY
+           ========================================================= */
+
+        async function copyText(text) {
+
+            if (!text.trim()) {
+
+                showToast(
+                    "Copy karne ke liye text nahi hai."
+                );
+
+                return;
+
+            }
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    text
+                );
+
+                showToast(
+                    "Text clipboard me copy ho gaya."
+                );
+
+            } catch {
+
+                const area =
+                    document.createElement("textarea");
+
+                area.value =
+                    text;
+
+                area.style.position =
+                    "fixed";
+
+                area.style.left =
+                    "-9999px";
+
+                document.body.appendChild(
+                    area
+                );
+
+                area.select();
+
+                try {
+
+                    document.execCommand(
+                        "copy"
+                    );
+
+                    showToast(
+                        "Text copy ho gaya."
+                    );
+
+                } catch {
+
+                    showToast(
+                        "Copy nahi ho saka."
+                    );
+
+                }
+
+                area.remove();
+
+            }
+
+        }
+
+
+        document
+            .getElementById("copyButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    copyText(
+                        resultBox.textContent.trim()
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           DOWNLOAD
+           ========================================================= */
+
+        document
+            .getElementById("downloadButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const text =
+                        resultBox.textContent.trim() ||
+                        textInput.value;
+
+                    if (!text.trim()) {
+
+                        showToast(
+                            "Download ke liye text nahi hai."
+                        );
+
+                        return;
+
+                    }
+
+                    const blob =
+                        new Blob(
+                            [text],
+                            {
+                                type:
+                                    "text/plain;charset=utf-8"
+                            }
+                        );
+
+                    const url =
+                        URL.createObjectURL(blob);
+
+                    const link =
+                        document.createElement("a");
+
+                    link.href =
+                        url;
+
+                    link.download =
+                        "ai-learning-hub-text.txt";
+
+                    document.body.appendChild(
+                        link
+                    );
+
+                    link.click();
+
+                    link.remove();
+
+                    URL.revokeObjectURL(
+                        url
+                    );
+
+                    showToast(
+                        "Text file ready hai."
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           TOAST
+           ========================================================= */
+
+        let toastTimer = null;
+
+
+        function showToast(message) {
+
+            toast.textContent =
+                message;
+
+            toast.classList.add(
+                "show"
+            );
+
+            clearTimeout(
+                toastTimer
+            );
+
+            toastTimer =
+                setTimeout(
+                    () => {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    2400
+                );
+
+        }
+
+
+        /* =========================================================
+           INITIALIZE
+           ========================================================= */
+
+        loadTool("stats");
+
+        updateStats();
+
+    </script>
+
+</body>
+
+</html>

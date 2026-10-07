@@ -1,0 +1,2941 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Chapter 16: Prompt Engineering — Prompt Basics | AI Learning HUB</title>
+
+    <meta name="description"
+        content="Learn Prompt Engineering from the basics. Understand prompts, instructions, context, goals, tasks, constraints, output formats, prompt improvement, common mistakes, testing, and practical AI prompting with real-world examples.">
+
+    <meta name="keywords"
+        content="Prompt Engineering, Prompt Basics, AI Prompts, Prompt Writing, Learn Prompt Engineering, AI Learning HUB, ChatGPT Prompts, AI Course, Prompt Techniques">
+
+    <meta name="author" content="AI Learning HUB">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Chapter 16: Prompt Engineering — Prompt Basics">
+    <meta property="og:description"
+        content="A complete beginner-to-practical introduction to Prompt Engineering and effective AI prompting.">
+    <meta property="og:site_name" content="AI Learning HUB">
+
+    <link rel="canonical" href="chapters/chapter-16.html">
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Chapter 16: Prompt Engineering — Prompt Basics",
+    "description": "A complete educational chapter explaining Prompt Engineering, prompt structure, context, goals, tasks, instructions, constraints, output formats and practical prompt improvement.",
+    "educationalLevel": "Beginner to Intermediate",
+    "learningResourceType": "Course Chapter",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "AI Full Course",
+      "provider": {
+        "@type": "Organization",
+        "name": "AI Learning HUB"
+      }
+    }
+  }
+  </script>
+
+    <style>
+        :root {
+            --bg: #f6f8fc;
+            --surface: #ffffff;
+            --surface-2: #f1f5f9;
+            --text: #172033;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --primary-soft: #eef2ff;
+            --green: #059669;
+            --green-soft: #ecfdf5;
+            --orange: #ea580c;
+            --orange-soft: #fff7ed;
+            --red: #dc2626;
+            --red-soft: #fef2f2;
+            --blue: #0284c7;
+            --blue-soft: #f0f9ff;
+            --shadow: 0 12px 35px rgba(15, 23, 42, .07);
+            --radius: 18px;
+            --max: 1180px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0b1020;
+            --surface: #111827;
+            --surface-2: #172033;
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --border: #263246;
+            --primary: #818cf8;
+            --primary-dark: #a5b4fc;
+            --primary-soft: #1d2440;
+            --green: #34d399;
+            --green-soft: #0d2921;
+            --orange: #fb923c;
+            --orange-soft: #2a1d12;
+            --red: #f87171;
+            --red-soft: #321619;
+            --blue: #38bdf8;
+            --blue-soft: #102b3b;
+            --shadow: 0 14px 35px rgba(0, 0, 0, .22);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            overflow-x: hidden;
+        }
+
+        img,
+        svg {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed, #0284c7);
+            z-index: 9999;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: color-mix(in srgb, var(--surface) 94%, transparent);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            width: min(100% - 32px, var(--max));
+            min-height: 70px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -.4px;
+            white-space: nowrap;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: white;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, .25);
+            font-weight: 900;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            padding: 9px 12px;
+            border-radius: 10px;
+            font-size: .92rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            border-radius: 11px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            font-size: 1rem;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            width: min(100% - 32px, var(--max));
+            margin: 34px auto 25px;
+            padding: 48px;
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            background:
+                radial-gradient(circle at 90% 10%, rgba(99, 102, 241, .15), transparent 28%),
+                radial-gradient(circle at 10% 100%, rgba(14, 165, 233, .10), transparent 30%),
+                var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 18px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 11px;
+            border-radius: 999px;
+            font-size: .78rem;
+            font-weight: 800;
+            background: var(--primary-soft);
+            color: var(--primary);
+            border: 1px solid color-mix(in srgb, var(--primary) 15%, transparent);
+        }
+
+        .badge.level {
+            background: var(--green-soft);
+            color: var(--green);
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            font-size: clamp(2rem, 5vw, 4rem);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            max-width: 850px;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        .hero-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 26px;
+        }
+
+        .info-chip {
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            padding: 9px 13px;
+            border-radius: 11px;
+            color: var(--muted);
+            font-size: .86rem;
+            font-weight: 650;
+        }
+
+        /* ================= LAYOUT ================= */
+
+        .page-layout {
+            width: min(100% - 32px, var(--max));
+            margin: 0 auto 60px;
+            display: grid;
+            grid-template-columns: 270px minmax(0, 1fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .toc {
+            position: sticky;
+            top: 92px;
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;
+            padding: 18px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .toc-title {
+            font-weight: 800;
+            margin-bottom: 12px;
+            font-size: .95rem;
+        }
+
+        .toc a {
+            display: block;
+            text-decoration: none;
+            color: var(--muted);
+            font-size: .83rem;
+            line-height: 1.4;
+            padding: 7px 9px;
+            border-radius: 8px;
+            margin-bottom: 2px;
+        }
+
+        .toc a:hover,
+        .toc a.active {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 90px;
+        }
+
+        .section h2 {
+            font-size: clamp(1.45rem, 3vw, 2rem);
+            line-height: 1.25;
+            margin-bottom: 15px;
+            letter-spacing: -.7px;
+        }
+
+        .section h3 {
+            font-size: 1.12rem;
+            margin: 25px 0 9px;
+        }
+
+        .section p {
+            color: var(--muted);
+            margin-bottom: 13px;
+        }
+
+        .section ul,
+        .section ol {
+            padding-left: 22px;
+            color: var(--muted);
+            margin: 10px 0 16px;
+        }
+
+        .section li {
+            margin: 6px 0;
+        }
+
+        .lead {
+            font-size: 1.02rem;
+        }
+
+        .number {
+            display: inline-grid;
+            place-items: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-weight: 900;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* ================= SPECIAL BOXES ================= */
+
+        .callout {
+            padding: 18px 20px;
+            border-radius: 14px;
+            border-left: 4px solid var(--primary);
+            background: var(--primary-soft);
+            margin: 18px 0;
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .success {
+            border-left-color: var(--green);
+            background: var(--green-soft);
+        }
+
+        .warning {
+            border-left-color: var(--orange);
+            background: var(--orange-soft);
+        }
+
+        .danger {
+            border-left-color: var(--red);
+            background: var(--red-soft);
+        }
+
+        .blue {
+            border-left-color: var(--blue);
+            background: var(--blue-soft);
+        }
+
+        .formula {
+            padding: 22px;
+            margin: 20px 0;
+            border: 1px dashed var(--primary);
+            border-radius: 15px;
+            background: var(--primary-soft);
+            text-align: center;
+            font-size: clamp(1rem, 3vw, 1.35rem);
+            font-weight: 800;
+            color: var(--primary);
+            overflow-wrap: anywhere;
+        }
+
+        .code-box {
+            background: #0b1220;
+            color: #dbeafe;
+            border-radius: 14px;
+            padding: 19px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid #1e293b;
+        }
+
+        .code-box pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family:
+                ui-monospace,
+                SFMono-Regular,
+                Menlo,
+                Monaco,
+                Consolas,
+                monospace;
+            font-size: .86rem;
+            line-height: 1.65;
+        }
+
+        .label {
+            display: inline-block;
+            font-size: .72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            margin-bottom: 7px;
+            color: var(--primary);
+        }
+
+        /* ================= GRID ================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 18px 0;
+        }
+
+        .card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: var(--surface-2);
+        }
+
+        .card h3 {
+            margin: 0 0 7px;
+            font-size: 1rem;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: .91rem;
+        }
+
+        /* ================= COMPARISON ================= */
+
+        .compare {
+            overflow-x: auto;
+            margin: 18px 0;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 620px;
+        }
+
+        th,
+        td {
+            padding: 13px 15px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--surface-2);
+            font-size: .86rem;
+        }
+
+        td {
+            color: var(--muted);
+            font-size: .87rem;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        /* ================= PROMPT LAB ================= */
+
+        .prompt-example {
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 18px 0;
+        }
+
+        .prompt-head {
+            padding: 11px 15px;
+            background: var(--surface-2);
+            font-weight: 800;
+            font-size: .83rem;
+        }
+
+        .prompt-body {
+            padding: 17px;
+        }
+
+        .bad {
+            border-left: 4px solid var(--red);
+        }
+
+        .better {
+            border-left: 4px solid var(--orange);
+        }
+
+        .pro {
+            border-left: 4px solid var(--green);
+        }
+
+        .prompt-body p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        /* ================= CHECKLIST ================= */
+
+        .checklist {
+            display: grid;
+            gap: 9px;
+            margin: 17px 0;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: var(--surface-2);
+        }
+
+        .check-icon {
+            color: var(--green);
+            font-weight: 900;
+        }
+
+        /* ================= QUIZ ================= */
+
+        .quiz-question {
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 14px;
+            background: var(--surface-2);
+        }
+
+        .quiz-question h3 {
+            margin: 0 0 12px;
+            font-size: 1rem;
+        }
+
+        .quiz-option {
+            display: block;
+            width: 100%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            text-align: left;
+            padding: 11px 13px;
+            border-radius: 10px;
+            margin: 7px 0;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--green);
+            background: var(--green-soft);
+        }
+
+        .quiz-option.wrong {
+            border-color: var(--red);
+            background: var(--red-soft);
+        }
+
+        .quiz-result {
+            display: none;
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 13px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-weight: 750;
+        }
+
+        .quiz-submit {
+            border: 0;
+            border-radius: 11px;
+            padding: 12px 18px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: .92rem;
+        }
+
+        .quiz-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ================= SUMMARY ================= */
+
+        .summary-box {
+            background:
+                linear-gradient(135deg, var(--primary-soft), var(--surface));
+            border: 1px solid color-mix(in srgb, var(--primary) 25%, var(--border));
+        }
+
+        .mental-model {
+            text-align: center;
+            padding: 25px 15px;
+            margin: 20px 0;
+            border-radius: 17px;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            font-weight: 850;
+            overflow-wrap: anywhere;
+        }
+
+        .mental-model span {
+            color: var(--primary);
+        }
+
+        /* ================= BACK TOP ================= */
+
+        .back-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: .2s ease;
+            z-index: 900;
+        }
+
+        .back-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+            padding: 32px 16px;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--muted);
+            font-size: .88rem;
+            margin: 4px 0;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 16px;
+                right: 16px;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 12px;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 11px 12px;
+            }
+
+            .menu-btn {
+                display: grid;
+            }
+
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+
+            /*
+        IMPORTANT:
+        Mobile/tablet TOC is NOT sticky/fixed.
+        This prevents scroll overlap bugs.
+      */
+            .toc {
+                position: static;
+                top: auto;
+                max-height: none;
+                overflow: visible;
+            }
+
+            .toc a {
+                display: inline-block;
+                margin-right: 4px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .nav-inner {
+                min-height: 62px;
+                width: min(100% - 20px, var(--max));
+            }
+
+            .nav-links {
+                top: 62px;
+                left: 10px;
+                right: 10px;
+            }
+
+            .brand-logo {
+                width: 36px;
+                height: 36px;
+            }
+
+            .brand {
+                font-size: .98rem;
+            }
+
+            .hero {
+                width: min(100% - 20px, var(--max));
+                margin-top: 18px;
+                padding: 28px 20px;
+                border-radius: 20px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.2px;
+            }
+
+            .hero-description {
+                font-size: .96rem;
+            }
+
+            .page-layout {
+                width: min(100% - 20px, var(--max));
+                gap: 16px;
+            }
+
+            .section {
+                padding: 22px 18px;
+                border-radius: 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toc {
+                padding: 15px;
+            }
+
+            .toc a {
+                display: block;
+            }
+
+            .back-top {
+                right: 14px;
+                bottom: 14px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .nav-actions {
+                gap: 5px;
+            }
+
+            .icon-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .hero-info {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 19px 15px;
+            }
+
+            .formula {
+                padding: 17px 12px;
+            }
+
+            .section h2 {
+                font-size: 1.38rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+        <div class="nav-inner">
+
+            <a href="../index.html" class="brand" aria-label="AI Learning HUB Home">
+                <span class="brand-logo">AI</span>
+                <span>AI Learning HUB</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#courses">Courses</a>
+                <a href="../index.html#tools">Tools</a>
+                <a href="../index.html#articles">Articles</a>
+                <a href="../index.html#resources">Resources</a>
+                <a href="../index.html#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">
+                    ◐
+                </button>
+
+                <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu"
+                    aria-expanded="false">
+                    ☰
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="badge-row">
+                <span class="badge level">LEVEL 3</span>
+                <span class="badge">CHAPTER 16</span>
+                <span class="badge">PROMPT ENGINEERING</span>
+                <span class="badge">FOUNDATION</span>
+            </div>
+
+            <h1>
+                Prompt Engineering:
+                <span>Prompt Basics</span>
+            </h1>
+
+            <p class="hero-description">
+                AI se achha result lene ke liye sirf AI tool use karna enough nahi hai.
+                Aapko AI ko apni requirement clearly batani bhi aani chahiye.
+                Isi skill ko hum Prompt Engineering kehte hain.
+                Is chapter me hum zero se samjhenge ki prompt kya hota hai,
+                AI prompt ko kaise interpret karta hai, effective prompt kaise likhte hain,
+                aur ek simple question ko professional prompt me kaise convert karte hain.
+            </p>
+
+            <div class="hero-info">
+                <span class="info-chip">⏱ Deep Learning Chapter</span>
+                <span class="info-chip">🎯 Practical Prompting</span>
+                <span class="info-chip">🧠 AI Thinking</span>
+                <span class="info-chip">💻 Real-World Examples</span>
+            </div>
+
+        </section>
+
+
+        <!-- ================= PAGE LAYOUT ================= -->
+
+        <div class="page-layout">
+
+            <!-- TOC -->
+
+            <aside class="toc" aria-label="Chapter contents">
+
+                <div class="toc-title">📚 Chapter Contents</div>
+
+                <a href="#intro">1. Prompt Engineering Introduction</a>
+                <a href="#prompt">2. Prompt Kya Hai?</a>
+                <a href="#engineering">3. Prompt Engineering Kya Hai?</a>
+                <a href="#need">4. AI Ko Prompt Kyun Chahiye?</a>
+                <a href="#interpret">5. AI Prompt Ko Kaise Samajhta Hai?</a>
+                <a href="#mental-model">6. Core Prompt Mental Model</a>
+                <a href="#question-vs-prompt">7. Question vs Prompt</a>
+                <a href="#specificity">8. Specificity</a>
+                <a href="#context">9. Context</a>
+                <a href="#goal">10. Goal & Task</a>
+                <a href="#instructions">11. Instructions</a>
+                <a href="#output">12. Output Format</a>
+                <a href="#audience">13. Audience & Tone</a>
+                <a href="#constraints">14. Constraints</a>
+                <a href="#examples">15. Examples in Prompts</a>
+                <a href="#role">16. Role Prompting</a>
+                <a href="#ambiguity">17. Ambiguous Prompts</a>
+                <a href="#progressive">18. Prompt Improvement</a>
+                <a href="#mistakes">19. Common Mistakes</a>
+                <a href="#real-world">20. Real-World Prompts</a>
+                <a href="#testing">21. Prompt Testing</a>
+                <a href="#checklist">22. Prompt Quality Checklist</a>
+                <a href="#practice">23. Practical Exercises</a>
+                <a href="#quiz">24. Chapter Quiz</a>
+                <a href="#summary">25. Final Summary</a>
+
+            </aside>
+
+
+            <!-- CONTENT -->
+
+            <article class="content">
+
+
+                <!-- ================= 1 ================= -->
+
+                <section class="section" id="intro">
+
+                    <h2>
+                        <span class="number">1</span>
+                        Prompt Engineering ki Shuruaat
+                    </h2>
+
+                    <p class="lead">
+                        Aaj ke AI tools bahut powerful hain, lekin AI ki capability ka
+                        fayda tabhi properly milta hai jab hum AI ko apni requirement
+                        clearly communicate kar sakein.
+                    </p>
+
+                    <p>
+                        Socho aap ek AI assistant se kehte ho:
+                        <strong>"Mujhe English sikhao."</strong>
+                    </p>
+
+                    <p>
+                        AI ke liye ye ek valid request hai, lekin is request me bahut
+                        saari information missing hai. Aapko English kis level se seekhni hai?
+                        Grammar? Speaking? Vocabulary? Interview English?
+                        Daily conversation?
+                    </p>
+
+                    <p>
+                        Ab agar aap kahte ho:
+                    </p>
+
+                    <div class="code-box">
+                        <pre>I'm a beginner in English.
+Create a 15-minute daily English practice plan
+for the next 7 days.
+Focus on basic speaking and common daily sentences.
+Explain difficult words in simple Hindi.</pre>
+                    </div>
+
+                    <p>
+                        Ab AI ko task ka purpose, level, duration, focus aur output style
+                        samajhne ke liye kaafi useful information mil gayi.
+                    </p>
+
+                    <div class="callout success">
+                        <strong>Core Idea</strong>
+                        Better AI output ke liye hamesha complicated prompt ki zarurat nahi
+                        hoti. Zarurat hoti hai <strong>clear communication</strong> ki.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 2 ================= -->
+
+                <section class="section" id="prompt">
+
+                    <h2>
+                        <span class="number">2</span>
+                        Prompt Kya Hai?
+                    </h2>
+
+                    <p>
+                        Simple language me, <strong>prompt wo input hai jo hum AI system
+                            ko dete hain taaki AI kisi specific response ya action ko generate
+                            kare.</strong>
+                    </p>
+
+                    <p>
+                        Prompt sirf question nahi hota.
+                    </p>
+
+                    <p>
+                        Prompt ho sakta hai:
+                    </p>
+
+                    <ul>
+                        <li>Ek question</li>
+                        <li>Ek instruction</li>
+                        <li>Ek task</li>
+                        <li>Ek detailed requirement</li>
+                        <li>Ek example ke saath instruction</li>
+                        <li>Ek structured request</li>
+                        <li>Ek multi-step workflow</li>
+                    </ul>
+
+                    <div class="formula">
+                        User Input → AI Processing → Generated Output
+                    </div>
+
+                    <h3>Example</h3>
+
+                    <div class="code-box">
+                        <pre>Explain photosynthesis in simple language.</pre>
+                    </div>
+
+                    <p>
+                        Ye ek simple prompt hai.
+                    </p>
+
+                    <p>
+                        Is prompt ka goal hai AI se photosynthesis ko simple language me
+                        explain karwana.
+                    </p>
+
+                    <div class="callout blue">
+                        <strong>Yaad Rakho</strong>
+                        Prompt = AI ko diya gaya meaningful input jo desired output
+                        generate karne ke liye use hota hai.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 3 ================= -->
+
+                <section class="section" id="engineering">
+
+                    <h2>
+                        <span class="number">3</span>
+                        Prompt Engineering Kya Hai?
+                    </h2>
+
+                    <p>
+                        Prompt Engineering ka matlab sirf "achha prompt likhna" nahi hai.
+                    </p>
+
+                    <p>
+                        Iska deeper meaning hai:
+                        <strong>AI system ko desired result tak pahunchane ke liye
+                            instructions, context, constraints aur output requirements ko
+                            intelligently design karna.</strong>
+                    </p>
+
+                    <div class="formula">
+                        Prompt Engineering =
+                        Requirement ko AI-understandable instructions me convert karna
+                    </div>
+
+                    <p>
+                        Ek professional prompt engineer sochta hai:
+                    </p>
+
+                    <ul>
+                        <li>Mujhe exactly kya result chahiye?</li>
+                        <li>AI ko kaunsa context dena zaroori hai?</li>
+                        <li>Task kitna specific hona chahiye?</li>
+                        <li>Output kis format me chahiye?</li>
+                        <li>Kaun output ko use karega?</li>
+                        <li>Kaunsi limitations hain?</li>
+                        <li>AI ko examples dene se clarity improve hogi?</li>
+                    </ul>
+
+                    <div class="callout">
+                        <strong>Important</strong>
+                        Prompt Engineering ek communication skill + problem-solving skill
+                        hai. Sirf English grammar ki skill nahi.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 4 ================= -->
+
+                <section class="section" id="need">
+
+                    <h2>
+                        <span class="number">4</span>
+                        AI Ko Prompt Kyun Chahiye?
+                    </h2>
+
+                    <p>
+                        AI models bahut powerful patterns aur information process kar sakte
+                        hain, lekin user ki exact intention automatically hamesha clear nahi
+                        hoti.
+                    </p>
+
+                    <p>
+                        Example:
+                    </p>
+
+                    <div class="code-box">
+                        <pre>Write about AI.</pre>
+                    </div>
+
+                    <p>
+                        Iska matlab ho sakta hai:
+                    </p>
+
+                    <ul>
+                        <li>AI ka definition</li>
+                        <li>AI ka history</li>
+                        <li>AI ka future</li>
+                        <li>AI ke benefits</li>
+                        <li>AI ke risks</li>
+                        <li>AI par article</li>
+                        <li>School assignment</li>
+                        <li>Technical explanation</li>
+                    </ul>
+
+                    <p>
+                        AI ko user ke exact purpose ka certainty se pata nahi chalega.
+                        Isliye prompt me intention clarify karna useful hota hai.
+                    </p>
+
+                    <div class="callout warning">
+                        <strong>Rule</strong>
+                        Jitna important exact output hai, utni hi clearly requirement
+                        define karni chahiye.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 5 ================= -->
+
+                <section class="section" id="interpret">
+
+                    <h2>
+                        <span class="number">5</span>
+                        AI Prompt Ko Kaise Interpret Karta Hai?
+                    </h2>
+
+                    <p>
+                        High-level level par ek AI system aapke input ko process karke
+                        uske context aur instructions ke according output generate karta hai.
+                    </p>
+
+                    <div class="formula">
+                        Prompt → Context Understanding → Pattern/Model Processing → Output Generation
+                    </div>
+
+                    <p>
+                        Lekin ek important baat samjho:
+                        AI human ki tarah prompt ko literally "mind me read" nahi karta.
+                        Modern language models text ko computational representations me
+                        process karte hain aur learned patterns ke basis par output generate
+                        karte hain.
+                    </p>
+
+                    <p>
+                        Isi wajah se wording, context aur structure output ko affect kar
+                        sakte hain.
+                    </p>
+
+                    <h3>Example</h3>
+
+                    <div class="grid">
+
+                        <div class="card">
+                            <h3>Vague</h3>
+                            <p>
+                                Explain Python.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Clear</h3>
+                            <p>
+                                Explain Python to a complete beginner using simple Hinglish
+                                and three practical examples.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <p>
+                        Second prompt AI ko target audience, language aur examples ke
+                        baare me additional information deta hai.
+                    </p>
+
+                </section>
+
+
+                <!-- ================= 6 ================= -->
+
+                <section class="section" id="mental-model">
+
+                    <h2>
+                        <span class="number">6</span>
+                        Core Prompt Mental Model
+                    </h2>
+
+                    <p>
+                        Prompting ko samajhne ke liye ek simple mental model yaad rakho.
+                    </p>
+
+                    <div class="mental-model">
+                        <span>Goal</span>
+                        +
+                        <span>Context</span>
+                        +
+                        <span>Task</span>
+                        +
+                        <span>Instructions</span>
+                        +
+                        <span>Constraints</span>
+                        +
+                        <span>Output Format</span>
+                        =
+                        Better Prompt
+                    </div>
+
+                    <p>
+                        Har prompt me ye sab components compulsory nahi hain.
+                        Simple task ke liye ek short instruction enough ho sakta hai.
+                    </p>
+
+                    <p>
+                        Lekin complex task me ye components clarity ko dramatically improve
+                        kar sakte hain.
+                    </p>
+
+                    <div class="grid">
+
+                        <div class="card">
+                            <h3>Goal</h3>
+                            <p>Final result kya chahiye?</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Context</h3>
+                            <p>AI ko background me kya pata hona chahiye?</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Task</h3>
+                            <p>AI ko exactly kya karna hai?</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Instructions</h3>
+                            <p>Kaise perform karna hai?</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Constraints</h3>
+                            <p>Kya limit ya condition follow karni hai?</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Output</h3>
+                            <p>Final answer kis format me chahiye?</p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 7 ================= -->
+
+                <section class="section" id="question-vs-prompt">
+
+                    <h2>
+                        <span class="number">7</span>
+                        Normal Question vs Effective Prompt
+                    </h2>
+
+                    <p>
+                        Question aur prompt ke beech difference samajhna Prompt Engineering
+                        ka important first step hai.
+                    </p>
+
+                    <div class="compare">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Normal Question</th>
+                                    <th>Effective Prompt</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>What is AI?</td>
+                                    <td>
+                                        Explain AI to a complete beginner in simple Hinglish.
+                                        Give definition, 3 daily-life examples and 2 limitations.
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Write an email.</td>
+                                    <td>
+                                        Write a polite professional email requesting a one-day
+                                        leave. Keep it under 120 words.
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Teach me Python.</td>
+                                    <td>
+                                        Create a beginner-friendly Python lesson covering variables,
+                                        data types and input with simple examples and one practice
+                                        exercise.
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div class="callout success">
+                        <strong>Difference</strong>
+                        Effective prompt AI ko sirf "topic" nahi batata;
+                        wo desired result ka direction bhi deta hai.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 8 ================= -->
+
+                <section class="section" id="specificity">
+
+                    <h2>
+                        <span class="number">8</span>
+                        Specificity — Prompt Ko Specific Kaise Banayein?
+                    </h2>
+
+                    <p>
+                        Specificity ka matlab hai requirement ko unnecessary ambiguity ke
+                        bina clearly define karna.
+                    </p>
+
+                    <h3>Weak</h3>
+
+                    <div class="code-box">
+                        <pre>Make a study plan.</pre>
+                    </div>
+
+                    <h3>Better</h3>
+
+                    <div class="code-box">
+                        <pre>Make a 7-day study plan for learning basic Python.</pre>
+                    </div>
+
+                    <h3>Much Better</h3>
+
+                    <div class="code-box">
+                        <pre>I am a complete beginner in Python.
+Create a 7-day learning plan with 45 minutes per day.
+Cover variables, data types, conditions and loops.
+Include one small practice task for every day.
+Use simple Hinglish.</pre>
+                    </div>
+
+                    <p>
+                        Specificity ka matlab prompt ko unnecessarily giant banana nahi hai.
+                        Sirf relevant details provide karo.
+                    </p>
+
+                </section>
+
+
+                <!-- ================= 9 ================= -->
+
+                <section class="section" id="context">
+
+                    <h2>
+                        <span class="number">9</span>
+                        Context — AI Ko Background Information Dena
+                    </h2>
+
+                    <p>
+                        Context wo information hai jo AI ko situation samajhne me help karti
+                        hai.
+                    </p>
+
+                    <p>
+                        Example:
+                    </p>
+
+                    <div class="code-box">
+                        <pre>Improve this paragraph.</pre>
+                    </div>
+
+                    <p>
+                        AI ko pata nahi:
+                    </p>
+
+                    <ul>
+                        <li>Paragraph kis audience ke liye hai?</li>
+                        <li>Formal ya casual hona hai?</li>
+                        <li>School assignment hai ya website?</li>
+                        <li>Length kitni honi chahiye?</li>
+                    </ul>
+
+                    <p>
+                        Context add karne par output zyada targeted ho sakta hai.
+                    </p>
+
+                    <div class="code-box">
+                        <pre>I am writing an educational website for beginners.
+Improve the paragraph below.
+Keep the language simple, professional and easy to understand.
+Do not change the main meaning.</pre>
+                    </div>
+
+                    <div class="callout blue">
+                        <strong>Remember</strong>
+                        Context = "AI ko situation samjhane wali relevant background information."
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 10 ================= -->
+
+                <section class="section" id="goal">
+
+                    <h2>
+                        <span class="number">10</span>
+                        Goal aur Task
+                    </h2>
+
+                    <h3>Goal kya hai?</h3>
+
+                    <p>
+                        Goal final outcome ko describe karta hai.
+                    </p>
+
+                    <p>
+                        Example:
+                        <strong>"Mujhe Python beginners ke liye learning material banana hai."</strong>
+                    </p>
+
+                    <h3>Task kya hai?</h3>
+
+                    <p>
+                        Task AI ko batata hai ki specific action kya perform karna hai.
+                    </p>
+
+                    <p>
+                        Example:
+                        <strong>"Create a beginner-friendly lesson on Python variables."</strong>
+                    </p>
+
+                    <div class="formula">
+                        Goal = Why / Desired Result
+                        <br>
+                        Task = What AI Should Do
+                    </div>
+
+                    <p>
+                        Complex prompt me goal aur task dono clearly define karna useful hota hai.
+                    </p>
+
+                </section>
+
+
+                <!-- ================= 11 ================= -->
+
+                <section class="section" id="instructions">
+
+                    <h2>
+                        <span class="number">11</span>
+                        Instructions — AI Ko Kaise Kaam Karna Hai
+                    </h2>
+
+                    <p>
+                        Instruction wo direction hoti hai jo AI ko batati hai ki task
+                        perform karte waqt kis approach ko follow karna hai.
+                    </p>
+
+                    <h3>Example</h3>
+
+                    <div class="code-box">
+                        <pre>Create an explanation of machine learning.
+
+Instructions:
+- Start with a simple definition.
+- Explain using a daily-life example.
+- Avoid unnecessary technical jargon.
+- Explain the difference between AI and ML.
+- Finish with a short summary.</pre>
+                    </div>
+
+                    <p>
+                        Is prompt me AI ko sirf topic nahi diya gaya.
+                        Usko response structure bhi diya gaya hai.
+                    </p>
+
+                    <div class="callout success">
+                        <strong>Useful Principle</strong>
+                        "Kya karna hai" aur "kaise karna hai" ko zarurat ke according
+                        alag-alag define kiya ja sakta hai.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 12 ================= -->
+
+                <section class="section" id="output">
+
+                    <h2>
+                        <span class="number">12</span>
+                        Output Format
+                    </h2>
+
+                    <p>
+                        Kabhi-kabhi AI ka content correct hota hai, lekin format useful
+                        nahi hota. Is problem ko output format specify karke reduce kiya
+                        ja sakta hai.
+                    </p>
+
+                    <h3>Possible Output Formats</h3>
+
+                    <div class="grid">
+
+                        <div class="card">
+                            <h3>Bullet List</h3>
+                            <p>Quick points aur revision ke liye.</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Table</h3>
+                            <p>Comparison aur structured information ke liye.</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>Step-by-Step</h3>
+                            <p>Learning aur procedures ke liye.</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>JSON</h3>
+                            <p>Software/API workflows ke liye.</p>
+                        </div>
+
+                    </div>
+
+                    <h3>Example</h3>
+
+                    <div class="code-box">
+                        <pre>Compare AI, Machine Learning and Deep Learning.
+
+Output format:
+Use a table with these columns:
+Concept | Definition | Example | Relationship</pre>
+                    </div>
+
+                    <div class="callout">
+                        <strong>Tip</strong>
+                        Agar output ko directly kisi specific place par use karna hai,
+                        output format pehle specify karna bahut useful hota hai.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 13 ================= -->
+
+                <section class="section" id="audience">
+
+                    <h2>
+                        <span class="number">13</span>
+                        Audience aur Tone
+                    </h2>
+
+                    <p>
+                        Same topic ko different audiences ke liye completely different
+                        language me explain karna pad sakta hai.
+                    </p>
+
+                    <div class="compare">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Audience</th>
+                                    <th>Suitable Style</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Complete Beginner</td>
+                                    <td>Simple language, examples, less jargon</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Student</td>
+                                    <td>Educational, structured, examples + practice</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Developer</td>
+                                    <td>Technical terminology, code, architecture</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Business User</td>
+                                    <td>Practical, outcome-focused, concise</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <h3>Tone</h3>
+
+                    <p>
+                        Tone ka matlab response ka communication style hai.
+                    </p>
+
+                    <ul>
+                        <li>Professional</li>
+                        <li>Friendly</li>
+                        <li>Educational</li>
+                        <li>Formal</li>
+                        <li>Concise</li>
+                        <li>Detailed</li>
+                        <li>Persuasive</li>
+                    </ul>
+
+                    <div class="code-box">
+                        <pre>Explain Artificial Intelligence
+for a complete beginner.
+Use a friendly educational tone.
+Use simple Hinglish.
+Avoid unnecessary technical jargon.</pre>
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 14 ================= -->
+
+                <section class="section" id="constraints">
+
+                    <h2>
+                        <span class="number">14</span>
+                        Constraints — AI Ko Boundaries Dena
+                    </h2>
+
+                    <p>
+                        Constraint ka matlab hai output ke liye specific limits ya rules.
+                    </p>
+
+                    <p>
+                        Examples:
+                    </p>
+
+                    <ul>
+                        <li>100 words se kam</li>
+                        <li>5 bullet points</li>
+                        <li>Beginner level</li>
+                        <li>No technical jargon</li>
+                        <li>Only Markdown</li>
+                        <li>Use a table</li>
+                        <li>Include exactly 3 examples</li>
+                    </ul>
+
+                    <div class="code-box">
+                        <pre>Explain cloud computing.
+
+Constraints:
+- Maximum 180 words
+- Use simple Hinglish
+- Give exactly 3 examples
+- Avoid advanced technical terms
+- Finish with a 2-line summary</pre>
+                    </div>
+
+                    <div class="callout warning">
+                        <strong>Important</strong>
+                        Too many unnecessary constraints bhi prompt ko complicated bana sakte hain.
+                        Sirf useful constraints use karo.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 15 ================= -->
+
+                <section class="section" id="examples">
+
+                    <h2>
+                        <span class="number">15</span>
+                        Examples Dene Se Prompt Better Kaise Ho Sakta Hai?
+                    </h2>
+
+                    <p>
+                        Kabhi AI ko sirf instruction dene ke bajay desired output ka example
+                        dena zyada effective hota hai.
+                    </p>
+
+                    <h3>Example-Based Instruction</h3>
+
+                    <div class="code-box">
+                        <pre>Convert the following sentence into a short professional version.
+
+Example:
+Input: "I wanted to let you know that I won't be able to attend."
+Output: "I won't be able to attend."
+
+Now convert:
+"I am writing this message to inform you that..."</pre>
+                    </div>
+
+                    <p>
+                        Example AI ko desired pattern samajhne me help karta hai.
+                    </p>
+
+                    <div class="callout blue">
+                        <strong>Concept</strong>
+                        Example = "Mujhe kis type ka result chahiye" ka concrete demonstration.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 16 ================= -->
+
+                <section class="section" id="role">
+
+                    <h2>
+                        <span class="number">16</span>
+                        Role Prompting
+                    </h2>
+
+                    <p>
+                        Role prompting me aap AI ko ek specific perspective ya role ke
+                        according response generate karne ke liye kehte ho.
+                    </p>
+
+                    <div class="code-box">
+                        <pre>You are an experienced Python instructor.
+Teach Python variables to a complete beginner.
+Use simple Hinglish, practical examples
+and one small exercise.</pre>
+                    </div>
+
+                    <p>
+                        Isse response ka perspective aur communication style guide kiya
+                        ja sakta hai.
+                    </p>
+
+                    <div class="callout">
+                        <strong>But remember</strong>
+                        "You are an expert" likhne se AI automatically infallible expert
+                        nahi ban jata. Important information ko independently verify karna
+                        phir bhi zaroori hai.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 17 ================= -->
+
+                <section class="section" id="ambiguity">
+
+                    <h2>
+                        <span class="number">17</span>
+                        Ambiguous aur Under-Specified Prompts
+                    </h2>
+
+                    <p>
+                        Ambiguous prompt ka meaning multiple ways me interpret ho sakta hai.
+                    </p>
+
+                    <div class="code-box">
+                        <pre>Make it better.</pre>
+                    </div>
+
+                    <p>
+                        "Better" ka matlab kya?
+                    </p>
+
+                    <ul>
+                        <li>Shorter?</li>
+                        <li>More professional?</li>
+                        <li>More detailed?</li>
+                        <li>More persuasive?</li>
+                        <li>More simple?</li>
+                        <li>Better grammar?</li>
+                    </ul>
+
+                    <p>
+                        Isliye better prompt:
+                    </p>
+
+                    <div class="code-box">
+                        <pre>Rewrite this paragraph to make it more professional.
+Keep the original meaning.
+Improve grammar and clarity.
+Keep the length approximately the same.</pre>
+                    </div>
+
+                    <h3>Under-Specified Prompt</h3>
+
+                    <p>
+                        Jab task diya ho lekin required information missing ho,
+                        prompt under-specified ho sakta hai.
+                    </p>
+
+                    <div class="callout warning">
+                        <strong>Solution</strong>
+                        Socho: "Agar koi human mujhe ye task de raha hota,
+                        to mujhe kaunsi information aur chahiye hoti?"
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 18 ================= -->
+
+                <section class="section" id="progressive">
+
+                    <h2>
+                        <span class="number">18</span>
+                        Prompt Ko Step-by-Step Improve Karna
+                    </h2>
+
+                    <p>
+                        Professional prompting ka matlab hamesha first attempt me perfect
+                        prompt likhna nahi hai.
+                    </p>
+
+                    <p>
+                        Prompt ko iterative process ki tarah treat karo.
+                    </p>
+
+                    <div class="mental-model">
+                        <span>Draft</span>
+                        →
+                        <span>Output</span>
+                        →
+                        <span>Review</span>
+                        →
+                        <span>Improve Prompt</span>
+                        →
+                        <span>Test Again</span>
+                    </div>
+
+                    <h3>Example</h3>
+
+                    <div class="prompt-example">
+
+                        <div class="prompt-head">
+                            Version 1 — Basic
+                        </div>
+
+                        <div class="prompt-body bad">
+                            <p>
+                                Teach me AI.
+                            </p>
+                        </div>
+
+                        <div class="prompt-head">
+                            Version 2 — Better
+                        </div>
+
+                        <div class="prompt-body better">
+                            <p>
+                                Teach me AI for beginners with simple examples.
+                            </p>
+                        </div>
+
+                        <div class="prompt-head">
+                            Version 3 — Professional
+                        </div>
+
+                        <div class="prompt-body pro">
+                            <p>
+                                I am a complete beginner learning AI. Explain AI fundamentals
+                                in simple Hinglish. Start with definition, then explain how AI
+                                differs from normal software and give 5 daily-life examples.
+                                Include benefits, limitations and a short recap at the end.
+                                Use headings and bullet points.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="callout success">
+                        <strong>Golden Principle</strong>
+                        Prompting is not one-shot magic. Good results often come from
+                        observation + refinement.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 19 ================= -->
+
+                <section class="section" id="mistakes">
+
+                    <h2>
+                        <span class="number">19</span>
+                        Beginners ki Common Prompt Mistakes
+                    </h2>
+
+                    <div class="grid">
+
+                        <div class="card">
+                            <h3>❌ Too Vague</h3>
+                            <p>AI ko exact requirement nahi pata.</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>❌ No Context</h3>
+                            <p>AI situation ko incorrectly assume kar sakta hai.</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>❌ No Output Format</h3>
+                            <p>Useful content wrong structure me aa sakta hai.</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>❌ Too Many Unrelated Tasks</h3>
+                            <p>Ek prompt me unnecessary multiple objectives daal dena.</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>❌ Contradictory Instructions</h3>
+                            <p>Instructions ek doosre se conflict kar rahi hoti hain.</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>❌ No Verification</h3>
+                            <p>AI output ko automatically true maan lena.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="callout danger">
+                        <strong>Important AI Rule</strong>
+                        Better prompt ≠ guaranteed truth.
+                        Prompt output ko improve kar sakta hai, lekin AI-generated information
+                        ko important situations me verify karna phir bhi zaroori hai.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 20 ================= -->
+
+                <section class="section" id="real-world">
+
+                    <h2>
+                        <span class="number">20</span>
+                        Real-World Prompt Examples
+                    </h2>
+
+                    <h3>📚 Study</h3>
+
+                    <div class="code-box">
+                        <pre>I am learning basic electricity as a beginner.
+Explain voltage, current and resistance in simple Hinglish.
+Use one daily-life analogy for each.
+Then give me 5 practice questions with answers.</pre>
+                    </div>
+
+                    <h3>🇬🇧 English Learning</h3>
+
+                    <div class="code-box">
+                        <pre>Act as a friendly English practice tutor.
+I am a beginner.
+Give me one daily conversation situation at a time.
+Ask me a question, wait for my answer,
+then correct my grammar and explain the mistake simply.</pre>
+                    </div>
+
+                    <h3>✍️ Writing</h3>
+
+                    <div class="code-box">
+                        <pre>Rewrite this paragraph for an educational website.
+Keep the meaning unchanged.
+Make it clear, professional and beginner-friendly.
+Use short paragraphs and avoid unnecessary jargon.</pre>
+                    </div>
+
+                    <h3>💻 Coding</h3>
+
+                    <div class="code-box">
+                        <pre>Act as a programming instructor.
+Explain this JavaScript code to a beginner.
+First explain what the code does,
+then explain important lines,
+then identify possible bugs,
+and finally show a cleaner version.</pre>
+                    </div>
+
+                    <h3>🔎 Research</h3>
+
+                    <div class="code-box">
+                        <pre>Help me understand the topic of machine learning.
+Separate the answer into:
+1. Definition
+2. How it works
+3. Main types
+4. Real-world applications
+5. Limitations
+6. Important terms
+
+Clearly distinguish established facts from uncertain claims.</pre>
+                    </div>
+
+                    <h3>📊 Data Work</h3>
+
+                    <div class="code-box">
+                        <pre>I have a table containing sales data.
+Help me identify:
+- missing values
+- duplicate records
+- unusual values
+- useful summary statistics
+
+Explain each step in simple language before suggesting formulas or code.</pre>
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 21 ================= -->
+
+                <section class="section" id="testing">
+
+                    <h2>
+                        <span class="number">21</span>
+                        Prompt Testing
+                    </h2>
+
+                    <p>
+                        Agar aap ek prompt ko baar-baar use karna chahte ho,
+                        to usko test karna important hai.
+                    </p>
+
+                    <h3>Testing Process</h3>
+
+                    <ol>
+                        <li>Prompt ka objective define karo.</li>
+                        <li>Ek representative input choose karo.</li>
+                        <li>Prompt run karo.</li>
+                        <li>Output ko evaluate karo.</li>
+                        <li>Problem identify karo.</li>
+                        <li>Prompt improve karo.</li>
+                        <li>Same type ke multiple examples par test karo.</li>
+                    </ol>
+
+                    <div class="formula">
+                        Prompt Quality = Clear Requirement + Useful Context + Testable Output
+                    </div>
+
+                    <h3>Evaluation Questions</h3>
+
+                    <ul>
+                        <li>Kya output task ko actually solve karta hai?</li>
+                        <li>Kya unnecessary information hai?</li>
+                        <li>Kya format correct hai?</li>
+                        <li>Kya audience ke according language hai?</li>
+                        <li>Kya important requirements miss hui hain?</li>
+                        <li>Kya output consistent hai?</li>
+                    </ul>
+
+                </section>
+
+
+                <!-- ================= 22 ================= -->
+
+                <section class="section" id="checklist">
+
+                    <h2>
+                        <span class="number">22</span>
+                        Prompt Quality Checklist
+                    </h2>
+
+                    <p>
+                        Prompt send karne se pehle ye quick checklist use kar sakte ho.
+                    </p>
+
+                    <div class="checklist">
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>Mujhe exact desired result pata hai.</span>
+                        </div>
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>Task clearly defined hai.</span>
+                        </div>
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>Required context diya gaya hai.</span>
+                        </div>
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>Audience relevant hai.</span>
+                        </div>
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>Language/tone useful hai.</span>
+                        </div>
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>Output format specify kiya hai, agar zaroori hai.</span>
+                        </div>
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>Important constraints mention hain.</span>
+                        </div>
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>Instructions contradictory nahi hain.</span>
+                        </div>
+
+                        <div class="check-item">
+                            <span class="check-icon">✓</span>
+                            <span>AI output ko review/verify karne ka plan hai.</span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 23 ================= -->
+
+                <section class="section" id="practice">
+
+                    <h2>
+                        <span class="number">23</span>
+                        Practical Exercises
+                    </h2>
+
+                    <p>
+                        Ab theory ko practice me convert karo.
+                    </p>
+
+                    <h3>Exercise 1 — Vague Prompt Improve Karo</h3>
+
+                    <div class="code-box">
+                        <pre>Teach me coding.</pre>
+                    </div>
+
+                    <p>
+                        Isko beginner, language, duration, topic aur output ke according
+                        improve karo.
+                    </p>
+
+                    <h3>Exercise 2 — Writing</h3>
+
+                    <div class="code-box">
+                        <pre>Write something about technology.</pre>
+                    </div>
+
+                    <p>
+                        Isme audience, purpose, length, tone aur format add karo.
+                    </p>
+
+                    <h3>Exercise 3 — Study</h3>
+
+                    <div class="code-box">
+                        <pre>Explain electricity.</pre>
+                    </div>
+
+                    <p>
+                        Isko aisa prompt banao jisme:
+                    </p>
+
+                    <ul>
+                        <li>Beginner level</li>
+                        <li>Hinglish</li>
+                        <li>Daily-life examples</li>
+                        <li>Important terms</li>
+                        <li>Short quiz</li>
+                    </ul>
+
+                    <h3>Exercise 4 — Real Problem</h3>
+
+                    <p>
+                        Apni daily life ka koi actual task choose karo aur uske liye
+                        AI prompt design karo.
+                    </p>
+
+                    <div class="callout success">
+                        <strong>Best Practice</strong>
+                        Prompt Engineering tab genuinely improve hogi jab aap sirf prompts
+                        read nahi, balki different problems ke liye prompts design aur
+                        refine karoge.
+                    </div>
+
+                </section>
+
+
+                <!-- ================= 24 QUIZ ================= -->
+
+                <section class="section" id="quiz">
+
+                    <h2>
+                        <span class="number">24</span>
+                        Chapter Quiz
+                    </h2>
+
+                    <p>
+                        Chapter ki understanding check karo.
+                    </p>
+
+
+                    <div class="quiz-question" data-answer="2">
+
+                        <h3>1. Prompt kya hota hai?</h3>
+
+                        <button class="quiz-option" data-index="1">
+                            A. Sirf ek programming language
+                        </button>
+
+                        <button class="quiz-option" data-index="2">
+                            B. AI ko diya gaya meaningful input/instruction
+                        </button>
+
+                        <button class="quiz-option" data-index="3">
+                            C. Sirf AI ka output
+                        </button>
+
+                        <button class="quiz-option" data-index="4">
+                            D. Computer hardware
+                        </button>
+
+                    </div>
+
+
+                    <div class="quiz-question" data-answer="3">
+
+                        <h3>2. Context ka main purpose kya hai?</h3>
+
+                        <button class="quiz-option" data-index="1">
+                            A. AI ko confuse karna
+                        </button>
+
+                        <button class="quiz-option" data-index="2">
+                            B. Prompt ko hamesha long banana
+                        </button>
+
+                        <button class="quiz-option" data-index="3">
+                            C. Situation/background samjhane me help karna
+                        </button>
+
+                        <button class="quiz-option" data-index="4">
+                            D. Output delete karna
+                        </button>
+
+                    </div>
+
+
+                    <div class="quiz-question" data-answer="1">
+
+                        <h3>3. Output format specify karne ka benefit kya hai?</h3>
+
+                        <button class="quiz-option" data-index="1">
+                            A. Output ko desired structure me guide karna
+                        </button>
+
+                        <button class="quiz-option" data-index="2">
+                            B. AI ko internet se disconnect karna
+                        </button>
+
+                        <button class="quiz-option" data-index="3">
+                            C. Prompt ko automatically true banana
+                        </button>
+
+                        <button class="quiz-option" data-index="4">
+                            D. AI model change karna
+                        </button>
+
+                    </div>
+
+
+                    <div class="quiz-question" data-answer="4">
+
+                        <h3>4. Prompt Engineering ka important part kya hai?</h3>
+
+                        <button class="quiz-option" data-index="1">
+                            A. Sirf difficult English use karna
+                        </button>
+
+                        <button class="quiz-option" data-index="2">
+                            B. Har prompt ko bahut long banana
+                        </button>
+
+                        <button class="quiz-option" data-index="3">
+                            C. AI ke output ko bina check kiye accept karna
+                        </button>
+
+                        <button class="quiz-option" data-index="4">
+                            D. Requirement ko clearly structure aur refine karna
+                        </button>
+
+                    </div>
+
+
+                    <div class="quiz-question" data-answer="2">
+
+                        <h3>5. Kya har prompt me Goal, Context, Task, Constraints aur Output sab compulsory hain?</h3>
+
+                        <button class="quiz-option" data-index="1">
+                            A. Haan, har baar
+                        </button>
+
+                        <button class="quiz-option" data-index="2">
+                            B. Nahi, task ke according relevant components use hote hain
+                        </button>
+
+                        <button class="quiz-option" data-index="3">
+                            C. Sirf Goal compulsory hai
+                        </button>
+
+                        <button class="quiz-option" data-index="4">
+                            D. Sirf Context compulsory hai
+                        </button>
+
+                    </div>
+
+
+                    <button class="quiz-submit" id="quizSubmit">
+                        Check My Score
+                    </button>
+
+                    <div class="quiz-result" id="quizResult"></div>
+
+                </section>
+
+
+                <!-- ================= 25 SUMMARY ================= -->
+
+                <section class="section summary-box" id="summary">
+
+                    <h2>
+                        <span class="number">25</span>
+                        Chapter 16 — Complete Summary
+                    </h2>
+
+                    <p class="lead">
+                        Is chapter me humne Prompt Engineering ka foundation build kiya.
+                    </p>
+
+                    <div class="mental-model">
+                        <span>Goal</span>
+                        +
+                        <span>Context</span>
+                        +
+                        <span>Task</span>
+                        +
+                        <span>Instructions</span>
+                        +
+                        <span>Constraints</span>
+                        +
+                        <span>Output</span>
+                    </div>
+
+                    <h3>Ab aapko kya samajh aa jana chahiye?</h3>
+
+                    <ul>
+                        <li>Prompt kya hota hai.</li>
+                        <li>Prompt Engineering kya hoti hai.</li>
+                        <li>AI ko clear instructions ki zarurat kyun hoti hai.</li>
+                        <li>Question aur effective prompt me difference.</li>
+                        <li>Specificity ka importance.</li>
+                        <li>Context ka importance.</li>
+                        <li>Goal aur task ka difference.</li>
+                        <li>Instructions ka use.</li>
+                        <li>Output format define karna.</li>
+                        <li>Audience aur tone specify karna.</li>
+                        <li>Constraints ka use.</li>
+                        <li>Examples se desired pattern samjhana.</li>
+                        <li>Role prompting ka basic concept.</li>
+                        <li>Ambiguous prompts ko identify karna.</li>
+                        <li>Prompt ko iterative process se improve karna.</li>
+                        <li>Common beginner mistakes.</li>
+                        <li>Real-world prompting.</li>
+                        <li>Prompt testing aur evaluation.</li>
+                        <li>Prompt quality checklist.</li>
+                    </ul>
+
+                    <div class="callout success">
+
+                        <strong>Final Mental Model</strong>
+
+                        <p style="margin-bottom:0;">
+                            AI ko bas "kuch bana do" kehna aur AI ko clearly define karna
+                            ki <strong>kya banana hai, kisliye banana hai, kis audience ke
+                                liye banana hai, kis style me banana hai aur kis format me
+                                output chahiye</strong> — dono approaches ka result bahut
+                            different ho sakta hai.
+                        </p>
+
+                    </div>
+
+                    <div class="callout">
+
+                        <strong>Most Important Lesson</strong>
+
+                        <p style="margin-bottom:0;">
+                            Prompt Engineering ka real goal fancy prompts likhna nahi hai.
+                            Real goal hai <strong>apni thinking ko clear instructions me
+                                convert karna</strong>, AI output ko evaluate karna aur zarurat
+                            padne par prompt ko improve karna.
+                        </p>
+
+                    </div>
+
+                </section>
+
+            </article>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            <strong>AI Learning HUB</strong>
+        </p>
+
+        <p>
+            Learn AI from fundamentals to advanced practical skills.
+        </p>
+
+        <p>
+            © <span id="year"></span> AI Learning HUB. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= BACK TO TOP ================= -->
+
+    <button class="back-top" id="backTop" type="button" aria-label="Back to top">
+        ↑
+    </button>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ================= THEME ================= */
+
+        const themeBtn = document.getElementById("themeBtn");
+
+        const savedTheme = localStorage.getItem("ai-learning-theme");
+
+        if (savedTheme === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+            themeBtn.textContent = "☀";
+        }
+
+        themeBtn.addEventListener("click", () => {
+
+            const current =
+                document.documentElement.getAttribute("data-theme");
+
+            if (current === "dark") {
+
+                document.documentElement.removeAttribute("data-theme");
+
+                localStorage.setItem(
+                    "ai-learning-theme",
+                    "light"
+                );
+
+                themeBtn.textContent = "◐";
+
+            } else {
+
+                document.documentElement.setAttribute(
+                    "data-theme",
+                    "dark"
+                );
+
+                localStorage.setItem(
+                    "ai-learning-theme",
+                    "dark"
+                );
+
+                themeBtn.textContent = "☀";
+
+            }
+
+        });
+
+
+        /* ================= MOBILE MENU ================= */
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", () => {
+
+            const isOpen =
+                navLinks.classList.toggle("open");
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+            menuBtn.textContent =
+                isOpen ? "✕" : "☰";
+
+        });
+
+
+        navLinks.querySelectorAll("a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("open");
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuBtn.textContent = "☰";
+
+            });
+
+        });
+
+
+        /* ================= READING PROGRESS ================= */
+
+        const progressBar =
+            document.getElementById("progressBar");
+
+        function updateProgress() {
+
+            const scrollTop =
+                window.scrollY;
+
+            const documentHeight =
+                document.documentElement.scrollHeight -
+                window.innerHeight;
+
+            const progress =
+                documentHeight > 0
+                    ? (scrollTop / documentHeight) * 100
+                    : 0;
+
+            progressBar.style.width =
+                Math.min(progress, 100) + "%";
+
+        }
+
+        window.addEventListener(
+            "scroll",
+            updateProgress,
+            { passive: true }
+        );
+
+        updateProgress();
+
+
+        /* ================= BACK TO TOP ================= */
+
+        const backTop =
+            document.getElementById("backTop");
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (window.scrollY > 500) {
+                    backTop.classList.add("show");
+                } else {
+                    backTop.classList.remove("show");
+                }
+
+            },
+            { passive: true }
+        );
+
+        backTop.addEventListener(
+            "click",
+            () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }
+        );
+
+
+        /* ================= YEAR ================= */
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+        /* ================= QUIZ ================= */
+
+        const quizQuestions =
+            document.querySelectorAll(".quiz-question");
+
+        quizQuestions.forEach(question => {
+
+            const options =
+                question.querySelectorAll(".quiz-option");
+
+            options.forEach(option => {
+
+                option.addEventListener("click", () => {
+
+                    options.forEach(item => {
+                        item.classList.remove(
+                            "correct",
+                            "wrong"
+                        );
+                    });
+
+                    const selected =
+                        Number(option.dataset.index);
+
+                    const correct =
+                        Number(question.dataset.answer);
+
+                    if (selected === correct) {
+                        option.classList.add("correct");
+                    } else {
+                        option.classList.add("wrong");
+                    }
+
+                });
+
+            });
+
+        });
+
+
+        const quizSubmit =
+            document.getElementById("quizSubmit");
+
+        const quizResult =
+            document.getElementById("quizResult");
+
+        quizSubmit.addEventListener("click", () => {
+
+            let score = 0;
+            let answered = 0;
+
+            quizQuestions.forEach(question => {
+
+                const selected =
+                    question.querySelector(
+                        ".quiz-option.correct, .quiz-option.wrong"
+                    );
+
+                if (!selected) return;
+
+                answered++;
+
+                const chosen =
+                    Number(selected.dataset.index);
+
+                const correct =
+                    Number(question.dataset.answer);
+
+                if (chosen === correct) {
+                    score++;
+                }
+
+            });
+
+            const total =
+                quizQuestions.length;
+
+            if (answered < total) {
+
+                quizResult.style.display = "block";
+
+                quizResult.textContent =
+                    `Please answer all ${total} questions first. You have answered ${answered}/${total}.`;
+
+                return;
+            }
+
+            const percentage =
+                Math.round((score / total) * 100);
+
+            let message = "";
+
+            if (percentage >= 90) {
+
+                message =
+                    "Excellent! Aapko Prompt Engineering ka foundation bahut achhe se samajh aa gaya.";
+
+            } else if (percentage >= 70) {
+
+                message =
+                    "Very good! Foundation strong hai. Examples aur exercises practice karo.";
+
+            } else if (percentage >= 50) {
+
+                message =
+                    "Good start! Chapter ke Goal, Context, Task aur Output concepts ko ek baar phir revise karo.";
+
+            } else {
+
+                message =
+                    "Chapter ko ek baar carefully revise karke practical prompts banana start karo.";
+
+            }
+
+            quizResult.style.display = "block";
+
+            quizResult.textContent =
+                `Your Score: ${score}/${total} (${percentage}%). ${message}`;
+
+        });
+
+
+        /* ================= TOC ACTIVE STATE ================= */
+
+        const sections =
+            document.querySelectorAll(
+                ".content .section"
+            );
+
+        const tocLinks =
+            document.querySelectorAll(
+                ".toc a"
+            );
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (!entry.isIntersecting) return;
+
+                        const id =
+                            entry.target.id;
+
+                        tocLinks.forEach(link => {
+
+                            link.classList.toggle(
+                                "active",
+                                link.getAttribute("href") === "#" + id
+                            );
+
+                        });
+
+                    });
+
+                },
+                {
+                    rootMargin: "-15% 0px -70% 0px",
+                    threshold: 0
+                }
+            );
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+
+        /* ================= ESCAPE KEY ================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (event.key === "Escape") {
+
+                    navLinks.classList.remove("open");
+
+                    menuBtn.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    menuBtn.textContent = "☰";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

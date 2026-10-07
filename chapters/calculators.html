@@ -1,0 +1,3551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculators — AI Learning HUB</title>
+
+    <meta name="description"
+        content="Free practical calculators from AI Learning HUB. Calculate percentages, averages, ratios, unit conversions, BMI, discounts, simple interest and more directly in your browser.">
+
+    <meta name="keywords"
+        content="online calculators, percentage calculator, average calculator, ratio calculator, discount calculator, unit converter, AI Learning HUB">
+
+    <meta name="author" content="AI Learning HUB">
+
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Calculators — AI Learning HUB">
+
+    <meta property="og:description"
+        content="A collection of practical browser-based calculators for students and everyday learning.">
+
+    <meta property="og:type" content="website">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Learning HUB Calculators",
+    "description": "A collection of free browser-based calculators for learning and everyday calculations.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true
+  }
+  </script>
+
+    <style>
+        /* =========================================================
+       AI LEARNING HUB — SHARED DESIGN SYSTEM
+       ========================================================= */
+
+        :root {
+            --bg: #f7f9fc;
+            --surface: #ffffff;
+            --surface-2: #f1f5f9;
+            --surface-3: #eef2f7;
+
+            --text: #111827;
+            --text-soft: #4b5563;
+            --text-muted: #6b7280;
+
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-soft: #eff6ff;
+
+            --border: #e5e7eb;
+            --border-strong: #d1d5db;
+
+            --success: #15803d;
+            --success-soft: #f0fdf4;
+
+            --warning: #b45309;
+            --warning-soft: #fffbeb;
+
+            --danger: #dc2626;
+            --danger-soft: #fef2f2;
+
+            --shadow-sm:
+                0 1px 2px rgba(15, 23, 42, .04);
+
+            --shadow:
+                0 10px 30px rgba(15, 23, 42, .07);
+
+            --shadow-lg:
+                0 20px 55px rgba(15, 23, 42, .10);
+
+            --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 20px;
+
+            --container: 1200px;
+
+            --font:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            --header-height: 72px;
+        }
+
+        html.dark {
+            --bg: #0b1120;
+            --surface: #111827;
+            --surface-2: #172033;
+            --surface-3: #1d293d;
+
+            --text: #f3f4f6;
+            --text-soft: #cbd5e1;
+            --text-muted: #94a3b8;
+
+            --primary: #60a5fa;
+            --primary-dark: #93c5fd;
+            --primary-soft: rgba(37, 99, 235, .14);
+
+            --border: #253248;
+            --border-strong: #334155;
+
+            --success: #4ade80;
+            --success-soft: rgba(34, 197, 94, .10);
+
+            --warning: #fbbf24;
+            --warning-soft: rgba(245, 158, 11, .10);
+
+            --danger: #f87171;
+            --danger-soft: rgba(239, 68, 68, .10);
+
+            --shadow-sm:
+                0 1px 2px rgba(0, 0, 0, .20);
+
+            --shadow:
+                0 12px 35px rgba(0, 0, 0, .22);
+
+            --shadow-lg:
+                0 22px 65px rgba(0, 0, 0, .30);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+
+            background: var(--bg);
+            color: var(--text);
+
+            font-family: var(--font);
+            line-height: 1.6;
+
+            overflow-x: hidden;
+
+            transition:
+                background .25s ease,
+                color .25s ease;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            background: rgba(37, 99, 235, .18);
+        }
+
+        /* =========================================================
+       HEADER
+       ========================================================= */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            height: var(--header-height);
+
+            background:
+                color-mix(in srgb,
+                    var(--surface) 94%,
+                    transparent);
+
+            border-bottom: 1px solid var(--border);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .nav-container {
+            width: min(calc(100% - 40px),
+                    var(--container));
+
+            height: 100%;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            min-width: max-content;
+
+            font-weight: 800;
+            letter-spacing: -.035em;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
+            display: grid;
+            place-items: center;
+
+            color: #fff;
+
+            background:
+                linear-gradient(135deg,
+                    #2563eb,
+                    #4f46e5);
+
+            box-shadow:
+                0 7px 18px rgba(37, 99, 235, .22);
+        }
+
+        .brand-mark svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .brand-name {
+            font-size: 1.02rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            margin-left: auto;
+        }
+
+        .nav-link {
+            padding: 8px 11px;
+
+            border-radius: 8px;
+
+            color: var(--text-soft);
+
+            font-size: .88rem;
+            font-weight: 600;
+
+            transition:
+                background .2s ease,
+                color .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-button {
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--surface);
+            color: var(--text-soft);
+
+            display: grid;
+            place-items: center;
+
+            transition:
+                border-color .2s ease,
+                color .2s ease,
+                background .2s ease,
+                transform .2s ease;
+        }
+
+        .icon-button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .menu-button {
+            display: none;
+        }
+
+        /* =========================================================
+       HERO
+       ========================================================= */
+
+        .hero {
+            position: relative;
+
+            padding: 70px 20px 50px;
+
+            border-bottom: 1px solid var(--border);
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 15% 15%,
+                    rgba(37, 99, 235, .08),
+                    transparent 32%),
+                radial-gradient(circle at 85% 20%,
+                    rgba(99, 102, 241, .07),
+                    transparent 30%),
+                var(--surface);
+        }
+
+        .hero-inner {
+            width: min(100%, var(--container));
+            margin: auto;
+
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 6px 11px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: var(--surface);
+            color: var(--primary);
+
+            font-size: .78rem;
+            font-weight: 750;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+        }
+
+        .hero h1 {
+            max-width: 850px;
+
+            margin: 18px auto 14px;
+
+            font-size:
+                clamp(2rem, 5vw, 3.7rem);
+
+            line-height: 1.08;
+
+            letter-spacing: -.055em;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            max-width: 720px;
+            margin: auto;
+
+            color: var(--text-soft);
+
+            font-size:
+                clamp(.98rem, 2vw, 1.08rem);
+        }
+
+        .hero-points {
+            margin-top: 26px;
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .hero-point {
+            padding: 7px 11px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: var(--surface);
+            color: var(--text-soft);
+
+            font-size: .8rem;
+            font-weight: 600;
+        }
+
+        /* =========================================================
+       MAIN
+       ========================================================= */
+
+        main {
+            width: min(calc(100% - 40px),
+                    var(--container));
+
+            margin: auto;
+
+            padding: 42px 0 80px;
+        }
+
+        /* =========================================================
+       CALCULATOR SELECTOR
+       ========================================================= */
+
+        .calculator-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+
+            margin-bottom: 24px;
+        }
+
+        .calculator-card {
+            width: 100%;
+
+            padding: 17px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--surface);
+
+            text-align: left;
+
+            color: var(--text);
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(37, 99, 235, .35);
+
+            box-shadow: var(--shadow);
+        }
+
+        .calculator-card.active {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .calc-icon {
+            width: 39px;
+            height: 39px;
+
+            margin-bottom: 10px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            color: var(--primary);
+            background: var(--surface-2);
+
+            font-size: .76rem;
+            font-weight: 800;
+        }
+
+        .calculator-card.active .calc-icon {
+            background: var(--surface);
+        }
+
+        .calculator-card strong {
+            display: block;
+
+            margin-bottom: 3px;
+
+            font-size: .84rem;
+        }
+
+        .calculator-card small {
+            display: block;
+
+            color: var(--text-muted);
+
+            font-size: .71rem;
+            line-height: 1.45;
+        }
+
+        /* =========================================================
+       WORKSPACE
+       ========================================================= */
+
+        .workspace {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr) 270px;
+
+            gap: 20px;
+
+            align-items: start;
+        }
+
+        .panel {
+            min-width: 0;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+
+            background: var(--surface);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .panel-header {
+            padding: 19px 21px;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .panel-title {
+            margin: 0;
+
+            font-size: 1.04rem;
+            letter-spacing: -.02em;
+        }
+
+        .panel-subtitle {
+            margin: 4px 0 0;
+
+            color: var(--text-muted);
+
+            font-size: .77rem;
+        }
+
+        .panel-body {
+            padding: 21px;
+        }
+
+        /* =========================================================
+       FORM
+       ========================================================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+        .field {
+            min-width: 0;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: var(--text-soft);
+
+            font-size: .75rem;
+            font-weight: 700;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            height: 43px;
+
+            padding: 0 12px;
+
+            border: 1px solid var(--border-strong);
+            border-radius: 9px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            outline: none;
+
+            font-size: .81rem;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .10);
+        }
+
+        .field input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .field-note {
+            margin-top: 5px;
+
+            color: var(--text-muted);
+
+            font-size: .66rem;
+        }
+
+        /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+        .button-row {
+            margin-top: 18px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+        .btn {
+            min-height: 40px;
+
+            padding: 8px 14px;
+
+            border: 1px solid transparent;
+            border-radius: 9px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            font-size: .77rem;
+            font-weight: 700;
+
+            transition:
+                transform .18s ease,
+                background .18s ease,
+                border-color .18s ease,
+                color .18s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: var(--primary);
+
+            box-shadow:
+                0 6px 15px rgba(37, 99, 235, .18);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            color: var(--text-soft);
+            background: var(--surface);
+
+            border-color: var(--border-strong);
+        }
+
+        .btn-secondary:hover {
+            color: var(--primary);
+
+            border-color: var(--primary);
+
+            background: var(--primary-soft);
+        }
+
+        .btn-danger {
+            color: var(--danger);
+            background: var(--danger-soft);
+        }
+
+        /* =========================================================
+       RESULT
+       ========================================================= */
+
+        .result-area {
+            margin-top: 23px;
+
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: 13px;
+
+            background: var(--surface-2);
+        }
+
+        .result-label {
+            color: var(--text-muted);
+
+            font-size: .7rem;
+            font-weight: 750;
+
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+
+        .result-value {
+            margin-top: 5px;
+
+            color: var(--primary);
+
+            font-size:
+                clamp(1.7rem, 4vw, 2.55rem);
+
+            line-height: 1.15;
+            letter-spacing: -.045em;
+            font-weight: 800;
+
+            overflow-wrap: anywhere;
+        }
+
+        .result-explanation {
+            margin-top: 8px;
+
+            color: var(--text-soft);
+
+            font-size: .76rem;
+            line-height: 1.6;
+        }
+
+        .formula {
+            margin-top: 13px;
+
+            padding: 10px 12px;
+
+            border: 1px dashed var(--border-strong);
+            border-radius: 9px;
+
+            color: var(--text-soft);
+
+            background: var(--surface);
+
+            font-size: .73rem;
+            line-height: 1.55;
+        }
+
+        .formula strong {
+            color: var(--text);
+        }
+
+        /* =========================================================
+       SIDEBAR
+       ========================================================= */
+
+        .sidebar-stack {
+            display: grid;
+            gap: 15px;
+
+            position: sticky;
+            top: calc(var(--header-height) + 18px);
+        }
+
+        .mini-panel {
+            padding: 16px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--surface);
+        }
+
+        .mini-panel h3 {
+            margin: 0 0 9px;
+
+            font-size: .84rem;
+        }
+
+        .mini-panel p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: .72rem;
+            line-height: 1.6;
+        }
+
+        .mini-list {
+            margin: 10px 0 0;
+            padding: 0;
+
+            list-style: none;
+
+            display: grid;
+            gap: 7px;
+        }
+
+        .mini-list li {
+            position: relative;
+
+            padding-left: 15px;
+
+            color: var(--text-soft);
+
+            font-size: .72rem;
+        }
+
+        .mini-list li::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: .62em;
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+        }
+
+        /* =========================================================
+       SECTION
+       ========================================================= */
+
+        .section {
+            margin-top: 52px;
+        }
+
+        .section-heading {
+            margin-bottom: 17px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 5px;
+
+            font-size: 1.32rem;
+            letter-spacing: -.025em;
+        }
+
+        .section-heading p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: .84rem;
+        }
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+        .info-card {
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--surface);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-number {
+            width: 31px;
+            height: 31px;
+
+            margin-bottom: 12px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 8px;
+
+            background: var(--primary-soft);
+            color: var(--primary);
+
+            font-size: .73rem;
+            font-weight: 800;
+        }
+
+        .info-card h3 {
+            margin: 0 0 6px;
+
+            font-size: .89rem;
+        }
+
+        .info-card p {
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: .74rem;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+       FOOTER
+       ========================================================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            width: min(calc(100% - 40px),
+                    var(--container));
+
+            margin: auto;
+
+            padding: 26px 0;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-size: .82rem;
+            font-weight: 750;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: .72rem;
+        }
+
+        /* =========================================================
+       TOAST
+       ========================================================= */
+
+        .toast {
+            position: fixed;
+
+            right: 20px;
+            bottom: 20px;
+
+            z-index: 2000;
+
+            max-width:
+                min(360px, calc(100vw - 40px));
+
+            padding: 11px 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            box-shadow: var(--shadow-lg);
+
+            font-size: .77rem;
+            font-weight: 650;
+
+            opacity: 0;
+
+            transform: translateY(10px);
+
+            pointer-events: none;
+
+            transition:
+                opacity .22s ease,
+                transform .22s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+       MOBILE NAV
+       ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .nav-links {
+                position: absolute;
+
+                top: calc(var(--header-height) + 7px);
+
+                left: 20px;
+                right: 20px;
+
+                padding: 8px;
+
+                display: none;
+
+                flex-direction: column;
+                align-items: stretch;
+
+                background: var(--surface);
+
+                border: 1px solid var(--border);
+                border-radius: 13px;
+
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 11px 12px;
+            }
+
+            .menu-button {
+                display: grid;
+            }
+
+            .calculator-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-stack {
+                position: static;
+            }
+        }
+
+        /* =========================================================
+       TABLET
+       ========================================================= */
+
+        @media (max-width: 700px) {
+
+            :root {
+                --header-height: 64px;
+            }
+
+            .nav-container,
+            main,
+            .footer-inner {
+                width:
+                    min(calc(100% - 28px),
+                        var(--container));
+            }
+
+            .hero {
+                padding:
+                    48px 14px 38px;
+            }
+
+            .hero h1 {
+                font-size: 2.15rem;
+            }
+
+            main {
+                padding-top: 30px;
+                padding-bottom: 55px;
+            }
+
+            .panel-header,
+            .panel-body {
+                padding: 17px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================================================
+       SMALL MOBILE
+       ========================================================= */
+
+        @media (max-width: 480px) {
+
+            .brand-name {
+                font-size: .92rem;
+            }
+
+            .brand-mark {
+                width: 35px;
+                height: 35px;
+            }
+
+            .nav-actions {
+                gap: 5px;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .hero-description {
+                font-size: .9rem;
+            }
+
+            .hero-points {
+                justify-content: flex-start;
+            }
+
+            .hero-point {
+                font-size: .69rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-row {
+                width: 100%;
+            }
+
+            .button-row .btn {
+                flex: 1;
+            }
+
+            .toast {
+                right: 14px;
+                bottom: 14px;
+
+                max-width:
+                    calc(100vw - 28px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =======================================================
+       NAVBAR
+       ======================================================= -->
+
+    <header class="site-header">
+
+        <div class="nav-container">
+
+            <a class="brand" href="../index.html" aria-label="AI Learning HUB Home">
+
+                <span class="brand-mark" aria-hidden="true">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                        <path d="M12 3 4.5 7.2v9.6L12 21l7.5-4.2V7.2L12 3Z" />
+                        <path d="m7.5 9.1 4.5 2.5 4.5-2.5M12 11.6V17" />
+
+                    </svg>
+
+                </span>
+
+                <span class="brand-name">
+                    AI Learning HUB
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+
+                <a class="nav-link" href="../index.html">
+                    Home
+                </a>
+
+                <a class="nav-link" href="../index.html#courses">
+                    Courses
+                </a>
+
+                <a class="nav-link active" href="../index.html#tools">
+                    Tools
+                </a>
+
+                <a class="nav-link" href="../index.html#articles">
+                    Articles
+                </a>
+
+                <a class="nav-link" href="../index.html#resources">
+                    Resources
+                </a>
+
+                <a class="nav-link" href="../index.html#about">
+                    About
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode"
+                    title="Toggle theme">
+
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                        <circle cx="12" cy="12" r="4" />
+
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+
+                    </svg>
+
+                </button>
+
+
+                <button class="icon-button menu-button" id="menuButton" type="button" aria-label="Open navigation"
+                    aria-expanded="false">
+
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+                        <path d="M4 6h16M4 12h16M4 18h16" />
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =======================================================
+       HERO
+       ======================================================= -->
+
+    <section class="hero">
+
+        <div class="hero-inner">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-dot"></span>
+
+                Learn by Doing · Calculators
+
+            </div>
+
+
+            <h1>
+                Calculate
+                <span>Smarter</span>
+            </h1>
+
+
+            <p class="hero-description">
+                Percentage, average, ratio, discount, interest,
+                unit conversion aur everyday calculations ko
+                ek simple professional workspace me solve karo.
+            </p>
+
+
+            <div class="hero-points">
+
+                <span class="hero-point">
+                    Percentage
+                </span>
+
+                <span class="hero-point">
+                    Average
+                </span>
+
+                <span class="hero-point">
+                    Ratio
+                </span>
+
+                <span class="hero-point">
+                    Discount
+                </span>
+
+                <span class="hero-point">
+                    Interest
+                </span>
+
+                <span class="hero-point">
+                    Unit Converter
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+    <main>
+
+
+        <!-- CALCULATOR SELECTOR -->
+
+        <section>
+
+            <div class="calculator-grid" id="calculatorGrid">
+
+
+                <button class="calculator-card active" type="button" data-calculator="percentage">
+
+                    <span class="calc-icon">
+                        %
+                    </span>
+
+                    <strong>
+                        Percentage
+                    </strong>
+
+                    <small>
+                        Percentage find karo, increase/decrease calculate karo.
+                    </small>
+
+                </button>
+
+
+                <button class="calculator-card" type="button" data-calculator="average">
+
+                    <span class="calc-icon">
+                        AVG
+                    </span>
+
+                    <strong>
+                        Average
+                    </strong>
+
+                    <small>
+                        Numbers ka mean/average quickly calculate karo.
+                    </small>
+
+                </button>
+
+
+                <button class="calculator-card" type="button" data-calculator="ratio">
+
+                    <span class="calc-icon">
+                        1:2
+                    </span>
+
+                    <strong>
+                        Ratio
+                    </strong>
+
+                    <small>
+                        Ratio simplify aur proportional values calculate karo.
+                    </small>
+
+                </button>
+
+
+                <button class="calculator-card" type="button" data-calculator="discount">
+
+                    <span class="calc-icon">
+                        OFF
+                    </span>
+
+                    <strong>
+                        Discount
+                    </strong>
+
+                    <small>
+                        Original price, discount aur final price calculate karo.
+                    </small>
+
+                </button>
+
+
+                <button class="calculator-card" type="button" data-calculator="interest">
+
+                    <span class="calc-icon">
+                        ₹
+                    </span>
+
+                    <strong>
+                        Simple Interest
+                    </strong>
+
+                    <small>
+                        Principal, rate aur time se simple interest nikalo.
+                    </small>
+
+                </button>
+
+
+                <button class="calculator-card" type="button" data-calculator="conversion">
+
+                    <span class="calc-icon">
+                        ↔
+                    </span>
+
+                    <strong>
+                        Unit Converter
+                    </strong>
+
+                    <small>
+                        Length, weight, temperature aur digital units convert karo.
+                    </small>
+
+                </button>
+
+
+                <button class="calculator-card" type="button" data-calculator="speed">
+
+                    <span class="calc-icon">
+                        km/h
+                    </span>
+
+                    <strong>
+                        Speed
+                    </strong>
+
+                    <small>
+                        Distance aur time se speed calculate karo.
+                    </small>
+
+                </button>
+
+
+                <button class="calculator-card" type="button" data-calculator="time">
+
+                    <span class="calc-icon">
+                        ⏱
+                    </span>
+
+                    <strong>
+                        Time
+                    </strong>
+
+                    <small>
+                        Hours, minutes aur seconds ko convert karo.
+                    </small>
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- WORKSPACE -->
+
+        <section class="workspace">
+
+
+            <!-- CALCULATOR -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title" id="calculatorTitle">
+
+                            Percentage Calculator
+
+                        </h2>
+
+                        <p class="panel-subtitle" id="calculatorDescription">
+
+                            Percentage aur percentage-based calculations easily solve karo.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel-body">
+
+                    <div class="form-grid" id="formArea">
+                    </div>
+
+
+                    <div class="button-row">
+
+                        <button class="btn btn-primary" id="calculateButton" type="button">
+
+                            Calculate
+
+                        </button>
+
+                        <button class="btn btn-secondary" id="resetButton" type="button">
+
+                            Reset
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="result-area" aria-live="polite">
+
+                        <div class="result-label">
+                            Result
+                        </div>
+
+                        <div class="result-value" id="resultValue">
+
+                            —
+
+                        </div>
+
+                        <div class="result-explanation" id="resultExplanation">
+
+                            Values enter karke Calculate dabao.
+
+                        </div>
+
+                        <div class="formula" id="formulaBox">
+
+                            <strong>
+                                Formula:
+                            </strong>
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SIDEBAR -->
+
+            <aside class="sidebar-stack">
+
+
+                <div class="mini-panel">
+
+                    <h3>
+                        Kaise use kare?
+                    </h3>
+
+                    <p>
+                        Calculator choose karo, required values enter karo
+                        aur Calculate button press karo.
+                    </p>
+
+                    <ul class="mini-list">
+
+                        <li>
+                            Calculator select karo
+                        </li>
+
+                        <li>
+                            Values enter karo
+                        </li>
+
+                        <li>
+                            Calculate dabao
+                        </li>
+
+                        <li>
+                            Result aur formula dekho
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="mini-panel">
+
+                    <h3>
+                        Browser based
+                    </h3>
+
+                    <p>
+                        Calculations isi browser me JavaScript se perform
+                        hote hain. Kisi external API ki zarurat nahi.
+                    </p>
+
+                </div>
+
+
+                <div class="mini-panel">
+
+                    <h3>
+                        Useful for
+                    </h3>
+
+                    <ul class="mini-list">
+
+                        <li>
+                            Students
+                        </li>
+
+                        <li>
+                            Learners
+                        </li>
+
+                        <li>
+                            Office work
+                        </li>
+
+                        <li>
+                            Technical learning
+                        </li>
+
+                        <li>
+                            Everyday calculations
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+            </aside>
+
+        </section>
+
+
+        <!-- EDUCATIONAL SECTION -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <h2>
+                    Calculators ko smartly use karo
+                </h2>
+
+                <p>
+                    Sirf answer dekhna nahi — formula aur calculation logic bhi samjho.
+                </p>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Formula samjho
+                    </h3>
+
+                    <p>
+                        Calculator result ke saath formula bhi show karta hai,
+                        jisse calculation ka logic samajhna easy hota hai.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Input verify karo
+                    </h3>
+
+                    <p>
+                        Galat input se calculator bhi galat result de sakta hai.
+                        Calculate karne se pehle units aur values check karo.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Approximation samjho
+                    </h3>
+
+                    <p>
+                        Kuch calculations me decimal rounding hoti hai.
+                        Important work me required precision ko dhyan me rakho.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Units important hain
+                    </h3>
+
+                    <p>
+                        Distance, weight, time aur temperature jaise calculations
+                        me input aur output unit ko hamesha check karo.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Real learning
+                    </h3>
+
+                    <p>
+                        Pehle calculation manually samajhne ki koshish karo,
+                        phir calculator se answer verify karo.
+                    </p>
+
+                </article>
+
+
+                <article class="info-card">
+
+                    <div class="info-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Fast verification
+                    </h3>
+
+                    <p>
+                        Repeated calculations ko quickly verify karne ke liye
+                        browser-based calculators useful productivity tools hain.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div>
+
+                <div class="footer-brand">
+                    AI Learning HUB
+                </div>
+
+                <div class="footer-text">
+                    Learn AI. Practice AI. Build with AI.
+                </div>
+
+            </div>
+
+            <div class="footer-text">
+                Calculators · Browser-based learning tool
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- TOAST -->
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+    </div>
+
+
+    <script>
+        "use strict";
+
+
+        /* =========================================================
+           ELEMENTS
+           ========================================================= */
+
+        const root =
+            document.documentElement;
+
+        const formArea =
+            document.getElementById("formArea");
+
+        const calculatorTitle =
+            document.getElementById(
+                "calculatorTitle"
+            );
+
+        const calculatorDescription =
+            document.getElementById(
+                "calculatorDescription"
+            );
+
+        const resultValue =
+            document.getElementById(
+                "resultValue"
+            );
+
+        const resultExplanation =
+            document.getElementById(
+                "resultExplanation"
+            );
+
+        const formulaBox =
+            document.getElementById(
+                "formulaBox"
+            );
+
+        const toast =
+            document.getElementById("toast");
+
+
+        let currentCalculator =
+            "percentage";
+
+
+        /* =========================================================
+           THEME
+           ========================================================= */
+
+        function applyTheme(theme) {
+
+            if (theme === "dark") {
+
+                root.classList.add("dark");
+
+                localStorage.setItem(
+                    "ailh-theme",
+                    "dark"
+                );
+
+            } else {
+
+                root.classList.remove("dark");
+
+                localStorage.setItem(
+                    "ailh-theme",
+                    "light"
+                );
+
+            }
+
+        }
+
+
+        const savedTheme =
+            localStorage.getItem("ailh-theme");
+
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        }
+
+
+        document
+            .getElementById("themeToggle")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const dark =
+                        root.classList.contains("dark");
+
+                    applyTheme(
+                        dark
+                            ? "light"
+                            : "dark"
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           MOBILE MENU
+           ========================================================= */
+
+        const menuButton =
+            document.getElementById(
+                "menuButton"
+            );
+
+        const navLinks =
+            document.getElementById(
+                "navLinks"
+            );
+
+
+        menuButton.addEventListener(
+            "click",
+            () => {
+
+                const open =
+                    navLinks.classList.toggle(
+                        "open"
+                    );
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    String(open)
+                );
+
+            }
+        );
+
+
+        navLinks
+            .querySelectorAll("a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        navLinks.classList.remove(
+                            "open"
+                        );
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =========================================================
+           HELPERS
+           ========================================================= */
+
+        function number(id) {
+
+            const element =
+                document.getElementById(id);
+
+            const value =
+                parseFloat(element?.value);
+
+            return Number.isFinite(value)
+                ? value
+                : 0;
+
+        }
+
+
+        function formatNumber(value) {
+
+            if (!Number.isFinite(value)) {
+                return "—";
+            }
+
+            return new Intl.NumberFormat(
+                "en-IN",
+                {
+                    maximumFractionDigits: 8
+                }
+            ).format(value);
+
+        }
+
+
+        function inputField(
+            id,
+            label,
+            placeholder = "",
+            type = "number"
+        ) {
+
+            return `
+        <div class="field">
+
+          <label for="${id}">
+            ${label}
+          </label>
+
+          <input
+            id="${id}"
+            type="${type}"
+            placeholder="${placeholder}"
+            ${type === "number"
+                    ? 'step="any"'
+                    : ""}>
+
+        </div>
+      `;
+
+        }
+
+
+        function selectField(
+            id,
+            label,
+            options
+        ) {
+
+            return `
+        <div class="field">
+
+          <label for="${id}">
+            ${label}
+          </label>
+
+          <select id="${id}">
+
+            ${options
+                    .map(option => `
+                <option value="${option.value}">
+                  ${option.label}
+                </option>
+              `)
+                    .join("")}
+
+          </select>
+
+        </div>
+      `;
+
+        }
+
+
+        function showToast(message) {
+
+            toast.textContent =
+                message;
+
+            toast.classList.add(
+                "show"
+            );
+
+            clearTimeout(
+                showToast.timer
+            );
+
+            showToast.timer =
+                setTimeout(
+                    () => {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    2300
+                );
+
+        }
+
+
+        /* =========================================================
+           CALCULATOR DEFINITIONS
+           ========================================================= */
+
+        const calculators = {
+
+
+            /* -------------------------------------------------------
+               PERCENTAGE
+               ------------------------------------------------------- */
+
+            percentage: {
+
+                title:
+                    "Percentage Calculator",
+
+                description:
+                    "Percentage, percentage increase aur decrease calculate karo.",
+
+                form: () => `
+
+          ${inputField(
+                    "percentValue",
+                    "Percentage",
+                    "Example: 25"
+                )}
+
+          ${inputField(
+                    "percentOf",
+                    "Value",
+                    "Example: 200"
+                )}
+
+          ${selectField(
+                    "percentMode",
+                    "Calculation",
+                    [
+                        {
+                            value: "of",
+                            label: "What is X% of Y?"
+                        },
+                        {
+                            value: "change",
+                            label: "Percentage change"
+                        },
+                        {
+                            value: "increase",
+                            label: "Increase by percentage"
+                        },
+                        {
+                            value: "decrease",
+                            label: "Decrease by percentage"
+                        }
+                    ]
+                )}
+
+          <div class="field full">
+
+            <div class="field-note">
+              "What is X% of Y?" mode me first value percentage aur second value base value hai.
+            </div>
+
+          </div>
+
+        `,
+
+                calculate: () => {
+
+                    const x =
+                        number("percentValue");
+
+                    const y =
+                        number("percentOf");
+
+                    const mode =
+                        document.getElementById(
+                            "percentMode"
+                        ).value;
+
+                    if (mode === "of") {
+
+                        const result =
+                            (x / 100) * y;
+
+                        return {
+                            value:
+                                formatNumber(result),
+
+                            explanation:
+                                `${x}% of ${y} = ${formatNumber(result)}`,
+
+                            formula:
+                                `(${x} ÷ 100) × ${y}`
+                        };
+
+                    }
+
+                    if (mode === "increase") {
+
+                        const result =
+                            y + (y * x / 100);
+
+                        return {
+                            value:
+                                formatNumber(result),
+
+                            explanation:
+                                `${y} ko ${x}% increase karne par ${formatNumber(result)}.`,
+
+                            formula:
+                                `${y} + (${y} × ${x} ÷ 100)`
+                        };
+
+                    }
+
+                    if (mode === "decrease") {
+
+                        const result =
+                            y - (y * x / 100);
+
+                        return {
+                            value:
+                                formatNumber(result),
+
+                            explanation:
+                                `${y} ko ${x}% decrease karne par ${formatNumber(result)}.`,
+
+                            formula:
+                                `${y} − (${y} × ${x} ÷ 100)`
+                        };
+
+                    }
+
+                    const oldValue =
+                        x;
+
+                    const newValue =
+                        y;
+
+                    if (oldValue === 0) {
+
+                        return {
+                            value: "Not defined",
+                            explanation:
+                                "Percentage change ke liye original value zero nahi honi chahiye.",
+                            formula:
+                                "((New − Old) ÷ Old) × 100"
+                        };
+
+                    }
+
+                    const change =
+                        ((newValue - oldValue) /
+                            Math.abs(oldValue)) *
+                        100;
+
+                    return {
+                        value:
+                            `${formatNumber(change)}%`,
+
+                        explanation:
+                            `Change ${formatNumber(change)}% hai.`,
+
+                        formula:
+                            `((New − Old) ÷ Old) × 100`
+                    };
+
+                }
+
+            },
+
+
+            /* -------------------------------------------------------
+               AVERAGE
+               ------------------------------------------------------- */
+
+            average: {
+
+                title:
+                    "Average Calculator",
+
+                description:
+                    "Multiple numbers ka arithmetic average calculate karo.",
+
+                form: () => `
+
+          <div class="field full">
+
+            <label for="averageNumbers">
+              Numbers
+            </label>
+
+            <input
+              id="averageNumbers"
+              type="text"
+              placeholder="Example: 10, 20, 30, 40, 50">
+
+            <div class="field-note">
+              Numbers ko comma ya space se separate kar sakte ho.
+            </div>
+
+          </div>
+
+        `,
+
+                calculate: () => {
+
+                    const raw =
+                        document.getElementById(
+                            "averageNumbers"
+                        ).value;
+
+                    const values =
+                        raw
+                            .split(/[\s,]+/)
+                            .map(Number)
+                            .filter(Number.isFinite);
+
+                    if (!values.length) {
+
+                        return {
+                            value: "—",
+                            explanation:
+                                "Valid numbers enter karo.",
+                            formula:
+                                "Average = Sum ÷ Number of values"
+                        };
+
+                    }
+
+                    const sum =
+                        values.reduce(
+                            (a, b) => a + b,
+                            0
+                        );
+
+                    const average =
+                        sum / values.length;
+
+                    return {
+                        value:
+                            formatNumber(average),
+
+                        explanation:
+                            `${values.length} values ka total ${formatNumber(sum)} hai.`,
+
+                        formula:
+                            `${formatNumber(sum)} ÷ ${values.length} = ${formatNumber(average)}`
+                    };
+
+                }
+
+            },
+
+
+            /* -------------------------------------------------------
+               RATIO
+               ------------------------------------------------------- */
+
+            ratio: {
+
+                title:
+                    "Ratio Calculator",
+
+                description:
+                    "Ratio simplify karo aur proportional value calculate karo.",
+
+                form: () => `
+
+          ${inputField(
+                    "ratioA",
+                    "First value",
+                    "Example: 20"
+                )}
+
+          ${inputField(
+                    "ratioB",
+                    "Second value",
+                    "Example: 30"
+                )}
+
+          ${inputField(
+                    "ratioTarget",
+                    "Target value (optional)",
+                    "Example: 60"
+                )}
+
+        `,
+
+                calculate: () => {
+
+                    const a =
+                        number("ratioA");
+
+                    const b =
+                        number("ratioB");
+
+                    const target =
+                        number("ratioTarget");
+
+                    if (
+                        a === 0 ||
+                        b === 0
+                    ) {
+
+                        return {
+                            value: "—",
+                            explanation:
+                                "Ratio ke liye non-zero values enter karo.",
+                            formula:
+                                "Simplify by dividing both values by their GCD."
+                        };
+
+                    }
+
+                    const gcd = (
+                        x,
+                        y
+                    ) => {
+
+                        x = Math.abs(
+                            Math.round(x)
+                        );
+
+                        y = Math.abs(
+                            Math.round(y)
+                        );
+
+                        while (y) {
+
+                            const temp =
+                                y;
+
+                            y =
+                                x % y;
+
+                            x =
+                                temp;
+
+                        }
+
+                        return x || 1;
+
+                    };
+
+
+                    const divisor =
+                        gcd(a, b);
+
+                    const simpleA =
+                        a / divisor;
+
+                    const simpleB =
+                        b / divisor;
+
+
+                    let explanation =
+                        `${formatNumber(a)} : ${formatNumber(b)} = ${formatNumber(simpleA)} : ${formatNumber(simpleB)}.`;
+
+                    let formula =
+                        `Ratio = ${formatNumber(a)} : ${formatNumber(b)}`;
+
+                    if (
+                        target !== 0
+                    ) {
+
+                        const proportional =
+                            target *
+                            (b / a);
+
+                        explanation +=
+                            ` If first value ${formatNumber(target)} ho, corresponding second value ${formatNumber(proportional)} hoga.`;
+
+                        formula +=
+                            ` → Target × (${formatNumber(b)} ÷ ${formatNumber(a)})`;
+
+                    }
+
+                    return {
+
+                        value:
+                            `${formatNumber(simpleA)} : ${formatNumber(simpleB)}`,
+
+                        explanation,
+
+                        formula
+
+                    };
+
+                }
+
+            },
+
+
+            /* -------------------------------------------------------
+               DISCOUNT
+               ------------------------------------------------------- */
+
+            discount: {
+
+                title:
+                    "Discount Calculator",
+
+                description:
+                    "Original price, discount amount aur final price calculate karo.",
+
+                form: () => `
+
+          ${inputField(
+                    "discountPrice",
+                    "Original price",
+                    "Example: 2500"
+                )}
+
+          ${inputField(
+                    "discountPercent",
+                    "Discount (%)",
+                    "Example: 20"
+                )}
+
+          <div class="field full">
+
+            <div class="field-note">
+              Result me discount amount aur final price dono show honge.
+            </div>
+
+          </div>
+
+        `,
+
+                calculate: () => {
+
+                    const price =
+                        number("discountPrice");
+
+                    const percent =
+                        number("discountPercent");
+
+                    const discount =
+                        price *
+                        percent /
+                        100;
+
+                    const finalPrice =
+                        price - discount;
+
+                    return {
+
+                        value:
+                            `₹${formatNumber(finalPrice)}`,
+
+                        explanation:
+                            `Discount amount ₹${formatNumber(discount)} hai. Final price ₹${formatNumber(finalPrice)} hai.`,
+
+                        formula:
+                            `Discount = ${price} × ${percent} ÷ 100; Final = ${price} − ${formatNumber(discount)}`
+
+                    };
+
+                }
+
+            },
+
+
+            /* -------------------------------------------------------
+               SIMPLE INTEREST
+               ------------------------------------------------------- */
+
+            interest: {
+
+                title:
+                    "Simple Interest Calculator",
+
+                description:
+                    "Principal, annual interest rate aur time se simple interest calculate karo.",
+
+                form: () => `
+
+          ${inputField(
+                    "interestPrincipal",
+                    "Principal",
+                    "Example: 10000"
+                )}
+
+          ${inputField(
+                    "interestRate",
+                    "Annual rate (%)",
+                    "Example: 8"
+                )}
+
+          ${inputField(
+                    "interestTime",
+                    "Time (years)",
+                    "Example: 2"
+                )}
+
+        `,
+
+                calculate: () => {
+
+                    const principal =
+                        number(
+                            "interestPrincipal"
+                        );
+
+                    const rate =
+                        number(
+                            "interestRate"
+                        );
+
+                    const time =
+                        number(
+                            "interestTime"
+                        );
+
+                    const interest =
+                        principal *
+                        rate *
+                        time /
+                        100;
+
+                    const total =
+                        principal +
+                        interest;
+
+                    return {
+
+                        value:
+                            `₹${formatNumber(interest)}`,
+
+                        explanation:
+                            `Simple interest ₹${formatNumber(interest)} hai. Total amount ₹${formatNumber(total)} hoga.`,
+
+                        formula:
+                            `SI = P × R × T ÷ 100 = ${principal} × ${rate} × ${time} ÷ 100`
+
+                    };
+
+                }
+
+            },
+
+
+            /* -------------------------------------------------------
+               UNIT CONVERTER
+               ------------------------------------------------------- */
+
+            conversion: {
+
+                title:
+                    "Unit Converter",
+
+                description:
+                    "Common length, weight, temperature aur digital units convert karo.",
+
+                form: () => `
+
+          ${inputField(
+                    "convertValue",
+                    "Value",
+                    "Example: 10"
+                )}
+
+          ${selectField(
+                    "convertCategory",
+                    "Category",
+                    [
+                        {
+                            value: "length",
+                            label: "Length"
+                        },
+                        {
+                            value: "weight",
+                            label: "Weight"
+                        },
+                        {
+                            value: "temperature",
+                            label: "Temperature"
+                        },
+                        {
+                            value: "digital",
+                            label: "Digital storage"
+                        }
+                    ]
+                )}
+
+          ${selectField(
+                    "convertFrom",
+                    "From",
+                    [
+                        {
+                            value: "meter",
+                            label: "Meter"
+                        },
+                        {
+                            value: "kilometer",
+                            label: "Kilometer"
+                        },
+                        {
+                            value: "centimeter",
+                            label: "Centimeter"
+                        },
+                        {
+                            value: "foot",
+                            label: "Foot"
+                        },
+                        {
+                            value: "inch",
+                            label: "Inch"
+                        }
+                    ]
+                )}
+
+          ${selectField(
+                    "convertTo",
+                    "To",
+                    [
+                        {
+                            value: "meter",
+                            label: "Meter"
+                        },
+                        {
+                            value: "kilometer",
+                            label: "Kilometer"
+                        },
+                        {
+                            value: "centimeter",
+                            label: "Centimeter"
+                        },
+                        {
+                            value: "foot",
+                            label: "Foot"
+                        },
+                        {
+                            value: "inch",
+                            label: "Inch"
+                        }
+                    ]
+                )}
+
+          <div class="field full">
+
+            <div class="field-note">
+              Category change karne par From/To options automatically update honge.
+            </div>
+
+          </div>
+
+        `,
+
+                calculate: () => {
+
+                    const value =
+                        number("convertValue");
+
+                    const category =
+                        document.getElementById(
+                            "convertCategory"
+                        ).value;
+
+                    const from =
+                        document.getElementById(
+                            "convertFrom"
+                        ).value;
+
+                    const to =
+                        document.getElementById(
+                            "convertTo"
+                        ).value;
+
+
+                    if (
+                        category === "temperature"
+                    ) {
+
+                        let celsius;
+
+                        if (from === "celsius") {
+                            celsius = value;
+                        } else if (from === "fahrenheit") {
+                            celsius =
+                                (value - 32) *
+                                5 / 9;
+                        } else {
+                            celsius =
+                                value - 273.15;
+                        }
+
+                        let result;
+
+                        if (to === "celsius") {
+                            result = celsius;
+                        } else if (to === "fahrenheit") {
+                            result =
+                                celsius *
+                                9 / 5 +
+                                32;
+                        } else {
+                            result =
+                                celsius +
+                                273.15;
+                        }
+
+                        return {
+
+                            value:
+                                formatNumber(result),
+
+                            explanation:
+                                `${formatNumber(value)} ${from} = ${formatNumber(result)} ${to}.`,
+
+                            formula:
+                                "Temperature conversion formula selected according to From/To units."
+
+                        };
+
+                    }
+
+
+                    const maps = {
+
+                        length: {
+
+                            meter: 1,
+                            kilometer: 1000,
+                            centimeter: .01,
+                            foot: .3048,
+                            inch: .0254
+
+                        },
+
+                        weight: {
+
+                            kilogram: 1,
+                            gram: .001,
+                            pound: .45359237,
+                            ounce: .028349523125
+
+                        },
+
+                        digital: {
+
+                            byte: 1,
+                            kilobyte: 1024,
+                            megabyte: 1024 ** 2,
+                            gigabyte: 1024 ** 3
+
+                        }
+
+                    };
+
+
+                    const map =
+                        maps[category];
+
+                    if (
+                        !map ||
+                        !map[from] ||
+                        !map[to]
+                    ) {
+
+                        return {
+
+                            value: "—",
+
+                            explanation:
+                                "Selected conversion is not available.",
+
+                            formula:
+                                "Choose compatible units."
+
+                        };
+
+                    }
+
+
+                    const base =
+                        value *
+                        map[from];
+
+                    const result =
+                        base /
+                        map[to];
+
+
+                    return {
+
+                        value:
+                            formatNumber(result),
+
+                        explanation:
+                            `${formatNumber(value)} ${from} = ${formatNumber(result)} ${to}.`,
+
+                        formula:
+                            `${formatNumber(value)} × (${map[from]} ÷ ${map[to]})`
+
+                    };
+
+                }
+
+            },
+
+
+            /* -------------------------------------------------------
+               SPEED
+               ------------------------------------------------------- */
+
+            speed: {
+
+                title:
+                    "Speed Calculator",
+
+                description:
+                    "Distance aur time ke basis par speed calculate karo.",
+
+                form: () => `
+
+          ${inputField(
+                    "speedDistance",
+                    "Distance",
+                    "Example: 120"
+                )}
+
+          ${inputField(
+                    "speedTime",
+                    "Time",
+                    "Example: 2"
+                )}
+
+          ${selectField(
+                    "speedDistanceUnit",
+                    "Distance unit",
+                    [
+                        {
+                            value: "km",
+                            label: "Kilometers"
+                        },
+                        {
+                            value: "m",
+                            label: "Meters"
+                        }
+                    ]
+                )}
+
+          ${selectField(
+                    "speedTimeUnit",
+                    "Time unit",
+                    [
+                        {
+                            value: "h",
+                            label: "Hours"
+                        },
+                        {
+                            value: "min",
+                            label: "Minutes"
+                        },
+                        {
+                            value: "s",
+                            label: "Seconds"
+                        }
+                    ]
+                )}
+
+        `,
+
+                calculate: () => {
+
+                    const distance =
+                        number(
+                            "speedDistance"
+                        );
+
+                    const time =
+                        number(
+                            "speedTime"
+                        );
+
+                    const distanceUnit =
+                        document.getElementById(
+                            "speedDistanceUnit"
+                        ).value;
+
+                    const timeUnit =
+                        document.getElementById(
+                            "speedTimeUnit"
+                        ).value;
+
+
+                    if (
+                        time <= 0
+                    ) {
+
+                        return {
+
+                            value: "—",
+
+                            explanation:
+                                "Time zero ya negative nahi ho sakta.",
+
+                            formula:
+                                "Speed = Distance ÷ Time"
+
+                        };
+
+                    }
+
+
+                    let kilometers =
+                        distance;
+
+                    if (
+                        distanceUnit === "m"
+                    ) {
+                        kilometers =
+                            distance / 1000;
+                    }
+
+
+                    let hours =
+                        time;
+
+                    if (
+                        timeUnit === "min"
+                    ) {
+                        hours =
+                            time / 60;
+                    }
+
+                    if (
+                        timeUnit === "s"
+                    ) {
+                        hours =
+                            time / 3600;
+                    }
+
+
+                    const kmh =
+                        kilometers / hours;
+
+                    const ms =
+                        kmh / 3.6;
+
+
+                    return {
+
+                        value:
+                            `${formatNumber(kmh)} km/h`,
+
+                        explanation:
+                            `Equivalent speed approximately ${formatNumber(ms)} m/s bhi hai.`,
+
+                        formula:
+                            `Speed = Distance ÷ Time`
+
+                    };
+
+                }
+
+            },
+
+
+            /* -------------------------------------------------------
+               TIME
+               ------------------------------------------------------- */
+
+            time: {
+
+                title:
+                    "Time Converter",
+
+                description:
+                    "Hours, minutes aur seconds ko easily convert karo.",
+
+                form: () => `
+
+          ${inputField(
+                    "timeValue",
+                    "Value",
+                    "Example: 125"
+                )}
+
+          ${selectField(
+                    "timeUnitFrom",
+                    "From",
+                    [
+                        {
+                            value: "seconds",
+                            label: "Seconds"
+                        },
+                        {
+                            value: "minutes",
+                            label: "Minutes"
+                        },
+                        {
+                            value: "hours",
+                            label: "Hours"
+                        }
+                    ]
+                )}
+
+          ${selectField(
+                    "timeUnitTo",
+                    "To",
+                    [
+                        {
+                            value: "seconds",
+                            label: "Seconds"
+                        },
+                        {
+                            value: "minutes",
+                            label: "Minutes"
+                        },
+                        {
+                            value: "hours",
+                            label: "Hours"
+                        }
+                    ]
+                )}
+
+        `,
+
+                calculate: () => {
+
+                    const value =
+                        number(
+                            "timeValue"
+                        );
+
+                    const from =
+                        document.getElementById(
+                            "timeUnitFrom"
+                        ).value;
+
+                    const to =
+                        document.getElementById(
+                            "timeUnitTo"
+                        ).value;
+
+
+                    const factors = {
+
+                        seconds: 1,
+                        minutes: 60,
+                        hours: 3600
+
+                    };
+
+
+                    const seconds =
+                        value *
+                        factors[from];
+
+                    const result =
+                        seconds /
+                        factors[to];
+
+
+                    return {
+
+                        value:
+                            formatNumber(result),
+
+                        explanation:
+                            `${formatNumber(value)} ${from} = ${formatNumber(result)} ${to}.`,
+
+                        formula:
+                            `${formatNumber(value)} × ${factors[from]} ÷ ${factors[to]}`
+
+                    };
+
+                }
+
+            }
+
+        };
+
+
+        /* =========================================================
+           DYNAMIC CONVERSION OPTIONS
+           ========================================================= */
+
+        function updateConversionUnits() {
+
+            const categoryElement =
+                document.getElementById(
+                    "convertCategory"
+                );
+
+            if (!categoryElement) {
+                return;
+            }
+
+            const category =
+                categoryElement.value;
+
+            const from =
+                document.getElementById(
+                    "convertFrom"
+                );
+
+            const to =
+                document.getElementById(
+                    "convertTo"
+                );
+
+
+            const units = {
+
+                length: [
+
+                    ["meter", "Meter"],
+                    ["kilometer", "Kilometer"],
+                    ["centimeter", "Centimeter"],
+                    ["foot", "Foot"],
+                    ["inch", "Inch"]
+
+                ],
+
+                weight: [
+
+                    ["kilogram", "Kilogram"],
+                    ["gram", "Gram"],
+                    ["pound", "Pound"],
+                    ["ounce", "Ounce"]
+
+                ],
+
+                temperature: [
+
+                    ["celsius", "Celsius"],
+                    ["fahrenheit", "Fahrenheit"],
+                    ["kelvin", "Kelvin"]
+
+                ],
+
+                digital: [
+
+                    ["byte", "Byte"],
+                    ["kilobyte", "Kilobyte"],
+                    ["megabyte", "Megabyte"],
+                    ["gigabyte", "Gigabyte"]
+
+                ]
+
+            };
+
+
+            const list =
+                units[category];
+
+
+            from.innerHTML =
+                list
+                    .map(item => `
+            <option value="${item[0]}">
+              ${item[1]}
+            </option>
+          `)
+                    .join("");
+
+
+            to.innerHTML =
+                list
+                    .map(item => `
+            <option value="${item[0]}">
+              ${item[1]}
+            </option>
+          `)
+                    .join("");
+
+
+            if (
+                list.length > 1
+            ) {
+                to.value =
+                    list[1][0];
+            }
+
+        }
+
+
+        /* =========================================================
+           LOAD CALCULATOR
+           ========================================================= */
+
+        function loadCalculator(
+            name
+        ) {
+
+            const calculator =
+                calculators[name];
+
+            if (!calculator) {
+                return;
+            }
+
+            currentCalculator =
+                name;
+
+            calculatorTitle.textContent =
+                calculator.title;
+
+            calculatorDescription.textContent =
+                calculator.description;
+
+            formArea.innerHTML =
+                calculator.form();
+
+
+            resultValue.textContent =
+                "—";
+
+            resultExplanation.textContent =
+                "Values enter karke Calculate dabao.";
+
+            formulaBox.innerHTML =
+                "<strong>Formula:</strong> —";
+
+
+            document
+                .querySelectorAll(
+                    ".calculator-card"
+                )
+                .forEach(card => {
+
+                    card.classList.toggle(
+                        "active",
+                        card.dataset.calculator ===
+                        name
+                    );
+
+                });
+
+
+            const category =
+                document.getElementById(
+                    "convertCategory"
+                );
+
+            if (category) {
+
+                category.addEventListener(
+                    "change",
+                    updateConversionUnits
+                );
+
+                updateConversionUnits();
+
+            }
+
+        }
+
+
+        /* =========================================================
+           SELECT CALCULATOR
+           ========================================================= */
+
+        document
+            .querySelectorAll(
+                ".calculator-card"
+            )
+            .forEach(card => {
+
+                card.addEventListener(
+                    "click",
+                    () => {
+
+                        loadCalculator(
+                            card.dataset.calculator
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =========================================================
+           CALCULATE
+           ========================================================= */
+
+        document
+            .getElementById(
+                "calculateButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    const calculator =
+                        calculators[
+                        currentCalculator
+                        ];
+
+                    try {
+
+                        const result =
+                            calculator.calculate();
+
+
+                        resultValue.textContent =
+                            result.value;
+
+                        resultExplanation.textContent =
+                            result.explanation;
+
+                        formulaBox.innerHTML =
+                            `<strong>Formula:</strong> ${result.formula}`;
+
+
+                        showToast(
+                            "Calculation complete."
+                        );
+
+                    } catch (error) {
+
+                        resultValue.textContent =
+                            "Check input";
+
+                        resultExplanation.textContent =
+                            "Please values ko check karke dobara calculate karo.";
+
+                        formulaBox.innerHTML =
+                            "<strong>Formula:</strong> Input values verify karo.";
+
+                        showToast(
+                            "Input values check karo."
+                        );
+
+                    }
+
+                }
+            );
+
+
+        /* =========================================================
+           RESET
+           ========================================================= */
+
+        document
+            .getElementById(
+                "resetButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
+
+                    const calculator =
+                        calculators[
+                        currentCalculator
+                        ];
+
+                    formArea.innerHTML =
+                        calculator.form();
+
+                    resultValue.textContent =
+                        "—";
+
+                    resultExplanation.textContent =
+                        "Values enter karke Calculate dabao.";
+
+                    formulaBox.innerHTML =
+                        "<strong>Formula:</strong> —";
+
+
+                    const category =
+                        document.getElementById(
+                            "convertCategory"
+                        );
+
+                    if (category) {
+
+                        category.addEventListener(
+                            "change",
+                            updateConversionUnits
+                        );
+
+                        updateConversionUnits();
+
+                    }
+
+
+                    showToast(
+                        "Calculator reset ho gaya."
+                    );
+
+                }
+            );
+
+
+        /* =========================================================
+           INITIALIZE
+           ========================================================= */
+
+        loadCalculator(
+            "percentage"
+        );
+
+    </script>
+
+</body>
+
+</html>

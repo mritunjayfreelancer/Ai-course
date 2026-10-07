@@ -1,0 +1,3428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chapter 44: Python Introduction, Installation & Development Setup | AI Learning HUB</title>
+
+    <meta name="description"
+        content="Learn Python from the ground up for AI, automation, data science and application development. Chapter 44 covers Python basics, installation, VS Code, PyCharm, interpreter, terminal, first program, virtual environments, project structure and common errors." />
+
+    <meta name="keywords"
+        content="Python introduction, Python for AI, learn Python, Python installation, VS Code Python, PyCharm Python, Python interpreter, Python terminal, Python setup, AI Python course, Python beginner course" />
+
+    <meta name="author" content="AI Learning HUB" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#f8fafc" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Chapter 44: Python Introduction & Setup" />
+    <meta property="og:description"
+        content="A complete beginner-friendly foundation for learning Python for AI, automation and modern technology." />
+    <meta property="og:site_name" content="AI Learning HUB" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chapter 44: Python Introduction & Setup" />
+    <meta name="twitter:description"
+        content="Learn Python fundamentals, installation, VS Code, PyCharm, interpreter, terminal and your first Python programs." />
+
+    <link rel="canonical" href="chapters/chapter-44.html" />
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 44: Python Introduction, Installation & Development Setup",
+    "description": "Complete beginner-friendly introduction to Python for AI, automation, data science and application development.",
+    "author": {
+      "@type": "Organization",
+      "name": "AI Learning HUB"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AI Learning HUB"
+    },
+    "educationalLevel": "Beginner",
+    "learningResourceType": "Course Chapter",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "AI Full Course"
+    }
+  }
+  </script>
+
+    <style>
+        :root {
+            --bg: #f6f8fc;
+            --surface: #ffffff;
+            --surface-2: #f1f5f9;
+            --surface-3: #eaf0f7;
+            --text: #172033;
+            --muted: #667085;
+            --border: #dfe5ee;
+            --primary: #2563eb;
+            --primary-2: #1d4ed8;
+            --primary-soft: #eaf2ff;
+            --green: #16805a;
+            --green-soft: #e9f8f1;
+            --orange: #b45309;
+            --orange-soft: #fff4df;
+            --red: #c24141;
+            --red-soft: #fff0f0;
+            --purple: #7c3aed;
+            --purple-soft: #f2ebff;
+            --shadow-sm: 0 4px 14px rgba(15, 23, 42, .06);
+            --shadow: 0 16px 45px rgba(15, 23, 42, .09);
+            --radius: 18px;
+            --radius-sm: 12px;
+            --max: 1240px;
+            --nav-height: 72px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0b1220;
+            --surface: #111a2b;
+            --surface-2: #172235;
+            --surface-3: #1c2a40;
+            --text: #edf3fb;
+            --muted: #a8b3c5;
+            --border: #26364d;
+            --primary: #60a5fa;
+            --primary-2: #93c5fd;
+            --primary-soft: #132c4e;
+            --green: #55d39b;
+            --green-soft: #102d24;
+            --orange: #f6b65c;
+            --orange-soft: #33230d;
+            --red: #ff8b8b;
+            --red-soft: #35191d;
+            --purple: #b394ff;
+            --purple-soft: #261b42;
+            --shadow-sm: 0 4px 14px rgba(0, 0, 0, .18);
+            --shadow: 0 18px 50px rgba(0, 0, 0, .25);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-height) + 22px);
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family:
+                Inter, ui-sans-serif, system-ui, -apple-system,
+                BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.72;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* =========================
+       NAVBAR
+    ========================== */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            min-height: var(--nav-height);
+            border-bottom: 1px solid var(--border);
+            background: color-mix(in srgb, var(--surface) 94%, transparent);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-inner {
+            max-width: var(--max);
+            min-height: var(--nav-height);
+            margin: auto;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 800;
+            letter-spacing: -.03em;
+            white-space: nowrap;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
+            color: #fff;
+            box-shadow: 0 8px 22px rgba(37, 99, 235, .24);
+            font-size: 17px;
+        }
+
+        .brand-text {
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            padding: 9px 12px;
+            color: var(--muted);
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn,
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            border-radius: 10px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            transition: .2s ease;
+        }
+
+        .icon-btn:hover,
+        .menu-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* =========================
+       READING PROGRESS
+    ========================== */
+
+        .progress-track {
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 999;
+            background: transparent;
+            pointer-events: none;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #7c3aed);
+            transition: width .08s linear;
+        }
+
+        /* =========================
+       HERO
+    ========================== */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(37, 99, 235, .13), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(124, 58, 237, .12), transparent 28%),
+                var(--surface);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            right: -170px;
+            bottom: -220px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            opacity: .7;
+        }
+
+        .hero-inner {
+            max-width: var(--max);
+            margin: auto;
+            padding: 72px 22px 66px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 11px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            margin: 20px 0 14px;
+            font-size: clamp(36px, 5vw, 66px);
+            line-height: 1.04;
+            letter-spacing: -.055em;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            max-width: 830px;
+            margin: 0;
+            color: var(--muted);
+            font-size: clamp(16px, 2vw, 19px);
+        }
+
+        .hero-meta {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .meta-pill {
+            padding: 9px 13px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--muted);
+        }
+
+        .meta-pill strong {
+            color: var(--text);
+        }
+
+        .hero-roadmap {
+            margin-top: 35px;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .roadmap-item {
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: color-mix(in srgb, var(--surface) 85%, transparent);
+        }
+
+        .roadmap-number {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .roadmap-item strong {
+            display: block;
+            margin-top: 4px;
+            font-size: 14px;
+        }
+
+        /* =========================
+       LAYOUT
+    ========================== */
+
+        .page {
+            max-width: var(--max);
+            margin: auto;
+            padding: 42px 22px 90px;
+            display: grid;
+            grid-template-columns: 275px minmax(0, 1fr);
+            gap: 34px;
+            align-items: start;
+        }
+
+        .toc {
+            position: sticky;
+            top: calc(var(--nav-height) + 28px);
+            max-height: calc(100vh - var(--nav-height) - 50px);
+            overflow: auto;
+            padding: 17px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toc-title {
+            margin: 0 0 12px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            color: var(--muted);
+        }
+
+        .toc a {
+            display: block;
+            padding: 8px 9px;
+            margin: 2px 0;
+            border-radius: 8px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.4;
+            transition: .2s ease;
+        }
+
+        .toc a:hover {
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        .chapter-section {
+            margin-bottom: 38px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chapter-section h2 {
+            margin: 0 0 12px;
+            font-size: clamp(24px, 3vw, 34px);
+            line-height: 1.2;
+            letter-spacing: -.035em;
+        }
+
+        .chapter-section h3 {
+            margin: 28px 0 9px;
+            font-size: 20px;
+            line-height: 1.3;
+            letter-spacing: -.02em;
+        }
+
+        .chapter-section h4 {
+            margin: 22px 0 7px;
+            font-size: 16px;
+        }
+
+        .chapter-section p {
+            margin: 10px 0;
+            color: var(--muted);
+        }
+
+        .chapter-section strong {
+            color: var(--text);
+        }
+
+        .lead {
+            font-size: 17px;
+            color: var(--text) !important;
+        }
+
+        .section-number {
+            display: inline-block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+       CALLOUTS
+    ========================== */
+
+        .callout {
+            margin: 22px 0;
+            padding: 17px 18px;
+            border-left: 4px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            background: var(--primary-soft);
+        }
+
+        .callout.green {
+            border-left-color: var(--green);
+            background: var(--green-soft);
+        }
+
+        .callout.orange {
+            border-left-color: var(--orange);
+            background: var(--orange-soft);
+        }
+
+        .callout.red {
+            border-left-color: var(--red);
+            background: var(--red-soft);
+        }
+
+        .callout.purple {
+            border-left-color: var(--purple);
+            background: var(--purple-soft);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* =========================
+       CARDS / GRIDS
+    ========================== */
+
+        .grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .info-card {
+            padding: 19px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--surface-2);
+        }
+
+        .info-card .icon {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 11px;
+            border-radius: 10px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .info-card h3,
+        .info-card h4 {
+            margin: 0 0 5px;
+        }
+
+        .info-card p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* =========================
+       PROCESS
+    ========================== */
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 22px 0;
+        }
+
+        .process-step {
+            position: relative;
+            padding: 18px 14px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: var(--surface-2);
+            text-align: center;
+        }
+
+        .process-step .step-no {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto 9px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--primary);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .process-step strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .process-step span {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================
+       CODE
+    ========================== */
+
+        .code-wrap {
+            position: relative;
+            margin: 18px 0;
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: #0d1524;
+            color: #dbeafe;
+            font-family:
+                "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 9px;
+            right: 9px;
+            padding: 6px 9px;
+            border: 1px solid rgba(255, 255, 255, .16);
+            border-radius: 7px;
+            background: rgba(255, 255, 255, .08);
+            color: #fff;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, .15);
+        }
+
+        .code-label {
+            display: inline-block;
+            margin-bottom: -1px;
+            padding: 6px 10px;
+            border-radius: 7px 7px 0 0;
+            background: #172235;
+            color: #93c5fd;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        /* =========================
+       TABLE
+    ========================== */
+
+        .table-wrap {
+            margin: 20px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 620px;
+        }
+
+        th,
+        td {
+            padding: 13px 14px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+            font-size: 13px;
+        }
+
+        th {
+            background: var(--surface-2);
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        td {
+            color: var(--muted);
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        /* =========================
+       LISTS
+    ========================== */
+
+        .check-list,
+        .number-list {
+            padding-left: 21px;
+            color: var(--muted);
+        }
+
+        .check-list li,
+        .number-list li {
+            margin: 7px 0;
+        }
+
+        .check-list li::marker {
+            color: var(--green);
+        }
+
+        /* =========================
+       PROMPT BOX
+    ========================== */
+
+        .prompt-box {
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: var(--surface-2);
+        }
+
+        .prompt-label {
+            margin-bottom: 9px;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .prompt-text {
+            margin: 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: var(--surface);
+            border: 1px dashed var(--border);
+            color: var(--text);
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.65;
+            white-space: pre-wrap;
+        }
+
+        /* =========================
+       CHECKLIST
+    ========================== */
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 10px 0;
+            color: var(--muted);
+        }
+
+        .check-item input {
+            margin-top: 6px;
+            accent-color: var(--primary);
+        }
+
+        /* =========================
+       QUIZ
+    ========================== */
+
+        .quiz {
+            margin-top: 25px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: var(--surface-2);
+        }
+
+        .question-title {
+            margin: 0 0 12px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .option {
+            display: block;
+            margin: 8px 0;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: var(--surface);
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+        }
+
+        .option input {
+            margin-right: 8px;
+            accent-color: var(--primary);
+        }
+
+        .quiz-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 15px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            border: 0;
+            border-radius: 10px;
+            padding: 11px 16px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: .2s ease;
+        }
+
+        .primary-btn {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .primary-btn:hover {
+            background: var(--primary-2);
+            transform: translateY(-1px);
+        }
+
+        .secondary-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .secondary-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .quiz-result {
+            display: none;
+            margin-top: 17px;
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--green-soft);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        /* =========================
+       SUMMARY
+    ========================== */
+
+        .takeaways {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .takeaway {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface-2);
+        }
+
+        .takeaway strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .takeaway span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================
+       FOOTER
+    ========================== */
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            max-width: var(--max);
+            margin: auto;
+            padding: 28px 22px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================
+       BACK TO TOP
+    ========================== */
+
+        .top-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 43px;
+            height: 43px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: .2s ease;
+            z-index: 900;
+        }
+
+        .top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* =========================
+       FOCUS
+    ========================== */
+
+        :focus-visible {
+            outline: 3px solid rgba(37, 99, 235, .35);
+            outline-offset: 2px;
+        }
+
+        /* =========================
+       RESPONSIVE
+    ========================== */
+
+        @media (max-width: 1050px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: grid;
+            }
+
+            .nav-links.open {
+                position: absolute;
+                top: calc(var(--nav-height) - 1px);
+                left: 0;
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 12px 20px 16px;
+                border-bottom: 1px solid var(--border);
+                background: var(--surface);
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.open a {
+                padding: 12px;
+            }
+
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            /*
+        IMPORTANT:
+        Tablet/mobile TOC is NOT sticky.
+        This prevents overlap/fixed-sidebar bugs.
+      */
+            .toc {
+                position: static;
+                max-height: none;
+                overflow: visible;
+            }
+
+            .toc-links {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 3px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            :root {
+                --nav-height: 64px;
+            }
+
+            .nav-inner {
+                min-height: 64px;
+                padding: 0 15px;
+            }
+
+            .brand-mark {
+                width: 35px;
+                height: 35px;
+            }
+
+            .hero-inner {
+                padding: 48px 17px 45px;
+            }
+
+            .page {
+                padding: 25px 14px 65px;
+            }
+
+            .chapter-section {
+                padding: 21px 17px;
+                border-radius: 15px;
+                margin-bottom: 22px;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-roadmap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .takeaways {
+                grid-template-columns: 1fr;
+            }
+
+            .toc-links {
+                grid-template-columns: 1fr;
+            }
+
+            .top-btn {
+                right: 13px;
+                bottom: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-text {
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .hero-roadmap,
+            .process {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-meta {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .meta-pill {
+                font-size: 11px;
+            }
+
+            .chapter-section h2 {
+                font-size: 25px;
+            }
+
+            pre {
+                padding: 15px;
+                font-size: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+       NAVBAR
+  ========================== -->
+
+    <header class="navbar">
+        <div class="nav-inner">
+
+            <a class="brand" href="../index.html" aria-label="AI Learning HUB Home">
+                <span class="brand-mark">AI</span>
+                <span class="brand-text">AI Learning HUB</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#courses">Courses</a>
+                <a href="../index.html#tools">Tools</a>
+                <a href="../index.html#articles">Articles</a>
+                <a href="../index.html#resources">Resources</a>
+                <a href="../index.html#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode"
+                    title="Toggle theme">☾</button>
+
+                <button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu"
+                    aria-expanded="false">☰</button>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="progress-track" aria-hidden="true">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- =========================
+       HERO
+  ========================== -->
+
+    <section class="hero">
+        <div class="hero-inner">
+
+            <span class="eyebrow">Level 7 · Python Foundation</span>
+
+            <h1>
+                Chapter 44:
+                <span>Python Introduction & Setup</span>
+            </h1>
+
+            <p class="hero-description">
+                AI ke liye Python kyun important hai, Python kya hai, Python kaise
+                kaam karta hai, installation kaise hoti hai, VS Code aur PyCharm
+                kaise use karte hain, terminal kya hota hai aur apna first Python
+                program kaise run karte hain — sab kuch step-by-step.
+            </p>
+
+            <div class="hero-meta">
+                <div class="meta-pill"><strong>Level:</strong> 7</div>
+                <div class="meta-pill"><strong>Chapter:</strong> 44</div>
+                <div class="meta-pill"><strong>Topic:</strong> Python</div>
+                <div class="meta-pill"><strong>Difficulty:</strong> Beginner</div>
+            </div>
+
+            <div class="hero-roadmap">
+
+                <div class="roadmap-item">
+                    <div class="roadmap-number">01 · Understand</div>
+                    <strong>Python kya hai?</strong>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-number">02 · Setup</div>
+                    <strong>Python install karo</strong>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-number">03 · Build</div>
+                    <strong>VS Code / PyCharm</strong>
+                </div>
+
+                <div class="roadmap-item">
+                    <div class="roadmap-number">04 · Run</div>
+                    <strong>First Python program</strong>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =========================
+       MAIN
+  ========================== -->
+
+    <main class="page">
+
+        <!-- =========================
+         TOC
+    ========================== -->
+
+        <aside class="toc" aria-label="Chapter contents">
+
+            <h2 class="toc-title">Chapter Contents</h2>
+
+            <div class="toc-links">
+                <a href="#intro">1. Python Introduction</a>
+                <a href="#ai-connection">2. Python & AI Connection</a>
+                <a href="#python-meaning">3. Python Actually Kya Hai?</a>
+                <a href="#features">4. Python Ki Strengths</a>
+                <a href="#how-works">5. Python Kaise Kaam Karta Hai?</a>
+                <a href="#interpreter">6. Python Interpreter</a>
+                <a href="#install">7. Python Installation</a>
+                <a href="#terminal">8. Terminal / Command Line</a>
+                <a href="#first-run">9. First Python Program</a>
+                <a href="#editors">10. Code Editor & IDE</a>
+                <a href="#vscode">11. VS Code Setup</a>
+                <a href="#pycharm">12. PyCharm Setup</a>
+                <a href="#files">13. Python Files & Structure</a>
+                <a href="#syntax">14. Python Syntax Preview</a>
+                <a href="#variables-preview">15. Variables Preview</a>
+                <a href="#errors">16. Errors & Debugging</a>
+                <a href="#venv">17. Virtual Environment</a>
+                <a href="#workflow">18. Professional Workflow</a>
+                <a href="#ai-workflow">19. Python + AI Workflow</a>
+                <a href="#mistakes">20. Beginner Mistakes</a>
+                <a href="#security">21. Safe Development Habits</a>
+                <a href="#projects">22. Practice Projects</a>
+                <a href="#checklist">23. Setup Checklist</a>
+                <a href="#quiz">24. Chapter Quiz</a>
+                <a href="#summary">25. Summary</a>
+            </div>
+
+        </aside>
+
+        <!-- =========================
+         CONTENT
+    ========================== -->
+
+        <article class="content">
+
+            <!-- 1 -->
+            <section class="chapter-section" id="intro">
+
+                <span class="section-number">01 · Foundation</span>
+
+                <h2>Python kya hai?</h2>
+
+                <p class="lead">
+                    Python ek high-level, general-purpose programming language hai jiska
+                    use software, automation, web applications, data analysis,
+                    artificial intelligence, machine learning aur bahut saare modern
+                    technology systems banane ke liye hota hai.
+                </p>
+
+                <p>
+                    Simple language mein samjho: <strong>Python ek medium hai jiske
+                        through hum computer ko instructions dete hain.</strong>
+                </p>
+
+                <p>
+                    Jaise human language mein hum kisi person ko bol sakte hain:
+                    "File open karo", "number calculate karo", "data sort karo",
+                    waise programming mein hum computer ko exact instructions dete hain.
+                </p>
+
+                <div class="callout">
+                    <strong>Simple Mental Model</strong>
+                    Python = Human instructions ko computer-executable instructions
+                    mein express karne ka ek readable tareeka.
+                </div>
+
+                <h3>Python ka naam sunte hi sirf AI mat samajhna</h3>
+
+                <p>
+                    Python sirf AI language nahi hai. Python ek general-purpose language
+                    hai. AI uska ek bahut important application area hai.
+                </p>
+
+                <div class="grid grid-3">
+
+                    <div class="info-card">
+                        <div class="icon">🤖</div>
+                        <h3>AI / ML</h3>
+                        <p>
+                            Machine learning, deep learning, model experimentation aur AI
+                            applications.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="icon">⚙️</div>
+                        <h3>Automation</h3>
+                        <p>
+                            Repetitive computer tasks ko programs ke through automate karna.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="icon">📊</div>
+                        <h3>Data</h3>
+                        <p>
+                            Data cleaning, analysis, visualization aur processing.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="icon">🌐</div>
+                        <h3>Web</h3>
+                        <p>
+                            Backend services, APIs aur web applications develop karna.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="icon">🧪</div>
+                        <h3>Research</h3>
+                        <p>
+                            Experiments, simulations aur technical research workflows.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="icon">🛠️</div>
+                        <h3>Tools</h3>
+                        <p>
+                            Custom utilities, scripts, data tools aur developer utilities.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- 2 -->
+            <section class="chapter-section" id="ai-connection">
+
+                <span class="section-number">02 · AI Connection</span>
+
+                <h2>Python aur AI ka connection</h2>
+
+                <p>
+                    Agar tum AI course kar rahe ho, to Python ka importance bahut high
+                    hai. Lekin iska reason sirf ye nahi hai ki "AI Python mein hota hai".
+                </p>
+
+                <p>
+                    Actual reason ye hai ki AI development mein data handle karna,
+                    calculations karna, models train karna, experiments run karna,
+                    APIs connect karna aur applications banana padta hai.
+                </p>
+
+                <div class="process">
+
+                    <div class="process-step">
+                        <div class="step-no">1</div>
+                        <strong>Data</strong>
+                        <span>Data read / clean</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">2</div>
+                        <strong>Code</strong>
+                        <span>Logic implement</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">3</div>
+                        <strong>Model</strong>
+                        <span>AI/ML processing</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">4</div>
+                        <strong>Application</strong>
+                        <span>Real-world output</span>
+                    </div>
+
+                </div>
+
+                <h3>AI development mein Python kahan use hota hai?</h3>
+
+                <div class="grid grid-2">
+
+                    <div class="info-card">
+                        <h3>Machine Learning</h3>
+                        <p>
+                            Data se patterns learn karne wale systems banane ke liye
+                            Python ecosystem bahut popular hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Deep Learning</h3>
+                        <p>
+                            Neural networks aur large-scale model experiments mein Python
+                            commonly used hota hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Data Processing</h3>
+                        <p>
+                            AI model ko useful data dene ke liye data ko load, clean,
+                            transform aur analyze karna padta hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>AI Applications</h3>
+                        <p>
+                            Model ko actual application, API, chatbot ya automation
+                            workflow mein connect kiya ja sakta hai.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="callout green">
+                    <strong>Important</strong>
+                    Python khud intelligent nahi hota. Python ek programming tool hai.
+                    Intelligence AI model, algorithms, data aur system design se aati hai.
+                </div>
+
+            </section>
+
+            <!-- 3 -->
+            <section class="chapter-section" id="python-meaning">
+
+                <span class="section-number">03 · Core Concept</span>
+
+                <h2>Python actually kya hai?</h2>
+
+                <p>
+                    Python ko samajhne ke liye teen cheezein alag rakho:
+                </p>
+
+                <div class="grid grid-3">
+
+                    <div class="info-card">
+                        <h3>Language</h3>
+                        <p>
+                            Python ke rules aur syntax hote hain jinke according hum code
+                            likhte hain.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Interpreter</h3>
+                        <p>
+                            Python interpreter Python instructions ko execute karne mein
+                            help karta hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Libraries</h3>
+                        <p>
+                            Ready-made functionality provide karne wale reusable code
+                            packages.
+                        </p>
+                    </div>
+
+                </div>
+
+                <h3>Programming language aur library mein difference</h3>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Meaning</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Python</td>
+                                <td>Programming language</td>
+                                <td>Syntax aur programming rules</td>
+                            </tr>
+
+                            <tr>
+                                <td>Library</td>
+                                <td>Reusable code</td>
+                                <td>Data, web, AI functionality</td>
+                            </tr>
+
+                            <tr>
+                                <td>Framework</td>
+                                <td>Application build karne ka structured ecosystem</td>
+                                <td>Web/application frameworks</td>
+                            </tr>
+
+                            <tr>
+                                <td>Package</td>
+                                <td>Distributable Python code collection</td>
+                                <td>Installable third-party functionality</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <!-- 4 -->
+            <section class="chapter-section" id="features">
+
+                <span class="section-number">04 · Why Python</span>
+
+                <h2>Python ki strengths</h2>
+
+                <p>
+                    Python ki popularity ke peeche kai practical reasons hain.
+                </p>
+
+                <div class="grid grid-2">
+
+                    <div class="info-card">
+                        <h3>Readable Syntax</h3>
+                        <p>
+                            Python ka syntax comparatively clean aur readable hai, isliye
+                            beginners programming concepts par focus kar sakte hain.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Large Ecosystem</h3>
+                        <p>
+                            AI, data, web, automation aur scientific computing ke liye
+                            bahut bada ecosystem available hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Cross Platform</h3>
+                        <p>
+                            Python Windows, macOS aur Linux jaise platforms par use kiya
+                            ja sakta hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Community</h3>
+                        <p>
+                            Python ka large developer community hai, jiski wajah se
+                            learning resources aur documentation kaafi available hain.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Automation Friendly</h3>
+                        <p>
+                            Files, data processing aur repetitive tasks automate karne ke
+                            liye Python useful hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>AI Ecosystem</h3>
+                        <p>
+                            AI aur machine learning ke liye Python ka ecosystem especially
+                            strong hai.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="callout orange">
+                    <strong>But Python perfect nahi hai</strong>
+                    Har problem ke liye Python best choice nahi hota. Performance-critical
+                    systems, low-level programming aur kuch specialized environments mein
+                    other languages better fit ho sakti hain.
+                </div>
+
+            </section>
+
+            <!-- 5 -->
+            <section class="chapter-section" id="how-works">
+
+                <span class="section-number">05 · Execution</span>
+
+                <h2>Python kaise kaam karta hai?</h2>
+
+                <p>
+                    Jab tum Python code likhte ho, computer directly tumhare human-readable
+                    code ko hardware instructions ki tarah execute nahi karta.
+                </p>
+
+                <p>
+                    Python runtime system tumhare code ko process karke execution karne
+                    mein help karta hai.
+                </p>
+
+                <div class="process">
+
+                    <div class="process-step">
+                        <div class="step-no">1</div>
+                        <strong>Write</strong>
+                        <span>Python code</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">2</div>
+                        <strong>Parse</strong>
+                        <span>Code understand</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">3</div>
+                        <strong>Execute</strong>
+                        <span>Instructions run</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">4</div>
+                        <strong>Output</strong>
+                        <span>Result / error</span>
+                    </div>
+
+                </div>
+
+                <h3>Example</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Python</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>print("Hello, Python!")</code></pre>
+                </div>
+
+                <p>
+                    Is code ka simple meaning hai: screen par
+                    <strong>Hello, Python!</strong> print karo.
+                </p>
+
+            </section>
+
+            <!-- 6 -->
+            <section class="chapter-section" id="interpreter">
+
+                <span class="section-number">06 · Interpreter</span>
+
+                <h2>Python Interpreter kya hota hai?</h2>
+
+                <p>
+                    Python interpreter ko beginner level par tum ek aise software ke
+                    roop mein samajh sakte ho jo Python program ko execute karta hai.
+                </p>
+
+                <p>
+                    Jab system mein Python properly installed hota hai, terminal se
+                    Python command available ho sakti hai.
+                </p>
+
+                <div class="callout">
+                    <strong>Simple analogy</strong>
+                    Tum Python mein instruction likhte ho → Python runtime us instruction
+                    ko process karta hai → computer required action perform karta hai.
+                </div>
+
+                <h3>Python command check karna</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Terminal</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>python --version</code></pre>
+                </div>
+
+                <p>
+                    Kuch systems par Python ko <code>python3</code> command se invoke
+                    kiya ja sakta hai.
+                </p>
+
+                <div class="code-wrap">
+                    <span class="code-label">Terminal</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>python3 --version</code></pre>
+                </div>
+
+                <div class="callout orange">
+                    <strong>Important</strong>
+                    Command system aur installation configuration ke according different
+                    ho sakti hai. Agar ek command work na kare, iska matlab automatically
+                    ye nahi ki Python installed nahi hai.
+                </div>
+
+            </section>
+
+            <!-- 7 -->
+            <section class="chapter-section" id="install">
+
+                <span class="section-number">07 · Installation</span>
+
+                <h2>Python installation ka basic process</h2>
+
+                <p>
+                    Python programming start karne ke liye system mein Python runtime
+                    install hona useful hai.
+                </p>
+
+                <h3>Windows par general process</h3>
+
+                <ol class="number-list">
+                    <li>Official Python website se appropriate installer obtain karo.</li>
+                    <li>Installer start karo.</li>
+                    <li>Installation options carefully check karo.</li>
+                    <li>PATH-related option available ho to uska meaning samjho.</li>
+                    <li>Installation complete hone do.</li>
+                    <li>Terminal open karke Python version check karo.</li>
+                </ol>
+
+                <h3>Installation verify karna</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Windows Terminal</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>python --version</code></pre>
+                </div>
+
+                <p>
+                    Agar command version return karti hai, to generally Python command
+                    available hai.
+                </p>
+
+                <h3>Installation ke baad kya-kya milta hai?</h3>
+
+                <div class="grid grid-3">
+
+                    <div class="info-card">
+                        <h3>Python Runtime</h3>
+                        <p>
+                            Python programs execute karne ke liye.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Python Launcher</h3>
+                        <p>
+                            Kuch systems par Python versions launch/manage karne mein help
+                            karta hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Package Tool</h3>
+                        <p>
+                            Python ecosystem ke packages install karne ke workflow mein
+                            commonly use hota hai.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="callout red">
+                    <strong>Safety Rule</strong>
+                    Python ya packages install karte waqt random websites aur unknown
+                    installers avoid karo. Software ko trusted/official sources se
+                    obtain karna safer practice hai.
+                </div>
+
+            </section>
+
+            <!-- 8 -->
+            <section class="chapter-section" id="terminal">
+
+                <span class="section-number">08 · Terminal</span>
+
+                <h2>Terminal / Command Line kya hota hai?</h2>
+
+                <p>
+                    Terminal ek text-based interface hai jisme hum commands likh kar
+                    operating system aur development tools ke saath interact karte hain.
+                </p>
+
+                <p>
+                    Python developer ke liye terminal bahut important hai kyunki
+                    installation verify karna, programs run karna, packages manage karna
+                    aur environments activate karna jaise tasks yahin se kiye ja sakte hain.
+                </p>
+
+                <div class="grid grid-2">
+
+                    <div class="info-card">
+                        <h3>Graphical Interface</h3>
+                        <p>
+                            Buttons, windows aur menus ke through interaction.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Terminal</h3>
+                        <p>
+                            Commands type karke direct interaction.
+                        </p>
+                    </div>
+
+                </div>
+
+                <h3>Python interactive mode</h3>
+
+                <p>
+                    Python command run karne par kuch environments mein interactive
+                    interpreter session open ho sakta hai.
+                </p>
+
+                <div class="code-wrap">
+                    <span class="code-label">Terminal</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>python</code></pre>
+                </div>
+
+                <p>
+                    Uske baad directly Python statements try kiye ja sakte hain.
+                </p>
+
+                <div class="code-wrap">
+                    <span class="code-label">Python Interactive Mode</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>print("Hello")
+2 + 3
+10 * 5</code></pre>
+                </div>
+
+                <p>
+                    Interactive mode experimentation ke liye useful hai. Lekin proper
+                    projects ke liye normally <strong>.py files</strong> use ki jaati hain.
+                </p>
+
+            </section>
+
+            <!-- 9 -->
+            <section class="chapter-section" id="first-run">
+
+                <span class="section-number">09 · First Program</span>
+
+                <h2>Apna first Python program</h2>
+
+                <p>
+                    Ab actual Python file banate hain.
+                </p>
+
+                <h3>Step 1 — File banao</h3>
+
+                <p>
+                    Ek folder create karo aur usme file banao:
+                </p>
+
+                <div class="code-wrap">
+                    <span class="code-label">File</span>
+                    <pre><code>hello.py</code></pre>
+                </div>
+
+                <h3>Step 2 — Code likho</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">hello.py</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>print("Hello, Python!")</code></pre>
+                </div>
+
+                <h3>Step 3 — Terminal se run karo</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Terminal</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>python hello.py</code></pre>
+                </div>
+
+                <h3>Expected output</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Output</span>
+                    <pre><code>Hello, Python!</code></pre>
+                </div>
+
+                <div class="callout green">
+                    <strong>Yahi tumhara first complete programming cycle hai:</strong>
+                    File create → Code write → Program execute → Output observe.
+                </div>
+
+            </section>
+
+            <!-- 10 -->
+            <section class="chapter-section" id="editors">
+
+                <span class="section-number">10 · Development Tools</span>
+
+                <h2>Code Editor aur IDE kya hote hain?</h2>
+
+                <p>
+                    Python code technically simple text editor mein bhi likha ja sakta
+                    hai. Lekin real development mein specialized tools ka use productivity
+                    improve karta hai.
+                </p>
+
+                <h3>Code Editor</h3>
+
+                <p>
+                    Code editor primarily code likhne aur manage karne ke liye optimized
+                    hota hai.
+                </p>
+
+                <h3>IDE</h3>
+
+                <p>
+                    IDE ka full form <strong>Integrated Development Environment</strong>
+                    hai. Isme editor ke saath debugging, project management aur
+                    development tools integrated ho sakte hain.
+                </p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tool Type</th>
+                                <th>Main Purpose</th>
+                                <th>Beginner Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Text Editor</td>
+                                <td>Basic text editing</td>
+                                <td>Small scripts</td>
+                            </tr>
+                            <tr>
+                                <td>Code Editor</td>
+                                <td>Programming productivity</td>
+                                <td>Excellent</td>
+                            </tr>
+                            <tr>
+                                <td>IDE</td>
+                                <td>Complete development environment</td>
+                                <td>Excellent for projects</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <!-- 11 -->
+            <section class="chapter-section" id="vscode">
+
+                <span class="section-number">11 · VS Code</span>
+
+                <h2>VS Code ke saath Python setup</h2>
+
+                <p>
+                    Visual Studio Code ek lightweight, extensible code editor hai jo
+                    Python development ke liye commonly use kiya jata hai.
+                </p>
+
+                <h3>Basic workflow</h3>
+
+                <ol class="number-list">
+                    <li>VS Code install/open karo.</li>
+                    <li>Apna Python project folder open karo.</li>
+                    <li>Python file create karo.</li>
+                    <li>Python-related extension/tooling configure karo.</li>
+                    <li>Correct Python interpreter select karo.</li>
+                    <li>Code likho.</li>
+                    <li>Terminal se program run karo.</li>
+                </ol>
+
+                <div class="callout">
+                    <strong>Interpreter selection important hai</strong>
+                    Agar system mein multiple Python installations ya environments hain,
+                    editor ko correct interpreter ke saath connect karna zaroori hai.
+                </div>
+
+                <h3>Typical project</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Project Structure</span>
+                    <pre><code>my_python_project/
+│
+├── main.py
+├── notes.txt
+└── README.md</code></pre>
+                </div>
+
+                <p>
+                    Aage jaakar projects much larger ho sakte hain, jisme multiple
+                    modules, packages, tests, configuration files aur virtual environments
+                    bhi ho sakte hain.
+                </p>
+
+            </section>
+
+            <!-- 12 -->
+            <section class="chapter-section" id="pycharm">
+
+                <span class="section-number">12 · IDE</span>
+
+                <h2>PyCharm kya hai?</h2>
+
+                <p>
+                    PyCharm Python-focused IDE hai. Ye Python development ke liye
+                    specialized tooling provide karta hai.
+                </p>
+
+                <div class="grid grid-2">
+
+                    <div class="info-card">
+                        <h3>Code Intelligence</h3>
+                        <p>
+                            Code navigation aur development assistance.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Debugging</h3>
+                        <p>
+                            Program ko step-by-step inspect karne ke tools.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Project Management</h3>
+                        <p>
+                            Python project files aur environments ko manage karne mein help.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Environment Support</h3>
+                        <p>
+                            Python interpreter aur virtual environments ke saath workflow.
+                        </p>
+                    </div>
+
+                </div>
+
+                <h3>VS Code ya PyCharm?</h3>
+
+                <p>
+                    Beginner ke liye dono valid choices hain.
+                    Important ye hai ki tool choose karke usme consistently practice karo.
+                </p>
+
+                <div class="callout green">
+                    <strong>Best beginner rule:</strong>
+                    Tool selection se zyada important programming concepts samajhna hai.
+                    Editor tumhari skill nahi banata — practice aur understanding banati hai.
+                </div>
+
+            </section>
+
+            <!-- 13 -->
+            <section class="chapter-section" id="files">
+
+                <span class="section-number">13 · Project Structure</span>
+
+                <h2>Python files aur project structure</h2>
+
+                <p>
+                    Python source files generally <strong>.py</strong> extension use karti hain.
+                </p>
+
+                <div class="code-wrap">
+                    <span class="code-label">Examples</span>
+                    <pre><code>main.py
+calculator.py
+data_processing.py
+app.py</code></pre>
+                </div>
+
+                <h3>Ek simple project</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Structure</span>
+                    <pre><code>calculator_project/
+│
+├── main.py
+├── calculator.py
+└── README.md</code></pre>
+                </div>
+
+                <p>
+                    Yahan <strong>main.py</strong> program ka starting point ho sakta hai,
+                    jabki <strong>calculator.py</strong> reusable logic rakh sakti hai.
+                </p>
+
+                <h3>File extension kyun important hai?</h3>
+
+                <p>
+                    Extension system aur development tools ko file ke type ke baare mein
+                    information deti hai. Python source code ke liye .py standard extension
+                    hai.
+                </p>
+
+            </section>
+
+            <!-- 14 -->
+            <section class="chapter-section" id="syntax">
+
+                <span class="section-number">14 · Syntax Preview</span>
+
+                <h2>Python syntax ka first preview</h2>
+
+                <p>
+                    Syntax ka matlab programming language ke rules. Jaise natural
+                    language mein grammar hoti hai, programming language mein syntax rules
+                    hote hain.
+                </p>
+
+                <h3>Print statement</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Python</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>print("Hello")</code></pre>
+                </div>
+
+                <h3>Numbers</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Python</span>
+                    <pre><code>print(10)
+print(10 + 5)
+print(20 * 2)</code></pre>
+                </div>
+
+                <h3>Text</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Python</span>
+                    <pre><code>name = "Alex"
+print(name)</code></pre>
+                </div>
+
+                <h3>Comments</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Python</span>
+                    <pre><code># This is a comment
+print("Python")</code></pre>
+                </div>
+
+                <p>
+                    Comment program ke logic ka part execute nahi karta. Ye human readers
+                    ke liye explanation ya notes ke roop mein use hota hai.
+                </p>
+
+                <div class="callout purple">
+                    <strong>Abhi sirf preview hai</strong>
+                    Variables, data types, operators, conditions, loops aur functions ko
+                    aage dedicated chapters mein systematically detail mein seekha jayega.
+                </div>
+
+            </section>
+
+            <!-- 15 -->
+            <section class="chapter-section" id="variables-preview">
+
+                <span class="section-number">15 · First Programming Concept</span>
+
+                <h2>Variables ka basic preview</h2>
+
+                <p>
+                    Variable ko beginner level par ek named reference samajh sakte ho
+                    jisme program ke andar koi value store/refer ki ja sakti hai.
+                </p>
+
+                <div class="code-wrap">
+                    <span class="code-label">Python</span>
+                    <button class="copy-btn" type="button">Copy</button>
+                    <pre><code>name = "Rahul"
+age = 18
+
+print(name)
+print(age)</code></pre>
+                </div>
+
+                <p>
+                    Yahan <strong>name</strong> aur <strong>age</strong> names hain jinhe
+                    program values ke saath work karne ke liye use kar sakta hai.
+                </p>
+
+                <h3>AI ke context mein variables</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Conceptual Example</span>
+                    <pre><code>user_question = "What is machine learning?"
+language = "English"
+
+print(user_question)
+print(language)</code></pre>
+                </div>
+
+                <p>
+                    Real AI applications mein input, configuration, model responses,
+                    file paths, settings aur data references ko program mein manage karna
+                    padta hai.
+                </p>
+
+            </section>
+
+            <!-- 16 -->
+            <section class="chapter-section" id="errors">
+
+                <span class="section-number">16 · Debugging</span>
+
+                <h2>Python errors se darna nahi hai</h2>
+
+                <p>
+                    Programming seekhne ke process mein errors normal hain. Error ka
+                    matlab ye nahi ki tum programming ke liye suitable nahi ho.
+                </p>
+
+                <p>
+                    Error ek signal hai jo batata hai ki program mein kuch expected
+                    tareeke se nahi hua.
+                </p>
+
+                <h3>Common error categories</h3>
+
+                <div class="grid grid-3">
+
+                    <div class="info-card">
+                        <h3>Syntax Error</h3>
+                        <p>
+                            Code language ke syntax rules follow nahi karta.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Runtime Error</h3>
+                        <p>
+                            Program execute karte waqt problem aa sakti hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Logic Error</h3>
+                        <p>
+                            Program run ho jata hai lekin result expected nahi hota.
+                        </p>
+                    </div>
+
+                </div>
+
+                <h3>Example</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Python</span>
+                    <pre><code>print("Hello"</code></pre>
+                </div>
+
+                <p>
+                    Yahan closing parenthesis missing hai. Python is code ko valid syntax
+                    nahi samjhega.
+                </p>
+
+                <h3>Debugging mindset</h3>
+
+                <ol class="number-list">
+                    <li>Error message ko calmly padho.</li>
+                    <li>Line number identify karo.</li>
+                    <li>Code ke surrounding part ko check karo.</li>
+                    <li>Small change karo.</li>
+                    <li>Program dobara run karo.</li>
+                    <li>Result observe karo.</li>
+                </ol>
+
+                <div class="callout green">
+                    <strong>Golden Rule</strong>
+                    Error message ko ignore mat karo. Use problem-solving information
+                    ki tarah treat karo.
+                </div>
+
+            </section>
+
+            <!-- 17 -->
+            <section class="chapter-section" id="venv">
+
+                <span class="section-number">17 · Environments</span>
+
+                <h2>Virtual Environment kya hota hai?</h2>
+
+                <p>
+                    Jab Python projects bade hone lagte hain, different projects ko
+                    different packages aur package versions ki zarurat ho sakti hai.
+                </p>
+
+                <p>
+                    Virtual environment ek isolated Python environment provide karne
+                    mein help karta hai jisme project-specific dependencies manage ki
+                    ja sakti hain.
+                </p>
+
+                <h3>Problem samjho</h3>
+
+                <p>
+                    Maan lo Project A ko package ka ek version chahiye aur Project B ko
+                    doosra version. Agar sab kuch ek global environment mein install karoge,
+                    conflicts create ho sakte hain.
+                </p>
+
+                <h3>Conceptual solution</h3>
+
+                <div class="process">
+
+                    <div class="process-step">
+                        <div class="step-no">A</div>
+                        <strong>Project A</strong>
+                        <span>Own environment</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">B</div>
+                        <strong>Project B</strong>
+                        <span>Own environment</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">C</div>
+                        <strong>Isolation</strong>
+                        <span>Dependencies separated</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">D</div>
+                        <strong>Control</strong>
+                        <span>More reproducible setup</span>
+                    </div>
+
+                </div>
+
+                <h3>Typical command</h3>
+
+                <div class="code-wrap">
+                    <span class="code-label">Terminal</span>
+                    <pre><code>python -m venv .venv</code></pre>
+                </div>
+
+                <p>
+                    Is command ka purpose ek virtual environment create karna hai.
+                    Activation command operating system aur shell ke according different
+                    ho sakti hai.
+                </p>
+
+                <div class="callout orange">
+                    <strong>Beginner note</strong>
+                    Virtual environment ka complete package-management workflow
+                    aage projects ke time aur deeply use hoga. Abhi iska main concept
+                    samjho: <strong>project dependencies ko isolate karna.</strong>
+                </div>
+
+            </section>
+
+            <!-- 18 -->
+            <section class="chapter-section" id="workflow">
+
+                <span class="section-number">18 · Professional Workflow</span>
+
+                <h2>Python project ka professional basic workflow</h2>
+
+                <p>
+                    Beginner se developer banne ke liye sirf syntax yaad karna enough nahi.
+                    Ek clean workflow develop karna bhi important hai.
+                </p>
+
+                <div class="process">
+
+                    <div class="process-step">
+                        <div class="step-no">1</div>
+                        <strong>Problem</strong>
+                        <span>Kya banana hai?</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">2</div>
+                        <strong>Plan</strong>
+                        <span>Logic design</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">3</div>
+                        <strong>Code</strong>
+                        <span>Implementation</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">4</div>
+                        <strong>Test</strong>
+                        <span>Check behaviour</span>
+                    </div>
+
+                </div>
+
+                <div class="process">
+
+                    <div class="process-step">
+                        <div class="step-no">5</div>
+                        <strong>Debug</strong>
+                        <span>Fix problems</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">6</div>
+                        <strong>Improve</strong>
+                        <span>Refactor</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">7</div>
+                        <strong>Document</strong>
+                        <span>Explain usage</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">8</div>
+                        <strong>Maintain</strong>
+                        <span>Future changes</span>
+                    </div>
+
+                </div>
+
+                <div class="callout">
+                    <strong>Professional mindset</strong>
+                    "Code chal gaya" final goal nahi hai. Good software ko readable,
+                    testable, maintainable aur understandable bhi hona chahiye.
+                </div>
+
+            </section>
+
+            <!-- 19 -->
+            <section class="chapter-section" id="ai-workflow">
+
+                <span class="section-number">19 · Python + AI</span>
+
+                <h2>Python + AI ka real development workflow</h2>
+
+                <p>
+                    Aage tum AI applications build karoge. Ek simplified AI development
+                    workflow kuch is tarah samjha ja sakta hai:
+                </p>
+
+                <div class="process">
+
+                    <div class="process-step">
+                        <div class="step-no">1</div>
+                        <strong>Input</strong>
+                        <span>User / data</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">2</div>
+                        <strong>Python</strong>
+                        <span>Application logic</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">3</div>
+                        <strong>AI System</strong>
+                        <span>Model / API</span>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">4</div>
+                        <strong>Output</strong>
+                        <span>Useful result</span>
+                    </div>
+
+                </div>
+
+                <h3>Example: AI study assistant</h3>
+
+                <p>
+                    Imagine ek application hai jahan user question enter karta hai.
+                    Python application input receive karegi, required processing karegi,
+                    AI service/model ke saath communicate karegi aur result user ko
+                    display karegi.
+                </p>
+
+                <div class="code-wrap">
+                    <span class="code-label">Conceptual Architecture</span>
+                    <pre><code>User
+  ↓
+Python Application
+  ↓
+Input Processing
+  ↓
+AI Model / API
+  ↓
+Response
+  ↓
+Python Processing
+  ↓
+User Interface</code></pre>
+                </div>
+
+                <p>
+                    Isi wajah se Python seekhna future AI chapters ke liye important
+                    foundation banata hai.
+                </p>
+
+            </section>
+
+            <!-- 20 -->
+            <section class="chapter-section" id="mistakes">
+
+                <span class="section-number">20 · Common Mistakes</span>
+
+                <h2>Python beginners ki common mistakes</h2>
+
+                <div class="grid grid-2">
+
+                    <div class="info-card">
+                        <h3>Sirf Videos Dekhna</h3>
+                        <p>
+                            Programming dekhne se nahi, code likhne aur errors solve karne
+                            se develop hoti hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Code Copy Karna</h3>
+                        <p>
+                            Copy-paste se output mil sakta hai, understanding zaroori nahi
+                            develop hoti.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Errors Se Darna</h3>
+                        <p>
+                            Error debugging learning process ka normal part hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Bahut Saare Tools</h3>
+                        <p>
+                            Har editor try karne ke bajay ek tool choose karke practice karo.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Syntax Ratna</h3>
+                        <p>
+                            Syntax ke saath problem-solving aur logic ko equally important
+                            samjho.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>AI Par Blind Dependence</h3>
+                        <p>
+                            AI se code explanation aur debugging help li ja sakti hai,
+                            lekin generated code ko samajhna aur test karna zaroori hai.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- 21 -->
+            <section class="chapter-section" id="security">
+
+                <span class="section-number">21 · Safe Development</span>
+
+                <h2>Python development mein safe habits</h2>
+
+                <p>
+                    Programming seekhte waqt security ko beginning se habit banana
+                    beneficial hai.
+                </p>
+
+                <div class="grid grid-2">
+
+                    <div class="info-card">
+                        <h3>Passwords Code Mein Mat Rakho</h3>
+                        <p>
+                            Real credentials ko source code mein directly store karna unsafe
+                            practice ho sakti hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Unknown Code Carefully Run Karo</h3>
+                        <p>
+                            Internet ya AI se mila code blindly execute mat karo. Pehle
+                            samjho ki code kya kar raha hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Dependencies Check Karo</h3>
+                        <p>
+                            Unknown packages install karne se pehle source aur purpose verify
+                            karo.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Private Data Protect Karo</h3>
+                        <p>
+                            Personal files, credentials aur confidential information ko
+                            unnecessary code/tools mein expose mat karo.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="callout red">
+                    <strong>AI + Coding Rule</strong>
+                    AI-generated code ko "trusted by default" mat samjho. Read → Understand
+                    → Test → Verify → Then use.
+                </div>
+
+            </section>
+
+            <!-- 22 -->
+            <section class="chapter-section" id="projects">
+
+                <span class="section-number">22 · Practice</span>
+
+                <h2>Chapter 44 ke practical projects</h2>
+
+                <p>
+                    Is chapter ke baad tumhe sirf theory nahi, basic hands-on practice
+                    bhi karni chahiye.
+                </p>
+
+                <div class="grid grid-2">
+
+                    <div class="info-card">
+                        <h3>Project 1 — Hello Program</h3>
+                        <p>
+                            Apna first Python program banao jo name aur ek welcome message
+                            display kare.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Project 2 — Basic Calculator Preview</h3>
+                        <p>
+                            Simple numbers ke addition, subtraction aur multiplication ka
+                            output generate karo.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Project 3 — Personal Info</h3>
+                        <p>
+                            Name, age aur learning goal jaise values variables mein store
+                            karke display karo.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Project 4 — AI Learning Folder</h3>
+                        <p>
+                            Apna clean Python learning folder structure banao aur scripts
+                            organized rakho.
+                        </p>
+                    </div>
+
+                </div>
+
+                <h3>Mini challenge</h3>
+
+                <p>
+                    Ek program banao jo ye information display kare:
+                </p>
+
+                <div class="code-wrap">
+                    <span class="code-label">Target Output</span>
+                    <pre><code>========================
+AI Learning Profile
+========================
+Name: Your Name
+Goal: Learn Python
+Level: Beginner
+========================</code></pre>
+                </div>
+
+                <p>
+                    Is exercise ka purpose syntax ratna nahi, file create → code write →
+                    run → output observe karne ka workflow practice karna hai.
+                </p>
+
+            </section>
+
+            <!-- 23 -->
+            <section class="chapter-section" id="checklist">
+
+                <span class="section-number">23 · Readiness</span>
+
+                <h2>Python setup checklist</h2>
+
+                <p>
+                    Neeche checklist complete karke tum verify kar sakte ho ki foundation
+                    ready hai ya nahi.
+                </p>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c1" />
+                    <label for="c1">Mujhe Python ka basic purpose samajh aa gaya hai.</label>
+                </div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c2" />
+                    <label for="c2">Mujhe Python aur AI ka relationship samajh aa gaya hai.</label>
+                </div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c3" />
+                    <label for="c3">Mere computer par Python command verify ho sakti hai.</label>
+                </div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c4" />
+                    <label for="c4">Main Python .py file create kar sakta hoon.</label>
+                </div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c5" />
+                    <label for="c5">Main terminal se Python program run kar sakta hoon.</label>
+                </div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c6" />
+                    <label for="c6">Mujhe VS Code/PyCharm ka purpose samajh aa gaya hai.</label>
+                </div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c7" />
+                    <label for="c7">Mujhe interpreter ka basic concept samajh aa gaya hai.</label>
+                </div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c8" />
+                    <label for="c8">Mujhe virtual environment ka purpose pata hai.</label>
+                </div>
+
+                <div class="check-item">
+                    <input type="checkbox" id="c9" />
+                    <label for="c9">Main basic Python error ko read karke investigate kar sakta hoon.</label>
+                </div>
+
+            </section>
+
+            <!-- 24 -->
+            <section class="chapter-section" id="quiz">
+
+                <span class="section-number">24 · Knowledge Check</span>
+
+                <h2>Chapter 44 Quiz</h2>
+
+                <p>
+                    Quiz ka purpose tumhari understanding check karna hai. Guess karne
+                    ke bajay pehle concepts ko mentally recall karo.
+                </p>
+
+                <div class="quiz">
+
+                    <div class="question">
+                        <p class="question-title">
+                            1. Python kya hai?
+                        </p>
+
+                        <label class="option">
+                            <input type="radio" name="q1" value="a" />
+                            Sirf ek AI model
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q1" value="b" />
+                            General-purpose programming language
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q1" value="c" />
+                            Operating system
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q1" value="d" />
+                            Database
+                        </label>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-title">
+                            2. Python AI development mein useful kyun hai?
+                        </p>
+
+                        <label class="option">
+                            <input type="radio" name="q2" value="a" />
+                            Kyunki Python computer ko replace karta hai
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q2" value="b" />
+                            Kyunki Python ecosystem mein AI, data aur automation ke strong tools hain
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q2" value="c" />
+                            Kyunki Python internet hai
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q2" value="d" />
+                            Kyunki Python hardware hai
+                        </label>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-title">
+                            3. Python source file ki common extension kya hoti hai?
+                        </p>
+
+                        <label class="option">
+                            <input type="radio" name="q3" value="a" />
+                            .html
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q3" value="b" />
+                            .css
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q3" value="c" />
+                            .py
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q3" value="d" />
+                            .sql
+                        </label>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-title">
+                            4. Terminal ka primary purpose kya hai?
+                        </p>
+
+                        <label class="option">
+                            <input type="radio" name="q4" value="a" />
+                            Commands ke through system/tools ke saath interact karna
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q4" value="b" />
+                            Sirf images edit karna
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q4" value="c" />
+                            Internet speed badhana
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q4" value="d" />
+                            Computer hardware replace karna
+                        </label>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-title">
+                            5. Virtual environment ka main purpose kya hai?
+                        </p>
+
+                        <label class="option">
+                            <input type="radio" name="q5" value="a" />
+                            Monitor ko isolate karna
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q5" value="b" />
+                            Project dependencies ko isolated environment mein manage karna
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q5" value="c" />
+                            Internet ko block karna
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q5" value="d" />
+                            Keyboard ko configure karna
+                        </label>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-title">
+                            6. Error aane par best beginner approach kya hai?
+                        </p>
+
+                        <label class="option">
+                            <input type="radio" name="q6" value="a" />
+                            Computer band kar dena
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q6" value="b" />
+                            Error ko ignore karna
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q6" value="c" />
+                            Error message, line aur code ko investigate karna
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q6" value="d" />
+                            Hamesha pura code delete kar dena
+                        </label>
+                    </div>
+
+                    <div class="quiz-actions">
+                        <button class="primary-btn" id="checkQuiz" type="button">
+                            Check Score
+                        </button>
+
+                        <button class="secondary-btn" id="resetQuiz" type="button">
+                            Reset
+                        </button>
+                    </div>
+
+                    <div class="quiz-result" id="quizResult"></div>
+
+                </div>
+
+            </section>
+
+            <!-- 25 -->
+            <section class="chapter-section" id="summary">
+
+                <span class="section-number">25 · Final Understanding</span>
+
+                <h2>Chapter 44 ka complete summary</h2>
+
+                <p class="lead">
+                    Is chapter ka main purpose Python ki syntax ko complete karna nahi,
+                    balki tumhe Python development environment aur programming journey
+                    ke liye properly prepare karna tha.
+                </p>
+
+                <div class="takeaways">
+
+                    <div class="takeaway">
+                        <strong>Python</strong>
+                        <span>
+                            Ek general-purpose programming language hai jo AI, data,
+                            automation, web aur many other domains mein use hoti hai.
+                        </span>
+                    </div>
+
+                    <div class="takeaway">
+                        <strong>AI Connection</strong>
+                        <span>
+                            Python AI applications mein data, logic, models, APIs aur
+                            application layers connect karne mein useful hai.
+                        </span>
+                    </div>
+
+                    <div class="takeaway">
+                        <strong>Interpreter</strong>
+                        <span>
+                            Python runtime program ko execute karne mein important role
+                            play karta hai.
+                        </span>
+                    </div>
+
+                    <div class="takeaway">
+                        <strong>Terminal</strong>
+                        <span>
+                            Commands ke through Python aur development environment ke saath
+                            interact karne ka powerful method hai.
+                        </span>
+                    </div>
+
+                    <div class="takeaway">
+                        <strong>VS Code / PyCharm</strong>
+                        <span>
+                            Python code likhne, run karne, debug aur manage karne ke
+                            development tools hain.
+                        </span>
+                    </div>
+
+                    <div class="takeaway">
+                        <strong>.py File</strong>
+                        <span>
+                            Python source code ko commonly .py extension wali files mein
+                            store kiya jata hai.
+                        </span>
+                    </div>
+
+                    <div class="takeaway">
+                        <strong>Virtual Environment</strong>
+                        <span>
+                            Project-specific dependencies ko isolate aur manage karne mein
+                            help karta hai.
+                        </span>
+                    </div>
+
+                    <div class="takeaway">
+                        <strong>Debugging</strong>
+                        <span>
+                            Errors programming learning ka normal part hain; error messages
+                            ko problem-solving clues ki tarah use karo.
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="callout green">
+                    <strong>Chapter 44 ka final mental model</strong>
+
+                    Problem
+                    → Python Code
+                    → Python Runtime
+                    → Execution
+                    → Output
+
+                    <br /><br />
+
+                    Aur AI development ke context mein:
+
+                    <br />
+
+                    User/Data
+                    → Python Application
+                    → AI Model/API
+                    → Processing
+                    → Useful Result
+                </div>
+
+                <h3>Ab tumhe kya aana chahiye?</h3>
+
+                <ul class="check-list">
+                    <li>Python ka basic meaning explain kar pao.</li>
+                    <li>Python aur AI ka connection explain kar pao.</li>
+                    <li>Python installation verify kar pao.</li>
+                    <li>Terminal mein basic Python command run kar pao.</li>
+                    <li>.py file create kar pao.</li>
+                    <li>Basic Python program run kar pao.</li>
+                    <li>VS Code/PyCharm ka purpose samajh pao.</li>
+                    <li>Interpreter ka basic role explain kar pao.</li>
+                    <li>Virtual environment ka purpose samajh pao.</li>
+                    <li>Basic errors ko investigate karna start kar pao.</li>
+                </ul>
+
+                <div class="callout purple">
+                    <strong>Sabse important baat</strong>
+                    Python seekhne ka goal code ko ratna nahi hai. Goal hai:
+                    <strong>problem ko samajhna → logic banana → code likhna →
+                        run karna → error samajhna → improve karna.</strong>
+                </div>
+
+            </section>
+
+        </article>
+
+    </main>
+
+    <!-- =========================
+       FOOTER
+  ========================== -->
+
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <strong>AI Learning HUB</strong><br />
+                Learn AI. Build Skills. Create Real Projects.
+            </div>
+
+            <div>
+                Chapter 44 · Python Introduction & Setup
+            </div>
+        </div>
+    </footer>
+
+    <button class="top-btn" id="topBtn" type="button" aria-label="Back to top" title="Back to top">
+        ↑
+    </button>
+
+    <script>
+        /* ==========================================
+           THEME
+        ========================================== */
+
+        const themeBtn = document.getElementById("themeBtn");
+
+        const savedTheme = localStorage.getItem("ai-learning-theme");
+
+        if (savedTheme === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+            themeBtn.textContent = "☀";
+        }
+
+        themeBtn.addEventListener("click", () => {
+            const isDark =
+                document.documentElement.getAttribute("data-theme") === "dark";
+
+            if (isDark) {
+                document.documentElement.removeAttribute("data-theme");
+                localStorage.setItem("ai-learning-theme", "light");
+                themeBtn.textContent = "☾";
+            } else {
+                document.documentElement.setAttribute("data-theme", "dark");
+                localStorage.setItem("ai-learning-theme", "dark");
+                themeBtn.textContent = "☀";
+            }
+        });
+
+
+        /* ==========================================
+           MOBILE MENU
+        ========================================== */
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", () => {
+            const open = navLinks.classList.toggle("open");
+
+            menuBtn.setAttribute("aria-expanded", String(open));
+            menuBtn.textContent = open ? "✕" : "☰";
+        });
+
+        navLinks.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("open");
+                menuBtn.setAttribute("aria-expanded", "false");
+                menuBtn.textContent = "☰";
+            });
+        });
+
+
+        /* ==========================================
+           READING PROGRESS
+        ========================================== */
+
+        const progressBar = document.getElementById("progressBar");
+
+        function updateProgress() {
+            const scrollTop = window.scrollY;
+
+            const documentHeight =
+                document.documentElement.scrollHeight - window.innerHeight;
+
+            const progress =
+                documentHeight > 0
+                    ? (scrollTop / documentHeight) * 100
+                    : 0;
+
+            progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+        }
+
+        window.addEventListener("scroll", updateProgress, { passive: true });
+        window.addEventListener("resize", updateProgress);
+        updateProgress();
+
+
+        /* ==========================================
+           BACK TO TOP
+        ========================================== */
+
+        const topBtn = document.getElementById("topBtn");
+
+        function updateTopButton() {
+            if (window.scrollY > 500) {
+                topBtn.classList.add("show");
+            } else {
+                topBtn.classList.remove("show");
+            }
+        }
+
+        window.addEventListener("scroll", updateTopButton, {
+            passive: true
+        });
+
+        topBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+
+        /* ==========================================
+           COPY BUTTONS
+        ========================================== */
+
+        document.querySelectorAll(".copy-btn").forEach(button => {
+
+            button.addEventListener("click", async () => {
+
+                const code =
+                    button.parentElement.querySelector("code")?.innerText ||
+                    button.parentElement.querySelector("pre")?.innerText ||
+                    "";
+
+                try {
+
+                    await navigator.clipboard.writeText(code);
+
+                    const original = button.textContent;
+
+                    button.textContent = "Copied!";
+
+                    setTimeout(() => {
+                        button.textContent = original;
+                    }, 1400);
+
+                } catch (error) {
+
+                    button.textContent = "Select & Copy";
+
+                    setTimeout(() => {
+                        button.textContent = "Copy";
+                    }, 1400);
+
+                }
+
+            });
+
+        });
+
+
+        /* ==========================================
+           CHECKLIST MEMORY
+        ========================================== */
+
+        const checkboxes = document.querySelectorAll(
+            '.check-item input[type="checkbox"]'
+        );
+
+        checkboxes.forEach((checkbox, index) => {
+
+            const key = `chapter44-check-${index}`;
+
+            const saved = localStorage.getItem(key);
+
+            if (saved === "true") {
+                checkbox.checked = true;
+            }
+
+            checkbox.addEventListener("change", () => {
+                localStorage.setItem(
+                    key,
+                    String(checkbox.checked)
+                );
+            });
+
+        });
+
+
+        /* ==========================================
+           QUIZ
+        ========================================== */
+
+        const answers = {
+            q1: "b",
+            q2: "b",
+            q3: "c",
+            q4: "a",
+            q5: "b",
+            q6: "c"
+        };
+
+        const checkQuiz = document.getElementById("checkQuiz");
+        const resetQuiz = document.getElementById("resetQuiz");
+        const quizResult = document.getElementById("quizResult");
+
+        checkQuiz.addEventListener("click", () => {
+
+            let score = 0;
+            let answered = 0;
+
+            Object.keys(answers).forEach(question => {
+
+                const selected =
+                    document.querySelector(
+                        `input[name="${question}"]:checked`
+                    );
+
+                if (selected) {
+                    answered++;
+
+                    if (selected.value === answers[question]) {
+                        score++;
+                    }
+                }
+
+            });
+
+            if (answered < Object.keys(answers).length) {
+
+                quizResult.style.display = "block";
+
+                quizResult.innerHTML =
+                    "<strong>Quiz incomplete.</strong><br>" +
+                    "Please answer all questions before checking your final score.";
+
+                return;
+            }
+
+            const total = Object.keys(answers).length;
+            const percentage = Math.round((score / total) * 100);
+
+            let message = "";
+
+            if (percentage >= 85) {
+                message =
+                    "Excellent! Python foundation ka concept strong lag raha hai.";
+            } else if (percentage >= 65) {
+                message =
+                    "Good work! Foundation samajh aa gayi hai, bas kuch concepts revise karo.";
+            } else {
+                message =
+                    "Concepts ko ek baar aur revise karo aur phir quiz dobara attempt karo.";
+            }
+
+            quizResult.style.display = "block";
+
+            quizResult.innerHTML = `
+        <strong>Score: ${score}/${total} (${percentage}%)</strong>
+        <br />
+        ${message}
+      `;
+
+            quizResult.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+
+        });
+
+
+        resetQuiz.addEventListener("click", () => {
+
+            document
+                .querySelectorAll('.question input[type="radio"]')
+                .forEach(input => {
+                    input.checked = false;
+                });
+
+            quizResult.style.display = "none";
+            quizResult.innerHTML = "";
+
+        });
+
+
+        /* ==========================================
+           ESCAPE KEY — MOBILE MENU
+        ========================================== */
+
+        document.addEventListener("keydown", event => {
+
+            if (event.key === "Escape") {
+
+                navLinks.classList.remove("open");
+                menuBtn.setAttribute("aria-expanded", "false");
+                menuBtn.textContent = "☰";
+
+            }
+
+        });
+
+
+        /* ==========================================
+           INTERNAL LINK SAFETY
+        ========================================== */
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+            link.addEventListener("click", event => {
+
+                const targetId = link.getAttribute("href");
+
+                if (!targetId || targetId === "#") return;
+
+                const target = document.querySelector(targetId);
+
+                if (!target) return;
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+                history.replaceState(
+                    null,
+                    "",
+                    targetId
+                );
+
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

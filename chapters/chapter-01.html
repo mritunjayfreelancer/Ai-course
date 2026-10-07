@@ -1,0 +1,2984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chapter 01: Computer & Digital Fundamentals | AI Learning HUB</title>
+
+    <meta name="description"
+        content="Learn Computer and Digital Fundamentals from basics to practical level. Understand hardware, software, CPU, RAM, storage, operating systems, files, folders, browser, internet, websites, web apps, cloud computing and digital safety.">
+    <meta name="keywords"
+        content="computer basics, computer fundamentals, hardware software, CPU RAM storage, operating system, Windows Linux, files folders, internet basics, browser, website web app, cloud computing, digital skills, AI basics">
+    <meta name="author" content="AI Learning HUB">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Chapter 01: Computer & Digital Fundamentals">
+    <meta property="og:description"
+        content="Complete practical guide to computer and digital fundamentals for AI learners.">
+    <meta property="og:type" content="article">
+
+    <meta name="theme-color" content="#0f172a">
+
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --surface: #ffffff;
+            --surface-2: #f8fafc;
+            --text: #172033;
+            --muted: #64748b;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --border: #e2e8f0;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --shadow: 0 14px 40px rgba(15, 23, 42, .08);
+            --radius: 18px;
+            --max: 1180px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 32px));
+            margin: auto;
+        }
+
+        /* =========================
+       HEADER
+    ========================== */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, .94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            box-shadow: 0 8px 22px rgba(37, 99, 235, .25);
+            font-size: 18px;
+        }
+
+        .brand-text {
+            font-size: 17px;
+            letter-spacing: -.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            padding: 9px 12px;
+            color: #475569;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: .2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn,
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+        }
+
+        .menu-btn {
+            display: none;
+            font-size: 20px;
+        }
+
+        /* =========================
+       PAGE HERO
+    ========================== */
+
+        .chapter-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 72px 0 58px;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(37, 99, 235, .14), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(124, 58, 237, .13), transparent 30%),
+                linear-gradient(180deg, #ffffff, #f5f7fb);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.35fr .65fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 17px;
+        }
+
+        .eyebrow span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+        }
+
+        .hero-title {
+            font-size: clamp(36px, 5vw, 64px);
+            line-height: 1.06;
+            letter-spacing: -2.5px;
+            max-width: 850px;
+            margin-bottom: 20px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 760px;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 12px;
+            padding: 12px 17px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: .2s ease;
+        }
+
+        .btn-primary {
+            color: white;
+            background: var(--primary);
+            box-shadow: 0 10px 24px rgba(37, 99, 235, .2);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            color: #334155;
+            background: white;
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: #bfdbfe;
+            color: var(--primary);
+        }
+
+        .hero-card {
+            padding: 24px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, .88);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .chapter-number {
+            width: 60px;
+            height: 60px;
+            display: grid;
+            place-items: center;
+            border-radius: 17px;
+            color: white;
+            font-weight: 900;
+            font-size: 20px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #ecfdf5;
+            color: #047857;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .mini-stat {
+            padding: 15px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        .mini-stat strong {
+            display: block;
+            font-size: 21px;
+        }
+
+        .mini-stat span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================
+       PROGRESS
+    ========================== */
+
+        .progress-wrap {
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .progress-inner {
+            min-height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .progress-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .progress-track {
+            flex: 1;
+            max-width: 500px;
+            height: 8px;
+            border-radius: 999px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            border-radius: 999px;
+            transition: width .3s ease;
+        }
+
+        /* =========================
+       MAIN LAYOUT
+    ========================== */
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            gap: 30px;
+            padding: 45px 0 70px;
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        .section {
+            margin-bottom: 55px;
+            scroll-margin-top: 90px;
+        }
+
+        .section-heading {
+            margin-bottom: 22px;
+        }
+
+        .section-kicker {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-size: 12px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .section-title {
+            font-size: clamp(27px, 4vw, 38px);
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .section-intro {
+            color: var(--muted);
+            max-width: 850px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, .045);
+        }
+
+        .card-pad {
+            padding: 25px;
+        }
+
+        .definition-box {
+            border-left: 4px solid var(--primary);
+            padding: 22px 24px;
+            background: #eff6ff;
+            border-radius: 0 16px 16px 0;
+            margin: 22px 0;
+        }
+
+        .definition-box strong {
+            display: block;
+            margin-bottom: 7px;
+            color: #1e40af;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .info-card {
+            padding: 21px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .info-card h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .info-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .icon-title {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 11px;
+        }
+
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: #eff6ff;
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        /* =========================
+       TABLE
+    ========================== */
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f8fafc;
+            font-weight: 900;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        /* =========================
+       COMPONENT VISUAL
+    ========================== */
+
+        .computer-diagram {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .diagram-part {
+            min-height: 150px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: linear-gradient(180deg, #fff, #f8fafc);
+        }
+
+        .diagram-icon {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .diagram-part strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .diagram-part span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================
+       PROCESS
+    ========================== */
+
+        .process {
+            display: grid;
+            gap: 13px;
+            margin-top: 20px;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 46px 1fr;
+            gap: 14px;
+            align-items: start;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: white;
+        }
+
+        .step-no {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: white;
+            background: var(--primary);
+            font-weight: 900;
+        }
+
+        .process-step h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .process-step p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* =========================
+       NOTE / WARNING
+    ========================== */
+
+        .note {
+            margin: 20px 0;
+            padding: 17px 19px;
+            border-radius: 14px;
+            border: 1px solid #bfdbfe;
+            background: #eff6ff;
+        }
+
+        .note.warning {
+            border-color: #fed7aa;
+            background: #fff7ed;
+        }
+
+        .note.success {
+            border-color: #a7f3d0;
+            background: #ecfdf5;
+        }
+
+        .note strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+       LIST
+    ========================== */
+
+        .clean-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .clean-list li {
+            position: relative;
+            padding-left: 27px;
+            color: #475569;
+        }
+
+        .clean-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--success);
+            font-weight: 900;
+        }
+
+        /* =========================
+       QUIZ
+    ========================== */
+
+        .quiz {
+            padding: 25px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            margin-top: 18px;
+        }
+
+        .quiz-question {
+            font-weight: 850;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            display: grid;
+            gap: 9px;
+        }
+
+        .option {
+            width: 100%;
+            padding: 12px 14px;
+            text-align: left;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: #fff;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .option:hover {
+            border-color: #93c5fd;
+            background: #eff6ff;
+        }
+
+        .option.correct {
+            border-color: #6ee7b7;
+            background: #ecfdf5;
+            color: #047857;
+        }
+
+        .option.wrong {
+            border-color: #fca5a5;
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .quiz-result {
+            margin-top: 12px;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        /* =========================
+       SIDEBAR
+    ========================== */
+
+        .sidebar {
+            position: relative;
+        }
+
+        .toc {
+            position: sticky;
+            top: 90px;
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, .04);
+        }
+
+        .toc-title {
+            font-size: 14px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .toc a {
+            display: block;
+            padding: 8px 10px;
+            margin: 2px 0;
+            border-radius: 9px;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .toc a:hover,
+        .toc a.active {
+            color: var(--primary);
+            background: #eff6ff;
+            font-weight: 800;
+        }
+
+        .toc-progress {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* =========================
+       BOTTOM NAV
+    ========================== */
+
+        .chapter-navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .chapter-nav-card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: white;
+            transition: .2s;
+        }
+
+        .chapter-nav-card:hover {
+            border-color: #93c5fd;
+            transform: translateY(-2px);
+        }
+
+        .chapter-nav-card.next {
+            text-align: right;
+        }
+
+        .nav-label {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .nav-title {
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        /* =========================
+       FOOTER
+    ========================== */
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 45px 0;
+            margin-top: 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .footer-brand {
+            color: white;
+            font-weight: 900;
+            font-size: 18px;
+            margin-bottom: 9px;
+        }
+
+        footer p {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: grid;
+            gap: 7px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #1e293b;
+            margin-top: 30px;
+            padding-top: 20px;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* =========================
+       BACK TO TOP
+    ========================== */
+
+        .top-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 13px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            display: none;
+            z-index: 900;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, .25);
+        }
+
+        .top-btn.show {
+            display: grid;
+            place-items: center;
+        }
+
+        /* =========================
+       RESPONSIVE
+    ========================== */
+
+        @media(max-width:1000px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card {
+                max-width: 600px;
+            }
+
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media(max-width:800px) {
+            .nav-links {
+                position: absolute;
+                left: 16px;
+                right: 16px;
+                top: 70px;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px;
+                background: white;
+                border: 1px solid var(--border);
+                border-radius: 15px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                width: 100%;
+            }
+
+            .menu-btn {
+                display: grid;
+            }
+
+            .header-actions {
+                margin-left: auto;
+            }
+
+            .progress-inner {
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: center;
+                padding: 9px 0;
+                gap: 5px;
+            }
+
+            .progress-track {
+                max-width: none;
+                width: 100%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .computer-diagram {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width:600px) {
+            .container {
+                width: min(var(--max), calc(100% - 22px));
+            }
+
+            .brand-text {
+                font-size: 14px;
+            }
+
+            .brand-logo {
+                width: 36px;
+                height: 36px;
+            }
+
+            .chapter-hero {
+                padding: 48px 0 42px;
+            }
+
+            .hero-title {
+                font-size: 38px;
+                letter-spacing: -1.6px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .hero-card {
+                padding: 18px;
+            }
+
+            .main-layout {
+                padding-top: 30px;
+            }
+
+            .section {
+                margin-bottom: 42px;
+            }
+
+            .card-pad {
+                padding: 18px;
+            }
+
+            .chapter-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-nav-card.next {
+                text-align: left;
+            }
+
+            .top-btn {
+                right: 13px;
+                bottom: 13px;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"LearningResource",
+    "name":"Chapter 01: Computer & Digital Fundamentals",
+    "description":"Complete practical learning chapter covering computer hardware, software, CPU, RAM, storage, operating systems, files, folders, internet, browser, websites, web apps, cloud computing and digital safety.",
+    "educationalLevel":"Beginner",
+    "learningResourceType":"Course Chapter",
+    "inLanguage":"en",
+    "isPartOf":{
+      "@type":"Course",
+      "name":"AI Learning HUB Full AI Course"
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+    <!-- =========================
+       HEADER
+  ========================== -->
+
+    <header class="site-header">
+        <div class="container nav">
+
+            <a href="../index.html" class="brand" aria-label="AI Learning HUB Home">
+                <span class="brand-logo">AI</span>
+                <span class="brand-text">AI Learning HUB</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#courses">Courses</a>
+                <a href="../index.html#tools">Tools</a>
+                <a href="../index.html#articles">Articles</a>
+                <a href="../index.html#resources">Resources</a>
+                <a href="../index.html#about">About</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme">
+                    ☼
+                </button>
+
+                <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu">
+                    ☰
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- =========================
+       HERO
+  ========================== -->
+
+    <section class="chapter-hero">
+        <div class="container hero-grid">
+
+            <div>
+
+                <div class="eyebrow">
+                    <span></span>
+                    LEVEL 0 · DIGITAL & COMPUTER FUNDAMENTALS
+                </div>
+
+                <h1 class="hero-title">
+                    Chapter 01:
+                    <span class="gradient-text">Computer & Digital Fundamentals</span>
+                </h1>
+
+                <p class="hero-description">
+                    Computer ko sirf chalana nahi, balki andar se samajhna seekho.
+                    Hardware se lekar software, CPU, RAM, storage, operating system,
+                    files, folders, browser, internet, website, web app aur cloud tak
+                    sab kuch practical examples ke saath.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#start" class="btn btn-primary">
+                        Start Chapter ↓
+                    </a>
+
+                    <a href="#quiz" class="btn btn-secondary">
+                        Test Your Knowledge
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="hero-card">
+
+                <div class="hero-card-top">
+                    <div class="chapter-number">01</div>
+                    <div class="status">Beginner → Practical</div>
+                </div>
+
+                <div class="hero-stats">
+
+                    <div class="mini-stat">
+                        <strong>10+</strong>
+                        <span>Core Concepts</span>
+                    </div>
+
+                    <div class="mini-stat">
+                        <strong>20+</strong>
+                        <span>Practical Examples</span>
+                    </div>
+
+                    <div class="mini-stat">
+                        <strong>8</strong>
+                        <span>Major Topics</span>
+                    </div>
+
+                    <div class="mini-stat">
+                        <strong>Quiz</strong>
+                        <span>Knowledge Check</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =========================
+       PROGRESS
+  ========================== -->
+
+    <div class="progress-wrap">
+        <div class="container progress-inner">
+
+            <div class="progress-info">
+                <span>Chapter Progress</span>
+                <strong id="progressPercent">0%</strong>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========================
+       MAIN
+  ========================== -->
+
+    <main class="container main-layout">
+
+        <article class="content">
+
+            <!-- INTRO -->
+
+            <section class="section" id="start">
+
+                <div class="section-heading">
+                    <div class="section-kicker">01 · Foundation</div>
+                    <h2 class="section-title">Computer ko actually kehte kise hain?</h2>
+                    <p class="section-intro">
+                        AI seekhne se pehle computer ki basic working samajhna important hai.
+                        Computer ek electronic system hai jo input leta hai, instructions ko
+                        process karta hai, information ko store karta hai aur output deta hai.
+                    </p>
+                </div>
+
+                <div class="definition-box">
+                    <strong>Simple Definition</strong>
+                    Computer ek programmable electronic machine hai jo data ko instructions
+                    ke according process karke useful information ya result produce karta hai.
+                </div>
+
+                <div class="card card-pad">
+
+                    <h3>Ek simple real-life example</h3>
+
+                    <p style="margin-top:10px;color:var(--muted);">
+                        Agar tum calculator me <strong>25 + 75</strong> enter karte ho,
+                        computer-like system tumhara input receive karta hai, calculation
+                        process karta hai aur result <strong>100</strong> output karta hai.
+                    </p>
+
+                    <div class="process">
+
+                        <div class="process-step">
+                            <div class="step-no">1</div>
+                            <div>
+                                <h3>Input</h3>
+                                <p>Keyboard se tum 25 + 75 enter karte ho.</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-no">2</div>
+                            <div>
+                                <h3>Processing</h3>
+                                <p>Processor calculation perform karta hai.</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-no">3</div>
+                            <div>
+                                <h3>Output</h3>
+                                <p>Screen par 100 result dikhai deta hai.</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-no">4</div>
+                            <div>
+                                <h3>Storage</h3>
+                                <p>Agar result save kiya jaye to storage me data rakha ja sakta hai.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- HARDWARE SOFTWARE -->
+
+            <section class="section" id="hardware-software">
+
+                <div class="section-heading">
+                    <div class="section-kicker">02 · Core Concept</div>
+                    <h2 class="section-title">Hardware aur Software</h2>
+                    <p class="section-intro">
+                        Computer system ko broadly do major parts me samjha ja sakta hai:
+                        hardware aur software.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+
+                        <div class="icon-title">
+                            <div class="icon-box">HW</div>
+                            <h3>Hardware</h3>
+                        </div>
+
+                        <p>
+                            Computer ke physical parts jinhe hum dekh aur touch kar sakte hain.
+                        </p>
+
+                        <ul class="clean-list">
+                            <li>CPU</li>
+                            <li>RAM</li>
+                            <li>SSD / HDD</li>
+                            <li>Keyboard</li>
+                            <li>Mouse</li>
+                            <li>Monitor</li>
+                            <li>Motherboard</li>
+                            <li>Printer</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="info-card">
+
+                        <div class="icon-title">
+                            <div class="icon-box">SW</div>
+                            <h3>Software</h3>
+                        </div>
+
+                        <p>
+                            Instructions aur programs jo hardware ko batate hain ki kya kaam karna hai.
+                        </p>
+
+                        <ul class="clean-list">
+                            <li>Windows</li>
+                            <li>Linux</li>
+                            <li>Chrome</li>
+                            <li>VS Code</li>
+                            <li>Photoshop</li>
+                            <li>Games</li>
+                            <li>Mobile Apps</li>
+                            <li>AI Applications</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="note success">
+                    <strong>Easy Trick</strong>
+                    Hardware = jisey touch kar sakte ho.
+                    Software = jo hardware ko instructions deta hai.
+                </div>
+
+            </section>
+
+            <!-- COMPUTER COMPONENTS -->
+
+            <section class="section" id="components">
+
+                <div class="section-heading">
+                    <div class="section-kicker">03 · Hardware</div>
+                    <h2 class="section-title">Computer ke important components</h2>
+                    <p class="section-intro">
+                        Har component ka apna role hota hai. AI aur programming seekhne ke
+                        liye in roles ko samajhna bahut useful hai.
+                    </p>
+                </div>
+
+                <div class="computer-diagram">
+
+                    <div class="diagram-part">
+                        <div class="diagram-icon">🧠</div>
+                        <strong>CPU</strong>
+                        <span>Instructions process karta hai</span>
+                    </div>
+
+                    <div class="diagram-part">
+                        <div class="diagram-icon">⚡</div>
+                        <strong>RAM</strong>
+                        <span>Temporary working memory</span>
+                    </div>
+
+                    <div class="diagram-part">
+                        <div class="diagram-icon">💾</div>
+                        <strong>Storage</strong>
+                        <span>Data long-term store karta hai</span>
+                    </div>
+
+                    <div class="diagram-part">
+                        <div class="diagram-icon">🖥️</div>
+                        <strong>Monitor</strong>
+                        <span>Visual output dikhata hai</span>
+                    </div>
+
+                    <div class="diagram-part">
+                        <div class="diagram-icon">⌨️</div>
+                        <strong>Keyboard</strong>
+                        <span>Text aur commands input</span>
+                    </div>
+
+                    <div class="diagram-part">
+                        <div class="diagram-icon">🖱️</div>
+                        <strong>Mouse</strong>
+                        <span>Point, select aur control</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- CPU -->
+
+            <section class="section" id="cpu">
+
+                <div class="section-heading">
+                    <div class="section-kicker">04 · Processor</div>
+                    <h2 class="section-title">CPU — Computer ka processing center</h2>
+                    <p class="section-intro">
+                        CPU ka full form Central Processing Unit hai. Ye instructions ko
+                        execute karne aur calculations/processes perform karne me central role
+                        play karta hai.
+                    </p>
+                </div>
+
+                <div class="card card-pad">
+
+                    <div class="definition-box">
+                        <strong>CPU ko simple language me samjho</strong>
+                        CPU ko computer ka "instruction execution center" samajh sakte ho.
+                        Program jo instructions deta hai, CPU unhe execute karta hai.
+                    </div>
+
+                    <h3>CPU ke important concepts</h3>
+
+                    <div class="info-grid" style="margin-top:18px;">
+
+                        <div class="info-card">
+                            <h3>Clock Speed</h3>
+                            <p>
+                                CPU ki operating frequency ko generally GHz me represent kiya jata hai.
+                                Sirf GHz dekh kar complete performance decide nahi karni chahiye.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Cores</h3>
+                            <p>
+                                Multiple CPU cores multiple instruction streams/tasks ko efficiently
+                                handle karne me help kar sakte hain.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Threads</h3>
+                            <p>
+                                Threads CPU workload ko organize karne ka ek logical execution concept hain.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Cache</h3>
+                            <p>
+                                CPU ke paas very fast cache memory hoti hai jo frequently needed data
+                                ko quickly access karne me help karti hai.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- RAM -->
+
+            <section class="section" id="ram">
+
+                <div class="section-heading">
+                    <div class="section-kicker">05 · Memory</div>
+                    <h2 class="section-title">RAM kya hoti hai?</h2>
+                    <p class="section-intro">
+                        RAM yani Random Access Memory computer ki temporary working memory hoti hai.
+                    </p>
+                </div>
+
+                <div class="card card-pad">
+
+                    <p>
+                        Jab tum Chrome open karte ho, code editor chalate ho, document edit
+                        karte ho ya multiple applications simultaneously use karte ho, unke
+                        active data ka kuch portion RAM me use hota hai.
+                    </p>
+
+                    <div class="note warning">
+                        <strong>Important</strong>
+                        RAM ko permanent storage mat samjho. Computer shutdown hone par RAM
+                        ka working data normally retain nahi hota.
+                    </div>
+
+                    <h3 style="margin-top:20px;">RAM aur Storage ka difference</h3>
+
+                    <div class="table-wrap" style="margin-top:15px;">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Purpose</td>
+                                    <td>Active/temporary work</td>
+                                    <td>Long-term data</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Examples</td>
+                                    <td>8 GB RAM</td>
+                                    <td>512 GB SSD</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Power Off</td>
+                                    <td>Working data lost</td>
+                                    <td>Data generally remains</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Use</td>
+                                    <td>Running programs</td>
+                                    <td>Files, apps, OS, media</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- STORAGE -->
+
+            <section class="section" id="storage">
+
+                <div class="section-heading">
+                    <div class="section-kicker">06 · Storage</div>
+                    <h2 class="section-title">HDD, SSD aur Storage</h2>
+                    <p class="section-intro">
+                        Storage ka kaam data ko relatively long-term basis par store karna hai.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+                        <h3>HDD</h3>
+                        <p>
+                            Hard Disk Drive magnetic storage technology use karti hai.
+                            Usually economical high-capacity storage ke liye use hoti rahi hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>SSD</h3>
+                        <p>
+                            Solid State Drive flash memory use karti hai aur moving mechanical
+                            parts nahi hote. Modern systems me fast storage ke liye common hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>External Storage</h3>
+                        <p>
+                            USB drives, external SSD/HDD etc. data transfer, backup aur portability
+                            ke liye use kiye ja sakte hain.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Cloud Storage</h3>
+                        <p>
+                            Data remote servers par store hota hai aur internet ke through access
+                            kiya ja sakta hai.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="note">
+                    <strong>Example</strong>
+                    Agar laptop me 8 GB RAM aur 512 GB SSD hai, to 8 GB aur 512 GB same
+                    type ki memory nahi hain. RAM working memory hai, SSD storage hai.
+                </div>
+
+            </section>
+
+            <!-- SOFTWARE -->
+
+            <section class="section" id="software">
+
+                <div class="section-heading">
+                    <div class="section-kicker">07 · Software</div>
+                    <h2 class="section-title">Software ke major types</h2>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+                        <h3>System Software</h3>
+                        <p>
+                            Hardware aur core computer operations ko manage karne wala software.
+                            Operating system iska major example hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Application Software</h3>
+                        <p>
+                            User ke specific tasks ke liye software, jaise browser, editor,
+                            spreadsheet aur media applications.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Utility Software</h3>
+                        <p>
+                            Maintenance, management, backup, compression aur security jaise tasks
+                            ke liye utilities use hoti hain.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Programming Software</h3>
+                        <p>
+                            Developers ke liye tools jaise code editors, compilers, interpreters
+                            aur development environments.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- OPERATING SYSTEM -->
+
+            <section class="section" id="os">
+
+                <div class="section-heading">
+                    <div class="section-kicker">08 · Operating System</div>
+                    <h2 class="section-title">Operating System kya karta hai?</h2>
+                    <p class="section-intro">
+                        Operating System yani OS computer hardware aur applications ke beech
+                        important management layer provide karta hai.
+                    </p>
+                </div>
+
+                <div class="definition-box">
+                    <strong>Examples</strong>
+                    Windows, Linux, macOS, Android aur iOS operating systems ke examples hain.
+                </div>
+
+                <div class="card card-pad">
+
+                    <h3>OS ke important kaam</h3>
+
+                    <ul class="clean-list">
+
+                        <li>Applications ko run karne me help karna</li>
+
+                        <li>Files aur folders manage karna</li>
+
+                        <li>Memory resources manage karna</li>
+
+                        <li>Hardware devices ke saath interaction manage karna</li>
+
+                        <li>User interface provide karna</li>
+
+                        <li>Security aur permissions handle karna</li>
+
+                        <li>Processes ko schedule/manage karna</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="table-wrap" style="margin-top:20px;">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>OS</th>
+                                <th>Common Use</th>
+                                <th>Example Device</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Windows</td>
+                                <td>Desktop, office, gaming, development</td>
+                                <td>PC / Laptop</td>
+                            </tr>
+
+                            <tr>
+                                <td>Linux</td>
+                                <td>Servers, development, technical systems</td>
+                                <td>PC / Server</td>
+                            </tr>
+
+                            <tr>
+                                <td>macOS</td>
+                                <td>Apple desktop/laptop ecosystem</td>
+                                <td>Mac</td>
+                            </tr>
+
+                            <tr>
+                                <td>Android</td>
+                                <td>Mobile devices</td>
+                                <td>Smartphone / Tablet</td>
+                            </tr>
+
+                            <tr>
+                                <td>iOS</td>
+                                <td>Apple mobile devices</td>
+                                <td>iPhone</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+            <!-- FILES FOLDERS -->
+
+            <section class="section" id="files">
+
+                <div class="section-heading">
+                    <div class="section-kicker">09 · Digital Organization</div>
+                    <h2 class="section-title">Files aur Folders ko properly samjho</h2>
+                    <p class="section-intro">
+                        Digital work me file management ek basic but extremely important skill hai.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+
+                        <div class="icon-title">
+                            <div class="icon-box">F</div>
+                            <h3>File</h3>
+                        </div>
+
+                        <p>
+                            File ek digital object hai jisme information stored hoti hai.
+                        </p>
+
+                        <ul class="clean-list">
+                            <li>document.pdf</li>
+                            <li>photo.jpg</li>
+                            <li>notes.txt</li>
+                            <li>data.xlsx</li>
+                            <li>website.html</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="info-card">
+
+                        <div class="icon-title">
+                            <div class="icon-box">D</div>
+                            <h3>Folder</h3>
+                        </div>
+
+                        <p>
+                            Folder files aur subfolders ko organize karne ke liye container ki tarah
+                            use hota hai.
+                        </p>
+
+                        <ul class="clean-list">
+                            <li>Documents</li>
+                            <li>Projects</li>
+                            <li>Photos</li>
+                            <li>AI Course</li>
+                            <li>Backup</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="note success">
+                    <strong>Professional Habit</strong>
+                    Files ko random Desktop par save karne ke bajay meaningful folders aur
+                    clear file names use karo.
+                </div>
+
+                <div class="card card-pad">
+
+                    <h3>Example: AI Course Project</h3>
+
+                    <pre style="
+            margin-top:15px;
+            padding:18px;
+            overflow:auto;
+            border-radius:13px;
+            background:#0f172a;
+            color:#e2e8f0;
+            font-size:13px;
+          ">AI-Learning-HUB/
+├── index.html
+├── style.css
+├── script.js
+└── chapters/
+    ├── chapter-01.html
+    ├── chapter-02.html
+    ├── chapter-03.html
+    └── ...</pre>
+
+                </div>
+
+            </section>
+
+            <!-- BROWSER -->
+
+            <section class="section" id="browser">
+
+                <div class="section-heading">
+                    <div class="section-kicker">10 · Internet</div>
+                    <h2 class="section-title">Browser aur Internet</h2>
+                    <p class="section-intro">
+                        Browser aur internet same cheez nahi hain. Ye difference beginner level
+                        par samajhna important hai.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+                        <h3>Internet</h3>
+                        <p>
+                            Internet interconnected networks ka global system hai jiske through
+                            computers aur devices information exchange karte hain.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Web Browser</h3>
+                        <p>
+                            Browser ek application hai jo web resources ko access aur display
+                            karne me help karta hai.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="definition-box">
+
+                    <strong>Examples of browsers</strong>
+
+                    Chrome, Microsoft Edge, Firefox, Safari aur other modern browsers.
+
+                </div>
+
+                <h3 style="margin-top:25px;">Jab tum website open karte ho to basic flow</h3>
+
+                <div class="process">
+
+                    <div class="process-step">
+                        <div class="step-no">1</div>
+                        <div>
+                            <h3>URL enter</h3>
+                            <p>Browser me website ka address enter kiya jata hai.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">2</div>
+                        <div>
+                            <h3>Network request</h3>
+                            <p>Browser internet ke through required resource ke liye request karta hai.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">3</div>
+                        <div>
+                            <h3>Server response</h3>
+                            <p>Server requested resources/data return karta hai.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-no">4</div>
+                        <div>
+                            <h3>Browser rendering</h3>
+                            <p>Browser HTML, CSS aur JavaScript ko process karke page display karta hai.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- WEBSITE WEB APP -->
+
+            <section class="section" id="website">
+
+                <div class="section-heading">
+                    <div class="section-kicker">11 · Web Fundamentals</div>
+                    <h2 class="section-title">Website vs Web App</h2>
+                    <p class="section-intro">
+                        Dono browser me run ho sakte hain, lekin unka purpose aur interaction
+                        level different ho sakta hai.
+                    </p>
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Website</th>
+                                <th>Web App</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Main purpose</td>
+                                <td>Information/content provide karna</td>
+                                <td>Interactive task/service provide karna</td>
+                            </tr>
+
+                            <tr>
+                                <td>Interaction</td>
+                                <td>Usually lower</td>
+                                <td>Usually higher</td>
+                            </tr>
+
+                            <tr>
+                                <td>Examples</td>
+                                <td>Blog, documentation site</td>
+                                <td>Email, online editor, dashboard</td>
+                            </tr>
+
+                            <tr>
+                                <td>Data processing</td>
+                                <td>May be limited</td>
+                                <td>Often significant</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="note">
+                    <strong>Important</strong>
+                    Real-world products kabhi pure "website" ya pure "web app" category me
+                    perfectly fit nahi hote. Modern web platforms often dono characteristics
+                    combine karte hain.
+                </div>
+
+            </section>
+
+            <!-- URL DOMAIN HOSTING -->
+
+            <section class="section" id="url">
+
+                <div class="section-heading">
+                    <div class="section-kicker">12 · Web Address</div>
+                    <h2 class="section-title">URL, Domain aur Hosting</h2>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+
+                        <h3>URL</h3>
+
+                        <p>
+                            URL yani Uniform Resource Locator kisi web resource ka address hota hai.
+                        </p>
+
+                    </div>
+
+                    <div class="info-card">
+
+                        <h3>Domain</h3>
+
+                        <p>
+                            Domain website ka readable address/name hota hai, jaise example.com.
+                        </p>
+
+                    </div>
+
+                    <div class="info-card">
+
+                        <h3>Hosting</h3>
+
+                        <p>
+                            Hosting infrastructure/service website ki files aur required resources
+                            ko users tak available karne ke liye provide ki jati hai.
+                        </p>
+
+                    </div>
+
+                    <div class="info-card">
+
+                        <h3>DNS</h3>
+
+                        <p>
+                            Domain Name System human-friendly domain names ko network addressing
+                            information se map karne me help karta hai.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- CLOUD -->
+
+            <section class="section" id="cloud">
+
+                <div class="section-heading">
+                    <div class="section-kicker">13 · Cloud</div>
+                    <h2 class="section-title">Cloud Computing ko simple language me samjho</h2>
+                    <p class="section-intro">
+                        Cloud ka matlab sirf "internet par file rakhna" nahi hai. Cloud computing
+                        remote computing resources ko network ke through use karne ka broader concept hai.
+                    </p>
+                </div>
+
+                <div class="definition-box">
+                    <strong>Simple Example</strong>
+                    Google Drive jaise service me tum apni files remote infrastructure par
+                    store kar sakte ho aur internet-connected devices se access kar sakte ho.
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+                        <h3>Cloud Storage</h3>
+                        <p>
+                            Files aur data ko remote servers par store karna.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Cloud Computing</h3>
+                        <p>
+                            Remote computing resources ko use karna, jaise servers, databases,
+                            processing aur application infrastructure.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Advantages</h3>
+                        <p>
+                            Accessibility, scalability, collaboration aur centralized management
+                            jaise benefits mil sakte hain.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Limitations</h3>
+                        <p>
+                            Internet dependency, privacy considerations, service availability aur
+                            account security important factors hain.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- DIGITAL SECURITY -->
+
+            <section class="section" id="security">
+
+                <div class="section-heading">
+                    <div class="section-kicker">14 · Safety</div>
+                    <h2 class="section-title">Digital Safety & Security</h2>
+                    <p class="section-intro">
+                        Computer knowledge ka ek important part safe digital behavior bhi hai.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+                        <h3>Strong Passwords</h3>
+                        <p>
+                            Har important account ke liye unique, strong credentials use karo.
+                            Password reuse avoid karna better practice hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>2FA / MFA</h3>
+                        <p>
+                            Multi-factor authentication account security ko additional verification
+                            layer provide kar sakti hai.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Phishing</h3>
+                        <p>
+                            Fake messages, websites ya emails ke through sensitive information
+                            lene ki fraudulent technique ko phishing kehte hain.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Updates</h3>
+                        <p>
+                            Operating system, browser aur applications ko supported updates ke
+                            saath maintain karna security ke liye useful hai.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="note warning">
+
+                    <strong>Golden Rule</strong>
+
+                    Kisi unknown link, attachment, software installer ya login page ko blindly
+                    trust mat karo. Sender, URL aur context verify karo.
+
+                </div>
+
+            </section>
+
+            <!-- AI CONNECTION -->
+
+            <section class="section" id="ai-connection">
+
+                <div class="section-heading">
+                    <div class="section-kicker">15 · AI Foundation</div>
+                    <h2 class="section-title">AI seekhne ke liye ye sab kyun important hai?</h2>
+                    <p class="section-intro">
+                        AI sirf ChatGPT use karna nahi hai. Aage chal kar tum Python, APIs,
+                        machine learning, data, automation aur AI applications ke saath kaam karoge.
+                    </p>
+                </div>
+
+                <div class="card card-pad">
+
+                    <h3>Ye concepts aage kaise kaam aayenge?</h3>
+
+                    <ul class="clean-list">
+
+                        <li>
+                            <strong>CPU/RAM/Storage:</strong>
+                            AI tools aur applications ke system requirements samajhne me.
+                        </li>
+
+                        <li>
+                            <strong>Operating System:</strong>
+                            Python, VS Code aur development tools install/run karne me.
+                        </li>
+
+                        <li>
+                            <strong>Files/Folders:</strong>
+                            Projects, datasets, models aur code organize karne me.
+                        </li>
+
+                        <li>
+                            <strong>Browser/Internet:</strong>
+                            AI tools, APIs, documentation aur online resources use karne me.
+                        </li>
+
+                        <li>
+                            <strong>Cloud:</strong>
+                            Online AI services, remote computing aur cloud-based applications samajhne me.
+                        </li>
+
+                        <li>
+                            <strong>Security:</strong>
+                            Passwords, API keys, personal data aur accounts ko safely handle karne me.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </section>
+
+            <!-- PRACTICAL -->
+
+            <section class="section" id="practical">
+
+                <div class="section-heading">
+                    <div class="section-kicker">16 · Practical Skills</div>
+                    <h2 class="section-title">Aaj ke practical tasks</h2>
+                    <p class="section-intro">
+                        Chapter ko complete karne ke baad in tasks ko khud perform karke dekho.
+                    </p>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-card">
+                        <h3>Task 01</h3>
+                        <p>
+                            Apne computer ka CPU model, RAM amount aur storage capacity check karo.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Task 02</h3>
+                        <p>
+                            Ek folder banao: <strong>AI-Learning</strong>. Iske andar
+                            <strong>Notes</strong>, <strong>Projects</strong> aur
+                            <strong>Resources</strong> folders banao.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Task 03</h3>
+                        <p>
+                            Ek text file create karo, uska naam change karo aur usse proper folder
+                            me move karo.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Task 04</h3>
+                        <p>
+                            Browser me kisi trusted website ka URL identify karo aur domain portion
+                            ko observe karo.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="note success">
+                    <strong>Learning Rule</strong>
+                    Sirf padhna enough nahi hai. Jo concept padha hai, usko apne computer par
+                    perform karke dekho. Isi approach ko hum aage AI course me bhi follow karenge.
+                </div>
+
+            </section>
+
+            <!-- SUMMARY -->
+
+            <section class="section" id="summary">
+
+                <div class="section-heading">
+                    <div class="section-kicker">17 · Quick Revision</div>
+                    <h2 class="section-title">Chapter Summary</h2>
+                </div>
+
+                <div class="card card-pad">
+
+                    <ul class="clean-list">
+
+                        <li>Computer ek programmable electronic system hai.</li>
+
+                        <li>Hardware physical components hote hain.</li>
+
+                        <li>Software instructions/programs provide karta hai.</li>
+
+                        <li>CPU instructions execute aur processing karta hai.</li>
+
+                        <li>RAM temporary working memory hai.</li>
+
+                        <li>SSD/HDD long-term data storage provide karte hain.</li>
+
+                        <li>Operating System computer resources aur applications manage karta hai.</li>
+
+                        <li>Files information store karti hain aur folders organization ke liye hote hain.</li>
+
+                        <li>Internet interconnected networks ka global system hai.</li>
+
+                        <li>Browser web resources ko access/display karne ka application hai.</li>
+
+                        <li>Website aur web app me purpose aur interaction level different ho sakta hai.</li>
+
+                        <li>Cloud remote computing/storage resources ko network ke through provide kar sakta hai.</li>
+
+                        <li>Digital security me strong credentials, MFA, updates aur phishing awareness important hain.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </section>
+
+            <!-- QUIZ -->
+
+            <section class="section" id="quiz">
+
+                <div class="section-heading">
+                    <div class="section-kicker">18 · Knowledge Check</div>
+                    <h2 class="section-title">Chapter Quiz</h2>
+                    <p class="section-intro">
+                        Har question ka ek best answer select karo.
+                    </p>
+                </div>
+
+                <!-- Q1 -->
+
+                <div class="quiz">
+
+                    <div class="quiz-question">
+                        1. CPU ka primary role kya hai?
+                    </div>
+
+                    <div class="options">
+
+                        <button class="option" data-correct="true">
+                            Instructions ko process aur execute karna
+                        </button>
+
+                        <button class="option">
+                            Permanent files store karna
+                        </button>
+
+                        <button class="option">
+                            Internet connection provide karna
+                        </button>
+
+                        <button class="option">
+                            Monitor ko physically clean karna
+                        </button>
+
+                    </div>
+
+                    <div class="quiz-result"></div>
+
+                </div>
+
+                <!-- Q2 -->
+
+                <div class="quiz">
+
+                    <div class="quiz-question">
+                        2. RAM ko sabse accurately kaise describe karenge?
+                    </div>
+
+                    <div class="options">
+
+                        <button class="option">
+                            Permanent storage
+                        </button>
+
+                        <button class="option" data-correct="true">
+                            Temporary working memory
+                        </button>
+
+                        <button class="option">
+                            Operating system
+                        </button>
+
+                        <button class="option">
+                            Internet protocol
+                        </button>
+
+                    </div>
+
+                    <div class="quiz-result"></div>
+
+                </div>
+
+                <!-- Q3 -->
+
+                <div class="quiz">
+
+                    <div class="quiz-question">
+                        3. Inme se operating system ka example kaunsa hai?
+                    </div>
+
+                    <div class="options">
+
+                        <button class="option">
+                            Keyboard
+                        </button>
+
+                        <button class="option">
+                            SSD
+                        </button>
+
+                        <button class="option" data-correct="true">
+                            Linux
+                        </button>
+
+                        <button class="option">
+                            HDMI cable
+                        </button>
+
+                    </div>
+
+                    <div class="quiz-result"></div>
+
+                </div>
+
+                <!-- Q4 -->
+
+                <div class="quiz">
+
+                    <div class="quiz-question">
+                        4. Files ko organize karne ke liye generally kya use hota hai?
+                    </div>
+
+                    <div class="options">
+
+                        <button class="option">
+                            CPU
+                        </button>
+
+                        <button class="option" data-correct="true">
+                            Folder
+                        </button>
+
+                        <button class="option">
+                            Browser tab
+                        </button>
+
+                        <button class="option">
+                            RAM
+                        </button>
+
+                    </div>
+
+                    <div class="quiz-result"></div>
+
+                </div>
+
+                <!-- Q5 -->
+
+                <div class="quiz">
+
+                    <div class="quiz-question">
+                        5. Browser ka main purpose kya hai?
+                    </div>
+
+                    <div class="options">
+
+                        <button class="option">
+                            Computer ko physically assemble karna
+                        </button>
+
+                        <button class="option">
+                            RAM manufacture karna
+                        </button>
+
+                        <button class="option" data-correct="true">
+                            Web resources ko access aur display karna
+                        </button>
+
+                        <button class="option">
+                            Hard disk repair karna
+                        </button>
+
+                    </div>
+
+                    <div class="quiz-result"></div>
+
+                </div>
+
+            </section>
+
+            <!-- FINAL -->
+
+            <section class="section" id="complete">
+
+                <div class="section-heading">
+                    <div class="section-kicker">19 · Completion</div>
+                    <h2 class="section-title">Chapter 01 Complete</h2>
+                </div>
+
+                <div class="card card-pad">
+
+                    <div class="definition-box">
+
+                        <strong>What you should now understand</strong>
+
+                        Ab tum computer ke major hardware components, software,
+                        CPU, RAM, storage, operating system, file/folder organization,
+                        internet, browser, website, web app, cloud aur basic digital
+                        security ko conceptually samajh sakte ho.
+
+                    </div>
+
+                    <p>
+                        Ye foundation aage ke chapters ke liye important hai. Ab hum
+                        internet aur digital work ko aur detail me samjhenge, jiske baad
+                        AI learning journey start hogi.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- CHAPTER NAVIGATION -->
+
+            <div class="chapter-navigation">
+
+                <a href="../index.html#courses" class="chapter-nav-card">
+
+                    <span class="nav-label">← Back</span>
+
+                    <span class="nav-title">
+                        Course Home
+                    </span>
+
+                </a>
+
+                <a href="chapter-02.html" class="chapter-nav-card next">
+
+                    <span class="nav-label">Next Chapter →</span>
+
+                    <span class="nav-title">
+                        Chapter 02: Internet & Digital Work
+                    </span>
+
+                </a>
+
+            </div>
+
+        </article>
+
+        <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+        <aside class="sidebar">
+
+            <nav class="toc" aria-label="Chapter navigation">
+
+                <div class="toc-title">
+                    Chapter Contents
+                </div>
+
+                <a href="#start">Computer Basics</a>
+
+                <a href="#hardware-software">Hardware & Software</a>
+
+                <a href="#components">Components</a>
+
+                <a href="#cpu">CPU</a>
+
+                <a href="#ram">RAM</a>
+
+                <a href="#storage">Storage</a>
+
+                <a href="#software">Software Types</a>
+
+                <a href="#os">Operating System</a>
+
+                <a href="#files">Files & Folders</a>
+
+                <a href="#browser">Browser & Internet</a>
+
+                <a href="#website">Website vs Web App</a>
+
+                <a href="#url">URL & Domain</a>
+
+                <a href="#cloud">Cloud</a>
+
+                <a href="#security">Digital Safety</a>
+
+                <a href="#ai-connection">AI Connection</a>
+
+                <a href="#practical">Practical Tasks</a>
+
+                <a href="#summary">Summary</a>
+
+                <a href="#quiz">Quiz</a>
+
+                <a href="#complete">Completion</a>
+
+                <div class="toc-progress">
+                    <strong id="tocProgress">0%</strong>
+                    chapter viewed
+                </div>
+
+            </nav>
+
+        </aside>
+
+    </main>
+
+    <!-- =========================
+       FOOTER
+  ========================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div>
+
+                    <div class="footer-brand">
+                        AI Learning HUB
+                    </div>
+
+                    <p>
+                        Learn AI, digital skills, programming and practical technology
+                        concepts through structured, beginner-friendly learning.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <strong style="color:white;">Chapter</strong>
+
+                    <div class="footer-links" style="margin-top:10px;">
+                        <a href="#start">Start Chapter</a>
+                        <a href="#practical">Practical Tasks</a>
+                        <a href="#quiz">Quiz</a>
+                        <a href="#summary">Summary</a>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <strong style="color:white;">Course</strong>
+
+                    <div class="footer-links" style="margin-top:10px;">
+                        <a href="../index.html">Course Home</a>
+                        <a href="chapter-02.html">Next Chapter</a>
+                        <a href="../index.html#about">About</a>
+                        <a href="../index.html#contact">Contact</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                © <span id="year"></span> AI Learning HUB. Educational content for learning purposes.
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- BACK TO TOP -->
+
+    <button class="top-btn" id="topBtn" type="button" aria-label="Back to top">
+        ↑
+    </button>
+
+    <script>
+        /* =========================================
+           MOBILE NAVIGATION
+        ========================================== */
+
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        if (menuBtn && navLinks) {
+            menuBtn.addEventListener("click", () => {
+                navLinks.classList.toggle("open");
+            });
+
+            navLinks.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", () => {
+                    navLinks.classList.remove("open");
+                });
+            });
+        }
+
+
+        /* =========================================
+           THEME
+           Uses a lightweight class-based dark theme.
+        ========================================== */
+
+        const themeBtn = document.getElementById("themeBtn");
+
+        function applyTheme(theme) {
+
+            if (theme === "dark") {
+
+                document.documentElement.style.setProperty("--bg", "#0b1120");
+                document.documentElement.style.setProperty("--surface", "#111827");
+                document.documentElement.style.setProperty("--surface-2", "#172033");
+                document.documentElement.style.setProperty("--text", "#e5e7eb");
+                document.documentElement.style.setProperty("--muted", "#94a3b8");
+                document.documentElement.style.setProperty("--border", "#263244");
+
+                document.body.style.background = "#0b1120";
+
+                document.querySelector(".site-header").style.background =
+                    "rgba(15,23,42,.94)";
+
+                document.querySelectorAll(
+                    ".nav-links,.hero-card,.card,.info-card,.diagram-part,.process-step,.quiz,.toc,.chapter-nav-card,.btn-secondary,.table-wrap"
+                ).forEach(el => {
+                    el.style.background = "#111827";
+                });
+
+                document.querySelectorAll("th").forEach(el => {
+                    el.style.background = "#172033";
+                });
+
+                themeBtn.textContent = "☾";
+
+            } else {
+
+                document.documentElement.style.setProperty("--bg", "#f5f7fb");
+                document.documentElement.style.setProperty("--surface", "#ffffff");
+                document.documentElement.style.setProperty("--surface-2", "#f8fafc");
+                document.documentElement.style.setProperty("--text", "#172033");
+                document.documentElement.style.setProperty("--muted", "#64748b");
+                document.documentElement.style.setProperty("--border", "#e2e8f0");
+
+                document.body.style.background = "#f5f7fb";
+
+                document.querySelector(".site-header").style.background =
+                    "rgba(255,255,255,.94)";
+
+                document.querySelectorAll(
+                    ".nav-links,.hero-card,.card,.info-card,.diagram-part,.process-step,.quiz,.toc,.chapter-nav-card,.btn-secondary,.table-wrap"
+                ).forEach(el => {
+                    el.style.background = "#ffffff";
+                });
+
+                document.querySelectorAll("th").forEach(el => {
+                    el.style.background = "#f8fafc";
+                });
+
+                themeBtn.textContent = "☼";
+            }
+
+            localStorage.setItem("aiHubChapterTheme", theme);
+        }
+
+        const savedTheme = localStorage.getItem("aiHubChapterTheme");
+
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        }
+
+        if (themeBtn) {
+            themeBtn.addEventListener("click", () => {
+
+                const current =
+                    localStorage.getItem("aiHubChapterTheme") || "light";
+
+                applyTheme(current === "light" ? "dark" : "light");
+
+            });
+        }
+
+
+        /* =========================================
+           QUIZ
+        ========================================== */
+
+        document.querySelectorAll(".quiz").forEach(quiz => {
+
+            const options = quiz.querySelectorAll(".option");
+            const result = quiz.querySelector(".quiz-result");
+
+            options.forEach(option => {
+
+                option.addEventListener("click", () => {
+
+                    if (quiz.dataset.answered === "true") {
+                        return;
+                    }
+
+                    quiz.dataset.answered = "true";
+
+                    const correct = option.dataset.correct === "true";
+
+                    if (correct) {
+
+                        option.classList.add("correct");
+
+                        result.textContent = "✓ Correct!";
+
+                        result.style.color = "#047857";
+
+                    } else {
+
+                        option.classList.add("wrong");
+
+                        const correctOption =
+                            quiz.querySelector('[data-correct="true"]');
+
+                        if (correctOption) {
+                            correctOption.classList.add("correct");
+                        }
+
+                        result.textContent =
+                            "✗ Not quite. Correct answer highlighted above.";
+
+                        result.style.color = "#b91c1c";
+                    }
+
+                });
+
+            });
+
+        });
+
+
+        /* =========================================
+           SCROLL PROGRESS
+        ========================================== */
+
+        const progressBar =
+            document.getElementById("progressBar");
+
+        const progressPercent =
+            document.getElementById("progressPercent");
+
+        const tocProgress =
+            document.getElementById("tocProgress");
+
+        function updateProgress() {
+
+            const doc = document.documentElement;
+
+            const scrollTop =
+                window.scrollY || doc.scrollTop;
+
+            const scrollHeight =
+                doc.scrollHeight - window.innerHeight;
+
+            let percentage = 0;
+
+            if (scrollHeight > 0) {
+                percentage =
+                    Math.round((scrollTop / scrollHeight) * 100);
+            }
+
+            percentage =
+                Math.max(0, Math.min(100, percentage));
+
+            if (progressBar) {
+                progressBar.style.width = percentage + "%";
+            }
+
+            if (progressPercent) {
+                progressPercent.textContent =
+                    percentage + "%";
+            }
+
+            if (tocProgress) {
+                tocProgress.textContent =
+                    percentage + "%";
+            }
+
+        }
+
+        window.addEventListener("scroll", updateProgress, {
+            passive: true
+        });
+
+        updateProgress();
+
+
+        /* =========================================
+           ACTIVE TOC
+        ========================================== */
+
+        const sections =
+            document.querySelectorAll(".section");
+
+        const tocLinks =
+            document.querySelectorAll(".toc a");
+
+        function updateActiveTOC() {
+
+            let current = "";
+
+            sections.forEach(section => {
+
+                const top =
+                    section.getBoundingClientRect().top;
+
+                if (top <= 150) {
+                    current = section.id;
+                }
+
+            });
+
+            tocLinks.forEach(link => {
+
+                link.classList.remove("active");
+
+                if (link.getAttribute("href") === "#" + current) {
+                    link.classList.add("active");
+                }
+
+            });
+
+        }
+
+        window.addEventListener("scroll", updateActiveTOC, {
+            passive: true
+        });
+
+        updateActiveTOC();
+
+
+        /* =========================================
+           BACK TO TOP
+        ========================================== */
+
+        const topBtn =
+            document.getElementById("topBtn");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 500) {
+                topBtn.classList.add("show");
+            } else {
+                topBtn.classList.remove("show");
+            }
+
+        }, { passive: true });
+
+        topBtn.addEventListener("click", () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+
+        /* =========================================
+           YEAR
+        ========================================== */
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+        /* =========================================
+           ESCAPE CLOSE MENU
+        ========================================== */
+
+        document.addEventListener("keydown", event => {
+
+            if (event.key === "Escape") {
+
+                navLinks.classList.remove("open");
+
+            }
+
+        });
+
+
+        /* =========================================
+           PREVENT LAYOUT ISSUES ON RESIZE
+        ========================================== */
+
+        window.addEventListener("resize", () => {
+
+            if (window.innerWidth > 800) {
+                navLinks.classList.remove("open");
+            }
+
+            updateProgress();
+            updateActiveTOC();
+
+        });
+    </script>
+
+</body>
+
+</html>

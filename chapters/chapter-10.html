@@ -1,0 +1,3029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="AI Learning HUB Chapter 10: AI Tools. Learn AI tools, categories, workflows, chat assistants, writing, research, coding, image, video, voice, productivity and multimodal AI tools in deep Hinglish.">
+
+    <meta name="keywords"
+        content="AI tools, artificial intelligence tools, AI tools course, ChatGPT, AI writing tools, AI coding tools, AI image tools, AI video tools, AI research tools, AI productivity tools, AI learning">
+
+    <meta name="author" content="AI Learning HUB">
+
+    <meta name="robots" content="index, follow">
+
+    <meta name="theme-color" content="#2563eb">
+
+    <title>Chapter 10: AI Tools — AI Learning HUB</title>
+
+    <link rel="canonical" href="chapter-10.html">
+
+    <style>
+        /* =========================================================
+       AI LEARNING HUB — CHAPTER 10
+       Standalone responsive stylesheet
+       No fixed sidebar / no next chapter navigation
+    ========================================================= */
+
+        :root {
+            --bg: #f7f9fc;
+            --surface: #ffffff;
+            --surface-2: #f1f5f9;
+            --text: #172033;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-soft: #eff6ff;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --shadow: 0 12px 35px rgba(15, 23, 42, .08);
+            --radius: 18px;
+            --max: 1240px;
+        }
+
+        html.dark {
+            --bg: #0b1120;
+            --surface: #111827;
+            --surface-2: #172033;
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --border: #263247;
+            --primary: #60a5fa;
+            --primary-dark: #93c5fd;
+            --primary-soft: #13243e;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --shadow: 0 15px 40px rgba(0, 0, 0, .25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ::selection {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: color-mix(in srgb,
+                    var(--surface) 94%,
+                    transparent);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-inner {
+            width: min(100% - 32px, var(--max));
+            min-height: 70px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 850;
+            white-space: nowrap;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background:
+                linear-gradient(135deg,
+                    #2563eb,
+                    #7c3aed);
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, .25);
+            font-weight: 900;
+        }
+
+        .brand-text {
+            font-size: 1rem;
+            letter-spacing: -.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            padding: 9px 12px;
+            border-radius: 10px;
+            color: var(--muted);
+            font-size: .9rem;
+            font-weight: 650;
+            transition: .2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn,
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: var(--surface);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .icon-btn:hover,
+        .menu-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* ================= PROGRESS ================= */
+
+        .progress-track {
+            height: 3px;
+            width: 100%;
+            background: var(--border);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg,
+                    #2563eb,
+                    #7c3aed);
+            transition: width .15s linear;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            width: min(100% - 32px, var(--max));
+            margin: 34px auto 0;
+        }
+
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: clamp(28px, 5vw, 62px);
+            background:
+                radial-gradient(circle at 85% 15%,
+                    rgba(37, 99, 235, .14),
+                    transparent 34%),
+                radial-gradient(circle at 15% 90%,
+                    rgba(124, 58, 237, .10),
+                    transparent 30%),
+                var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            right: -100px;
+            bottom: -100px;
+            border-radius: 50%;
+            border: 35px solid rgba(37, 99, 235, .06);
+            pointer-events: none;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 19px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: .78rem;
+            font-weight: 800;
+            border: 1px solid color-mix(in srgb,
+                    var(--primary) 18%,
+                    transparent);
+        }
+
+        .badge.neutral {
+            color: var(--muted);
+            background: var(--surface-2);
+            border-color: var(--border);
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            font-size: clamp(2rem, 5vw, 4.2rem);
+            line-height: 1.05;
+            letter-spacing: -2.2px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-lead {
+            max-width: 820px;
+            color: var(--muted);
+            font-size: clamp(1rem, 2vw, 1.18rem);
+        }
+
+        .hero-meta {
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .meta-box {
+            padding: 15px;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        .meta-box strong {
+            display: block;
+            font-size: .78rem;
+            color: var(--muted);
+            margin-bottom: 3px;
+        }
+
+        .meta-box span {
+            font-weight: 800;
+            font-size: .93rem;
+        }
+
+        /* ================= LAYOUT ================= */
+
+        .page-layout {
+            width: min(100% - 32px, var(--max));
+            margin: 30px auto 80px;
+            display: grid;
+            grid-template-columns: 270px minmax(0, 1fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* IMPORTANT:
+       This sidebar is sticky only on desktop.
+       It becomes normal static flow on smaller screens.
+    */
+
+        .toc {
+            position: sticky;
+            top: 92px;
+            max-height: calc(100vh - 115px);
+            overflow-y: auto;
+            padding: 17px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--surface);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, .05);
+        }
+
+        .toc-title {
+            font-weight: 850;
+            margin-bottom: 12px;
+            font-size: .94rem;
+        }
+
+        .toc a {
+            display: block;
+            padding: 7px 9px;
+            margin: 2px 0;
+            border-radius: 9px;
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.35;
+        }
+
+        .toc a:hover {
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .section {
+            scroll-margin-top: 92px;
+            margin-bottom: 24px;
+            padding: clamp(22px, 3vw, 34px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, .035);
+        }
+
+        .section-label {
+            color: var(--primary);
+            font-size: .75rem;
+            font-weight: 850;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .section h2 {
+            font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+            line-height: 1.25;
+            margin-bottom: 14px;
+            letter-spacing: -.6px;
+        }
+
+        .section h3 {
+            font-size: 1.08rem;
+            margin: 22px 0 9px;
+        }
+
+        .section p {
+            color: var(--muted);
+            margin-bottom: 13px;
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section ul,
+        .section ol {
+            color: var(--muted);
+            padding-left: 21px;
+            margin: 12px 0;
+        }
+
+        .section li {
+            margin: 6px 0;
+        }
+
+        strong {
+            color: var(--text);
+        }
+
+        /* ================= CALLOUT ================= */
+
+        .callout {
+            margin: 20px 0;
+            padding: 18px;
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            background: var(--primary-soft);
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .callout p {
+            margin: 0;
+        }
+
+        .callout.warning {
+            border-left-color: var(--warning);
+            background:
+                color-mix(in srgb,
+                    var(--warning) 8%,
+                    var(--surface));
+        }
+
+        .callout.success {
+            border-left-color: var(--success);
+            background:
+                color-mix(in srgb,
+                    var(--success) 8%,
+                    var(--surface));
+        }
+
+        /* ================= CARDS ================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .grid.three {
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+        }
+
+        .info-card {
+            padding: 18px;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            border-radius: 15px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-weight: 900;
+            margin-bottom: 11px;
+        }
+
+        .info-card h3 {
+            margin: 0 0 6px;
+            font-size: 1rem;
+        }
+
+        .info-card p {
+            font-size: .9rem;
+            margin: 0;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            margin: 18px 0;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 620px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            font-size: .9rem;
+        }
+
+        th {
+            color: var(--text);
+            background: var(--surface-2);
+            font-weight: 800;
+        }
+
+        td {
+            color: var(--muted);
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        /* ================= WORKFLOW ================= */
+
+        .workflow {
+            display: grid;
+            grid-template-columns:
+                repeat(6, minmax(0, 1fr));
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .workflow-step {
+            position: relative;
+            padding: 14px 10px;
+            text-align: center;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            border-radius: 13px;
+            font-size: .8rem;
+            font-weight: 750;
+        }
+
+        .workflow-step::after {
+            content: "→";
+            position: absolute;
+            right: -11px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-weight: 900;
+            z-index: 2;
+        }
+
+        .workflow-step:last-child::after {
+            display: none;
+        }
+
+        .workflow-num {
+            display: block;
+            color: var(--primary);
+            font-size: .7rem;
+            margin-bottom: 4px;
+        }
+
+        /* ================= CODE / PROMPT ================= */
+
+        .prompt-box {
+            margin: 16px 0;
+            padding: 17px;
+            overflow-x: auto;
+            border-radius: 13px;
+            border: 1px solid var(--border);
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family:
+                ui-monospace,
+                SFMono-Regular,
+                Menlo,
+                Monaco,
+                Consolas,
+                monospace;
+            font-size: .84rem;
+            line-height: 1.65;
+            white-space: pre-wrap;
+        }
+
+        /* ================= CHECKLIST ================= */
+
+        .checklist {
+            list-style: none !important;
+            padding-left: 0 !important;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 30px;
+            margin: 10px 0;
+        }
+
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 21px;
+            height: 21px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--primary-soft);
+            color: var(--primary);
+            font-size: .75rem;
+            font-weight: 900;
+        }
+
+        /* ================= QUIZ ================= */
+
+        .quiz-question {
+            margin-top: 20px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--surface-2);
+        }
+
+        .quiz-question p {
+            color: var(--text);
+            font-weight: 750;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 9px 0;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .option input {
+            margin-top: 4px;
+            accent-color: var(--primary);
+        }
+
+        .quiz-btn {
+            margin-top: 20px;
+            border: 0;
+            border-radius: 11px;
+            padding: 12px 18px;
+            color: #fff;
+            background: var(--primary);
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .quiz-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .quiz-result {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            background: var(--primary-soft);
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        /* ================= SUMMARY ================= */
+
+        .takeaway {
+            padding: 22px;
+            border-radius: 17px;
+            background:
+                linear-gradient(135deg,
+                    var(--primary-soft),
+                    var(--surface));
+            border: 1px solid var(--border);
+        }
+
+        .takeaway h3 {
+            margin-top: 0;
+        }
+
+        /* ================= BACK TO TOP ================= */
+
+        .top-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 43px;
+            height: 43px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: var(--surface);
+            color: var(--text);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: none;
+            place-items: center;
+            z-index: 90;
+        }
+
+        .top-btn.show {
+            display: grid;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            width: min(100% - 32px, var(--max));
+            margin: 0 auto 35px;
+            padding: 25px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: .86rem;
+        }
+
+        /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: grid;
+            }
+
+            .nav-links.mobile-open {
+                position: absolute;
+                left: 16px;
+                right: 16px;
+                top: 76px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 15px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.mobile-open a {
+                width: 100%;
+            }
+
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+
+            /*
+        Critical mobile fix:
+        sidebar is NOT fixed and NOT sticky.
+        It becomes a normal block in document flow.
+      */
+
+            .toc {
+                position: static;
+                max-height: none;
+                overflow: visible;
+                width: 100%;
+            }
+
+            .toc a {
+                display: inline-block;
+                margin-right: 4px;
+            }
+
+            .workflow {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+            .workflow-step::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 760px) {
+
+            .nav-inner,
+            .hero,
+            .page-layout,
+            footer {
+                width: min(100% - 22px, var(--max));
+            }
+
+            .nav-inner {
+                min-height: 62px;
+            }
+
+            .brand-logo {
+                width: 38px;
+                height: 38px;
+            }
+
+            .brand-text {
+                font-size: .9rem;
+            }
+
+            .hero {
+                margin-top: 18px;
+            }
+
+            .hero-card {
+                border-radius: 20px;
+                padding: 24px 19px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.2px;
+            }
+
+            .hero-meta {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .page-layout {
+                margin-top: 18px;
+            }
+
+            .section {
+                padding: 21px 17px;
+                border-radius: 15px;
+            }
+
+            .grid,
+            .grid.three {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .top-btn {
+                right: 13px;
+                bottom: 13px;
+            }
+        }
+
+        @media (max-width: 470px) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .hero-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow {
+                grid-template-columns: 1fr;
+            }
+
+            .badge-row {
+                gap: 6px;
+            }
+
+            .badge {
+                font-size: .72rem;
+            }
+
+            .toc {
+                padding: 14px;
+            }
+
+            .toc a {
+                display: block;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "AI Learning HUB - Chapter 10: AI Tools",
+    "description": "A comprehensive educational chapter covering AI tools, categories, workflows, responsible usage and practical applications.",
+    "provider": {
+      "@type": "Organization",
+      "name": "AI Learning HUB"
+    },
+    "educationalLevel": "Beginner to Intermediate",
+    "inLanguage": "en-IN"
+  }
+  </script>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+        <div class="nav-inner">
+
+            <a href="../index.html" class="brand" aria-label="AI Learning HUB Home">
+                <span class="brand-logo">AI</span>
+                <span class="brand-text">AI Learning HUB</span>
+            </a>
+
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#courses">Courses</a>
+                <a href="../index.html#tools">Tools</a>
+                <a href="../index.html#articles">Articles</a>
+                <a href="../index.html#resources">Resources</a>
+                <a href="../index.html#about">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">
+                    ☾
+                </button>
+
+                <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">
+                    ☰
+                </button>
+            </div>
+
+        </div>
+
+        <div class="progress-track" aria-hidden="true">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-card">
+
+                <div class="badge-row">
+                    <span class="badge">LEVEL 2</span>
+                    <span class="badge">CHAPTER 10</span>
+                    <span class="badge neutral">AI Tools</span>
+                </div>
+
+                <h1>
+                    AI Tools:
+                    <span>AI ko real world me use karna</span>
+                </h1>
+
+                <p class="hero-lead">
+                    AI sirf ek chatbot ka naam nahi hai. Aaj AI ke andar
+                    writing, research, coding, image, video, voice,
+                    productivity, automation aur multimodal jaise bahut
+                    saare tool categories hain. Is chapter me tum ek
+                    complete AI tool ecosystem samjhoge aur seekhoge ki
+                    kisi problem ke liye sahi AI tool kaise choose kiya jata hai.
+                </p>
+
+                <div class="hero-meta">
+
+                    <div class="meta-box">
+                        <strong>Level</strong>
+                        <span>AI Tool Fundamentals</span>
+                    </div>
+
+                    <div class="meta-box">
+                        <strong>Difficulty</strong>
+                        <span>Beginner → Intermediate</span>
+                    </div>
+
+                    <div class="meta-box">
+                        <strong>Focus</strong>
+                        <span>Tool Selection + Workflow</span>
+                    </div>
+
+                    <div class="meta-box">
+                        <strong>Goal</strong>
+                        <span>Use AI Intelligently</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PAGE ================= -->
+
+        <div class="page-layout">
+
+            <!-- ================= TOC ================= -->
+
+            <aside class="toc" aria-label="Chapter contents">
+
+                <div class="toc-title">
+                    Chapter Contents
+                </div>
+
+                <a href="#intro">01. AI Tools Introduction</a>
+                <a href="#what">02. AI Tool Kya Hai?</a>
+                <a href="#working">03. AI Tools Kaise Kaam Karte Hain?</a>
+                <a href="#categories">04. AI Tool Categories</a>
+                <a href="#ecosystem">05. AI Tool Ecosystem</a>
+                <a href="#chat">06. Chat Assistants</a>
+                <a href="#writing">07. Writing Tools</a>
+                <a href="#research">08. Research & Search</a>
+                <a href="#coding">09. Coding Tools</a>
+                <a href="#image">10. Image Tools</a>
+                <a href="#video">11. Video Tools</a>
+                <a href="#voice">12. Voice & Audio</a>
+                <a href="#productivity">13. Productivity</a>
+                <a href="#multimodal">14. Multimodal AI</a>
+                <a href="#selection">15. Tool Selection</a>
+                <a href="#workflow">16. Professional Workflow</a>
+                <a href="#limitations">17. Limitations</a>
+                <a href="#security">18. Privacy & Security</a>
+                <a href="#mistakes">19. Beginner Mistakes</a>
+                <a href="#projects">20. Practical Projects</a>
+                <a href="#quiz">21. Quiz</a>
+                <a href="#summary">22. Summary</a>
+
+            </aside>
+
+
+            <!-- ================= CONTENT ================= -->
+
+            <article class="content">
+
+
+                <!-- 01 -->
+
+                <section class="section" id="intro">
+
+                    <div class="section-label">
+                        01 · Foundation
+                    </div>
+
+                    <h2>AI Tools ka Introduction</h2>
+
+                    <p>
+                        AI ko practically use karne ke liye sirf ye samajhna
+                        enough nahi hai ki Artificial Intelligence kya hoti hai.
+                        Tumhe ye bhi samajhna padega ki AI ko use karne ke liye
+                        kaun-kaun se tools available hain aur unka kaam kya hai.
+                    </p>
+
+                    <p>
+                        Example ke liye agar tumhe ek article likhna hai,
+                        coding problem solve karni hai, image generate karni hai,
+                        PDF se information nikalni hai, data analyze karna hai
+                        ya kisi topic par research karni hai, to har situation
+                        me same AI tool best choice nahi hota.
+                    </p>
+
+                    <div class="callout">
+                        <strong>Core Idea</strong>
+                        <p>
+                            AI seekhne ka next step sirf “AI kya hai?” nahi,
+                            balki “AI ko kis problem ke liye kaise use karna hai?”
+                            hai.
+                        </p>
+                    </div>
+
+                    <div class="grid three">
+
+                        <div class="info-card">
+                            <div class="card-icon">01</div>
+                            <h3>Understand</h3>
+                            <p>
+                                Tool ka purpose aur capability samjho.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">02</div>
+                            <h3>Choose</h3>
+                            <p>
+                                Problem ke according suitable tool select karo.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">03</div>
+                            <h3>Use</h3>
+                            <p>
+                                Clear input do aur output ko verify karo.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- 02 -->
+
+                <section class="section" id="what">
+
+                    <div class="section-label">
+                        02 · Definition
+                    </div>
+
+                    <h2>AI Tool Kya Hai?</h2>
+
+                    <p>
+                        Simple language me, <strong>AI tool ek software,
+                            application ya service hai jo artificial intelligence
+                            ke models/capabilities ka use karke kisi particular
+                            task me help karti hai.</strong>
+                    </p>
+
+                    <p>
+                        AI tool khud ek magic machine nahi hota. Usually uske
+                        peeche ek ya multiple AI models, data-processing
+                        systems, interfaces, APIs aur software infrastructure
+                        ka combination hota hai.
+                    </p>
+
+                    <h3>Ek simple model</h3>
+
+                    <div class="workflow">
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">01</span>
+                            User
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">02</span>
+                            Input
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">03</span>
+                            AI System
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">04</span>
+                            Processing
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">05</span>
+                            Output
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">06</span>
+                            Human Review
+                        </div>
+
+                    </div>
+
+                    <div class="callout success">
+                        <strong>Important</strong>
+                        <p>
+                            AI tool ka output final truth automatically nahi hota.
+                            Important information ko human review aur verification
+                            ki zarurat ho sakti hai.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 03 -->
+
+                <section class="section" id="working">
+
+                    <div class="section-label">
+                        03 · Working
+                    </div>
+
+                    <h2>AI Tools Kaise Kaam Karte Hain?</h2>
+
+                    <p>
+                        Different AI tools internally different technologies
+                        use karte hain, lekin user perspective se ek common
+                        workflow samjha ja sakta hai.
+                    </p>
+
+                    <div class="grid">
+
+                        <div class="info-card">
+                            <div class="card-icon">I</div>
+                            <h3>Input</h3>
+                            <p>
+                                User text, image, audio, document, code, data ya
+                                kisi other supported format me input deta hai.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">M</div>
+                            <h3>Model</h3>
+                            <p>
+                                AI model input ko process karke patterns,
+                                relationships ya learned representations ka use
+                                karta hai.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">O</div>
+                            <h3>Output</h3>
+                            <p>
+                                System answer, text, image, code, audio,
+                                recommendation ya other output produce kar sakta hai.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">H</div>
+                            <h3>Human Review</h3>
+                            <p>
+                                User output ko check karta hai aur zarurat ke
+                                according correction/refinement karta hai.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <h3>Tool aur AI Model me difference</h3>
+
+                    <p>
+                        AI model aur AI tool ko same samajhna common mistake hai.
+                        Model ek computational intelligence system ho sakta hai,
+                        jabki tool us capability ko user-friendly application
+                        ke through accessible banata hai.
+                    </p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concept</th>
+                                    <th>Simple Meaning</th>
+                                    <th>Example Role</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>AI Model</td>
+                                    <td>Intelligence processing system</td>
+                                    <td>Text/image prediction or generation</td>
+                                </tr>
+
+                                <tr>
+                                    <td>AI Tool</td>
+                                    <td>User-facing application</td>
+                                    <td>Chat, coding, image creation</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Interface</td>
+                                    <td>Jahan user interaction karta hai</td>
+                                    <td>Web/mobile application</td>
+                                </tr>
+
+                                <tr>
+                                    <td>API</td>
+                                    <td>Software-to-software connection</td>
+                                    <td>App me AI capability integrate karna</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+
+
+                <!-- 04 -->
+
+                <section class="section" id="categories">
+
+                    <div class="section-label">
+                        04 · Ecosystem
+                    </div>
+
+                    <h2>AI Tools ki Major Categories</h2>
+
+                    <p>
+                        AI ecosystem ko samajhne ke liye tools ko unke main
+                        purpose ke basis par categories me divide karna useful hai.
+                    </p>
+
+                    <div class="grid three">
+
+                        <div class="info-card">
+                            <div class="card-icon">💬</div>
+                            <h3>Chat Assistants</h3>
+                            <p>
+                                Questions, explanations, brainstorming,
+                                planning aur general assistance.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">✍</div>
+                            <h3>Writing</h3>
+                            <p>
+                                Drafting, rewriting, summarizing, editing
+                                aur content creation.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">🔎</div>
+                            <h3>Research</h3>
+                            <p>
+                                Information discovery, source analysis
+                                aur research assistance.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">💻</div>
+                            <h3>Coding</h3>
+                            <p>
+                                Code generation, explanation, debugging
+                                aur development assistance.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">🖼</div>
+                            <h3>Image</h3>
+                            <p>
+                                Image generation, editing, design
+                                aur visual ideation.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">🎬</div>
+                            <h3>Video</h3>
+                            <p>
+                                Video generation, editing assistance,
+                                scripts aur visual production.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">🎙</div>
+                            <h3>Voice & Audio</h3>
+                            <p>
+                                Speech recognition, transcription,
+                                synthesis aur audio workflows.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">📊</div>
+                            <h3>Productivity</h3>
+                            <p>
+                                Documents, spreadsheets, presentations,
+                                meetings aur workflow assistance.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">🧩</div>
+                            <h3>Multimodal</h3>
+                            <p>
+                                Text, image, audio aur other input/output
+                                formats ko combine karna.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- 05 -->
+
+                <section class="section" id="ecosystem">
+
+                    <div class="section-label">
+                        05 · Big Picture
+                    </div>
+
+                    <h2>AI Tool Ecosystem ko Samjho</h2>
+
+                    <p>
+                        AI ecosystem ko ek toolbox ki tarah socho. Toolbox me
+                        har tool ka purpose different hota hai. Screwdriver,
+                        hammer aur measuring tool sab useful hain, lekin har
+                        problem ke liye same tool use nahi kiya jata.
+                    </p>
+
+                    <p>
+                        AI me bhi exactly isi principle ko apply karna chahiye.
+                        “Sabse popular AI tool kaunsa hai?” se zyada useful
+                        question hai:
+                    </p>
+
+                    <div class="callout">
+                        <strong>
+                            “Meri problem kya hai aur us problem ke liye kaunsi
+                            AI capability useful hai?”
+                        </strong>
+                        <p>
+                            Problem-first thinking AI tools choose karne ka
+                            strongest beginner habit hai.
+                        </p>
+                    </div>
+
+                    <h3>Capability vs Tool</h3>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Need</th>
+                                    <th>Capability</th>
+                                    <th>Possible Tool Type</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Concept samajhna</td>
+                                    <td>Explanation</td>
+                                    <td>Chat assistant</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Long document samajhna</td>
+                                    <td>Document analysis</td>
+                                    <td>AI document tool</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Article draft</td>
+                                    <td>Text generation</td>
+                                    <td>Writing assistant</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Code debugging</td>
+                                    <td>Code reasoning</td>
+                                    <td>Coding assistant</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Poster idea</td>
+                                    <td>Image generation</td>
+                                    <td>Image AI</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Audio transcription</td>
+                                    <td>Speech-to-text</td>
+                                    <td>Voice AI</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+
+
+                <!-- 06 -->
+
+                <section class="section" id="chat">
+
+                    <div class="section-label">
+                        06 · Conversational AI
+                    </div>
+
+                    <h2>AI Chat Assistants</h2>
+
+                    <p>
+                        Chat-based AI tools natural-language conversation ke
+                        through user ko AI capabilities access karne dete hain.
+                        Ye beginners ke liye AI ke saath interact karne ka
+                        easiest starting point hai.
+                    </p>
+
+                    <h3>Chat assistant se kya kar sakte ho?</h3>
+
+                    <ul class="checklist">
+                        <li>Complex topic ko simple language me samajhna.</li>
+                        <li>Study notes aur explanations banana.</li>
+                        <li>Ideas brainstorm karna.</li>
+                        <li>Text rewrite aur improve karna.</li>
+                        <li>Programming concepts samajhna.</li>
+                        <li>Planning aur task breakdown banana.</li>
+                        <li>Examples aur practice questions create karna.</li>
+                        <li>Conversation ke through answer refine karna.</li>
+                    </ul>
+
+                    <h3>Conversation ka advantage</h3>
+
+                    <p>
+                        Traditional search me har baar new query likhni pad sakti
+                        hai. Conversational AI me tum previous response ke context
+                        ke basis par follow-up instruction de sakte ho.
+                    </p>
+
+                    <div class="prompt-box">Example:
+
+                        User:
+                        "Photosynthesis ko simple Hindi me samjhao."
+
+                        Follow-up:
+                        "Ab ise class 8 ke student ke level par example ke saath samjhao."
+
+                        Follow-up:
+                        "Ab isi topic ke 5 MCQ bana do."</div>
+
+                    <p>
+                        Isi iterative conversation ko later chapters me prompt
+                        engineering ke through aur powerful banaya jayega.
+                    </p>
+
+                </section>
+
+
+                <!-- 07 -->
+
+                <section class="section" id="writing">
+
+                    <div class="section-label">
+                        07 · Content
+                    </div>
+
+                    <h2>AI Writing Tools</h2>
+
+                    <p>
+                        AI writing tools text creation aur editing workflows
+                        ko accelerate kar sakte hain. Inka use sirf article
+                        likhne tak limited nahi hai.
+                    </p>
+
+                    <div class="grid">
+
+                        <div class="info-card">
+                            <div class="card-icon">A</div>
+                            <h3>Drafting</h3>
+                            <p>
+                                First draft, outline, headings aur content structure.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">E</div>
+                            <h3>Editing</h3>
+                            <p>
+                                Grammar, clarity, structure aur readability improve karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">R</div>
+                            <h3>Rewriting</h3>
+                            <p>
+                                Same idea ko different tone, audience ya format me convert karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">S</div>
+                            <h3>Summarization</h3>
+                            <p>
+                                Long material ko concise key points me convert karna.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="callout warning">
+                        <strong>Important</strong>
+                        <p>
+                            AI-generated text ko blindly publish nahi karna chahiye.
+                            Facts, names, numbers, claims aur source requirements
+                            ko context ke according verify karna zaroori hai.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 08 -->
+
+                <section class="section" id="research">
+
+                    <div class="section-label">
+                        08 · Research
+                    </div>
+
+                    <h2>AI Research & Search Tools</h2>
+
+                    <p>
+                        Research-oriented AI tools ka purpose information
+                        discovery aur synthesis ko easier banana ho sakta hai.
+                        Lekin research ka matlab sirf AI se answer lena nahi hai.
+                    </p>
+
+                    <h3>Good research workflow</h3>
+
+                    <ol>
+                        <li>Question ko clearly define karo.</li>
+                        <li>Relevant information discover karo.</li>
+                        <li>Important claims identify karo.</li>
+                        <li>Primary/credible sources ko inspect karo.</li>
+                        <li>Different sources ko compare karo.</li>
+                        <li>Conclusion ko evidence ke saath build karo.</li>
+                    </ol>
+
+                    <div class="callout">
+                        <strong>Research Rule</strong>
+                        <p>
+                            AI ko research assistant samjho, automatic authority nahi.
+                            Important factual claims ke liye original/credible sources
+                            check karna strong habit hai.
+                        </p>
+                    </div>
+
+                    <h3>Search aur AI answer me difference</h3>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Traditional Search</th>
+                                    <th>AI-Assisted Search</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Relevant pages find karna</td>
+                                    <td>Information ko summarize/synthesize kar sakta hai</td>
+                                </tr>
+
+                                <tr>
+                                    <td>User sources inspect karta hai</td>
+                                    <td>Tool context ke basis par answer construct kar sakta hai</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Multiple pages manually compare karne pad sakte hain</td>
+                                    <td>Comparison assistance mil sakti hai</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+
+
+                <!-- 09 -->
+
+                <section class="section" id="coding">
+
+                    <div class="section-label">
+                        09 · Development
+                    </div>
+
+                    <h2>AI Coding Tools</h2>
+
+                    <p>
+                        Coding AI tools developers aur learners ko code likhne,
+                        samajhne, debug karne aur improve karne me assist kar sakte hain.
+                    </p>
+
+                    <div class="grid">
+
+                        <div class="info-card">
+                            <div class="card-icon">{ }</div>
+                            <h3>Code Generation</h3>
+                            <p>
+                                Requirement ke basis par example code create karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">?</div>
+                            <h3>Explanation</h3>
+                            <p>
+                                Existing code ko line-by-line ya concept-wise samajhna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">!</div>
+                            <h3>Debugging</h3>
+                            <p>
+                                Error ke possible causes identify karne me help.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">↗</div>
+                            <h3>Refactoring</h3>
+                            <p>
+                                Code structure aur readability improve karne ki assistance.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="prompt-box">Example request:
+
+                        "Is JavaScript function ko samjhao.
+                        Phir batao ki edge cases kya ho sakte hain.
+                        Code ko bina behavior change kiye readable version me refactor karo."</div>
+
+                    <div class="callout warning">
+                        <strong>Developer Rule</strong>
+                        <p>
+                            Generated code ko run, inspect, test aur understand karo.
+                            “AI ne code diya hai, isliye correct hoga” ek dangerous assumption hai.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 10 -->
+
+                <section class="section" id="image">
+
+                    <div class="section-label">
+                        10 · Visual AI
+                    </div>
+
+                    <h2>AI Image Tools</h2>
+
+                    <p>
+                        Image-generation aur image-editing AI tools natural-language
+                        instructions ya reference inputs ke through visual content
+                        create ya modify kar sakte hain.
+                    </p>
+
+                    <h3>Common use cases</h3>
+
+                    <ul>
+                        <li>Concept visualization</li>
+                        <li>Educational illustrations</li>
+                        <li>Design ideation</li>
+                        <li>Marketing visuals</li>
+                        <li>Background concepts</li>
+                        <li>Storyboarding</li>
+                        <li>Creative experimentation</li>
+                    </ul>
+
+                    <h3>Image prompt ke important elements</h3>
+
+                    <div class="grid three">
+
+                        <div class="info-card">
+                            <h3>Subject</h3>
+                            <p>
+                                Kya create karna hai?
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Style</h3>
+                            <p>
+                                Visual appearance kis type ki ho?
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Composition</h3>
+                            <p>
+                                Subject frame me kaise arranged ho?
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Lighting</h3>
+                            <p>
+                                Light aur environment kaisa ho?
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Purpose</h3>
+                            <p>
+                                Image ka intended use kya hai?
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Format</h3>
+                            <p>
+                                Aspect ratio ya output requirement kya hai?
+                            </p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- 11 -->
+
+                <section class="section" id="video">
+
+                    <div class="section-label">
+                        11 · Video AI
+                    </div>
+
+                    <h2>AI Video Tools</h2>
+
+                    <p>
+                        Video AI tools text, images ya other instructions se video
+                        creation aur editing workflows ko assist kar sakte hain.
+                    </p>
+
+                    <div class="grid">
+
+                        <div class="info-card">
+                            <h3>Text → Video</h3>
+                            <p>
+                                Description se visual sequence generate karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Image → Video</h3>
+                            <p>
+                                Still image ko animated scene me convert karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>AI Editing</h3>
+                            <p>
+                                Editing workflow ke selected tasks automate ya assist karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Script Assistance</h3>
+                            <p>
+                                Video idea, script, scenes aur narration planning.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <p>
+                        Professional video workflow me AI ko complete replacement
+                        ke bajay planning, generation aur editing assistance ke
+                        roop me use karna useful ho sakta hai.
+                    </p>
+
+                </section>
+
+
+                <!-- 12 -->
+
+                <section class="section" id="voice">
+
+                    <div class="section-label">
+                        12 · Audio AI
+                    </div>
+
+                    <h2>Voice & Audio AI</h2>
+
+                    <p>
+                        Voice AI speech ko text me convert karne, text ko speech
+                        me convert karne aur audio workflows ko process karne me
+                        useful ho sakta hai.
+                    </p>
+
+                    <div class="grid three">
+
+                        <div class="info-card">
+                            <div class="card-icon">STT</div>
+                            <h3>Speech → Text</h3>
+                            <p>
+                                Spoken audio ko written text me convert karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">TTS</div>
+                            <h3>Text → Speech</h3>
+                            <p>
+                                Written text ko synthesized speech me convert karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">AI</div>
+                            <h3>Audio Assistance</h3>
+                            <p>
+                                Transcription, cleanup, narration aur other workflows.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="callout warning">
+                        <strong>Voice Safety</strong>
+                        <p>
+                            Voice-related AI capabilities ke saath consent, identity,
+                            privacy aur misuse concerns ko seriously samajhna zaroori hai.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 13 -->
+
+                <section class="section" id="productivity">
+
+                    <div class="section-label">
+                        13 · Productivity
+                    </div>
+
+                    <h2>Office & Productivity AI</h2>
+
+                    <p>
+                        AI productivity tools repetitive knowledge-work ko faster
+                        banane me help kar sakte hain.
+                    </p>
+
+                    <div class="grid">
+
+                        <div class="info-card">
+                            <h3>Documents</h3>
+                            <p>
+                                Drafting, summarization, editing aur organization.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Spreadsheets</h3>
+                            <p>
+                                Formula explanation, data cleaning ideas aur analysis assistance.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Presentations</h3>
+                            <p>
+                                Structure, content ideas aur slide planning.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Meetings</h3>
+                            <p>
+                                Transcription, notes aur action-item organization.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <h3>AI productivity ka correct mindset</h3>
+
+                    <p>
+                        Goal ye nahi hona chahiye ki “AI har kaam khud kare.”
+                        Better goal hai:
+                        <strong>human judgement ko important decisions ke liye
+                            preserve karte hue repetitive work ko reduce karna.</strong>
+                    </p>
+
+                </section>
+
+
+                <!-- 14 -->
+
+                <section class="section" id="multimodal">
+
+                    <div class="section-label">
+                        14 · Advanced Concept
+                    </div>
+
+                    <h2>Multimodal AI</h2>
+
+                    <p>
+                        Multimodal AI aise systems ko refer karta hai jo ek se
+                        zyada modalities — jaise text, image, audio ya other data
+                        formats — ke saath kaam kar sakte hain.
+                    </p>
+
+                    <h3>Example workflow</h3>
+
+                    <div class="workflow">
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">01</span>
+                            Image
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">02</span>
+                            Question
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">03</span>
+                            AI Analysis
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">04</span>
+                            Reasoning
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">05</span>
+                            Text Output
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">06</span>
+                            Action
+                        </div>
+
+                    </div>
+
+                    <p>
+                        Iska practical benefit ye hai ki user ko har information
+                        ko manually ek single format me convert karna zaroori nahi
+                        hota. Lekin multimodal capability ka matlab perfect
+                        understanding automatically nahi hota.
+                    </p>
+
+                    <div class="callout">
+                        <strong>Remember</strong>
+                        <p>
+                            More input formats ≠ guaranteed perfect understanding.
+                            AI output ko task ke importance ke according evaluate karo.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 15 -->
+
+                <section class="section" id="selection">
+
+                    <div class="section-label">
+                        15 · Decision Making
+                    </div>
+
+                    <h2>Right AI Tool Kaise Choose Kare?</h2>
+
+                    <p>
+                        AI tools choose karte waqt sirf popularity ya fancy features
+                        ko decision factor nahi banana chahiye.
+                    </p>
+
+                    <h3>7-point selection framework</h3>
+
+                    <ol>
+                        <li><strong>Problem:</strong> exactly kya solve karna hai?</li>
+                        <li><strong>Capability:</strong> kaunsi AI capability required hai?</li>
+                        <li><strong>Quality:</strong> output quality task ke liye sufficient hai?</li>
+                        <li><strong>Control:</strong> output ko kitna customize kar sakte ho?</li>
+                        <li><strong>Privacy:</strong> sensitive information kaise handle hoti hai?</li>
+                        <li><strong>Cost:</strong> free/paid limits aur usage cost kya hai?</li>
+                        <li><strong>Workflow:</strong> existing process me fit hota hai?</li>
+                    </ol>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Factor</th>
+                                    <th>Ask Yourself</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Accuracy</td>
+                                    <td>Kya task me high accuracy required hai?</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Privacy</td>
+                                    <td>Kya input confidential hai?</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Speed</td>
+                                    <td>Kya fast output important hai?</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Features</td>
+                                    <td>Kya text ke saath files/images/audio bhi chahiye?</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Cost</td>
+                                    <td>Kya free plan sufficient hai?</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Integration</td>
+                                    <td>Kya tool existing software ke saath connect ho sakta hai?</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+
+
+                <!-- 16 -->
+
+                <section class="section" id="workflow">
+
+                    <div class="section-label">
+                        16 · Professional Method
+                    </div>
+
+                    <h2>Professional AI Workflow</h2>
+
+                    <p>
+                        Professional AI usage ka strongest concept hai:
+                        <strong>AI ko isolated answer machine ke bajay workflow
+                            component ki tarah use karna.</strong>
+                    </p>
+
+                    <div class="callout">
+                        <strong>Complete Mental Model</strong>
+                        <p>
+                            Problem → Capability → Tool → Input → AI Output →
+                            Human Review → Refinement → Final Result
+                        </p>
+                    </div>
+
+                    <h3>Example: Educational Article</h3>
+
+                    <div class="workflow">
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">1</span>
+                            Topic
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">2</span>
+                            Research
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">3</span>
+                            Outline
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">4</span>
+                            Draft
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">5</span>
+                            Review
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="workflow-num">6</span>
+                            Publish
+                        </div>
+
+                    </div>
+
+                    <h3>Human-in-the-loop</h3>
+
+                    <p>
+                        Human-in-the-loop ka simple meaning hai ki important stages
+                        par human judgement remain karta hai. AI output generate
+                        kar sakta hai, lekin final decision context aur requirement
+                        ke according human verify karta hai.
+                    </p>
+
+                    <div class="prompt-box">Professional mindset:
+
+                        AI se:
+                        "Answer do."
+
+                        ke bajay:
+
+                        "Task ko samjho → requirements identify karo →
+                        draft banao → assumptions clearly batao →
+                        possible errors identify karo → final output do."</div>
+
+                </section>
+
+
+                <!-- 17 -->
+
+                <section class="section" id="limitations">
+
+                    <div class="section-label">
+                        17 · Reality Check
+                    </div>
+
+                    <h2>AI Tools ki Limitations</h2>
+
+                    <p>
+                        AI tools powerful hain, lekin perfect nahi. Ek responsible
+                        AI learner ko capabilities ke saath limitations bhi samajhni chahiye.
+                    </p>
+
+                    <div class="grid">
+
+                        <div class="info-card">
+                            <h3>Wrong Output</h3>
+                            <p>
+                                AI confidently incorrect information produce kar sakta hai.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Missing Context</h3>
+                            <p>
+                                Incomplete input se output bhi incomplete ho sakta hai.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Ambiguity</h3>
+                            <p>
+                                Unclear instruction ke multiple interpretations ho sakte hain.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Outdated Information</h3>
+                            <p>
+                                Har tool har situation me latest information guarantee nahi karta.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Bias</h3>
+                            <p>
+                                AI outputs training data aur system design se influenced ho sakte hain.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <h3>Overconfidence</h3>
+                            <p>
+                                Fluent answer ka matlab automatically correct answer nahi hota.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="callout warning">
+                        <strong>Golden Rule</strong>
+                        <p>
+                            <strong>Confidence ≠ Accuracy.</strong>
+                            AI ka answer confident sound kare to bhi important
+                            claims ko verify karna chahiye.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 18 -->
+
+                <section class="section" id="security">
+
+                    <div class="section-label">
+                        18 · Responsible AI
+                    </div>
+
+                    <h2>Privacy, Security & Responsible Usage</h2>
+
+                    <p>
+                        AI tool choose karte waqt capability ke saath data handling
+                        bhi important hai.
+                    </p>
+
+                    <h3>AI me sensitive data ka example</h3>
+
+                    <ul>
+                        <li>Passwords</li>
+                        <li>Private authentication information</li>
+                        <li>Confidential business documents</li>
+                        <li>Personal identification information</li>
+                        <li>Private financial details</li>
+                        <li>Other information that should not be unnecessarily shared</li>
+                    </ul>
+
+                    <h3>Safe AI habits</h3>
+
+                    <ul class="checklist">
+                        <li>Tool ki privacy settings ko samjho.</li>
+                        <li>Unnecessary sensitive information share mat karo.</li>
+                        <li>Important output ko independently verify karo.</li>
+                        <li>Third-party content ke rights aur permissions samjho.</li>
+                        <li>AI-generated information ko automatically authoritative mat samjho.</li>
+                        <li>High-impact decisions me appropriate human review rakho.</li>
+                    </ul>
+
+                    <div class="callout success">
+                        <strong>Responsible AI Principle</strong>
+                        <p>
+                            AI ki power ka best use tab hota hai jab speed ke saath
+                            judgement, privacy aur verification bhi maintain rahe.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 19 -->
+
+                <section class="section" id="mistakes">
+
+                    <div class="section-label">
+                        19 · Beginner Mistakes
+                    </div>
+
+                    <h2>AI Tools Use Karte Time Common Mistakes</h2>
+
+                    <div class="grid">
+
+                        <div class="info-card">
+                            <div class="card-icon">1</div>
+                            <h3>Har kaam ke liye same tool</h3>
+                            <p>
+                                User ek hi tool ko every task ke liye use karta hai.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">2</div>
+                            <h3>Vague Input</h3>
+                            <p>
+                                Requirement unclear hoti hai aur output bhi generic aa jata hai.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">3</div>
+                            <h3>Blind Trust</h3>
+                            <p>
+                                AI output ko verify kiye bina final maan lena.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">4</div>
+                            <h3>Too Many Tools</h3>
+                            <p>
+                                Learning ke bajay unnecessary tool switching karna.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">5</div>
+                            <h3>Privacy Ignore Karna</h3>
+                            <p>
+                                Sensitive information ko casually AI systems me daal dena.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="card-icon">6</div>
+                            <h3>Output Review Skip Karna</h3>
+                            <p>
+                                Grammar ya formatting nahi, factual correctness bhi check nahi karna.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <h3>Better approach</h3>
+
+                    <div class="callout">
+                        <strong>
+                            One problem → One suitable capability → One suitable tool
+                        </strong>
+                        <p>
+                            Pehle workflow samjho, phir tools ki quantity badhao.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 20 -->
+
+                <section class="section" id="projects">
+
+                    <div class="section-label">
+                        20 · Practice
+                    </div>
+
+                    <h2>Practical AI Tool Projects</h2>
+
+                    <p>
+                        Chapter ko properly samajhne ke liye theory ke saath
+                        practical experimentation karo.
+                    </p>
+
+                    <h3>Project 1 — Study Assistant</h3>
+
+                    <p>
+                        Kisi ek school/technical topic ko choose karo aur AI se
+                        explanation, example, summary aur practice questions
+                        banwane ka workflow design karo.
+                    </p>
+
+                    <div class="prompt-box">Task:
+
+                        Topic: Electricity
+
+                        1. Simple explanation
+                        2. Important terms
+                        3. Real-life examples
+                        4. Common mistakes
+                        5. 10 practice questions
+                        6. Answer verification checklist</div>
+
+                    <h3>Project 2 — Content Workflow</h3>
+
+                    <p>
+                        Ek topic choose karke idea se final article tak workflow banao:
+                        research → outline → draft → editing → fact checking.
+                    </p>
+
+                    <h3>Project 3 — Coding Assistant</h3>
+
+                    <p>
+                        Ek small programming problem choose karo. AI se pehle
+                        concept explanation lo, phir solution approach,
+                        phir code, phir test cases aur edge cases.
+                    </p>
+
+                    <h3>Project 4 — Visual Learning</h3>
+
+                    <p>
+                        Kisi technical concept ka educational diagram ya visual
+                        banane ke liye image-generation workflow design karo.
+                    </p>
+
+                    <h3>Project 5 — Personal AI Toolbox</h3>
+
+                    <p>
+                        Apni daily learning/work requirements ko categories me
+                        divide karo aur har category ke liye suitable tool type
+                        identify karo.
+                    </p>
+
+                    <div class="callout success">
+                        <strong>Project Goal</strong>
+                        <p>
+                            Tumhe dozens of AI tools yaad nahi karne hain.
+                            Tumhe <strong>problem ke according capability aur tool
+                                choose karna seekhna hai.</strong>
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- 21 -->
+
+                <section class="section" id="quiz">
+
+                    <div class="section-label">
+                        21 · Knowledge Check
+                    </div>
+
+                    <h2>Chapter 10 Quiz</h2>
+
+                    <p>
+                        Neeche diye questions chapter ke main concepts ko check karte hain.
+                    </p>
+
+
+                    <div class="quiz-question">
+                        <p>1. AI tool ko best kaise describe kiya ja sakta hai?</p>
+
+                        <label class="option">
+                            <input type="radio" name="q1" value="a">
+                            <span>Sirf ek normal calculator</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q1" value="b">
+                            <span>AI capabilities ko user-facing task me provide karne wala software/service</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q1" value="c">
+                            <span>Sirf internet connection</span>
+                        </label>
+                    </div>
+
+
+                    <div class="quiz-question">
+                        <p>2. Sahi AI tool choose karne ka first step kya hai?</p>
+
+                        <label class="option">
+                            <input type="radio" name="q2" value="a">
+                            <span>Sabse expensive tool lena</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q2" value="b">
+                            <span>Problem ko clearly define karna</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q2" value="c">
+                            <span>Random tool try karna</span>
+                        </label>
+                    </div>
+
+
+                    <div class="quiz-question">
+                        <p>3. AI output ke baare me correct statement kaunsa hai?</p>
+
+                        <label class="option">
+                            <input type="radio" name="q3" value="a">
+                            <span>AI output hamesha correct hota hai</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q3" value="b">
+                            <span>AI output ko task ke importance ke according review/verify karna chahiye</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q3" value="c">
+                            <span>AI output ko kabhi use nahi karna chahiye</span>
+                        </label>
+                    </div>
+
+
+                    <div class="quiz-question">
+                        <p>4. Multimodal AI ka basic meaning kya hai?</p>
+
+                        <label class="option">
+                            <input type="radio" name="q4" value="a">
+                            <span>Sirf text process karna</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q4" value="b">
+                            <span>Multiple types of input/output modalities ke saath kaam karna</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q4" value="c">
+                            <span>Sirf images download karna</span>
+                        </label>
+                    </div>
+
+
+                    <div class="quiz-question">
+                        <p>5. Professional AI workflow ka important part kya hai?</p>
+
+                        <label class="option">
+                            <input type="radio" name="q5" value="a">
+                            <span>Human review aur refinement</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q5" value="b">
+                            <span>AI output ko bina check kiye publish karna</span>
+                        </label>
+
+                        <label class="option">
+                            <input type="radio" name="q5" value="c">
+                            <span>Har problem ke liye same tool use karna</span>
+                        </label>
+                    </div>
+
+
+                    <button class="quiz-btn" type="button" id="checkQuiz">
+                        Check Answers
+                    </button>
+
+                    <div class="quiz-result" id="quizResult" role="status">
+                    </div>
+
+                </section>
+
+
+                <!-- 22 -->
+
+                <section class="section" id="summary">
+
+                    <div class="section-label">
+                        22 · Final Understanding
+                    </div>
+
+                    <h2>Chapter 10 Summary</h2>
+
+                    <div class="takeaway">
+
+                        <h3>Ab tumhe kya samajhna chahiye?</h3>
+
+                        <ul class="checklist">
+                            <li>
+                                AI tool ek software/service ho sakta hai jo AI
+                                capabilities ko practical tasks ke liye provide karta hai.
+                            </li>
+
+                            <li>
+                                AI model aur AI tool same concept nahi hain.
+                            </li>
+
+                            <li>
+                                AI tools ke multiple categories hoti hain:
+                                chat, writing, research, coding, image, video,
+                                voice, productivity aur multimodal.
+                            </li>
+
+                            <li>
+                                Har problem ke liye same AI tool best nahi hota.
+                            </li>
+
+                            <li>
+                                Tool select karne se pehle problem aur required
+                                capability identify karni chahiye.
+                            </li>
+
+                            <li>
+                                AI output ko important tasks me review aur verify karna chahiye.
+                            </li>
+
+                            <li>
+                                Privacy aur sensitive data handling AI usage ka important part hai.
+                            </li>
+
+                            <li>
+                                Professional AI workflow me human judgement,
+                                refinement aur verification important hain.
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="callout" style="margin-top:20px;">
+
+                        <strong>Chapter 10 ka Core Formula</strong>
+
+                        <p>
+                            <strong>
+                                Problem → Capability → Tool → Input →
+                                AI Output → Human Review → Refinement → Result
+                            </strong>
+                        </p>
+
+                    </div>
+
+                    <p style="margin-top:20px;">
+                        Is chapter ke baad tumhara goal dozens of tools ke names
+                        ratna nahi hai. Real skill ye hai ki tum kisi problem ko
+                        dekhkar identify kar sako ki uske liye kis type ki AI
+                        capability aur kis type ka tool useful ho sakta hai.
+                    </p>
+
+                    <p>
+                        Ab tum AI tools ko ek random collection ki tarah nahi,
+                        balki ek structured ecosystem ki tarah samajh sakte ho.
+                        Aage practical AI usage me sabse important skill hogi
+                        AI ke saath clearly communicate karna — yani better
+                        questions aur better prompts banana.
+                    </p>
+
+                </section>
+
+            </article>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+        <p>
+            © <span id="year"></span> AI Learning HUB.
+            Learn AI. Build Skills. Use Technology Responsibly.
+        </p>
+    </footer>
+
+
+    <!-- BACK TO TOP -->
+
+    <button class="top-btn" id="topBtn" type="button" aria-label="Back to top">
+        ↑
+    </button>
+
+
+    <script>
+        /* =========================================================
+           AI LEARNING HUB — CHAPTER 10 JS
+        ========================================================= */
+
+        const html = document.documentElement;
+        const themeBtn = document.getElementById("themeBtn");
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+        const progressBar = document.getElementById("progressBar");
+        const topBtn = document.getElementById("topBtn");
+        const year = document.getElementById("year");
+
+        /* ================= YEAR ================= */
+
+        year.textContent = new Date().getFullYear();
+
+
+        /* ================= THEME ================= */
+
+        const savedTheme = localStorage.getItem("ai-hub-theme");
+
+        if (savedTheme === "dark") {
+            html.classList.add("dark");
+            themeBtn.textContent = "☀";
+        } else {
+            themeBtn.textContent = "☾";
+        }
+
+        themeBtn.addEventListener("click", () => {
+
+            html.classList.toggle("dark");
+
+            const isDark = html.classList.contains("dark");
+
+            localStorage.setItem(
+                "ai-hub-theme",
+                isDark ? "dark" : "light"
+            );
+
+            themeBtn.textContent = isDark ? "☀" : "☾";
+        });
+
+
+        /* ================= MOBILE MENU ================= */
+
+        menuBtn.addEventListener("click", () => {
+
+            const opened = navLinks.classList.toggle("mobile-open");
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                opened ? "true" : "false"
+            );
+
+            menuBtn.textContent = opened ? "✕" : "☰";
+        });
+
+
+        /* Close menu after clicking link */
+
+        document.querySelectorAll(".nav-links a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("mobile-open");
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuBtn.textContent = "☰";
+            });
+
+        });
+
+
+        /* ================= READING PROGRESS ================= */
+
+        function updateProgress() {
+
+            const scrollTop =
+                window.scrollY ||
+                document.documentElement.scrollTop;
+
+            const documentHeight =
+                document.documentElement.scrollHeight -
+                document.documentElement.clientHeight;
+
+            const percentage =
+                documentHeight > 0
+                    ? (scrollTop / documentHeight) * 100
+                    : 0;
+
+            progressBar.style.width =
+                Math.min(100, Math.max(0, percentage)) + "%";
+        }
+
+        window.addEventListener(
+            "scroll",
+            updateProgress,
+            { passive: true }
+        );
+
+        window.addEventListener(
+            "resize",
+            updateProgress
+        );
+
+        updateProgress();
+
+
+        /* ================= BACK TO TOP ================= */
+
+        function updateTopButton() {
+
+            if (window.scrollY > 500) {
+                topBtn.classList.add("show");
+            } else {
+                topBtn.classList.remove("show");
+            }
+        }
+
+        window.addEventListener(
+            "scroll",
+            updateTopButton,
+            { passive: true }
+        );
+
+        topBtn.addEventListener("click", () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+
+        /* ================= QUIZ ================= */
+
+        const checkQuiz =
+            document.getElementById("checkQuiz");
+
+        const quizResult =
+            document.getElementById("quizResult");
+
+        const answers = {
+            q1: "b",
+            q2: "b",
+            q3: "b",
+            q4: "b",
+            q5: "a"
+        };
+
+        checkQuiz.addEventListener("click", () => {
+
+            let score = 0;
+            let attempted = 0;
+
+            Object.keys(answers).forEach(question => {
+
+                const selected =
+                    document.querySelector(
+                        `input[name="${question}"]:checked`
+                    );
+
+                if (selected) {
+
+                    attempted++;
+
+                    if (selected.value === answers[question]) {
+                        score++;
+                    }
+
+                }
+
+            });
+
+            quizResult.style.display = "block";
+
+            if (attempted < Object.keys(answers).length) {
+
+                quizResult.textContent =
+                    `Pehle saare questions attempt karo. ` +
+                    `${attempted}/5 attempted.`;
+
+                return;
+            }
+
+            let message = "";
+
+            if (score === 5) {
+                message =
+                    "Excellent! 5/5 — AI Tools ka foundation bahut strong hai.";
+            }
+            else if (score >= 4) {
+                message =
+                    `Very good! ${score}/5 — concepts kaafi achhe se samjhe gaye hain.`;
+            }
+            else if (score >= 3) {
+                message =
+                    `${score}/5 — good start. Chapter ke core concepts ek baar revise karo.`;
+            }
+            else {
+                message =
+                    `${score}/5 — koi problem nahi. AI Tools ke categories, workflow aur selection framework ko dobara padho.`;
+            }
+
+            quizResult.textContent = message;
+
+        });
+
+
+        /* ================= KEYBOARD ================= */
+
+        document.addEventListener("keydown", event => {
+
+            if (event.key === "Escape") {
+
+                navLinks.classList.remove("mobile-open");
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuBtn.textContent = "☰";
+            }
+
+        });
+
+
+        /* ================= SAFETY CHECK ================= */
+
+        /*
+          This chapter intentionally contains:
+          - No Previous Chapter button
+          - No Next Chapter button
+          - No automatic chapter redirection
+          - No fixed mobile sidebar
+        */
+
+    </script>
+
+</body>
+
+</html>

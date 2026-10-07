@@ -1,0 +1,5376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Chapter 04 — AI Fundamentals | AI Learning HUB</title>
+
+    <meta name="description"
+        content="Learn Artificial Intelligence fundamentals in depth: AI definition, how AI works, data, rules, machine learning, deep learning, generative AI, automation, human intelligence, real-world applications, limitations, hallucinations, risks and responsible AI.">
+    <meta name="keywords"
+        content="AI fundamentals, Artificial Intelligence, AI basics, machine learning, deep learning, generative AI, AI history, AI applications, AI limitations, AI learning">
+    <meta name="author" content="AI Learning HUB">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#f8fafc">
+
+    <link rel="canonical" href="https://example.com/chapters/chapter-04.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Chapter 04 — AI Fundamentals">
+    <meta property="og:description" content="A deep and practical introduction to Artificial Intelligence.">
+    <meta property="og:site_name" content="AI Learning HUB">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "AI Fundamentals",
+    "description": "A complete practical introduction to Artificial Intelligence.",
+    "provider": {
+      "@type": "Organization",
+      "name": "AI Learning HUB"
+    },
+    "educationalLevel": "Beginner to Intermediate",
+    "inLanguage": "en-IN",
+    "isAccessibleForFree": true
+  }
+  </script>
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Chapter 04 — AI Fundamentals",
+    "description": "Learn the foundations of Artificial Intelligence, including AI systems, data, models, automation, machine learning, deep learning, generative AI and limitations.",
+    "author": {
+      "@type": "Organization",
+      "name": "AI Learning HUB"
+    }
+  }
+  </script>
+
+    <style>
+        /* =========================================================
+       AI LEARNING HUB — CHAPTER 04
+       Single-file professional educational page
+       ========================================================= */
+
+        :root {
+            --bg: #f5f7fb;
+            --surface: #ffffff;
+            --surface-2: #f8fafc;
+            --text: #172033;
+            --muted: #657085;
+            --border: #e4e8f0;
+
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --primary-soft: #eef2ff;
+
+            --success: #15803d;
+            --success-soft: #ecfdf3;
+
+            --warning: #b45309;
+            --warning-soft: #fff7ed;
+
+            --danger: #b91c1c;
+            --danger-soft: #fef2f2;
+
+            --info: #0369a1;
+            --info-soft: #f0f9ff;
+
+            --shadow-sm:
+                0 4px 14px rgba(15, 23, 42, 0.05);
+
+            --shadow-md:
+                0 12px 35px rgba(15, 23, 42, 0.08);
+
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+
+            --header-height: 70px;
+
+            --max-width: 1420px;
+
+            --font:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        /* =========================
+       DARK MODE
+       ========================= */
+
+        html.dark {
+            --bg: #0b1020;
+            --surface: #111827;
+            --surface-2: #182033;
+            --text: #edf2ff;
+            --muted: #9ca9bd;
+            --border: #273247;
+
+            --primary: #818cf8;
+            --primary-dark: #a5b4fc;
+            --primary-soft: #1e2540;
+
+            --success-soft: #10261a;
+            --warning-soft: #2a2010;
+            --danger-soft: #2b1518;
+            --info-soft: #0d2230;
+
+            --shadow-sm:
+                0 4px 14px rgba(0, 0, 0, 0.18);
+
+            --shadow-md:
+                0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        /* =========================
+       RESET
+       ========================= */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition:
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+        img,
+        svg {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            background: rgba(79, 70, 229, 0.18);
+        }
+
+        /* =========================
+       ACCESSIBILITY
+       ========================= */
+
+        .skip-link {
+            position: absolute;
+            left: 12px;
+            top: -60px;
+            z-index: 9999;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(79, 70, 229, 0.35);
+            outline-offset: 3px;
+        }
+
+        /* =========================
+       HEADER
+       ========================= */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            background: color-mix(in srgb,
+                    var(--surface) 94%,
+                    transparent);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            width: min(100% - 32px, var(--max-width));
+            height: 100%;
+            margin-inline: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            min-width: 0;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            flex: 0 0 40px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            color: white;
+            font-weight: 900;
+            font-size: 16px;
+
+            background:
+                linear-gradient(135deg,
+                    #4f46e5,
+                    #7c3aed);
+
+            box-shadow:
+                0 8px 20px rgba(79, 70, 229, 0.25);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 850;
+            letter-spacing: -0.2px;
+        }
+
+        .brand-subtitle {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .desktop-nav a {
+            padding: 8px 11px;
+            border-radius: 9px;
+
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 700;
+
+            transition:
+                color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        /* =========================
+       MOBILE NAV
+       ========================= */
+
+        .mobile-nav {
+            display: none;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .mobile-nav.open {
+            display: block;
+        }
+
+        .mobile-nav-inner {
+            width: min(100% - 32px, var(--max-width));
+            margin-inline: auto;
+            padding: 10px 0 14px;
+
+            display: grid;
+            gap: 5px;
+        }
+
+        .mobile-nav a {
+            padding: 11px 13px;
+            border-radius: 10px;
+
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        /* =========================
+       PROGRESS
+       ========================= */
+
+        .progress-track {
+            position: fixed;
+            z-index: 1100;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 3px;
+
+            pointer-events: none;
+            background: transparent;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+
+            background:
+                linear-gradient(90deg,
+                    #4f46e5,
+                    #7c3aed,
+                    #2563eb);
+
+            transition: width 0.08s linear;
+        }
+
+        /* =========================
+       MAIN LAYOUT
+       ========================= */
+
+        .page-shell {
+            width: min(100% - 32px, var(--max-width));
+            margin-inline: auto;
+            padding: 32px 0 70px;
+
+            display: grid;
+            grid-template-columns: 270px minmax(0, 1fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* =========================
+       SIDEBAR
+       ========================= */
+
+        .toc {
+            position: sticky;
+            top: 90px;
+
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;
+
+            padding: 17px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toc::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .toc::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            background: var(--border);
+        }
+
+        .toc-heading {
+            margin: 0 0 12px;
+            font-size: 12px;
+            font-weight: 850;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .toc-list {
+            display: grid;
+            gap: 3px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .toc-list a {
+            display: block;
+
+            padding: 8px 10px;
+
+            border-radius: 8px;
+
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 650;
+            line-height: 1.35;
+
+            transition:
+                color 0.18s ease,
+                background 0.18s ease;
+        }
+
+        .toc-list a:hover,
+        .toc-list a.active {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .toc-progress {
+            margin-top: 17px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .toc-progress-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+
+            margin-bottom: 7px;
+
+            font-size: 11px;
+            font-weight: 750;
+            color: var(--muted);
+        }
+
+        .mini-progress {
+            width: 100%;
+            height: 6px;
+
+            overflow: hidden;
+            border-radius: 999px;
+            background: var(--surface-2);
+        }
+
+        .mini-progress span {
+            display: block;
+            width: 0%;
+            height: 100%;
+
+            border-radius: inherit;
+            background: var(--primary);
+
+            transition: width 0.15s ease;
+        }
+
+        /* =========================
+       CONTENT
+       ========================= */
+
+        .content {
+            min-width: 0;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            padding: clamp(26px, 5vw, 54px);
+
+            border: 1px solid var(--border);
+            border-radius: 28px;
+
+            background:
+                radial-gradient(circle at 90% 10%,
+                    rgba(99, 102, 241, 0.15),
+                    transparent 35%),
+                radial-gradient(circle at 5% 90%,
+                    rgba(59, 130, 246, 0.08),
+                    transparent 35%),
+                var(--surface);
+
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            right: -100px;
+            top: -100px;
+
+            border-radius: 50%;
+
+            border: 35px solid rgba(99, 102, 241, 0.05);
+
+            pointer-events: none;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            margin-bottom: 17px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            padding: 6px 10px;
+
+            border-radius: 999px;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .badge-primary {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .badge-neutral {
+            color: var(--muted);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            max-width: 900px;
+
+            margin: 0;
+
+            font-size:
+                clamp(32px,
+                    5vw,
+                    58px);
+
+            line-height: 1.04;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-lead {
+            max-width: 840px;
+
+            margin: 20px 0 0;
+
+            color: var(--muted);
+
+            font-size:
+                clamp(15px,
+                    2vw,
+                    18px);
+
+            line-height: 1.75;
+        }
+
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            gap: 10px;
+
+            margin-top: 27px;
+        }
+
+        .meta-card {
+            padding: 13px;
+
+            border: 1px solid var(--border);
+            border-radius: 13px;
+
+            background: color-mix(in srgb,
+                    var(--surface-2) 80%,
+                    transparent);
+        }
+
+        .meta-label {
+            display: block;
+            margin-bottom: 3px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .meta-value {
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        /* =========================
+       SECTION
+       ========================= */
+
+        .chapter-section {
+            margin-top: 26px;
+            scroll-margin-top: 90px;
+        }
+
+        .section-card {
+            padding: clamp(21px, 4vw, 34px);
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .section-kicker {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            margin-bottom: 9px;
+
+            color: var(--primary);
+
+            font-size: 11px;
+            font-weight: 850;
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+        }
+
+        .section-number {
+            display: inline-grid;
+            place-items: center;
+
+            width: 25px;
+            height: 25px;
+
+            border-radius: 8px;
+
+            background: var(--primary-soft);
+            color: var(--primary);
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .section-card h2 {
+            margin: 0;
+
+            font-size:
+                clamp(24px,
+                    3vw,
+                    34px);
+
+            line-height: 1.18;
+            letter-spacing: -0.8px;
+        }
+
+        .section-card h3 {
+            margin:
+                28px 0 10px;
+
+            font-size: 19px;
+            line-height: 1.3;
+        }
+
+        .section-card h4 {
+            margin:
+                20px 0 7px;
+
+            font-size: 15px;
+        }
+
+        .section-card p {
+            margin: 12px 0;
+            color: var(--muted);
+        }
+
+        .section-card strong {
+            color: var(--text);
+        }
+
+        .section-card ul,
+        .section-card ol {
+            margin: 12px 0;
+            padding-left: 22px;
+            color: var(--muted);
+        }
+
+        .section-card li {
+            margin: 6px 0;
+        }
+
+        .lead-paragraph {
+            font-size: 16px;
+        }
+
+        /* =========================
+       INFO BOXES
+       ========================= */
+
+        .info-box {
+            margin: 19px 0;
+            padding: 16px 17px;
+
+            border-left: 4px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+
+            background: var(--primary-soft);
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+
+        .info-box p {
+            margin: 0;
+        }
+
+        .success-box {
+            border-left-color: var(--success);
+            background: var(--success-soft);
+        }
+
+        .success-box strong {
+            color: var(--success);
+        }
+
+        .warning-box {
+            border-left-color: var(--warning);
+            background: var(--warning-soft);
+        }
+
+        .warning-box strong {
+            color: var(--warning);
+        }
+
+        .danger-box {
+            border-left-color: var(--danger);
+            background: var(--danger-soft);
+        }
+
+        .danger-box strong {
+            color: var(--danger);
+        }
+
+        .info-blue {
+            border-left-color: var(--info);
+            background: var(--info-soft);
+        }
+
+        .info-blue strong {
+            color: var(--info);
+        }
+
+        /* =========================
+       FLOW DIAGRAM
+       ========================= */
+
+        .flow {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, minmax(0, 1fr));
+
+            gap: 10px;
+
+            margin: 22px 0;
+        }
+
+        .flow-step {
+            position: relative;
+
+            min-width: 0;
+
+            padding: 17px 12px;
+
+            text-align: center;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            background: var(--surface-2);
+        }
+
+        .flow-step:not(:last-child)::after {
+            content: "→";
+
+            position: absolute;
+
+            right: -16px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            z-index: 2;
+
+            width: 22px;
+            height: 22px;
+
+            display: grid;
+            place-items: center;
+
+            color: var(--primary);
+            background: var(--surface);
+
+            font-weight: 900;
+        }
+
+        .flow-icon {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 22px;
+        }
+
+        .flow-step strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .flow-step small {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        /* =========================
+       TWO / THREE COLUMNS
+       ========================= */
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            background: var(--surface-2);
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 12px;
+
+            border-radius: 11px;
+
+            background: var(--primary-soft);
+            color: var(--primary);
+
+            font-size: 18px;
+        }
+
+        .feature-card h3,
+        .feature-card h4 {
+            margin: 0 0 6px;
+            font-size: 15px;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        /* =========================
+       COMPARISON TABLE
+       ========================= */
+
+        .table-wrap {
+            width: 100%;
+            margin: 20px 0;
+
+            overflow-x: auto;
+
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 650px;
+
+            border-collapse: collapse;
+
+            background: var(--surface);
+        }
+
+        th,
+        td {
+            padding: 13px 14px;
+
+            border-bottom: 1px solid var(--border);
+
+            text-align: left;
+            vertical-align: top;
+
+            font-size: 13px;
+        }
+
+        th {
+            background: var(--surface-2);
+            color: var(--text);
+            font-weight: 850;
+        }
+
+        td {
+            color: var(--muted);
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        /* =========================
+       CODE / EXAMPLE
+       ========================= */
+
+        .code-card {
+            margin: 18px 0;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: 14px;
+
+            background: #0f172a;
+        }
+
+        .code-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 9px 13px;
+
+            background: #172033;
+
+            color: #cbd5e1;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .code-body {
+            padding: 17px;
+
+            overflow-x: auto;
+
+            color: #dbeafe;
+
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                "Liberation Mono",
+                monospace;
+
+            font-size: 12px;
+            line-height: 1.75;
+
+            white-space: pre;
+        }
+
+        .formula {
+            margin: 18px 0;
+            padding: 18px;
+
+            border: 1px dashed var(--border);
+            border-radius: 14px;
+
+            text-align: center;
+
+            background: var(--surface-2);
+
+            font-size: 17px;
+            font-weight: 850;
+            letter-spacing: 0.3px;
+        }
+
+        .formula span {
+            color: var(--primary);
+        }
+
+        /* =========================
+       CASE STUDY
+       ========================= */
+
+        .case-study {
+            margin: 20px 0;
+            padding: 20px;
+
+            border: 1px solid var(--border);
+            border-radius: 17px;
+
+            background:
+                linear-gradient(135deg,
+                    var(--surface-2),
+                    var(--surface));
+        }
+
+        .case-label {
+            display: inline-block;
+
+            margin-bottom: 8px;
+
+            color: var(--primary);
+
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .case-study h3 {
+            margin: 0 0 8px;
+            font-size: 17px;
+        }
+
+        .case-study p {
+            margin: 7px 0;
+        }
+
+        /* =========================
+       MYTH CARDS
+       ========================= */
+
+        .myth-card {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+
+            margin: 12px 0;
+        }
+
+        .myth,
+        .truth {
+            padding: 15px;
+
+            border-radius: 13px;
+
+            border: 1px solid var(--border);
+        }
+
+        .myth {
+            background: var(--danger-soft);
+        }
+
+        .truth {
+            background: var(--success-soft);
+        }
+
+        .myth strong,
+        .truth strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+
+        .myth strong {
+            color: var(--danger);
+        }
+
+        .truth strong {
+            color: var(--success);
+        }
+
+        .myth p,
+        .truth p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        /* =========================
+       CHECKPOINT
+       ========================= */
+
+        .checkpoint {
+            margin: 20px 0;
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            background: var(--surface-2);
+        }
+
+        .checkpoint-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            margin-bottom: 8px;
+
+            font-weight: 850;
+        }
+
+        .checkpoint-icon {
+            width: 28px;
+            height: 28px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 9px;
+
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+        .checkpoint p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .reveal-btn {
+            margin-top: 12px;
+
+            padding: 9px 13px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: var(--surface);
+            color: var(--primary);
+
+            cursor: pointer;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .reveal-answer {
+            display: none;
+
+            margin-top: 11px;
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background: var(--success-soft);
+            color: var(--success);
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .reveal-answer.show {
+            display: block;
+        }
+
+        /* =========================
+       QUIZ
+       ========================= */
+
+        .quiz {
+            margin-top: 20px;
+        }
+
+        .quiz-question {
+            padding: 17px;
+
+            border: 1px solid var(--border);
+            border-radius: 14px;
+
+            background: var(--surface-2);
+        }
+
+        .quiz-question+.quiz-question {
+            margin-top: 12px;
+        }
+
+        .question-title {
+            margin: 0 0 12px;
+
+            font-size: 14px;
+            font-weight: 850;
+        }
+
+        .options {
+            display: grid;
+            gap: 7px;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+
+            padding: 9px 10px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            color: var(--muted);
+
+            transition:
+                background 0.15s ease,
+                border-color 0.15s ease;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .option input {
+            margin-top: 4px;
+            accent-color: var(--primary);
+        }
+
+        .quiz-submit {
+            margin-top: 17px;
+
+            padding: 12px 18px;
+
+            border: 0;
+            border-radius: 11px;
+
+            background: var(--primary);
+            color: white;
+
+            cursor: pointer;
+
+            font-weight: 850;
+
+            box-shadow:
+                0 8px 18px rgba(79, 70, 229, 0.18);
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .quiz-submit:hover {
+            transform: translateY(-1px);
+            background: var(--primary-dark);
+        }
+
+        .quiz-result {
+            display: none;
+
+            margin-top: 14px;
+            padding: 15px;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+            font-weight: 750;
+        }
+
+        .quiz-result.show {
+            display: block;
+        }
+
+        .quiz-result.good {
+            background: var(--success-soft);
+            color: var(--success);
+        }
+
+        .quiz-result.average {
+            background: var(--warning-soft);
+            color: var(--warning);
+        }
+
+        /* =========================
+       CHAPTER NAVIGATION
+       ========================= */
+
+        .chapter-navigation {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr) minmax(0, 1fr);
+
+            gap: 14px;
+
+            margin-top: 26px;
+        }
+
+        .nav-card {
+            display: block;
+
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: 16px;
+
+            background: var(--surface);
+
+            transition:
+                transform 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-2px);
+
+            border-color: var(--primary);
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-card.next {
+            text-align: right;
+        }
+
+        .nav-label {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+            font-weight: 850;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+        }
+
+        .nav-title {
+            font-size: 15px;
+            font-weight: 850;
+        }
+
+        /* =========================
+       FOOTER
+       ========================= */
+
+        footer {
+            margin-top: 28px;
+            padding: 24px;
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            background: var(--surface);
+
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        footer strong {
+            color: var(--text);
+        }
+
+        /* =========================
+       BACK TO TOP
+       ========================= */
+
+        .back-top {
+            position: fixed;
+
+            right: 18px;
+            bottom: 18px;
+
+            z-index: 900;
+
+            width: 43px;
+            height: 43px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--border);
+            border-radius: 13px;
+
+            background: var(--surface);
+            color: var(--primary);
+
+            box-shadow: var(--shadow-md);
+
+            cursor: pointer;
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+
+            transition:
+                opacity 0.2s ease,
+                visibility 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .back-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* =========================
+       RESPONSIVE
+       ========================= */
+
+        @media (max-width: 1120px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: grid;
+            }
+
+            .page-shell {
+                grid-template-columns: 230px minmax(0, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .page-shell {
+                display: block;
+            }
+
+            /*
+        IMPORTANT:
+        Sidebar is NOT fixed on tablet/mobile.
+        This prevents the overlap/fixed-on-screen bug.
+      */
+            .toc {
+                position: static;
+                max-height: none;
+                overflow: visible;
+
+                margin-bottom: 20px;
+            }
+
+            .toc-list {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .hero-meta {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .grid-3 {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            :root {
+                --header-height: 62px;
+            }
+
+            .header-inner,
+            .mobile-nav-inner,
+            .page-shell {
+                width: min(100% - 22px, var(--max-width));
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .brand-logo {
+                width: 36px;
+                height: 36px;
+                flex-basis: 36px;
+            }
+
+            .header-actions {
+                gap: 5px;
+            }
+
+            .icon-btn {
+                width: 37px;
+                height: 37px;
+            }
+
+            .page-shell {
+                padding-top: 16px;
+                padding-bottom: 45px;
+            }
+
+            .hero {
+                border-radius: 20px;
+                padding: 25px 19px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.2px;
+            }
+
+            .hero-meta {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-card {
+                border-radius: 18px;
+                padding: 20px 17px;
+            }
+
+            .flow {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-step:not(:last-child)::after {
+                content: "↓";
+
+                right: auto;
+                top: auto;
+                bottom: -17px;
+                left: 50%;
+
+                transform: translateX(-50%);
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .myth-card {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-card.next {
+                text-align: left;
+            }
+
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 440px) {
+            .hero-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-badges {
+                gap: 6px;
+            }
+
+            .badge {
+                font-size: 10px;
+            }
+
+            .section-card h2 {
+                font-size: 24px;
+            }
+
+            .back-top {
+                right: 12px;
+                bottom: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* =========================
+       PRINT
+       ========================= */
+
+        @media print {
+
+            .site-header,
+            .progress-track,
+            .toc,
+            .back-top,
+            .chapter-navigation,
+            .quiz-submit,
+            .mobile-nav {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .page-shell {
+                display: block;
+                width: 100%;
+                padding: 0;
+            }
+
+            .section-card,
+            .hero {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <!-- Reading Progress -->
+    <div class="progress-track" aria-hidden="true">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- =========================
+       HEADER
+       ========================= -->
+
+    <header class="site-header">
+        <div class="header-inner">
+
+            <a class="brand" href="../index.html" aria-label="AI Learning HUB Home">
+
+                <span class="brand-logo" aria-hidden="true">
+                    AI
+                </span>
+
+                <span class="brand-text">
+                    <span class="brand-title">
+                        AI Learning HUB
+                    </span>
+
+                    <span class="brand-subtitle">
+                        Learn • Build • Grow
+                    </span>
+                </span>
+
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main navigation">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="../index.html#courses" class="active">
+                    Courses
+                </a>
+
+                <a href="../index.html#tools">
+                    Tools
+                </a>
+
+                <a href="../index.html#articles">
+                    Articles
+                </a>
+
+                <a href="../index.html#resources">
+                    Resources
+                </a>
+
+                <a href="../index.html#about">
+                    About
+                </a>
+
+            </nav>
+
+            <div class="header-actions">
+
+                <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+
+                    <span id="themeIcon" aria-hidden="true">
+                        ☾
+                    </span>
+
+                </button>
+
+                <button class="icon-btn mobile-menu-btn" id="menuBtn" type="button" aria-label="Open menu"
+                    aria-expanded="false">
+
+                    <span id="menuIcon" aria-hidden="true">
+                        ☰
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Mobile navigation -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+
+        <div class="mobile-nav-inner">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../index.html#courses">
+                Courses
+            </a>
+
+            <a href="../index.html#tools">
+                Tools
+            </a>
+
+            <a href="../index.html#articles">
+                Articles
+            </a>
+
+            <a href="../index.html#resources">
+                Resources
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- =========================
+       MAIN
+       ========================= -->
+
+    <main id="main-content">
+
+        <div class="page-shell">
+
+            <!-- =========================
+           TABLE OF CONTENTS
+           ========================= -->
+
+            <aside class="toc" aria-label="Chapter contents">
+
+                <h2 class="toc-heading">
+                    Chapter Contents
+                </h2>
+
+                <ul class="toc-list">
+
+                    <li>
+                        <a href="#ai-definition">
+                            1. What is AI?
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#technical-definition">
+                            2. Technical Definition
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#ai-working">
+                            3. How AI Works
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#software-vs-ai">
+                            4. AI vs Normal Software
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#automation">
+                            5. AI vs Automation
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#human-intelligence">
+                            6. AI vs Human Intelligence
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#intelligence">
+                            7. Why "Intelligent"?
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#data">
+                            8. Role of Data
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#rules-learning">
+                            9. Rules vs Learning
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#ml-dl">
+                            10. AI, ML & DL
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#generative-ai">
+                            11. Generative AI
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#real-world">
+                            12. AI in Real Life
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#applications">
+                            13. Major Applications
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#capabilities">
+                            14. What AI Can Do
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#limitations">
+                            15. AI Limitations
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#hallucination">
+                            16. Hallucination & Errors
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#verification">
+                            17. Verification
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#benefits-risks">
+                            18. Benefits & Risks
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#human-ai">
+                            19. Human + AI
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#mental-model">
+                            20. Complete Mental Model
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#misconceptions">
+                            21. Common Misconceptions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#practical">
+                            22. Practical Scenarios
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#quiz">
+                            23. Knowledge Quiz
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#summary">
+                            24. Chapter Summary
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="toc-progress">
+
+                    <div class="toc-progress-top">
+                        <span>
+                            Reading progress
+                        </span>
+
+                        <span id="progressText">
+                            0%
+                        </span>
+                    </div>
+
+                    <div class="mini-progress">
+                        <span id="miniProgress"></span>
+                    </div>
+
+                </div>
+
+            </aside>
+
+            <!-- =========================
+           CONTENT
+           ========================= -->
+
+            <article class="content">
+
+                <!-- HERO -->
+                <section class="hero">
+
+                    <div class="hero-badges">
+
+                        <span class="badge badge-primary">
+                            Level 1
+                        </span>
+
+                        <span class="badge badge-neutral">
+                            Chapter 04
+                        </span>
+
+                        <span class="badge badge-neutral">
+                            Artificial Intelligence Fundamentals
+                        </span>
+
+                    </div>
+
+                    <h1>
+                        Artificial Intelligence
+                        <span>Fundamentals</span>
+                    </h1>
+
+                    <p class="hero-lead">
+                        AI ko sirf “computer jo intelligent kaam karta hai”
+                        samajhna enough nahi hai. Is chapter me hum AI ko
+                        ek proper system ke roop me samjhenge — data,
+                        rules, models, learning, prediction, generation,
+                        decision-making aur human collaboration ke saath.
+                    </p>
+
+                    <div class="hero-meta">
+
+                        <div class="meta-card">
+                            <span class="meta-label">
+                                Level
+                            </span>
+
+                            <span class="meta-value">
+                                Beginner → Intermediate
+                            </span>
+                        </div>
+
+                        <div class="meta-card">
+                            <span class="meta-label">
+                                Focus
+                            </span>
+
+                            <span class="meta-value">
+                                AI Mental Model
+                            </span>
+                        </div>
+
+                        <div class="meta-card">
+                            <span class="meta-label">
+                                Format
+                            </span>
+
+                            <span class="meta-value">
+                                Theory + Examples
+                            </span>
+                        </div>
+
+                        <div class="meta-card">
+                            <span class="meta-label">
+                                Next
+                            </span>
+
+                            <span class="meta-value">
+                                AI History
+                            </span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             1
+             ========================= -->
+
+                <section class="chapter-section" id="ai-definition">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">01</span>
+                            Foundation
+                        </div>
+
+                        <h2>
+                            AI kya hai?
+                        </h2>
+
+                        <p class="lead-paragraph">
+                            <strong>Artificial Intelligence (AI)</strong>
+                            computer systems ko aise tasks perform karne
+                            ke liye design karne ka field hai jinke liye
+                            normally human intelligence ki zarurat padti hai.
+                        </p>
+
+                        <p>
+                            In tasks me information ko samajhna, patterns
+                            identify karna, prediction karna, language process
+                            karna, images ko analyze karna, recommendations
+                            dena, decisions support karna aur content generate
+                            karna shamil ho sakta hai.
+                        </p>
+
+                        <div class="info-box">
+
+                            <strong>Simple definition</strong>
+
+                            <p>
+                                AI ka broad idea hai: machine ko aise methods
+                                aur models dena jisse woh input ko process karke
+                                useful output, prediction, recommendation,
+                                decision ya generated content produce kar sake.
+                            </p>
+
+                        </div>
+
+                        <h3>
+                            Ek simple example
+                        </h3>
+
+                        <p>
+                            Agar ek system bahut saari email examples ko
+                            analyze karke seekhta hai ki kaunsi email spam
+                            hone ki probability rakhti hai, aur phir new email
+                            ko spam/not-spam classify karta hai, to yah
+                            AI-based behavior ka example ho sakta hai.
+                        </p>
+
+                        <div class="case-study">
+
+                            <span class="case-label">
+                                Real-world thinking
+                            </span>
+
+                            <h3>
+                                Phone me AI ka example
+                            </h3>
+
+                            <p>
+                                Phone camera scene ko identify kar sakta hai,
+                                keyboard next word suggest kar sakta hai,
+                                photo me unwanted object detect ho sakta hai,
+                                aur voice assistant spoken request ko process
+                                kar sakta hai.
+                            </p>
+
+                            <p>
+                                User ko andar ka model dikhai nahi deta, lekin
+                                input → processing → output ka pattern hota hai.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             2
+             ========================= -->
+
+                <section class="chapter-section" id="technical-definition">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">02</span>
+                            Technical Understanding
+                        </div>
+
+                        <h2>
+                            AI ki technical definition ko kaise samjhein?
+                        </h2>
+
+                        <p>
+                            AI koi single software, single algorithm ya ek
+                            single machine nahi hai. Ye computer science ka
+                            broad field hai jisme multiple approaches aur
+                            techniques use hoti hain.
+                        </p>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🧠
+                                </div>
+
+                                <h3>
+                                    Representation
+                                </h3>
+
+                                <p>
+                                    Information ko machine-readable form me
+                                    represent karna.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    📊
+                                </div>
+
+                                <h3>
+                                    Learning
+                                </h3>
+
+                                <p>
+                                    Examples/data se useful patterns learn karna.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🎯
+                                </div>
+
+                                <h3>
+                                    Decision
+                                </h3>
+
+                                <p>
+                                    Input ke basis par prediction, recommendation
+                                    ya action generate karna.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <p>
+                            Isliye AI ko samajhne ka better method hai
+                            “AI kya karta hai?” ke saath-saath
+                            “AI system information ko kaise transform karta
+                            hai?” samajhna.
+                        </p>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             3
+             ========================= -->
+
+                <section class="chapter-section" id="ai-working">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">03</span>
+                            System Model
+                        </div>
+
+                        <h2>
+                            AI system kaise kaam karta hai?
+                        </h2>
+
+                        <p>
+                            Har AI system exactly same architecture follow
+                            nahi karta, lekin ek general mental model beginner
+                            ke liye bahut useful hai.
+                        </p>
+
+                        <div class="flow">
+
+                            <div class="flow-step">
+
+                                <span class="flow-icon">📥</span>
+
+                                <strong>
+                                    Input
+                                </strong>
+
+                                <small>
+                                    Text, image, audio, sensor data...
+                                </small>
+
+                            </div>
+
+                            <div class="flow-step">
+
+                                <span class="flow-icon">🗂️</span>
+
+                                <strong>
+                                    Data
+                                </strong>
+
+                                <small>
+                                    Examples, signals, context...
+                                </small>
+
+                            </div>
+
+                            <div class="flow-step">
+
+                                <span class="flow-icon">🧠</span>
+
+                                <strong>
+                                    Model / Rules
+                                </strong>
+
+                                <small>
+                                    Logic, learned patterns...
+                                </small>
+
+                            </div>
+
+                            <div class="flow-step">
+
+                                <span class="flow-icon">⚙️</span>
+
+                                <strong>
+                                    Processing
+                                </strong>
+
+                                <small>
+                                    Computation and inference...
+                                </small>
+
+                            </div>
+
+                            <div class="flow-step">
+
+                                <span class="flow-icon">📤</span>
+
+                                <strong>
+                                    Output
+                                </strong>
+
+                                <small>
+                                    Prediction, answer, action...
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="formula">
+                            <span>Input</span>
+                            →
+                            <span>Representation</span>
+                            →
+                            <span>Model</span>
+                            →
+                            <span>Inference</span>
+                            →
+                            <span>Output</span>
+                        </div>
+
+                        <h3>
+                            Example: spam detection
+                        </h3>
+
+                        <ol>
+
+                            <li>
+                                System ko email text milta hai.
+                            </li>
+
+                            <li>
+                                Text ko machine-processable representation me
+                                convert kiya jata hai.
+                            </li>
+
+                            <li>
+                                Trained model learned patterns ko evaluate karta hai.
+                            </li>
+
+                            <li>
+                                Model spam hone ki probability estimate karta hai.
+                            </li>
+
+                            <li>
+                                System final classification ya warning de sakta hai.
+                            </li>
+
+                        </ol>
+
+                        <div class="checkpoint">
+
+                            <div class="checkpoint-title">
+
+                                <span class="checkpoint-icon">
+                                    ?
+                                </span>
+
+                                Quick Check
+                            </div>
+
+                            <p>
+                                Agar input hi incomplete ya poor quality ka ho,
+                                to AI output par kya effect ho sakta hai?
+                            </p>
+
+                            <button class="reveal-btn" type="button">
+                                Answer dekho
+                            </button>
+
+                            <div class="reveal-answer">
+                                Poor input quality system ke output ko inaccurate
+                                ya less useful bana sakti hai. AI ko context aur
+                                data ki quality kaafi affect karti hai.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             4
+             ========================= -->
+
+                <section class="chapter-section" id="software-vs-ai">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">04</span>
+                            Core Difference
+                        </div>
+
+                        <h2>
+                            AI vs Normal Software
+                        </h2>
+
+                        <p>
+                            Har AI system software hota hai, lekin har software
+                            AI nahi hota.
+                        </p>
+
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead>
+                                    <tr>
+                                        <th>Point</th>
+                                        <th>Traditional Software</th>
+                                        <th>AI-based System</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>Logic</td>
+                                        <td>
+                                            Mostly explicitly programmed rules
+                                        </td>
+                                        <td>
+                                            Rules, learned patterns, or models
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Learning</td>
+                                        <td>
+                                            Usually does not learn automatically
+                                        </td>
+                                        <td>
+                                            Some AI systems learn from data
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Input</td>
+                                        <td>
+                                            Often structured and predictable
+                                        </td>
+                                        <td>
+                                            Can handle complex/unstructured data
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Output</td>
+                                        <td>
+                                            Programmed behavior
+                                        </td>
+                                        <td>
+                                            Prediction, classification, generation,
+                                            recommendation, etc.
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="case-study">
+
+                            <span class="case-label">
+                                Simple comparison
+                            </span>
+
+                            <h3>
+                                Calculator vs AI assistant
+                            </h3>
+
+                            <p>
+                                Calculator ko “25 × 48” dene par programmed
+                                mathematical operation execute hota hai.
+                            </p>
+
+                            <p>
+                                AI assistant natural-language request ko interpret
+                                karke context ke according response generate kar
+                                sakta hai.
+                            </p>
+
+                        </div>
+
+                        <div class="warning-box info-box">
+
+                            <strong>
+                                Important
+                            </strong>
+
+                            <p>
+                                Traditional software bhi complex ho sakta hai,
+                                aur AI system bhi conventional software components
+                                par depend karta hai. Difference ko oversimplify
+                                nahi karna chahiye.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             5
+             ========================= -->
+
+                <section class="chapter-section" id="automation">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">05</span>
+                            Automation
+                        </div>
+
+                        <h2>
+                            AI vs Automation
+                        </h2>
+
+                        <p>
+                            Automation ka matlab hai kisi process ko automatically
+                            execute karna. AI us automation ko perception,
+                            prediction, language understanding ya decision support
+                            jaise capabilities de sakta hai.
+                        </p>
+
+                        <div class="grid-2">
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    ⚙️
+                                </div>
+
+                                <h3>
+                                    Rule-based automation
+                                </h3>
+
+                                <p>
+                                    “Agar condition X hai, to action Y karo.”
+                                    Conditions aur actions pehle define kiye ja sakte hain.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🧠
+                                </div>
+
+                                <h3>
+                                    AI-assisted automation
+                                </h3>
+
+                                <p>
+                                    System input ko interpret ya predict karke
+                                    workflow ke next step ko support kar sakta hai.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="code-card">
+
+                            <div class="code-head">
+                                <span>Simple mental model</span>
+                                <span>Concept</span>
+                            </div>
+
+                            <div class="code-body">Traditional automation:
+                                IF condition → THEN action
+
+                                AI-assisted workflow:
+                                Input → AI analysis → decision/support → workflow action</div>
+
+                        </div>
+
+                        <p>
+                            Isliye “automation = AI” kehna technically correct
+                            nahi hai. Automation AI ke bina bhi ho sakti hai.
+                        </p>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             6
+             ========================= -->
+
+                <section class="chapter-section" id="human-intelligence">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">06</span>
+                            Comparison
+                        </div>
+
+                        <h2>
+                            AI vs Human Intelligence
+                        </h2>
+
+                        <p>
+                            AI ka naam Artificial Intelligence hai, lekin iska
+                            matlab ye nahi ki machine exactly human brain ki tarah
+                            sochti hai.
+                        </p>
+
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead>
+                                    <tr>
+                                        <th>Aspect</th>
+                                        <th>Human</th>
+                                        <th>AI System</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>Experience</td>
+                                        <td>
+                                            Real-world embodied experience
+                                        </td>
+                                        <td>
+                                            Training/data/model-dependent
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Learning</td>
+                                        <td>
+                                            Multiple forms of learning
+                                        </td>
+                                        <td>
+                                            Depends on architecture and training method
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Adaptability</td>
+                                        <td>
+                                            Broad and contextual
+                                        </td>
+                                        <td>
+                                            Often task/model dependent
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Speed</td>
+                                        <td>
+                                            Limited by human processing
+                                        </td>
+                                        <td>
+                                            Can process large amounts of data quickly
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Judgment</td>
+                                        <td>
+                                            Can use values, context and lived experience
+                                        </td>
+                                        <td>
+                                            Produces outputs according to system design
+                                            and learned patterns
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="info-blue info-box">
+
+                            <strong>
+                                Best mental model
+                            </strong>
+
+                            <p>
+                                AI ko “human brain ka exact replacement” samajhne
+                                ke bajay ek powerful computational system samjho
+                                jo kuch tasks me humans ko assist ya outperform
+                                kar sakta hai, while other areas me limitations
+                                rakhta hai.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             7
+             ========================= -->
+
+                <section class="chapter-section" id="intelligence">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">07</span>
+                            Core Concept
+                        </div>
+
+                        <h2>
+                            Machine ko “Intelligent” kyun kaha jata hai?
+                        </h2>
+
+                        <p>
+                            “Intelligence” word yahan human consciousness ka
+                            guarantee nahi hai. AI systems ko intelligent behavior
+                            ke context me describe kiya jata hai.
+                        </p>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🔎
+                                </div>
+
+                                <h4>
+                                    Pattern recognition
+                                </h4>
+
+                                <p>
+                                    Data me recurring patterns identify karna.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    📈
+                                </div>
+
+                                <h4>
+                                    Prediction
+                                </h4>
+
+                                <p>
+                                    Available information ke basis par likely
+                                    outcomes estimate karna.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    📝
+                                </div>
+
+                                <h4>
+                                    Language processing
+                                </h4>
+
+                                <p>
+                                    Human language ko process aur generate karna.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    👁️
+                                </div>
+
+                                <h4>
+                                    Perception
+                                </h4>
+
+                                <p>
+                                    Images, audio ya sensor signals se useful
+                                    information extract karna.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🎯
+                                </div>
+
+                                <h4>
+                                    Recommendation
+                                </h4>
+
+                                <p>
+                                    User behavior aur context ke basis par options
+                                    suggest karna.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    ⚡
+                                </div>
+
+                                <h4>
+                                    Decision support
+                                </h4>
+
+                                <p>
+                                    Human decision-making ko useful analysis
+                                    provide karna.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             8
+             ========================= -->
+
+                <section class="chapter-section" id="data">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">08</span>
+                            Data
+                        </div>
+
+                        <h2>
+                            AI me Data ka role
+                        </h2>
+
+                        <p>
+                            Modern AI ko samajhne ke liye data ko samajhna bahut
+                            important hai. Data examples provide kar sakta hai
+                            jinse learning-based models patterns discover karte hain.
+                        </p>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    📚
+                                </div>
+
+                                <h4>
+                                    Training data
+                                </h4>
+
+                                <p>
+                                    Model ko patterns learn karne ke liye examples
+                                    provide kar sakta hai.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🧪
+                                </div>
+
+                                <h4>
+                                    Validation data
+                                </h4>
+
+                                <p>
+                                    Model development ke dauran performance evaluate
+                                    aur tune karne me help karta hai.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🧾
+                                </div>
+
+                                <h4>
+                                    Test data
+                                </h4>
+
+                                <p>
+                                    Unseen examples par system performance assess
+                                    karne me help karta hai.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="warning-box info-box">
+
+                            <strong>
+                                Data quality matters
+                            </strong>
+
+                            <p>
+                                Incomplete, biased, noisy ya incorrectly labeled
+                                data model ki performance ko negatively affect
+                                kar sakta hai.
+                            </p>
+
+                        </div>
+
+                        <div class="formula">
+                            <span>Better data</span>
+                            +
+                            <span>Better model design</span>
+                            +
+                            <span>Better evaluation</span>
+                            →
+                            Better system
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             9
+             ========================= -->
+
+                <section class="chapter-section" id="rules-learning">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">09</span>
+                            AI Approaches
+                        </div>
+
+                        <h2>
+                            Rules-based AI vs Learning-based AI
+                        </h2>
+
+                        <p>
+                            AI ke history aur technology ko samajhne ke liye
+                            ye distinction important hai.
+                        </p>
+
+                        <div class="grid-2">
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    📜
+                                </div>
+
+                                <h3>
+                                    Rule-based approach
+                                </h3>
+
+                                <p>
+                                    Human-defined rules ke according system behavior
+                                    produce karta hai.
+                                </p>
+
+                                <ul>
+                                    <li>Rules explicitly define kiye jate hain.</li>
+                                    <li>Predictable logic useful hoti hai.</li>
+                                    <li>Complex real-world variation me rules bahut
+                                        difficult ho sakte hain.</li>
+                                </ul>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🧠
+                                </div>
+
+                                <h3>
+                                    Learning-based approach
+                                </h3>
+
+                                <p>
+                                    Model examples/data se patterns learn kar sakta hai.
+                                </p>
+
+                                <ul>
+                                    <li>Explicit rules har case ke liye manually
+                                        likhna zaroori nahi.</li>
+                                    <li>Large datasets useful ho sakte hain.</li>
+                                    <li>Evaluation aur generalization important hain.</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="case-study">
+
+                            <span class="case-label">
+                                Example
+                            </span>
+
+                            <h3>
+                                Image recognition
+                            </h3>
+
+                            <p>
+                                Traditional rules me har possible visual pattern
+                                manually specify karna impractical ho sakta hai.
+                                Learning-based computer vision model examples se
+                                useful visual patterns learn kar sakta hai.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             10
+             ========================= -->
+
+                <section class="chapter-section" id="ml-dl">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">10</span>
+                            AI Family
+                        </div>
+
+                        <h2>
+                            AI, Machine Learning aur Deep Learning
+                        </h2>
+
+                        <p>
+                            Beginners ke liye sabse important relationship:
+                        </p>
+
+                        <div class="formula">
+                            <span>Artificial Intelligence</span>
+                            ⟶
+                            <span>Machine Learning</span>
+                            ⟶
+                            <span>Deep Learning</span>
+                        </div>
+
+                        <p>
+                            Ye ek simplified relationship hai. AI broader field
+                            hai, ML AI ka ek major approach/area hai, aur deep
+                            learning ML ke andar neural-network based methods ka
+                            major family hai.
+                        </p>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🤖
+                                </div>
+
+                                <h3>
+                                    AI
+                                </h3>
+
+                                <p>
+                                    Intelligent behavior produce karne wale broad
+                                    methods, systems aur research ka field.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    📊
+                                </div>
+
+                                <h3>
+                                    Machine Learning
+                                </h3>
+
+                                <p>
+                                    Data/examples se patterns learn karke prediction
+                                    ya decision tasks perform karne ke methods.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🧠
+                                </div>
+
+                                <h3>
+                                    Deep Learning
+                                </h3>
+
+                                <p>
+                                    Multiple-layer neural networks par based
+                                    machine learning methods.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <strong>
+                                Remember this
+                            </strong>
+
+                            <p>
+                                AI aur ML ko interchangeable words mat samjho.
+                                ML AI ka ek important subset/approach hai.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             11
+             ========================= -->
+
+                <section class="chapter-section" id="generative-ai">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">11</span>
+                            Modern AI
+                        </div>
+
+                        <h2>
+                            Generative AI kya hai?
+                        </h2>
+
+                        <p>
+                            Generative AI aise systems ko refer karta hai jo
+                            learned patterns ke basis par new content generate
+                            kar sakte hain.
+                        </p>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    ✍️
+                                </div>
+
+                                <h4>
+                                    Text
+                                </h4>
+
+                                <p>
+                                    Answers, summaries, drafts, explanations aur
+                                    other text output.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🖼️
+                                </div>
+
+                                <h4>
+                                    Images
+                                </h4>
+
+                                <p>
+                                    Prompt ya conditioning ke basis par image
+                                    content generate karna.
+                                </p>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    🎵
+                                </div>
+
+                                <h4>
+                                    Audio
+                                </h4>
+
+                                <p>
+                                    Speech, sound ya other audio content generate
+                                    karne wale systems.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="info-blue info-box">
+
+                            <strong>
+                                Important distinction
+                            </strong>
+
+                            <p>
+                                “Generate” ka matlab ye nahi ki system human ki
+                                tarah conscious imagination experience karta hai.
+                                Output model ke learned representations aur
+                                generation process se produce hota hai.
+                            </p>
+
+                        </div>
+
+                        <h3>
+                            Chat-style AI ka simple mental model
+                        </h3>
+
+                        <div class="flow">
+
+                            <div class="flow-step">
+                                <span class="flow-icon">⌨️</span>
+                                <strong>User prompt</strong>
+                                <small>Instruction / question</small>
+                            </div>
+
+                            <div class="flow-step">
+                                <span class="flow-icon">🔤</span>
+                                <strong>Processing</strong>
+                                <small>Input representation</small>
+                            </div>
+
+                            <div class="flow-step">
+                                <span class="flow-icon">🧠</span>
+                                <strong>Model</strong>
+                                <small>Learned patterns</small>
+                            </div>
+
+                            <div class="flow-step">
+                                <span class="flow-icon">🎯</span>
+                                <strong>Generation</strong>
+                                <small>Candidate output</small>
+                            </div>
+
+                            <div class="flow-step">
+                                <span class="flow-icon">💬</span>
+                                <strong>Response</strong>
+                                <small>Generated result</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             12
+             ========================= -->
+
+                <section class="chapter-section" id="real-world">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">12</span>
+                            Daily Life
+                        </div>
+
+                        <h2>
+                            Real life me AI kahan milta hai?
+                        </h2>
+
+                        <p>
+                            AI sirf robots ya chatbots tak limited nahi hai.
+                            Bahut se systems background me AI techniques use
+                            kar sakte hain.
+                        </p>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🔎</div>
+                                <h4>Search</h4>
+                                <p>
+                                    Search results ko understand, rank aur personalize
+                                    karne me intelligent systems use ho sakte hain.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🎬</div>
+                                <h4>Recommendations</h4>
+                                <p>
+                                    Videos, products, music ya content recommend
+                                    karne wale systems.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🗺️</div>
+                                <h4>Maps</h4>
+                                <p>
+                                    Traffic estimation, routes aur location-related
+                                    predictions.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🎙️</div>
+                                <h4>Voice assistants</h4>
+                                <p>
+                                    Speech recognition aur language processing.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">📧</div>
+                                <h4>Spam detection</h4>
+                                <p>
+                                    Suspicious messages ko classify ya filter karna.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🔐</div>
+                                <h4>Fraud detection</h4>
+                                <p>
+                                    Unusual transaction patterns ko identify karna.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="checkpoint">
+
+                            <div class="checkpoint-title">
+                                <span class="checkpoint-icon">💡</span>
+                                Think
+                            </div>
+
+                            <p>
+                                Aapke daily digital life me kaunsa system
+                                prediction ya recommendation karta hai?
+                            </p>
+
+                            <button class="reveal-btn" type="button">
+                                Example dekho
+                            </button>
+
+                            <div class="reveal-answer">
+                                Shopping recommendations, video recommendations,
+                                search suggestions aur spam filters common examples
+                                hain.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             13
+             ========================= -->
+
+                <section class="chapter-section" id="applications">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">13</span>
+                            Applications
+                        </div>
+
+                        <h2>
+                            Major AI Applications
+                        </h2>
+
+                        <div class="grid-2">
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🎓</div>
+                                <h3>Education</h3>
+                                <p>
+                                    Personalized explanations, tutoring,
+                                    assessment support, content generation
+                                    aur learning assistance.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🏥</div>
+                                <h3>Healthcare</h3>
+                                <p>
+                                    Medical imaging support, research, prediction
+                                    aur workflow assistance. Human professionals
+                                    remain important.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🏦</div>
+                                <h3>Banking & Finance</h3>
+                                <p>
+                                    Fraud detection, risk analysis, customer
+                                    support aur transaction monitoring.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🏭</div>
+                                <h3>Manufacturing</h3>
+                                <p>
+                                    Quality inspection, predictive maintenance,
+                                    optimization aur robotics.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🛒</div>
+                                <h3>E-commerce</h3>
+                                <p>
+                                    Product recommendations, search ranking,
+                                    demand forecasting aur support.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🛡️</div>
+                                <h3>Cybersecurity</h3>
+                                <p>
+                                    Anomaly detection, threat analysis aur
+                                    security monitoring support.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="success-box info-box">
+
+                            <strong>
+                                AI ka real value
+                            </strong>
+
+                            <p>
+                                AI ka value sirf “AI use karna” nahi hai. Real
+                                value tab create hoti hai jab AI kisi genuine
+                                problem ko better, faster, safer ya more scalable
+                                way me solve karne me help kare.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             14
+             ========================= -->
+
+                <section class="chapter-section" id="capabilities">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">14</span>
+                            Capabilities
+                        </div>
+
+                        <h2>
+                            AI kya-kya kar sakta hai?
+                        </h2>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🔤</div>
+                                <h4>Classify</h4>
+                                <p>
+                                    Input ko categories me assign karna.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">📈</div>
+                                <h4>Predict</h4>
+                                <p>
+                                    Future ya unknown outcome ka estimate.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🔍</div>
+                                <h4>Recognize</h4>
+                                <p>
+                                    Images, speech, patterns ya objects identify karna.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">💬</div>
+                                <h4>Process language</h4>
+                                <p>
+                                    Text ko analyze aur language-based output
+                                    generate karna.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🎨</div>
+                                <h4>Generate</h4>
+                                <p>
+                                    Text, image, audio ya other content produce karna.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">⚙️</div>
+                                <h4>Assist workflows</h4>
+                                <p>
+                                    Repetitive ya information-heavy tasks me
+                                    assistance provide karna.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <strong>
+                                Capability ≠ guarantee
+                            </strong>
+
+                            <p>
+                                Kisi AI system ke paas capability hone ka matlab
+                                ye nahi ki woh har situation me correct result
+                                dega. Accuracy task, data, model, context aur
+                                evaluation par depend karti hai.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             15
+             ========================= -->
+
+                <section class="chapter-section" id="limitations">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">15</span>
+                            Limitations
+                        </div>
+
+                        <h2>
+                            AI ki limitations
+                        </h2>
+
+                        <p>
+                            AI powerful hai, lekin perfect nahi hai. Responsible
+                            AI use ke liye limitations ko samajhna mandatory hai.
+                        </p>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+                                <div class="feature-icon">❗</div>
+                                <h4>Errors</h4>
+                                <p>
+                                    AI incorrect outputs produce kar sakta hai.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">⚖️</div>
+                                <h4>Bias</h4>
+                                <p>
+                                    Data, design ya deployment me bias outcomes ko
+                                    influence kar sakta hai.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🔒</div>
+                                <h4>Privacy</h4>
+                                <p>
+                                    Sensitive information handle karte waqt
+                                    privacy considerations important hain.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🧩</div>
+                                <h4>Context limits</h4>
+                                <p>
+                                    System ke available context aur capabilities
+                                    limited ho sakte hain.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">📉</div>
+                                <h4>Generalization</h4>
+                                <p>
+                                    Training examples se different situations me
+                                    performance change ho sakti hai.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">👨‍💻</div>
+                                <h4>Human oversight</h4>
+                                <p>
+                                    High-impact tasks me human review important
+                                    ho sakta hai.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             16
+             ========================= -->
+
+                <section class="chapter-section" id="hallucination">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">16</span>
+                            AI Reliability
+                        </div>
+
+                        <h2>
+                            AI Hallucination aur wrong answers
+                        </h2>
+
+                        <p>
+                            Generative AI systems kabhi-kabhi confident-sounding
+                            output produce kar sakte hain jo factually incorrect,
+                            unsupported ya fabricated ho sakta hai. Is behavior
+                            ko commonly <strong>hallucination</strong> kaha jata hai.
+                        </p>
+
+                        <div class="danger-box info-box">
+
+                            <strong>
+                                Golden rule
+                            </strong>
+
+                            <p>
+                                AI ka confident tone correctness ka proof nahi hai.
+                            </p>
+
+                        </div>
+
+                        <h3>
+                            Example
+                        </h3>
+
+                        <div class="case-study">
+
+                            <span class="case-label">
+                                Scenario
+                            </span>
+
+                            <h3>
+                                User asks for a factual answer
+                            </h3>
+
+                            <p>
+                                AI ek detailed answer generate karta hai. Answer
+                                grammatically perfect aur confident hai, lekin
+                                usme ek unsupported fact ho sakta hai.
+                            </p>
+
+                            <p>
+                                Isliye important information ke liye source,
+                                calculation, documentation ya trusted reference
+                                se verification karna zaroori hai.
+                            </p>
+
+                        </div>
+
+                        <div class="checkpoint">
+
+                            <div class="checkpoint-title">
+                                <span class="checkpoint-icon">🧠</span>
+                                Remember
+                            </div>
+
+                            <p>
+                                “AI ne bola hai” aur “ye verified fact hai” —
+                                dono same statement nahi hain.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             17
+             ========================= -->
+
+                <section class="chapter-section" id="verification">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">17</span>
+                            Verification
+                        </div>
+
+                        <h2>
+                            AI output ko verify kaise karein?
+                        </h2>
+
+                        <ol>
+
+                            <li>
+                                <strong>Claim identify karo:</strong>
+                                AI ne exactly kya factual claim kiya?
+                            </li>
+
+                            <li>
+                                <strong>Source check karo:</strong>
+                                Reliable source available hai?
+                            </li>
+
+                            <li>
+                                <strong>Cross-check karo:</strong>
+                                Important facts ko independent source se compare karo.
+                            </li>
+
+                            <li>
+                                <strong>Calculation verify karo:</strong>
+                                Numbers, formulas aur units separately check karo.
+                            </li>
+
+                            <li>
+                                <strong>Context verify karo:</strong>
+                                Answer current situation aur actual problem par
+                                apply hota hai?
+                            </li>
+
+                        </ol>
+
+                        <div class="grid-3">
+
+                            <div class="feature-card">
+                                <div class="feature-icon">📚</div>
+                                <h4>Official docs</h4>
+                                <p>
+                                    Technical ya product-specific claims ke liye
+                                    official documentation useful hoti hai.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🔬</div>
+                                <h4>Primary sources</h4>
+                                <p>
+                                    Research claims ke liye original papers ya
+                                    authoritative sources check kiye ja sakte hain.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">🧮</div>
+                                <h4>Independent calculation</h4>
+                                <p>
+                                    Mathematical results ko manually ya trusted
+                                    calculator se verify kar sakte ho.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             18
+             ========================= -->
+
+                <section class="chapter-section" id="benefits-risks">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">18</span>
+                            Balanced View
+                        </div>
+
+                        <h2>
+                            AI ke Benefits aur Risks
+                        </h2>
+
+                        <div class="grid-2">
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    ✅
+                                </div>
+
+                                <h3>
+                                    Benefits
+                                </h3>
+
+                                <ul>
+                                    <li>Large data ko process karne me help.</li>
+                                    <li>Repetitive tasks automate/assist karna.</li>
+                                    <li>Fast analysis aur pattern detection.</li>
+                                    <li>Personalized assistance.</li>
+                                    <li>Creative and technical workflows me support.</li>
+                                    <li>Accessibility improve karne me help.</li>
+                                </ul>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <div class="feature-icon">
+                                    ⚠️
+                                </div>
+
+                                <h3>
+                                    Risks
+                                </h3>
+
+                                <ul>
+                                    <li>Incorrect information.</li>
+                                    <li>Bias.</li>
+                                    <li>Privacy and security concerns.</li>
+                                    <li>Over-reliance on AI.</li>
+                                    <li>Copyright and ownership questions.</li>
+                                    <li>Misuse or irresponsible deployment.</li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                        <div class="warning-box info-box">
+
+                            <strong>
+                                Responsible AI mindset
+                            </strong>
+
+                            <p>
+                                AI ko blindly trust ya blindly reject karne ke
+                                bajay task ke risk level ke according appropriate
+                                verification aur human oversight use karna better
+                                approach hai.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             19
+             ========================= -->
+
+                <section class="chapter-section" id="human-ai">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">19</span>
+                            Collaboration
+                        </div>
+
+                        <h2>
+                            Human + AI: Best combination
+                        </h2>
+
+                        <p>
+                            AI ka strongest practical use aksar human ko completely
+                            remove karna nahi, balki human capability ko augment
+                            karna hota hai.
+                        </p>
+
+                        <div class="flow">
+
+                            <div class="flow-step">
+                                <span class="flow-icon">👤</span>
+                                <strong>Human goal</strong>
+                                <small>Problem define karta hai</small>
+                            </div>
+
+                            <div class="flow-step">
+                                <span class="flow-icon">🤖</span>
+                                <strong>AI assistance</strong>
+                                <small>Ideas / analysis / draft</small>
+                            </div>
+
+                            <div class="flow-step">
+                                <span class="flow-icon">🔎</span>
+                                <strong>Human review</strong>
+                                <small>Check and evaluate</small>
+                            </div>
+
+                            <div class="flow-step">
+                                <span class="flow-icon">🛠️</span>
+                                <strong>Improvement</strong>
+                                <small>Correct and refine</small>
+                            </div>
+
+                            <div class="flow-step">
+                                <span class="flow-icon">🎯</span>
+                                <strong>Final result</strong>
+                                <small>Human-approved output</small>
+                            </div>
+
+                        </div>
+
+                        <div class="success-box info-box">
+
+                            <strong>
+                                Professional mindset
+                            </strong>
+
+                            <p>
+                                AI ko “answer machine” se zyada “thinking and
+                                productivity assistant” ki tarah use karna seekho.
+                                Final responsibility task ke context par depend karti hai.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             20
+             ========================= -->
+
+                <section class="chapter-section" id="mental-model">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">20</span>
+                            Master Concept
+                        </div>
+
+                        <h2>
+                            Complete AI Mental Model
+                        </h2>
+
+                        <p>
+                            Agar aapko Chapter 04 ke baad AI ko ek line me
+                            mentally visualize karna ho, to ye framework yaad rakho:
+                        </p>
+
+                        <div class="formula">
+                            <span>Problem</span>
+                            →
+                            <span>Input</span>
+                            →
+                            <span>Data / Context</span>
+                            →
+                            <span>Model / Rules</span>
+                            →
+                            <span>Processing</span>
+                            →
+                            <span>Prediction / Generation / Decision</span>
+                            →
+                            <span>Human Evaluation</span>
+                        </div>
+
+                        <h3>
+                            Is model ke 7 important questions
+                        </h3>
+
+                        <ol>
+
+                            <li>
+                                Problem kya solve karni hai?
+                            </li>
+
+                            <li>
+                                Input kya hai?
+                            </li>
+
+                            <li>
+                                Data ya context kahan se aa raha hai?
+                            </li>
+
+                            <li>
+                                System rules use karta hai ya learned model?
+                            </li>
+
+                            <li>
+                                Output kis form me hai?
+                            </li>
+
+                            <li>
+                                Output kitna reliable hai?
+                            </li>
+
+                            <li>
+                                Final verification ya human decision kahan required hai?
+                            </li>
+
+                        </ol>
+
+                        <div class="info-blue info-box">
+
+                            <strong>
+                                Ye framework future chapters me bhi kaam aayega
+                            </strong>
+
+                            <p>
+                                Machine learning, neural networks, prompts,
+                                APIs, generative AI aur AI applications padhte
+                                waqt isi mental model ko repeatedly apply karna.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             21
+             ========================= -->
+
+                <section class="chapter-section" id="misconceptions">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">21</span>
+                            Misconceptions
+                        </div>
+
+                        <h2>
+                            Common AI misconceptions
+                        </h2>
+
+                        <div class="myth-card">
+
+                            <div class="myth">
+                                <strong>
+                                    ❌ Myth
+                                </strong>
+
+                                <p>
+                                    Har software AI hota hai.
+                                </p>
+                            </div>
+
+                            <div class="truth">
+                                <strong>
+                                    ✅ Reality
+                                </strong>
+
+                                <p>
+                                    AI software ka ek specialized area hai; normal
+                                    software AI ke bina bhi exist karta hai.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="myth-card">
+
+                            <div class="myth">
+                                <strong>
+                                    ❌ Myth
+                                </strong>
+
+                                <p>
+                                    AI hamesha correct answer deta hai.
+                                </p>
+                            </div>
+
+                            <div class="truth">
+                                <strong>
+                                    ✅ Reality
+                                </strong>
+
+                                <p>
+                                    AI systems errors, uncertainty, bias ya
+                                    hallucinations produce kar sakte hain.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="myth-card">
+
+                            <div class="myth">
+                                <strong>
+                                    ❌ Myth
+                                </strong>
+
+                                <p>
+                                    Automation aur AI same cheez hain.
+                                </p>
+                            </div>
+
+                            <div class="truth">
+                                <strong>
+                                    ✅ Reality
+                                </strong>
+
+                                <p>
+                                    Automation rules-based bhi ho sakti hai; AI
+                                    intelligent analysis ko add kar sakta hai.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="myth-card">
+
+                            <div class="myth">
+                                <strong>
+                                    ❌ Myth
+                                </strong>
+
+                                <p>
+                                    Generative AI human consciousness rakhta hai.
+                                </p>
+                            </div>
+
+                            <div class="truth">
+                                <strong>
+                                    ✅ Reality
+                                </strong>
+
+                                <p>
+                                    Generated language ya images consciousness ka
+                                    proof nahi hain.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="myth-card">
+
+                            <div class="myth">
+                                <strong>
+                                    ❌ Myth
+                                </strong>
+
+                                <p>
+                                    More AI always means better result.
+                                </p>
+                            </div>
+
+                            <div class="truth">
+                                <strong>
+                                    ✅ Reality
+                                </strong>
+
+                                <p>
+                                    Correct problem, good data, suitable model,
+                                    evaluation aur workflow design equally important hain.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             22
+             ========================= -->
+
+                <section class="chapter-section" id="practical">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">22</span>
+                            Practical Scenarios
+                        </div>
+
+                        <h2>
+                            AI ko practical situation me identify karo
+                        </h2>
+
+                        <div class="case-study">
+
+                            <span class="case-label">
+                                Scenario 01
+                            </span>
+
+                            <h3>
+                                Online shopping
+                            </h3>
+
+                            <p>
+                                User kuch products browse karta hai. System
+                                previous behavior aur other signals ke basis par
+                                relevant products recommend karta hai.
+                            </p>
+
+                            <p>
+                                <strong>Possible AI task:</strong>
+                                recommendation / prediction.
+                            </p>
+
+                        </div>
+
+                        <div class="case-study">
+
+                            <span class="case-label">
+                                Scenario 02
+                            </span>
+
+                            <h3>
+                                Email filtering
+                            </h3>
+
+                            <p>
+                                Incoming email ko analyze karke spam hone ki
+                                probability estimate ki ja sakti hai.
+                            </p>
+
+                            <p>
+                                <strong>Possible AI task:</strong>
+                                classification.
+                            </p>
+
+                        </div>
+
+                        <div class="case-study">
+
+                            <span class="case-label">
+                                Scenario 03
+                            </span>
+
+                            <h3>
+                                AI writing assistant
+                            </h3>
+
+                            <p>
+                                User instruction deta hai aur system draft,
+                                summary, explanation ya other text generate karta hai.
+                            </p>
+
+                            <p>
+                                <strong>Possible AI task:</strong>
+                                language processing and generation.
+                            </p>
+
+                        </div>
+
+                        <div class="case-study">
+
+                            <span class="case-label">
+                                Scenario 04
+                            </span>
+
+                            <h3>
+                                Factory quality inspection
+                            </h3>
+
+                            <p>
+                                Camera images ko analyze karke system visible
+                                defects ke potential cases flag kar sakta hai.
+                            </p>
+
+                            <p>
+                                <strong>Possible AI task:</strong>
+                                computer vision / classification / anomaly detection.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             23 QUIZ
+             ========================= -->
+
+                <section class="chapter-section" id="quiz">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">23</span>
+                            Knowledge Check
+                        </div>
+
+                        <h2>
+                            Chapter 04 Quiz
+                        </h2>
+
+                        <p>
+                            Neeche ke questions attempt karo. Result submit
+                            karne ke baad turant show hoga.
+                        </p>
+
+                        <form class="quiz" id="quizForm">
+
+                            <!-- Q1 -->
+                            <div class="quiz-question">
+
+                                <p class="question-title">
+                                    1. AI ka broad purpose kya hai?
+                                </p>
+
+                                <div class="options">
+
+                                    <label class="option">
+                                        <input type="radio" name="q1" value="a">
+                                        <span>
+                                            Sirf calculations karna
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q1" value="b">
+                                        <span>
+                                            Intelligent-type tasks ko computational
+                                            systems se perform/assist karna
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q1" value="c">
+                                        <span>
+                                            Sirf internet chalana
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q1" value="d">
+                                        <span>
+                                            Sirf robots banana
+                                        </span>
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Q2 -->
+                            <div class="quiz-question">
+
+                                <p class="question-title">
+                                    2. Machine Learning ka AI ke saath kya relation hai?
+                                </p>
+
+                                <div class="options">
+
+                                    <label class="option">
+                                        <input type="radio" name="q2" value="a">
+                                        <span>
+                                            ML AI se completely unrelated hai
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q2" value="b">
+                                        <span>
+                                            ML AI ka ek major approach/area hai
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q2" value="c">
+                                        <span>
+                                            ML sirf hardware hai
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q2" value="d">
+                                        <span>
+                                            ML operating system hai
+                                        </span>
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Q3 -->
+                            <div class="quiz-question">
+
+                                <p class="question-title">
+                                    3. AI hallucination ka matlab kya hai?
+                                </p>
+
+                                <div class="options">
+
+                                    <label class="option">
+                                        <input type="radio" name="q3" value="a">
+                                        <span>
+                                            AI ka computer band hona
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q3" value="b">
+                                        <span>
+                                            AI ka confident-looking but incorrect or
+                                            unsupported output generate karna
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q3" value="c">
+                                        <span>
+                                            Internet slow hona
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q3" value="d">
+                                        <span>
+                                            File download fail hona
+                                        </span>
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Q4 -->
+                            <div class="quiz-question">
+
+                                <p class="question-title">
+                                    4. AI system me data ki quality important kyun hai?
+                                </p>
+
+                                <div class="options">
+
+                                    <label class="option">
+                                        <input type="radio" name="q4" value="a">
+                                        <span>
+                                            Data sirf storage ke liye hota hai
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q4" value="b">
+                                        <span>
+                                            Data system ke learning/analysis ko influence
+                                            kar sakta hai
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q4" value="c">
+                                        <span>
+                                            Data ka AI se koi relation nahi
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q4" value="d">
+                                        <span>
+                                            Data sirf images ke liye hota hai
+                                        </span>
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Q5 -->
+                            <div class="quiz-question">
+
+                                <p class="question-title">
+                                    5. AI output ke baare me best professional approach kya hai?
+                                </p>
+
+                                <div class="options">
+
+                                    <label class="option">
+                                        <input type="radio" name="q5" value="a">
+                                        <span>
+                                            Har answer ko blindly trust karna
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q5" value="b">
+                                        <span>
+                                            AI ko kabhi use na karna
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q5" value="c">
+                                        <span>
+                                            Risk aur context ke according output verify karna
+                                        </span>
+                                    </label>
+
+                                    <label class="option">
+                                        <input type="radio" name="q5" value="d">
+                                        <span>
+                                            Sirf answer ki length dekhna
+                                        </span>
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <button class="quiz-submit" type="submit">
+                                Check My Score
+                            </button>
+
+                            <div class="quiz-result" id="quizResult" role="status" aria-live="polite">
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             24 SUMMARY
+             ========================= -->
+
+                <section class="chapter-section" id="summary">
+
+                    <div class="section-card">
+
+                        <div class="section-kicker">
+                            <span class="section-number">24</span>
+                            Final Revision
+                        </div>
+
+                        <h2>
+                            Chapter 04 Summary
+                        </h2>
+
+                        <p>
+                            Agar aapko poora chapter short revision me yaad
+                            rakhna hai, to ye points master karo:
+                        </p>
+
+                        <div class="grid-2">
+
+                            <div class="feature-card">
+                                <div class="feature-icon">1</div>
+                                <h4>AI is a field</h4>
+                                <p>
+                                    AI koi single app nahi, balki intelligent
+                                    computational systems se related broad field hai.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">2</div>
+                                <h4>Input matters</h4>
+                                <p>
+                                    AI system input, context aur available data
+                                    ko process karta hai.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">3</div>
+                                <h4>Rules & learning</h4>
+                                <p>
+                                    AI systems rules, learning-based methods ya
+                                    combinations use kar sakte hain.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">4</div>
+                                <h4>AI ≠ ML ≠ DL</h4>
+                                <p>
+                                    AI broader field hai; ML aur DL uske important
+                                    related areas hain.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">5</div>
+                                <h4>Generative AI</h4>
+                                <p>
+                                    Generative systems new text, images, audio
+                                    ya other content produce kar sakte hain.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">6</div>
+                                <h4>AI is not perfect</h4>
+                                <p>
+                                    Errors, bias, hallucinations aur limitations
+                                    ko samajhna zaroori hai.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">7</div>
+                                <h4>Verify important output</h4>
+                                <p>
+                                    Important facts, calculations aur high-impact
+                                    decisions ke liye verification important hai.
+                                </p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="feature-icon">8</div>
+                                <h4>Human + AI</h4>
+                                <p>
+                                    Strong workflow me human judgment aur AI
+                                    assistance ek saath kaam kar sakte hain.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="success-box info-box">
+
+                            <strong>
+                                Chapter 04 ka final mental model
+                            </strong>
+
+                            <p>
+                                <strong>AI = Problem + Input + Data/Context +
+                                    Model/Rules + Processing + Output + Evaluation.</strong>
+                                Is framework ko yaad rakhoge to aage ke AI,
+                                ML, Prompt Engineering aur Generative AI chapters
+                                samajhna bahut easy ho jayega.
+                            </p>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <strong>
+                                Next Chapter
+                            </strong>
+
+                            <p>
+                                Chapter 05 me hum AI ki journey ko detail me
+                                dekhenge — early AI research, symbolic/rule-based
+                                systems, expert systems, machine learning,
+                                neural networks, deep learning aur modern
+                                generative AI era tak.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- =========================
+             PREVIOUS / NEXT
+             ========================= -->
+
+                <nav class="chapter-navigation" aria-label="Chapter navigation">
+
+                    <a class="nav-card" href="chapter-03.html">
+
+                        <span class="nav-label">
+                            ← Previous Chapter
+                        </span>
+
+                        <span class="nav-title">
+                            Chapter 03 — Learning AI
+                        </span>
+
+                    </a>
+
+                    <a class="nav-card next" href="chapter-05.html">
+
+                        <span class="nav-label">
+                            Next Chapter →
+                        </span>
+
+                        <span class="nav-title">
+                            Chapter 05 — AI History
+                        </span>
+
+                    </a>
+
+                </nav>
+
+                <!-- =========================
+             FOOTER
+             ========================= -->
+
+                <footer>
+
+                    <p>
+                        <strong>
+                            AI Learning HUB
+                        </strong>
+                        — Chapter 04: Artificial Intelligence Fundamentals
+                    </p>
+
+                    <p style="margin-top: 6px;">
+                        Learn the concepts. Understand the system. Build the skill.
+                    </p>
+
+                </footer>
+
+            </article>
+
+        </div>
+
+    </main>
+
+    <!-- Back to top -->
+    <button class="back-top" id="backTop" type="button" aria-label="Back to top" title="Back to top">
+        ↑
+    </button>
+
+    <script>
+        /* =========================================================
+           AI LEARNING HUB — CHAPTER 04 JS
+           ========================================================= */
+
+        "use strict";
+
+        /* =========================
+           ELEMENTS
+           ========================= */
+
+        const html = document.documentElement;
+
+        const themeBtn =
+            document.getElementById("themeBtn");
+
+        const themeIcon =
+            document.getElementById("themeIcon");
+
+        const menuBtn =
+            document.getElementById("menuBtn");
+
+        const menuIcon =
+            document.getElementById("menuIcon");
+
+        const mobileNav =
+            document.getElementById("mobileNav");
+
+        const progressBar =
+            document.getElementById("progressBar");
+
+        const miniProgress =
+            document.getElementById("miniProgress");
+
+        const progressText =
+            document.getElementById("progressText");
+
+        const backTop =
+            document.getElementById("backTop");
+
+        const tocLinks =
+            Array.from(
+                document.querySelectorAll(".toc-list a")
+            );
+
+        const sections =
+            Array.from(
+                document.querySelectorAll(".chapter-section")
+            );
+
+        /* =========================
+           THEME
+           ========================= */
+
+        function getStoredTheme() {
+            try {
+                return localStorage.getItem(
+                    "ai-learning-hub-theme"
+                );
+            } catch {
+                return null;
+            }
+        }
+
+        function setStoredTheme(theme) {
+            try {
+                localStorage.setItem(
+                    "ai-learning-hub-theme",
+                    theme
+                );
+            } catch {
+                /* Storage unavailable — continue normally */
+            }
+        }
+
+        function updateThemeIcon() {
+
+            const isDark =
+                html.classList.contains("dark");
+
+            themeIcon.textContent =
+                isDark ? "☀" : "☾";
+
+            themeBtn.setAttribute(
+                "aria-label",
+                isDark
+                    ? "Switch to light mode"
+                    : "Switch to dark mode"
+            );
+        }
+
+        function applyInitialTheme() {
+
+            const stored =
+                getStoredTheme();
+
+            if (
+                stored === "dark" ||
+                (
+                    !stored &&
+                    window.matchMedia &&
+                    window.matchMedia(
+                        "(prefers-color-scheme: dark)"
+                    ).matches
+                )
+            ) {
+                html.classList.add("dark");
+            }
+
+            updateThemeIcon();
+        }
+
+        themeBtn.addEventListener(
+            "click",
+            () => {
+
+                html.classList.toggle("dark");
+
+                const theme =
+                    html.classList.contains("dark")
+                        ? "dark"
+                        : "light";
+
+                setStoredTheme(theme);
+
+                updateThemeIcon();
+            }
+        );
+
+        applyInitialTheme();
+
+        /* =========================
+           MOBILE MENU
+           ========================= */
+
+        function closeMobileMenu() {
+
+            mobileNav.classList.remove("open");
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuIcon.textContent = "☰";
+        }
+
+        menuBtn.addEventListener(
+            "click",
+            () => {
+
+                const isOpen =
+                    mobileNav.classList.toggle("open");
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
+
+                menuIcon.textContent =
+                    isOpen ? "×" : "☰";
+            }
+        );
+
+        document
+            .querySelectorAll(".mobile-nav a")
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    closeMobileMenu
+                );
+
+            });
+
+        /* =========================
+           SCROLL PROGRESS
+           ========================= */
+
+        function updateScrollProgress() {
+
+            const scrollTop =
+                window.scrollY;
+
+            const documentHeight =
+                document.documentElement.scrollHeight;
+
+            const viewportHeight =
+                window.innerHeight;
+
+            const scrollable =
+                Math.max(
+                    1,
+                    documentHeight - viewportHeight
+                );
+
+            const percentage =
+                Math.min(
+                    100,
+                    Math.max(
+                        0,
+                        (scrollTop / scrollable) * 100
+                    )
+                );
+
+            const rounded =
+                Math.round(percentage);
+
+            progressBar.style.width =
+                percentage + "%";
+
+            miniProgress.style.width =
+                percentage + "%";
+
+            progressText.textContent =
+                rounded + "%";
+
+            if (scrollTop > 500) {
+                backTop.classList.add("show");
+            } else {
+                backTop.classList.remove("show");
+            }
+
+            updateActiveTOC();
+        }
+
+        let scrollTicking = false;
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (!scrollTicking) {
+
+                    window.requestAnimationFrame(
+                        () => {
+
+                            updateScrollProgress();
+
+                            scrollTicking = false;
+                        }
+                    );
+
+                    scrollTicking = true;
+                }
+
+            },
+            { passive: true }
+        );
+
+        window.addEventListener(
+            "resize",
+            updateScrollProgress,
+            { passive: true }
+        );
+
+        updateScrollProgress();
+
+        /* =========================
+           ACTIVE TOC
+           ========================= */
+
+        function updateActiveTOC() {
+
+            const offset =
+                window.scrollY + 130;
+
+            let activeId = "";
+
+            for (const section of sections) {
+
+                if (
+                    section.offsetTop <= offset
+                ) {
+                    activeId =
+                        section.id;
+                }
+            }
+
+            tocLinks.forEach(link => {
+
+                const href =
+                    link.getAttribute("href");
+
+                link.classList.toggle(
+                    "active",
+                    href === "#" + activeId
+                );
+
+            });
+        }
+
+        /* =========================
+           SMOOTH TOC
+           ========================= */
+
+        tocLinks.forEach(link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const targetId =
+                        link.getAttribute("href");
+
+                    if (
+                        !targetId ||
+                        !targetId.startsWith("#")
+                    ) {
+                        return;
+                    }
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+                    if (!target) {
+                        return;
+                    }
+
+                    event.preventDefault();
+
+                    target.scrollIntoView({
+                        behavior:
+                            window.matchMedia(
+                                "(prefers-reduced-motion: reduce)"
+                            ).matches
+                                ? "auto"
+                                : "smooth",
+                        block: "start"
+                    });
+
+                    history.replaceState(
+                        null,
+                        "",
+                        targetId
+                    );
+                }
+            );
+
+        });
+
+        /* =========================
+           BACK TO TOP
+           ========================= */
+
+        backTop.addEventListener(
+            "click",
+            () => {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior:
+                        window.matchMedia(
+                            "(prefers-reduced-motion: reduce)"
+                        ).matches
+                            ? "auto"
+                            : "smooth"
+                });
+
+            }
+        );
+
+        /* =========================
+           CHECKPOINT REVEALS
+           ========================= */
+
+        document
+            .querySelectorAll(".reveal-btn")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const answer =
+                            button.nextElementSibling;
+
+                        if (!answer) {
+                            return;
+                        }
+
+                        const isVisible =
+                            answer.classList.toggle("show");
+
+                        button.textContent =
+                            isVisible
+                                ? "Answer hide karo"
+                                : "Answer dekho";
+                    }
+                );
+
+            });
+
+        /* =========================
+           QUIZ
+           ========================= */
+
+        const quizForm =
+            document.getElementById("quizForm");
+
+        const quizResult =
+            document.getElementById("quizResult");
+
+        const correctAnswers = {
+            q1: "b",
+            q2: "b",
+            q3: "b",
+            q4: "b",
+            q5: "c"
+        };
+
+        quizForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+                let score = 0;
+
+                const total =
+                    Object.keys(correctAnswers).length;
+
+                Object.entries(
+                    correctAnswers
+                ).forEach(
+                    ([question, answer]) => {
+
+                        const selected =
+                            quizForm.querySelector(
+                                `input[name="${question}"]:checked`
+                            );
+
+                        if (
+                            selected &&
+                            selected.value === answer
+                        ) {
+                            score++;
+                        }
+
+                    }
+                );
+
+                const percentage =
+                    Math.round(
+                        (score / total) * 100
+                    );
+
+                quizResult.className =
+                    "quiz-result show";
+
+                if (percentage >= 80) {
+
+                    quizResult.classList.add(
+                        "good"
+                    );
+
+                    quizResult.textContent =
+                        `Excellent! Aapka score ${score}/${total} (${percentage}%). AI fundamentals ka base strong hai.`;
+
+                } else {
+
+                    quizResult.classList.add(
+                        "average"
+                    );
+
+                    quizResult.textContent =
+                        `Aapka score ${score}/${total} (${percentage}%). Chapter ke AI vs software, data, ML/DL aur verification sections ko ek baar revise karo.`;
+                }
+
+                quizResult.scrollIntoView({
+                    behavior:
+                        window.matchMedia(
+                            "(prefers-reduced-motion: reduce)"
+                        ).matches
+                            ? "auto"
+                            : "smooth",
+                    block: "nearest"
+                });
+
+            }
+        );
+
+        /* =========================
+           KEYBOARD ESCAPE
+           ========================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (event.key === "Escape") {
+
+                    closeMobileMenu();
+
+                }
+
+            }
+        );
+
+        /* =========================
+           MOBILE SAFETY
+           ========================= */
+
+        function handleResponsiveMenu() {
+
+            if (
+                window.innerWidth > 1120
+            ) {
+                closeMobileMenu();
+            }
+
+        }
+
+        window.addEventListener(
+            "resize",
+            handleResponsiveMenu
+        );
+
+    </script>
+
+</body>
+
+</html>

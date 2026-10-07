@@ -1,0 +1,4136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prompt Builder — AI Learning HUB</title>
+
+    <meta name="description"
+        content="Build clear, powerful and professional AI prompts with the AI Learning HUB Prompt Builder. Create structured, natural and reusable prompts for study, coding, research, writing, planning and work.">
+
+    <meta name="keywords"
+        content="AI prompt builder, prompt engineering, prompt generator, AI prompts, prompt templates, AI Learning HUB">
+
+    <meta name="author" content="AI Learning HUB">
+
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Prompt Builder — AI Learning HUB">
+    <meta property="og:description" content="Build better AI prompts with a practical, human-friendly prompt builder.">
+    <meta property="og:type" content="website">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Learning HUB Prompt Builder",
+    "description": "A browser-based tool for building structured and natural AI prompts.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true
+  }
+  </script>
+
+    <style>
+        /* =========================================================
+       AI LEARNING HUB — SHARED DESIGN SYSTEM
+       ========================================================= */
+
+        :root {
+            --bg: #f7f9fc;
+            --surface: #ffffff;
+            --surface-2: #f1f5f9;
+            --surface-3: #eef2f7;
+
+            --text: #111827;
+            --text-soft: #4b5563;
+            --text-muted: #6b7280;
+
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-soft: #eff6ff;
+
+            --border: #e5e7eb;
+            --border-strong: #d1d5db;
+
+            --success: #15803d;
+            --success-soft: #f0fdf4;
+
+            --warning: #b45309;
+            --warning-soft: #fffbeb;
+
+            --danger: #dc2626;
+            --danger-soft: #fef2f2;
+
+            --shadow-sm:
+                0 1px 2px rgba(15, 23, 42, .04);
+
+            --shadow:
+                0 10px 30px rgba(15, 23, 42, .07);
+
+            --shadow-lg:
+                0 20px 55px rgba(15, 23, 42, .10);
+
+            --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 20px;
+
+            --container: 1200px;
+
+            --font:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            --header-height: 72px;
+        }
+
+        html.dark {
+            --bg: #0b1120;
+            --surface: #111827;
+            --surface-2: #172033;
+            --surface-3: #1d293d;
+
+            --text: #f3f4f6;
+            --text-soft: #cbd5e1;
+            --text-muted: #94a3b8;
+
+            --primary: #60a5fa;
+            --primary-dark: #93c5fd;
+            --primary-soft: rgba(37, 99, 235, .14);
+
+            --border: #253248;
+            --border-strong: #334155;
+
+            --success: #4ade80;
+            --success-soft: rgba(34, 197, 94, .10);
+
+            --warning: #fbbf24;
+            --warning-soft: rgba(245, 158, 11, .10);
+
+            --danger: #f87171;
+            --danger-soft: rgba(239, 68, 68, .10);
+
+            --shadow-sm:
+                0 1px 2px rgba(0, 0, 0, .20);
+
+            --shadow:
+                0 12px 35px rgba(0, 0, 0, .22);
+
+            --shadow-lg:
+                0 22px 65px rgba(0, 0, 0, .30);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition:
+                background .25s ease,
+                color .25s ease;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            background: rgba(37, 99, 235, .18);
+        }
+
+        /* =========================================================
+       HEADER / NAVBAR
+       ========================================================= */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            background: color-mix(in srgb,
+                    var(--surface) 94%,
+                    transparent);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .nav-container {
+            width: min(calc(100% - 40px),
+                    var(--container));
+            height: 100%;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-width: max-content;
+            font-weight: 800;
+            letter-spacing: -.035em;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+
+            display: grid;
+            place-items: center;
+
+            color: #fff;
+            background:
+                linear-gradient(135deg,
+                    #2563eb,
+                    #4f46e5);
+
+            box-shadow:
+                0 7px 18px rgba(37, 99, 235, .22);
+        }
+
+        .brand-mark svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .brand-name {
+            font-size: 1.02rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: auto;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 8px 11px;
+            border-radius: 8px;
+            color: var(--text-soft);
+            font-size: .88rem;
+            font-weight: 600;
+            transition:
+                background .2s ease,
+                color .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-button {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: var(--surface);
+            color: var(--text-soft);
+
+            display: grid;
+            place-items: center;
+
+            transition:
+                border-color .2s ease,
+                color .2s ease,
+                background .2s ease,
+                transform .2s ease;
+        }
+
+        .icon-button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .icon-button:active {
+            transform: scale(.96);
+        }
+
+        .menu-button {
+            display: none;
+        }
+
+        /* =========================================================
+       HERO
+       ========================================================= */
+
+        .hero {
+            position: relative;
+            padding: 70px 20px 50px;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 15% 15%,
+                    rgba(37, 99, 235, .08),
+                    transparent 32%),
+                radial-gradient(circle at 85% 20%,
+                    rgba(99, 102, 241, .07),
+                    transparent 30%),
+                var(--surface);
+        }
+
+        .hero-inner {
+            width: min(100%, var(--container));
+            margin: auto;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 6px 11px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: var(--surface);
+            color: var(--primary);
+
+            font-size: .78rem;
+            font-weight: 750;
+            letter-spacing: .02em;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+        .eyebrow-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .hero h1 {
+            max-width: 850px;
+            margin: 18px auto 14px;
+
+            font-size:
+                clamp(2rem, 5vw, 3.7rem);
+
+            line-height: 1.08;
+            letter-spacing: -.055em;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            max-width: 720px;
+            margin: auto;
+
+            color: var(--text-soft);
+            font-size:
+                clamp(.98rem, 2vw, 1.08rem);
+        }
+
+        .hero-points {
+            margin-top: 26px;
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .hero-point {
+            padding: 7px 11px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--text-soft);
+            font-size: .8rem;
+            font-weight: 600;
+        }
+
+        /* =========================================================
+       MAIN
+       ========================================================= */
+
+        main {
+            width: min(calc(100% - 40px),
+                    var(--container));
+            margin: 0 auto;
+            padding: 42px 0 80px;
+        }
+
+        .section-heading {
+            margin-bottom: 18px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 5px;
+            font-size: 1.35rem;
+            letter-spacing: -.025em;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: .9rem;
+        }
+
+        /* =========================================================
+       QUICK MODES
+       ========================================================= */
+
+        .mode-section {
+            margin-bottom: 35px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(6, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .template-card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            padding: 15px 13px;
+            text-align: left;
+
+            transition:
+                border-color .2s ease,
+                transform .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(37, 99, 235, .35);
+            box-shadow: var(--shadow);
+        }
+
+        .template-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .template-icon {
+            width: 34px;
+            height: 34px;
+            margin-bottom: 9px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 9px;
+            background: var(--surface-2);
+            color: var(--primary);
+        }
+
+        .template-card.selected .template-icon {
+            background: var(--surface);
+        }
+
+        .template-card strong {
+            display: block;
+            font-size: .84rem;
+            margin-bottom: 2px;
+        }
+
+        .template-card small {
+            display: block;
+            color: var(--text-muted);
+            font-size: .72rem;
+            line-height: 1.4;
+        }
+
+        /* =========================================================
+       BUILDER LAYOUT
+       ========================================================= */
+
+        .builder-layout {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1.05fr) minmax(390px, .95fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .panel {
+            min-width: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .panel-header {
+            padding: 20px 22px;
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .panel-title {
+            margin: 0;
+            font-size: 1.05rem;
+            letter-spacing: -.02em;
+        }
+
+        .panel-subtitle {
+            margin: 4px 0 0;
+            color: var(--text-muted);
+            font-size: .8rem;
+        }
+
+        .panel-body {
+            padding: 22px;
+        }
+
+        /* =========================================================
+       FORM
+       ========================================================= */
+
+        .form-grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .field {
+            min-width: 0;
+        }
+
+        .field-label-row {
+            margin-bottom: 7px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .field label {
+            font-size: .84rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .required {
+            color: var(--danger);
+            margin-left: 2px;
+        }
+
+        .optional {
+            color: var(--text-muted);
+            font-size: .7rem;
+            font-weight: 500;
+        }
+
+        .field-help {
+            margin: -2px 0 7px;
+            color: var(--text-muted);
+            font-size: .74rem;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            border: 1px solid var(--border-strong);
+            border-radius: 10px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            outline: none;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        input,
+        select {
+            height: 45px;
+            padding: 0 12px;
+        }
+
+        textarea {
+            min-height: 96px;
+            resize: vertical;
+            padding: 11px 12px;
+            line-height: 1.55;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted);
+            opacity: .72;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary);
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, .11);
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .choice-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .choice {
+            position: relative;
+        }
+
+        .choice input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .choice label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 36px;
+            padding: 7px 11px;
+
+            border: 1px solid var(--border);
+            border-radius: 8px;
+
+            background: var(--surface);
+            color: var(--text-soft);
+
+            font-size: .78rem;
+            font-weight: 650;
+
+            cursor: pointer;
+
+            transition:
+                border-color .2s ease,
+                background .2s ease,
+                color .2s ease;
+        }
+
+        .choice input:checked+label {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .check-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+
+            padding: 11px 12px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface-2);
+        }
+
+        .check-row input {
+            width: 17px;
+            height: 17px;
+            margin-top: 2px;
+            accent-color: var(--primary);
+        }
+
+        .check-row label {
+            cursor: pointer;
+            font-size: .79rem;
+            color: var(--text-soft);
+        }
+
+        /* =========================================================
+       FORM FOOTER
+       ========================================================= */
+
+        .form-footer {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn {
+            min-height: 40px;
+            padding: 8px 14px;
+
+            border: 1px solid transparent;
+            border-radius: 9px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+
+            font-size: .8rem;
+            font-weight: 700;
+
+            transition:
+                transform .18s ease,
+                background .18s ease,
+                border-color .18s ease,
+                color .18s ease,
+                box-shadow .18s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: var(--primary);
+            box-shadow:
+                0 6px 15px rgba(37, 99, 235, .18);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            color: var(--text-soft);
+            background: var(--surface);
+            border-color: var(--border-strong);
+        }
+
+        .btn-secondary:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .btn-danger {
+            color: var(--danger);
+            background: var(--danger-soft);
+            border-color: transparent;
+        }
+
+        .btn-small {
+            min-height: 34px;
+            padding: 6px 10px;
+            font-size: .74rem;
+        }
+
+        /* =========================================================
+       PREVIEW
+       ========================================================= */
+
+        .preview-panel {
+            position: sticky;
+            top: calc(var(--header-height) + 18px);
+        }
+
+        .preview-tabs {
+            display: flex;
+            gap: 5px;
+
+            padding: 6px;
+
+            background: var(--surface-2);
+            border-radius: 10px;
+        }
+
+        .preview-tab {
+            border: 0;
+            border-radius: 7px;
+
+            padding: 7px 9px;
+
+            background: transparent;
+            color: var(--text-muted);
+
+            font-size: .73rem;
+            font-weight: 700;
+        }
+
+        .preview-tab.active {
+            color: var(--text);
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .preview-box {
+            position: relative;
+
+            min-height: 390px;
+
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background:
+                linear-gradient(180deg,
+                    var(--surface-2),
+                    var(--surface));
+
+            overflow: hidden;
+        }
+
+        .preview-label {
+            margin-bottom: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+
+            color: var(--text-muted);
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+        }
+
+        .prompt-output {
+            margin: 0;
+            min-height: 330px;
+
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+
+            color: var(--text);
+            font-family:
+                "SFMono-Regular",
+                Consolas,
+                "Liberation Mono",
+                monospace;
+
+            font-size: .79rem;
+            line-height: 1.7;
+        }
+
+        .empty-preview {
+            min-height: 330px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .empty-preview-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 12px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 14px;
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .empty-preview strong {
+            color: var(--text);
+            font-size: .9rem;
+        }
+
+        .empty-preview p {
+            max-width: 270px;
+            margin: 5px 0 0;
+            font-size: .76rem;
+        }
+
+        .preview-footer {
+            padding-top: 14px;
+            margin-top: 14px;
+
+            border-top: 1px solid var(--border);
+
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .stat {
+            padding: 5px 8px;
+            border-radius: 7px;
+            background: var(--surface-2);
+            color: var(--text-muted);
+            font-size: .68rem;
+            font-weight: 650;
+        }
+
+        /* =========================================================
+       QUALITY PANEL
+       ========================================================= */
+
+        .quality-section {
+            margin-top: 22px;
+        }
+
+        .quality-score {
+            padding: 15px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface-2);
+        }
+
+        .quality-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 9px;
+        }
+
+        .quality-top strong {
+            font-size: .82rem;
+        }
+
+        .quality-number {
+            color: var(--primary);
+            font-size: .82rem;
+            font-weight: 800;
+        }
+
+        .progress-track {
+            height: 7px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: var(--border);
+        }
+
+        .progress-value {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: var(--primary);
+            transition: width .3s ease;
+        }
+
+        .quality-note {
+            margin: 8px 0 0;
+            color: var(--text-muted);
+            font-size: .68rem;
+        }
+
+        .suggestions {
+            margin-top: 12px;
+
+            display: grid;
+            gap: 7px;
+        }
+
+        .suggestion {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+
+            padding: 9px 10px;
+
+            border-radius: 9px;
+            background: var(--surface);
+
+            color: var(--text-soft);
+            font-size: .73rem;
+        }
+
+        .suggestion-dot {
+            flex: 0 0 auto;
+            width: 7px;
+            height: 7px;
+            margin-top: 6px;
+            border-radius: 50%;
+            background: var(--warning);
+        }
+
+        .suggestion.good .suggestion-dot {
+            background: var(--success);
+        }
+
+        /* =========================================================
+       LEARNING SECTION
+       ========================================================= */
+
+        .learning-section {
+            margin-top: 50px;
+        }
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .learning-card {
+            padding: 19px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .learning-number {
+            width: 31px;
+            height: 31px;
+            margin-bottom: 13px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 8px;
+            color: var(--primary);
+            background: var(--primary-soft);
+
+            font-size: .75rem;
+            font-weight: 800;
+        }
+
+        .learning-card h3 {
+            margin: 0 0 6px;
+            font-size: .92rem;
+            letter-spacing: -.015em;
+        }
+
+        .learning-card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: .77rem;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+       EXAMPLES
+       ========================================================= */
+
+        .examples-section {
+            margin-top: 50px;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .example-card {
+            padding: 18px;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+        }
+
+        .example-tag {
+            display: inline-flex;
+
+            padding: 5px 8px;
+
+            border-radius: 6px;
+            background: var(--primary-soft);
+            color: var(--primary);
+
+            font-size: .67rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .example-card h3 {
+            margin: 11px 0 6px;
+            font-size: .9rem;
+        }
+
+        .example-card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: .76rem;
+        }
+
+        /* =========================================================
+       SAVED PROMPTS
+       ========================================================= */
+
+        .saved-section {
+            margin-top: 50px;
+        }
+
+        .saved-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .saved-empty {
+            padding: 22px;
+            text-align: center;
+            border: 1px dashed var(--border-strong);
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-size: .78rem;
+        }
+
+        .saved-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+
+            padding: 12px 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+        }
+
+        .saved-info {
+            min-width: 0;
+        }
+
+        .saved-info strong {
+            display: block;
+
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            font-size: .8rem;
+        }
+
+        .saved-info small {
+            color: var(--text-muted);
+            font-size: .68rem;
+        }
+
+        .saved-actions {
+            display: flex;
+            gap: 5px;
+            flex: 0 0 auto;
+        }
+
+        /* =========================================================
+       FOOTER
+       ========================================================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            width: min(calc(100% - 40px),
+                    var(--container));
+
+            margin: auto;
+            padding: 26px 0;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-size: .82rem;
+            font-weight: 750;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: .72rem;
+        }
+
+        /* =========================================================
+       TOAST
+       ========================================================= */
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 2000;
+
+            max-width: min(360px, calc(100vw - 40px));
+
+            padding: 11px 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            box-shadow: var(--shadow-lg);
+
+            font-size: .77rem;
+            font-weight: 650;
+
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+
+            transition:
+                opacity .22s ease,
+                transform .22s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+       MOBILE NAV
+       ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                position: absolute;
+
+                top: calc(var(--header-height) + 7px);
+                left: 20px;
+                right: 20px;
+
+                padding: 8px;
+
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 13px;
+
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 11px 12px;
+            }
+
+            .menu-button {
+                display: grid;
+            }
+
+            .template-grid {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+            .builder-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-panel {
+                position: static;
+            }
+
+            .learning-grid,
+            .example-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* =========================================================
+       TABLET
+       ========================================================= */
+
+        @media (max-width: 700px) {
+
+            :root {
+                --header-height: 64px;
+            }
+
+            .nav-container,
+            main,
+            .footer-inner {
+                width: min(calc(100% - 28px),
+                        var(--container));
+            }
+
+            .hero {
+                padding:
+                    48px 14px 38px;
+            }
+
+            .hero h1 {
+                font-size: 2.15rem;
+            }
+
+            main {
+                padding-top: 30px;
+                padding-bottom: 55px;
+            }
+
+            .template-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .two-columns,
+            .three-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-header,
+            .panel-body {
+                padding: 17px;
+            }
+
+            .learning-grid,
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* =========================================================
+       SMALL MOBILE
+       ========================================================= */
+
+        @media (max-width: 480px) {
+
+            .brand-name {
+                font-size: .92rem;
+            }
+
+            .brand-mark {
+                width: 35px;
+                height: 35px;
+            }
+
+            .nav-actions {
+                gap: 5px;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .hero-description {
+                font-size: .9rem;
+            }
+
+            .hero-points {
+                justify-content: flex-start;
+            }
+
+            .hero-point {
+                font-size: .69rem;
+            }
+
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .template-card {
+                padding: 13px;
+            }
+
+            .form-footer {
+                align-items: stretch;
+            }
+
+            .button-group {
+                width: 100%;
+            }
+
+            .button-group .btn {
+                flex: 1;
+            }
+
+            .preview-footer {
+                align-items: stretch;
+            }
+
+            .preview-footer .button-group {
+                width: 100%;
+            }
+
+            .preview-footer .button-group .btn {
+                flex: 1;
+            }
+
+            .toast {
+                right: 14px;
+                bottom: 14px;
+                max-width: calc(100vw - 28px);
+            }
+        }
+
+        /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+    <header class="site-header">
+
+        <div class="nav-container">
+
+            <a class="brand" href="../index.html" aria-label="AI Learning HUB Home">
+
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3 4.5 7.2v9.6L12 21l7.5-4.2V7.2L12 3Z" />
+                        <path d="m7.5 9.1 4.5 2.5 4.5-2.5M12 11.6V17" />
+                    </svg>
+                </span>
+
+                <span class="brand-name">AI Learning HUB</span>
+
+            </a>
+
+
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+
+                <a class="nav-link" href="../index.html">
+                    Home
+                </a>
+
+                <a class="nav-link" href="../index.html#courses">
+                    Courses
+                </a>
+
+                <a class="nav-link active" href="../index.html#tools">
+                    Tools
+                </a>
+
+                <a class="nav-link" href="../index.html#articles">
+                    Articles
+                </a>
+
+                <a class="nav-link" href="../index.html#resources">
+                    Resources
+                </a>
+
+                <a class="nav-link" href="../index.html#about">
+                    About
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode"
+                    title="Toggle theme">
+
+                    <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg>
+
+                </button>
+
+
+                <button class="icon-button menu-button" id="menuButton" type="button" aria-label="Open navigation"
+                    aria-expanded="false">
+
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =======================================================
+       HERO
+       ======================================================= -->
+
+    <section class="hero">
+
+        <div class="hero-inner">
+
+            <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                Learn by Doing · Prompt Engineering
+            </div>
+
+            <h1>
+                Build Better
+                <span>AI Prompts</span>
+            </h1>
+
+            <p class="hero-description">
+                Sirf bada prompt likhna important nahi hai.
+                AI ko clearly samjhana important hai ki aap kya chahte ho,
+                kis context me chahte ho aur final result kaisa hona chahiye.
+            </p>
+
+            <div class="hero-points">
+
+                <span class="hero-point">
+                    Goal
+                </span>
+
+                <span class="hero-point">
+                    Context
+                </span>
+
+                <span class="hero-point">
+                    Task
+                </span>
+
+                <span class="hero-point">
+                    Constraints
+                </span>
+
+                <span class="hero-point">
+                    Output
+                </span>
+
+                <span class="hero-point">
+                    Quality Check
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+    <main>
+
+        <!-- QUICK TEMPLATES -->
+
+        <section class="mode-section">
+
+            <div class="section-heading">
+
+                <h2>Start with a situation</h2>
+
+                <p>
+                    Kisi real kaam ke closest template ko choose karo.
+                    Builder uske according useful starting content dega.
+                </p>
+
+            </div>
+
+
+            <div class="template-grid" id="templateGrid">
+
+                <button class="template-card" data-template="study" type="button">
+
+                    <span class="template-icon">
+                        📚
+                    </span>
+
+                    <strong>Study Tutor</strong>
+
+                    <small>
+                        Kisi topic ko clearly samajhne aur practice karne ke liye.
+                    </small>
+
+                </button>
+
+
+                <button class="template-card" data-template="research" type="button">
+
+                    <span class="template-icon">
+                        🔎
+                    </span>
+
+                    <strong>Research</strong>
+
+                    <small>
+                        Reliable research, comparison aur source-aware answers.
+                    </small>
+
+                </button>
+
+
+                <button class="template-card" data-template="coding" type="button">
+
+                    <span class="template-icon">
+                        💻
+                    </span>
+
+                    <strong>Coding Mentor</strong>
+
+                    <small>
+                        Code samajhna, debug karna aur better solution banana.
+                    </small>
+
+                </button>
+
+
+                <button class="template-card" data-template="writing" type="button">
+
+                    <span class="template-icon">
+                        ✍️
+                    </span>
+
+                    <strong>Writing</strong>
+
+                    <small>
+                        Articles, explanations, emails aur professional copy.
+                    </small>
+
+                </button>
+
+
+                <button class="template-card" data-template="planning" type="button">
+
+                    <span class="template-icon">
+                        🗂️
+                    </span>
+
+                    <strong>Planning</strong>
+
+                    <small>
+                        Projects, learning plans aur step-by-step execution.
+                    </small>
+
+                </button>
+
+
+                <button class="template-card" data-template="work" type="button">
+
+                    <span class="template-icon">
+                        📊
+                    </span>
+
+                    <strong>Work</strong>
+
+                    <small>
+                        Office, business aur practical work ke prompts.
+                    </small>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- BUILDER -->
+
+        <section class="builder-layout">
+
+            <!-- LEFT -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2 class="panel-title">
+                            Build your prompt
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            AI ko jitna useful context doge, output ko guide karna utna easy hoga.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="panel-body">
+
+                    <form id="promptForm" class="form-grid">
+
+
+                        <!-- GOAL -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label for="goal">
+                                    1. Aap kya achieve karna chahte ho?
+                                    <span class="required">*</span>
+                                </label>
+
+                            </div>
+
+                            <p class="field-help">
+                                Final result ko simple words me batao.
+                            </p>
+
+                            <textarea id="goal"
+                                placeholder="Example: Mujhe Python loops ko beginner-friendly way me samajhna hai."
+                                data-field="goal"></textarea>
+
+                        </div>
+
+
+                        <!-- ROLE -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label for="role">
+                                    2. AI ko kis role me kaam karna chahiye?
+                                </label>
+
+                                <span class="optional">
+                                    optional
+                                </span>
+
+                            </div>
+
+                            <input id="role" type="text" placeholder="Example: Patient Python teacher and coding mentor"
+                                data-field="role">
+
+                        </div>
+
+
+                        <!-- CONTEXT -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label for="context">
+                                    3. Context / Background
+                                </label>
+
+                                <span class="optional">
+                                    optional
+                                </span>
+
+                            </div>
+
+                            <p class="field-help">
+                                Aapki situation, current level, problem ya background.
+                            </p>
+
+                            <textarea id="context"
+                                placeholder="Example: Main beginner hoon aur mujhe programming ka basic knowledge hai, lekin loops confusing lagte hain."
+                                data-field="context"></textarea>
+
+                        </div>
+
+
+                        <!-- TASK -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label for="task">
+                                    4. AI ko exactly kya karna hai?
+                                    <span class="required">*</span>
+                                </label>
+
+                            </div>
+
+                            <textarea id="task"
+                                placeholder="Example: Pehle concept explain karo, phir 3 simple examples do, aur end me practice questions do."
+                                data-field="task"></textarea>
+
+                        </div>
+
+
+                        <!-- AUDIENCE + OUTPUT -->
+
+                        <div class="two-columns">
+
+                            <div class="field">
+
+                                <div class="field-label-row">
+                                    <label for="audience">
+                                        Audience
+                                    </label>
+                                </div>
+
+                                <input id="audience" type="text" placeholder="Beginner students" data-field="audience">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <div class="field-label-row">
+                                    <label for="output">
+                                        Output format
+                                    </label>
+                                </div>
+
+                                <select id="output" data-field="output">
+
+                                    <option value="">
+                                        Choose format
+                                    </option>
+
+                                    <option value="Clear headings with short explanations">
+                                        Headings + explanation
+                                    </option>
+
+                                    <option value="A step-by-step numbered guide">
+                                        Step-by-step guide
+                                    </option>
+
+                                    <option value="A table with clear columns">
+                                        Table
+                                    </option>
+
+                                    <option value="Bullet points with practical examples">
+                                        Bullet points
+                                    </option>
+
+                                    <option value="A concise checklist">
+                                        Checklist
+                                    </option>
+
+                                    <option value="A structured tutorial with examples and practice">
+                                        Tutorial
+                                    </option>
+
+                                    <option value="JSON with clearly named fields">
+                                        JSON
+                                    </option>
+
+                                    <option value="A professional report with sections">
+                                        Report
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TONE -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label>
+                                    Tone / Style
+                                </label>
+
+                            </div>
+
+                            <div class="choice-group">
+
+                                <div class="choice">
+                                    <input type="radio" name="tone" id="tone-natural" value="natural and conversational"
+                                        checked>
+                                    <label for="tone-natural">
+                                        Natural
+                                    </label>
+                                </div>
+
+                                <div class="choice">
+                                    <input type="radio" name="tone" id="tone-professional"
+                                        value="professional and clear">
+                                    <label for="tone-professional">
+                                        Professional
+                                    </label>
+                                </div>
+
+                                <div class="choice">
+                                    <input type="radio" name="tone" id="tone-simple"
+                                        value="simple and beginner-friendly">
+                                    <label for="tone-simple">
+                                        Simple
+                                    </label>
+                                </div>
+
+                                <div class="choice">
+                                    <input type="radio" name="tone" id="tone-detailed"
+                                        value="detailed, practical and explanatory">
+                                    <label for="tone-detailed">
+                                        Detailed
+                                    </label>
+                                </div>
+
+                                <div class="choice">
+                                    <input type="radio" name="tone" id="tone-direct" value="direct and concise">
+                                    <label for="tone-direct">
+                                        Concise
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CONSTRAINTS -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label for="constraints">
+                                    Constraints / Must-follow rules
+                                </label>
+
+                                <span class="optional">
+                                    optional
+                                </span>
+
+                            </div>
+
+                            <textarea id="constraints"
+                                placeholder="Example: Difficult jargon avoid karo. Har technical term ko pehli baar explain karo. Unnecessary long introduction mat do."
+                                data-field="constraints"></textarea>
+
+                        </div>
+
+
+                        <!-- EXAMPLES -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label for="examples">
+                                    Example / Reference
+                                </label>
+
+                                <span class="optional">
+                                    optional
+                                </span>
+
+                            </div>
+
+                            <textarea id="examples"
+                                placeholder="Agar desired output ka example hai to yahan paste karo."
+                                data-field="examples"></textarea>
+
+                        </div>
+
+
+                        <!-- QUALITY -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label for="quality">
+                                    Acha answer kaisa dikhega?
+                                </label>
+
+                                <span class="optional">
+                                    recommended
+                                </span>
+
+                            </div>
+
+                            <textarea id="quality"
+                                placeholder="Example: Answer practical ho, examples real-world ho aur beginner ko bina extra research ke concept samajh aa jaye."
+                                data-field="quality"></textarea>
+
+                        </div>
+
+
+                        <!-- SOURCE -->
+
+                        <div class="field">
+
+                            <div class="field-label-row">
+
+                                <label for="source">
+                                    Source / Material
+                                </label>
+
+                                <span class="optional">
+                                    optional
+                                </span>
+
+                            </div>
+
+                            <textarea id="source"
+                                placeholder="Example: Is chapter ke notes, pasted text, document ya specific material ko use karo."
+                                data-field="source"></textarea>
+
+                        </div>
+
+
+                        <!-- VERIFICATION -->
+
+                        <div class="check-row">
+
+                            <input type="checkbox" id="verify">
+
+                            <label for="verify">
+                                Final answer dene se pehle important claims,
+                                assumptions aur missing information ko check karne ko bolo.
+                            </label>
+
+                        </div>
+
+
+                        <!-- FORM BUTTONS -->
+
+                        <div class="form-footer">
+
+                            <div class="button-group">
+
+                                <button type="button" class="btn btn-primary" id="copyButton">
+                                    Copy Prompt
+                                </button>
+
+                                <button type="button" class="btn btn-secondary" id="downloadButton">
+                                    Download
+                                </button>
+
+                                <button type="button" class="btn btn-secondary" id="saveButton">
+                                    Save
+                                </button>
+
+                            </div>
+
+
+                            <button type="button" class="btn btn-danger btn-small" id="resetButton">
+                                Reset
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <aside class="panel preview-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2 class="panel-title">
+                            Your prompt
+                        </h2>
+
+                        <p class="panel-subtitle">
+                            Live preview — changes automatically as you build.
+                        </p>
+
+                    </div>
+
+
+                    <div class="preview-tabs">
+
+                        <button class="preview-tab active" data-mode="natural" type="button">
+                            Natural
+                        </button>
+
+                        <button class="preview-tab" data-mode="structured" type="button">
+                            Structured
+                        </button>
+
+                        <button class="preview-tab" data-mode="compact" type="button">
+                            Compact
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel-body">
+
+                    <div class="preview-box">
+
+                        <div class="preview-label">
+
+                            <span>
+                                Generated prompt
+                            </span>
+
+                            <span id="promptStatus">
+                                Ready
+                            </span>
+
+                        </div>
+
+
+                        <div id="emptyPreview" class="empty-preview">
+
+                            <div class="empty-preview-icon">
+
+                                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M4 5h16M4 12h10M4 19h16" />
+                                    <path d="m17 9 3 3-3 3" />
+                                </svg>
+
+                            </div>
+
+                            <strong>
+                                Prompt yahan appear hoga
+                            </strong>
+
+                            <p>
+                                Goal aur task se start karo.
+                                Baaki details gradually add kar sakte ho.
+                            </p>
+
+                        </div>
+
+
+                        <pre id="promptOutput" class="prompt-output" hidden></pre>
+
+                    </div>
+
+
+                    <div class="preview-footer">
+
+                        <div class="stats">
+
+                            <span class="stat">
+                                Words: <b id="wordCount">0</b>
+                            </span>
+
+                            <span class="stat">
+                                Characters: <b id="charCount">0</b>
+                            </span>
+
+                            <span class="stat">
+                                Sections: <b id="sectionCount">0</b>
+                            </span>
+
+                        </div>
+
+
+                        <div class="button-group">
+
+                            <button type="button" class="btn btn-secondary btn-small" id="demoButton">
+                                Load Example
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- QUALITY -->
+
+                    <div class="quality-section">
+
+                        <div class="quality-score">
+
+                            <div class="quality-top">
+
+                                <strong>
+                                    Prompt structure
+                                </strong>
+
+                                <span class="quality-number" id="qualityNumber">
+                                    0%
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress-track">
+
+                                <div class="progress-value" id="qualityProgress">
+                                </div>
+
+                            </div>
+
+
+                            <p class="quality-note">
+                                Ye score structural completeness ko measure karta hai.
+                                Ye AI output ki quality ki guarantee nahi hai.
+                            </p>
+
+
+                            <div class="suggestions" id="suggestions">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- HOW IT WORKS -->
+
+        <section class="learning-section">
+
+            <div class="section-heading">
+
+                <h2>
+                    Prompt actually strong kab hota hai?
+                </h2>
+
+                <p>
+                    Good prompting ka simple mental model yaad rakho.
+                </p>
+
+            </div>
+
+
+            <div class="learning-grid">
+
+                <article class="learning-card">
+
+                    <div class="learning-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Goal clear karo
+                    </h3>
+
+                    <p>
+                        “Mujhe kuch batao” ke badle exact result batao.
+                        AI ko destination pata hona chahiye.
+                    </p>
+
+                </article>
+
+
+                <article class="learning-card">
+
+                    <div class="learning-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Context do
+                    </h3>
+
+                    <p>
+                        Aap beginner ho ya expert, audience kaun hai,
+                        problem kya hai — relevant background share karo.
+                    </p>
+
+                </article>
+
+
+                <article class="learning-card">
+
+                    <div class="learning-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Task define karo
+                    </h3>
+
+                    <p>
+                        AI se actual me kya karwana hai,
+                        usko action ke form me clearly likho.
+                    </p>
+
+                </article>
+
+
+                <article class="learning-card">
+
+                    <div class="learning-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Boundaries set karo
+                    </h3>
+
+                    <p>
+                        Length, difficulty, things to avoid,
+                        required details aur other constraints define karo.
+                    </p>
+
+                </article>
+
+
+                <article class="learning-card">
+
+                    <div class="learning-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Output design karo
+                    </h3>
+
+                    <p>
+                        AI ko batao answer kis format me useful rahega:
+                        table, steps, checklist, tutorial ya report.
+                    </p>
+
+                </article>
+
+
+                <article class="learning-card">
+
+                    <div class="learning-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Quality check lagao
+                    </h3>
+
+                    <p>
+                        Final answer ko desired result ke against verify
+                        karne ke instructions do.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXAMPLES -->
+
+        <section class="examples-section">
+
+            <div class="section-heading">
+
+                <h2>
+                    Real-world prompt thinking
+                </h2>
+
+                <p>
+                    Prompt ko command ki tarah nahi, clear briefing ki tarah socho.
+                </p>
+
+            </div>
+
+
+            <div class="example-grid">
+
+                <article class="example-card">
+
+                    <span class="example-tag">
+                        Study
+                    </span>
+
+                    <h3>
+                        Weak → Better
+                    </h3>
+
+                    <p>
+                        “Photosynthesis samjhao” se better hai:
+                        level, purpose, examples aur expected explanation style
+                        define karna.
+                    </p>
+
+                </article>
+
+
+                <article class="example-card">
+
+                    <span class="example-tag">
+                        Coding
+                    </span>
+
+                    <h3>
+                        Problem → Context → Fix
+                    </h3>
+
+                    <p>
+                        Sirf “code fix karo” ke badle code ka purpose,
+                        error, expected behaviour aur restrictions provide karo.
+                    </p>
+
+                </article>
+
+
+                <article class="example-card">
+
+                    <span class="example-tag">
+                        Research
+                    </span>
+
+                    <h3>
+                        Question → Evidence → Output
+                    </h3>
+
+                    <p>
+                        Research prompt me scope, comparison criteria,
+                        uncertainty aur source-handling expectations useful hote hain.
+                    </p>
+
+                </article>
+
+
+                <article class="example-card">
+
+                    <span class="example-tag">
+                        Writing
+                    </span>
+
+                    <h3>
+                        Audience matters
+                    </h3>
+
+                    <p>
+                        Same topic ko student, customer aur technical reader
+                        ke liye completely different way me likhna pad sakta hai.
+                    </p>
+
+                </article>
+
+
+                <article class="example-card">
+
+                    <span class="example-tag">
+                        Planning
+                    </span>
+
+                    <h3>
+                        Outcome first
+                    </h3>
+
+                    <p>
+                        Plan banwate waqt available time, resources,
+                        priorities aur practical limitations include karo.
+                    </p>
+
+                </article>
+
+
+                <article class="example-card">
+
+                    <span class="example-tag">
+                        Work
+                    </span>
+
+                    <h3>
+                        Define success
+                    </h3>
+
+                    <p>
+                        “Professional bana do” vague hai.
+                        “Clear, concise, respectful and action-oriented” much better hai.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- SAVED PROMPTS -->
+
+        <section class="saved-section">
+
+            <div class="section-heading">
+
+                <h2>
+                    Saved prompts
+                </h2>
+
+                <p>
+                    Saved prompts isi browser me locally store hote hain.
+                    Kisi server par upload nahi kiye jaate.
+                </p>
+
+            </div>
+
+
+            <div class="saved-list" id="savedList">
+
+                <div class="saved-empty">
+                    Abhi koi saved prompt nahi hai.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div>
+
+                <div class="footer-brand">
+                    AI Learning HUB
+                </div>
+
+                <div class="footer-text">
+                    Learn AI. Practice AI. Build with AI.
+                </div>
+
+            </div>
+
+            <div class="footer-text">
+                Prompt Builder · Browser-based learning tool
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- TOAST -->
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+    </div>
+
+
+    <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
+
+    <script>
+        "use strict";
+
+        /* =======================================================
+           ELEMENTS
+           ======================================================= */
+
+        const root = document.documentElement;
+
+        const form = document.getElementById("promptForm");
+
+        const goal = document.getElementById("goal");
+        const role = document.getElementById("role");
+        const context = document.getElementById("context");
+        const task = document.getElementById("task");
+        const audience = document.getElementById("audience");
+        const output = document.getElementById("output");
+        const constraints = document.getElementById("constraints");
+        const examples = document.getElementById("examples");
+        const quality = document.getElementById("quality");
+        const source = document.getElementById("source");
+        const verify = document.getElementById("verify");
+
+        const promptOutput =
+            document.getElementById("promptOutput");
+
+        const emptyPreview =
+            document.getElementById("emptyPreview");
+
+        const wordCount =
+            document.getElementById("wordCount");
+
+        const charCount =
+            document.getElementById("charCount");
+
+        const sectionCount =
+            document.getElementById("sectionCount");
+
+        const qualityNumber =
+            document.getElementById("qualityNumber");
+
+        const qualityProgress =
+            document.getElementById("qualityProgress");
+
+        const suggestions =
+            document.getElementById("suggestions");
+
+        const promptStatus =
+            document.getElementById("promptStatus");
+
+        const toast =
+            document.getElementById("toast");
+
+        const savedList =
+            document.getElementById("savedList");
+
+
+        let currentMode = "natural";
+
+
+        /* =======================================================
+           THEME
+           ======================================================= */
+
+        function applyTheme(theme) {
+
+            if (theme === "dark") {
+                root.classList.add("dark");
+                localStorage.setItem(
+                    "ailh-theme",
+                    "dark"
+                );
+            } else {
+                root.classList.remove("dark");
+                localStorage.setItem(
+                    "ailh-theme",
+                    "light"
+                );
+            }
+        }
+
+
+        const savedTheme =
+            localStorage.getItem("ailh-theme");
+
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        }
+
+
+        document
+            .getElementById("themeToggle")
+            .addEventListener("click", () => {
+
+                const isDark =
+                    root.classList.contains("dark");
+
+                applyTheme(
+                    isDark ? "light" : "dark"
+                );
+
+            });
+
+
+        /* =======================================================
+           MOBILE MENU
+           ======================================================= */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+
+        menuButton.addEventListener("click", () => {
+
+            const open =
+                navLinks.classList.toggle("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                String(open)
+            );
+
+        });
+
+
+        navLinks
+            .querySelectorAll("a")
+            .forEach(link => {
+
+                link.addEventListener("click", () => {
+
+                    navLinks.classList.remove("open");
+
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                });
+
+            });
+
+
+        /* =======================================================
+           DATA
+           ======================================================= */
+
+        const templates = {
+
+            study: {
+                goal:
+                    "Mujhe ek topic ko genuinely samajhna hai aur us par confidently practice karni hai.",
+                role:
+                    "Patient and practical study tutor",
+                context:
+                    "Main beginner level par hoon. Mujhe simple explanation ke saath real examples aur practice chahiye.",
+                task:
+                    "Pehle mera current understanding identify karo, phir concept ko simple language me explain karo, examples do, common mistakes batao aur end me practice questions do.",
+                audience:
+                    "Beginner learner",
+                output:
+                    "A structured tutorial with examples and practice",
+                constraints:
+                    "Difficult jargon avoid karo. Important technical terms ko first use par explain karo. Sirf answer dene ke bajay understanding build karo.",
+                quality:
+                    "Answer ke baad mujhe topic ko apne words me explain aur practical question solve karne layak hona chahiye."
+            },
+
+            research: {
+                goal:
+                    "Mujhe kisi topic par clear, balanced aur useful research summary chahiye.",
+                role:
+                    "Careful research assistant",
+                context:
+                    "Mujhe topic ko samajhne ke saath important differences, limitations aur uncertainty bhi samajhni hai.",
+                task:
+                    "Topic ko logically break karo, important points identify karo, relevant perspectives compare karo aur uncertain claims ko clearly mark karo.",
+                audience:
+                    "A curious learner",
+                output:
+                    "A professional report with sections",
+                constraints:
+                    "Facts aur interpretation ko mix mat karo. Unsupported certainty avoid karo. Important assumptions clearly mention karo.",
+                quality:
+                    "Answer mujhe topic ka reliable mental model de aur important gaps ya uncertainties hide na kare."
+            },
+
+            coding: {
+                goal:
+                    "Mujhe code ko samajhna, problem solve karna aur clean solution banana hai.",
+                role:
+                    "Senior coding mentor who teaches rather than blindly fixes",
+                context:
+                    "Main learning phase me hoon aur sirf final code copy nahi karna chahta. Mujhe reasoning bhi samajhni hai.",
+                task:
+                    "Problem ko diagnose karo, root cause explain karo, solution approach samjhao, corrected code do aur important changes explain karo.",
+                audience:
+                    "Beginner to intermediate developer",
+                output:
+                    "A step-by-step numbered guide",
+                constraints:
+                    "Unnecessary complexity avoid karo. Existing code ki useful structure ko bina reason replace mat karo. Security ya reliability issue ho to mention karo.",
+                quality:
+                    "Main samajh paun ki problem kyu hui aur future me similar problem khud diagnose kar sakun."
+            },
+
+            writing: {
+                goal:
+                    "Mujhe clear, natural aur professional writing chahiye jo AI-generated jaisi robotic na lage.",
+                role:
+                    "Experienced human editor and writer",
+                context:
+                    "Content ko readable, useful aur audience ke natural communication style ke close rakhna hai.",
+                task:
+                    "Given idea ko organize karo, unnecessary repetition remove karo aur clear flow ke saath polished version likho.",
+                audience:
+                    "General reader",
+                output:
+                    "Clear headings with short explanations",
+                constraints:
+                    "Overly dramatic language, filler sentences aur repetitive phrases avoid karo. Meaning preserve karo.",
+                quality:
+                    "Writing natural, clear, purposeful aur easy to read honi chahiye."
+            },
+
+            planning: {
+                goal:
+                    "Mujhe ek practical plan chahiye jise real life me follow kiya ja sake.",
+                role:
+                    "Practical planning mentor",
+                context:
+                    "Plan theoretical nahi hona chahiye. Time, priorities aur realistic limitations ko consider karna important hai.",
+                task:
+                    "Goal ko manageable steps me break karo, priorities set karo, dependencies identify karo aur realistic sequence suggest karo.",
+                audience:
+                    "Someone implementing the plan",
+                output:
+                    "A step-by-step numbered guide",
+                constraints:
+                    "Unrealistic workload mat banao. High-impact steps ko priority do. Agar information missing ho to assumption clearly state karo.",
+                quality:
+                    "Plan clear ho aur mujhe next actionable step immediately pata chale."
+            },
+
+            work: {
+                goal:
+                    "Mujhe work-related task ko efficiently complete karne ke liye practical output chahiye.",
+                role:
+                    "Experienced professional work assistant",
+                context:
+                    "Output practical, concise aur directly usable hona chahiye.",
+                task:
+                    "Task ko organize karo, important information extract karo aur final result ko professional format me prepare karo.",
+                audience:
+                    "Professional workplace audience",
+                output:
+                    "A concise checklist",
+                constraints:
+                    "Filler remove karo. Important details ko preserve karo. Ambiguous information ko invent mat karo.",
+                quality:
+                    "Result directly use ya edit kiya ja sake aur important details miss na hon."
+            }
+
+        };
+
+
+        /* =======================================================
+           HELPERS
+           ======================================================= */
+
+        function clean(value) {
+            return String(value || "")
+                .trim()
+                .replace(/\r\n/g, "\n")
+                .replace(/[ \t]+$/gm, "");
+        }
+
+
+        function getTone() {
+
+            const selected =
+                document.querySelector(
+                    'input[name="tone"]:checked'
+                );
+
+            return selected
+                ? selected.value
+                : "natural and conversational";
+
+        }
+
+
+        function values() {
+
+            return {
+
+                goal: clean(goal.value),
+                role: clean(role.value),
+                context: clean(context.value),
+                task: clean(task.value),
+                audience: clean(audience.value),
+                tone: getTone(),
+                output: clean(output.value),
+                constraints: clean(constraints.value),
+                examples: clean(examples.value),
+                quality: clean(quality.value),
+                source: clean(source.value),
+                verify: verify.checked
+
+            };
+
+        }
+
+
+        function titleCase(value) {
+
+            return value
+                .replace(/_/g, " ")
+                .replace(/\b\w/g, char =>
+                    char.toUpperCase()
+                );
+
+        }
+
+
+        /* =======================================================
+           NATURAL PROMPT
+           ======================================================= */
+
+        function buildNatural(v) {
+
+            const parts = [];
+
+            if (v.role) {
+                parts.push(
+                    `Act as ${v.role}.`
+                );
+            }
+
+            if (v.goal) {
+                parts.push(
+                    `I want to achieve this: ${v.goal}`
+                );
+            }
+
+            if (v.context) {
+                parts.push(
+                    `Here is the relevant context: ${v.context}`
+                );
+            }
+
+            if (v.task) {
+                parts.push(
+                    `Please do the following: ${v.task}`
+                );
+            }
+
+            if (v.audience) {
+                parts.push(
+                    `The result is intended for ${v.audience}.`
+                );
+            }
+
+            if (v.tone) {
+                parts.push(
+                    `Keep the tone ${v.tone}.`
+                );
+            }
+
+            if (v.constraints) {
+                parts.push(
+                    `Please follow these constraints: ${v.constraints}`
+                );
+            }
+
+            if (v.output) {
+                parts.push(
+                    `Format the response as ${v.output}.`
+                );
+            }
+
+            if (v.examples) {
+                parts.push(
+                    `Use this example or reference when useful: ${v.examples}`
+                );
+            }
+
+            if (v.source) {
+                parts.push(
+                    `Use the following source or material as relevant context: ${v.source}`
+                );
+            }
+
+            if (v.quality) {
+                parts.push(
+                    `A successful answer should meet this standard: ${v.quality}`
+                );
+            }
+
+            if (v.verify) {
+                parts.push(
+                    "Before finalizing, check important claims, assumptions and missing information. Do not present uncertain information as certain."
+                );
+            }
+
+            parts.push(
+                "If any important information is missing, make the smallest reasonable assumption and clearly state it instead of inventing details."
+            );
+
+            return parts.join("\n\n");
+
+        }
+
+
+        /* =======================================================
+           STRUCTURED PROMPT
+           ======================================================= */
+
+        function buildStructured(v) {
+
+            const sections = [];
+
+            if (v.role) {
+                sections.push(
+                    `ROLE\n${v.role}`
+                );
+            }
+
+            if (v.goal) {
+                sections.push(
+                    `GOAL\n${v.goal}`
+                );
+            }
+
+            if (v.context) {
+                sections.push(
+                    `CONTEXT\n${v.context}`
+                );
+            }
+
+            if (v.task) {
+                sections.push(
+                    `TASK\n${v.task}`
+                );
+            }
+
+            if (v.audience) {
+                sections.push(
+                    `AUDIENCE\n${v.audience}`
+                );
+            }
+
+            if (v.tone) {
+                sections.push(
+                    `TONE / STYLE\n${v.tone}`
+                );
+            }
+
+            if (v.constraints) {
+                sections.push(
+                    `CONSTRAINTS\n${v.constraints}`
+                );
+            }
+
+            if (v.output) {
+                sections.push(
+                    `OUTPUT FORMAT\n${v.output}`
+                );
+            }
+
+            if (v.examples) {
+                sections.push(
+                    `EXAMPLES / REFERENCES\n${v.examples}`
+                );
+            }
+
+            if (v.source) {
+                sections.push(
+                    `SOURCE / MATERIAL\n${v.source}`
+                );
+            }
+
+            if (v.quality) {
+                sections.push(
+                    `QUALITY CRITERIA\n${v.quality}`
+                );
+            }
+
+            if (v.verify) {
+                sections.push(
+                    `FINAL CHECK\nBefore finalizing, check important claims, assumptions and missing information. Clearly identify uncertainty.`
+                );
+            }
+
+            sections.push(
+                `GENERAL RULE\nDo not invent missing facts. If something important is unclear, state the assumption or identify what information is needed.`
+            );
+
+            return sections.join("\n\n");
+
+        }
+
+
+        /* =======================================================
+           COMPACT PROMPT
+           ======================================================= */
+
+        function buildCompact(v) {
+
+            const parts = [];
+
+            if (v.role)
+                parts.push(`Act as ${v.role}.`);
+
+            if (v.goal)
+                parts.push(`Goal: ${v.goal}`);
+
+            if (v.context)
+                parts.push(`Context: ${v.context}`);
+
+            if (v.task)
+                parts.push(`Task: ${v.task}`);
+
+            if (v.audience)
+                parts.push(`Audience: ${v.audience}`);
+
+            if (v.tone)
+                parts.push(`Tone: ${v.tone}`);
+
+            if (v.constraints)
+                parts.push(`Constraints: ${v.constraints}`);
+
+            if (v.output)
+                parts.push(`Output: ${v.output}`);
+
+            if (v.quality)
+                parts.push(`Success criteria: ${v.quality}`);
+
+            if (v.verify)
+                parts.push(
+                    "Verify important claims and state uncertainty."
+                );
+
+            return parts.join(" | ");
+
+        }
+
+
+        function buildPrompt(v) {
+
+            if (currentMode === "structured") {
+                return buildStructured(v);
+            }
+
+            if (currentMode === "compact") {
+                return buildCompact(v);
+            }
+
+            return buildNatural(v);
+
+        }
+
+
+        /* =======================================================
+           QUALITY SCORE
+           ======================================================= */
+
+        function calculateQuality(v) {
+
+            const fields = [
+
+                ["goal", v.goal, 20],
+                ["task", v.task, 20],
+                ["context", v.context, 10],
+                ["role", v.role, 8],
+                ["audience", v.audience, 7],
+                ["tone", v.tone, 7],
+                ["output", v.output, 10],
+                ["constraints", v.constraints, 8],
+                ["quality", v.quality, 7],
+                ["examples", v.examples, 3]
+
+            ];
+
+            let score = 0;
+
+            fields.forEach(
+                ([, value, weight]) => {
+
+                    if (value) {
+                        score += weight;
+                    }
+
+                }
+            );
+
+            return Math.min(
+                100,
+                Math.round(score)
+            );
+
+        }
+
+
+        function updateSuggestions(v, score) {
+
+            const items = [];
+
+            if (!v.goal) {
+                items.push({
+                    good: false,
+                    text:
+                        "Goal add karo — AI ko final result clearly pata chalega."
+                });
+            } else {
+                items.push({
+                    good: true,
+                    text:
+                        "Goal clear hai."
+                });
+            }
+
+
+            if (!v.task) {
+                items.push({
+                    good: false,
+                    text:
+                        "Exact task add karo — AI ko actual kaam define hoga."
+                });
+            } else {
+                items.push({
+                    good: true,
+                    text:
+                        "Task defined hai."
+                });
+            }
+
+
+            if (!v.context) {
+                items.push({
+                    good: false,
+                    text:
+                        "Relevant background dene se generic answer kam ho sakta hai."
+                });
+            } else {
+                items.push({
+                    good: true,
+                    text:
+                        "Context available hai."
+                });
+            }
+
+
+            if (!v.output) {
+                items.push({
+                    good: false,
+                    text:
+                        "Output format choose karo agar specific structure chahiye."
+                });
+            } else {
+                items.push({
+                    good: true,
+                    text:
+                        "Output format defined hai."
+                });
+            }
+
+
+            if (!v.quality) {
+                items.push({
+                    good: false,
+                    text:
+                        "Quality criteria add karoge to desired result aur clear hoga."
+                });
+            }
+
+
+            if (score >= 85) {
+                items.push({
+                    good: true,
+                    text:
+                        "Prompt structure strong hai. Ab actual output ko test karke refine karo."
+                });
+            }
+
+            suggestions.innerHTML = "";
+
+            items.forEach(item => {
+
+                const row =
+                    document.createElement("div");
+
+                row.className =
+                    "suggestion" +
+                    (item.good ? " good" : "");
+
+                const dot =
+                    document.createElement("span");
+
+                dot.className =
+                    "suggestion-dot";
+
+                const text =
+                    document.createElement("span");
+
+                text.textContent =
+                    item.text;
+
+                row.append(dot, text);
+
+                suggestions.appendChild(row);
+
+            });
+
+        }
+
+
+        /* =======================================================
+           UPDATE PREVIEW
+           ======================================================= */
+
+        function updatePreview() {
+
+            const v = values();
+
+            const prompt =
+                buildPrompt(v);
+
+            const score =
+                calculateQuality(v);
+
+            const hasContent =
+                Boolean(
+                    v.goal ||
+                    v.task ||
+                    v.context ||
+                    v.role
+                );
+
+
+            if (hasContent) {
+
+                emptyPreview.hidden = true;
+                promptOutput.hidden = false;
+
+                promptOutput.textContent =
+                    prompt;
+
+                promptStatus.textContent =
+                    "Live";
+
+            } else {
+
+                emptyPreview.hidden = false;
+                promptOutput.hidden = true;
+
+                promptStatus.textContent =
+                    "Ready";
+
+            }
+
+
+            const words =
+                prompt
+                    .trim()
+                    .split(/\s+/)
+                    .filter(Boolean)
+                    .length;
+
+            wordCount.textContent =
+                hasContent ? words : 0;
+
+            charCount.textContent =
+                hasContent
+                    ? prompt.length
+                    : 0;
+
+            const sections =
+                [
+                    v.goal,
+                    v.role,
+                    v.context,
+                    v.task,
+                    v.audience,
+                    v.tone,
+                    v.output,
+                    v.constraints,
+                    v.examples,
+                    v.quality,
+                    v.source
+                ]
+                    .filter(Boolean)
+                    .length;
+
+            sectionCount.textContent =
+                sections;
+
+            qualityNumber.textContent =
+                score + "%";
+
+            qualityProgress.style.width =
+                score + "%";
+
+            updateSuggestions(
+                v,
+                score
+            );
+
+        }
+
+
+        /* =======================================================
+           INPUT LISTENERS
+           ======================================================= */
+
+        form
+            .querySelectorAll(
+                "input, textarea, select"
+            )
+            .forEach(element => {
+
+                element.addEventListener(
+                    "input",
+                    updatePreview
+                );
+
+                element.addEventListener(
+                    "change",
+                    updatePreview
+                );
+
+            });
+
+
+        /* =======================================================
+           TEMPLATE LOADER
+           ======================================================= */
+
+        function fillTemplate(name) {
+
+            const data =
+                templates[name];
+
+            if (!data) return;
+
+            goal.value =
+                data.goal || "";
+
+            role.value =
+                data.role || "";
+
+            context.value =
+                data.context || "";
+
+            task.value =
+                data.task || "";
+
+            audience.value =
+                data.audience || "";
+
+            constraints.value =
+                data.constraints || "";
+
+            quality.value =
+                data.quality || "";
+
+            examples.value = "";
+            source.value = "";
+
+            output.value =
+                data.output || "";
+
+            verify.checked =
+                name === "research" ||
+                name === "work";
+
+            document
+                .querySelectorAll(
+                    ".template-card"
+                )
+                .forEach(card => {
+
+                    card.classList.toggle(
+                        "selected",
+                        card.dataset.template === name
+                    );
+
+                });
+
+            updatePreview();
+
+            showToast(
+                "Template load ho gaya. Ab apne actual details add karo."
+            );
+
+            document
+                .querySelector(".builder-layout")
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+        }
+
+
+        document
+            .querySelectorAll(".template-card")
+            .forEach(card => {
+
+                card.addEventListener(
+                    "click",
+                    () => {
+
+                        fillTemplate(
+                            card.dataset.template
+                        );
+
+                    }
+                );
+
+            });
+
+
+        /* =======================================================
+           PREVIEW MODES
+           ======================================================= */
+
+        document
+            .querySelectorAll(".preview-tab")
+            .forEach(tab => {
+
+                tab.addEventListener(
+                    "click",
+                    () => {
+
+                        currentMode =
+                            tab.dataset.mode;
+
+                        document
+                            .querySelectorAll(
+                                ".preview-tab"
+                            )
+                            .forEach(item => {
+
+                                item.classList.toggle(
+                                    "active",
+                                    item === tab
+                                );
+
+                            });
+
+                        updatePreview();
+
+                    }
+                );
+
+            });
+
+
+        /* =======================================================
+           COPY
+           ======================================================= */
+
+        async function copyText(text) {
+
+            if (!text.trim()) {
+
+                showToast(
+                    "Pehle prompt me kuch details add karo."
+                );
+
+                return;
+
+            }
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    text
+                );
+
+                showToast(
+                    "Prompt clipboard me copy ho gaya."
+                );
+
+            } catch (error) {
+
+                const area =
+                    document.createElement("textarea");
+
+                area.value = text;
+
+                area.style.position =
+                    "fixed";
+
+                area.style.left =
+                    "-9999px";
+
+                document.body.appendChild(area);
+
+                area.select();
+
+                try {
+                    document.execCommand("copy");
+
+                    showToast(
+                        "Prompt copy ho gaya."
+                    );
+
+                } catch (copyError) {
+
+                    showToast(
+                        "Copy nahi ho saka. Prompt manually select karke copy karo."
+                    );
+
+                }
+
+                area.remove();
+
+            }
+
+        }
+
+
+        document
+            .getElementById("copyButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    copyText(
+                        buildPrompt(values())
+                    );
+
+                }
+            );
+
+
+        /* =======================================================
+           DOWNLOAD
+           ======================================================= */
+
+        document
+            .getElementById("downloadButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const prompt =
+                        buildPrompt(values());
+
+                    if (!prompt.trim()) {
+
+                        showToast(
+                            "Download se pehle prompt build karo."
+                        );
+
+                        return;
+
+                    }
+
+                    const blob =
+                        new Blob(
+                            [prompt],
+                            {
+                                type:
+                                    "text/plain;charset=utf-8"
+                            }
+                        );
+
+                    const url =
+                        URL.createObjectURL(blob);
+
+                    const link =
+                        document.createElement("a");
+
+                    link.href = url;
+
+                    link.download =
+                        "ai-learning-hub-prompt.txt";
+
+                    document.body.appendChild(link);
+
+                    link.click();
+
+                    link.remove();
+
+                    URL.revokeObjectURL(url);
+
+                    showToast(
+                        "Prompt text file download ke liye ready hai."
+                    );
+
+                }
+            );
+
+
+        /* =======================================================
+           DEMO
+           ======================================================= */
+
+        document
+            .getElementById("demoButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    fillTemplate("study");
+
+                    role.value =
+                        "Patient AI learning mentor";
+
+                    goal.value =
+                        "Mujhe Artificial Intelligence ke basic concepts ko genuinely samajhna hai, sirf definitions yaad nahi karni.";
+
+                    context.value =
+                        "Main beginner hoon. Mujhe technical topics simple Hinglish me samajhne me help milti hai.";
+
+                    task.value =
+                        "AI ko simple language me explain karo. Pehle mental model do, phir real-world examples, AI aur normal software ka difference, common misconceptions, aur end me 5 questions ka self-test do.";
+
+                    audience.value =
+                        "AI beginner";
+
+                    constraints.value =
+                        "Unnecessary jargon avoid karo. Har important technical term ko simple words me explain karo. Examples practical rakho.";
+
+                    quality.value =
+                        "Explanation padhne ke baad beginner apne words me AI explain kar sake aur basic examples identify kar sake.";
+
+                    output.value =
+                        "A structured tutorial with examples and practice";
+
+                    verify.checked =
+                        true;
+
+                    updatePreview();
+
+                    showToast(
+                        "Demo prompt load ho gaya. Isse edit karke experiment karo."
+                    );
+
+                }
+            );
+
+
+        /* =======================================================
+           RESET
+           ======================================================= */
+
+        document
+            .getElementById("resetButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const confirmed =
+                        confirm(
+                            "Current prompt ki saari details clear karni hain?"
+                        );
+
+                    if (!confirmed) return;
+
+                    form.reset();
+
+                    document
+                        .querySelector(
+                            "#tone-natural"
+                        )
+                        .checked = true;
+
+                    document
+                        .querySelectorAll(
+                            ".template-card"
+                        )
+                        .forEach(card => {
+
+                            card.classList.remove(
+                                "selected"
+                            );
+
+                        });
+
+                    updatePreview();
+
+                    showToast(
+                        "Builder reset ho gaya."
+                    );
+
+                }
+            );
+
+
+        /* =======================================================
+           SAVED PROMPTS
+           ======================================================= */
+
+        function getSaved() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem(
+                        "ailh-prompts"
+                    ) || "[]"
+                );
+
+            } catch {
+
+                return [];
+
+            }
+
+        }
+
+
+        function setSaved(items) {
+
+            localStorage.setItem(
+                "ailh-prompts",
+                JSON.stringify(items)
+            );
+
+        }
+
+
+        function renderSaved() {
+
+            const items =
+                getSaved();
+
+            savedList.innerHTML = "";
+
+            if (!items.length) {
+
+                const empty =
+                    document.createElement("div");
+
+                empty.className =
+                    "saved-empty";
+
+                empty.textContent =
+                    "Abhi koi saved prompt nahi hai.";
+
+                savedList.appendChild(empty);
+
+                return;
+
+            }
+
+
+            items.forEach(
+                (item, index) => {
+
+                    const row =
+                        document.createElement("div");
+
+                    row.className =
+                        "saved-item";
+
+
+                    const info =
+                        document.createElement("div");
+
+                    info.className =
+                        "saved-info";
+
+
+                    const title =
+                        document.createElement("strong");
+
+                    title.textContent =
+                        item.title;
+
+
+                    const meta =
+                        document.createElement("small");
+
+                    meta.textContent =
+                        item.mode +
+                        " · " +
+                        item.prompt.length +
+                        " characters";
+
+
+                    info.append(
+                        title,
+                        meta
+                    );
+
+
+                    const actions =
+                        document.createElement("div");
+
+                    actions.className =
+                        "saved-actions";
+
+
+                    const load =
+                        document.createElement("button");
+
+                    load.type =
+                        "button";
+
+                    load.className =
+                        "btn btn-secondary btn-small";
+
+                    load.textContent =
+                        "Load";
+
+
+                    load.addEventListener(
+                        "click",
+                        () => {
+
+                            promptOutput.hidden = false;
+                            emptyPreview.hidden = true;
+
+                            promptOutput.textContent =
+                                item.prompt;
+
+                            promptStatus.textContent =
+                                "Saved";
+
+                            wordCount.textContent =
+                                item.prompt
+                                    .trim()
+                                    .split(/\s+/)
+                                    .filter(Boolean)
+                                    .length;
+
+                            charCount.textContent =
+                                item.prompt.length;
+
+                            showToast(
+                                "Saved prompt preview me load ho gaya."
+                            );
+
+                        }
+                    );
+
+
+                    const remove =
+                        document.createElement("button");
+
+                    remove.type =
+                        "button";
+
+                    remove.className =
+                        "btn btn-danger btn-small";
+
+                    remove.textContent =
+                        "Delete";
+
+
+                    remove.addEventListener(
+                        "click",
+                        () => {
+
+                            const current =
+                                getSaved();
+
+                            current.splice(
+                                index,
+                                1
+                            );
+
+                            setSaved(current);
+
+                            renderSaved();
+
+                            showToast(
+                                "Saved prompt delete ho gaya."
+                            );
+
+                        }
+                    );
+
+
+                    actions.append(
+                        load,
+                        remove
+                    );
+
+                    row.append(
+                        info,
+                        actions
+                    );
+
+                    savedList.appendChild(row);
+
+                }
+            );
+
+        }
+
+
+        document
+            .getElementById("saveButton")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const prompt =
+                        buildPrompt(values());
+
+                    if (!prompt.trim()) {
+
+                        showToast(
+                            "Save karne ke liye pehle prompt build karo."
+                        );
+
+                        return;
+
+                    }
+
+                    let title =
+                        window.prompt(
+                            "Is prompt ko kya naam dena hai?",
+                            "My AI Prompt"
+                        );
+
+                    if (title === null) {
+                        return;
+                    }
+
+                    title =
+                        title.trim() ||
+                        "Untitled Prompt";
+
+
+                    const items =
+                        getSaved();
+
+                    items.unshift({
+
+                        title,
+
+                        mode:
+                            titleCase(
+                                currentMode
+                            ),
+
+                        prompt,
+
+                        createdAt:
+                            Date.now()
+
+                    });
+
+
+                    setSaved(
+                        items.slice(0, 20)
+                    );
+
+                    renderSaved();
+
+                    showToast(
+                        "Prompt locally save ho gaya."
+                    );
+
+                }
+            );
+
+
+        /* =======================================================
+           TOAST
+           ======================================================= */
+
+        let toastTimer = null;
+
+
+        function showToast(message) {
+
+            toast.textContent =
+                message;
+
+            toast.classList.add("show");
+
+            clearTimeout(
+                toastTimer
+            );
+
+            toastTimer =
+                setTimeout(
+                    () => {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    2600
+                );
+
+        }
+
+
+        /* =======================================================
+           INITIALIZE
+           ======================================================= */
+
+        renderSaved();
+
+        updatePreview();
+
+    </script>
+
+</body>
+
+</html>
